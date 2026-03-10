@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XPERIENCE VISION | Intégrateur Digital Automobile Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-[#0a0a0a] text-white">
+
+    <nav id="navbar"
+        class="fixed w-full z-50 px-6 py-4 flex justify-between items-center card-glass transition-all duration-300">
+        <div class="text-xl font-extrabold tracking-tighter italic uppercase">
+            <a href="#accueil" class="hover:text-gray-400 transition">XPERIENCE<span
+                    class="text-gray-500 font-light">VISION</span></a>
+        </div>
+
+        <div class="hidden md:flex space-x-10 text-[12px] uppercase font-bold tracking-[0.2em]">
+            <a href="#solutions" class="hover:text-gray-400 transition">Solutions</a>
+            <a href="#configurateur" class="hover:text-gray-400 transition">Configurateur</a>
+            <a href="#packs" class="hover:text-gray-400 transition">Packs</a>
+            <a href="#pros" class="hover:text-gray-400 transition">Concessions</a>
+            <a href="#contact" class="hover:text-gray-400 transition">Contact</a>
+        </div>
+
+        <div class="flex items-center space-x-3">
+            <a href="realisations.html"
+                class="hidden md:inline-block border border-white/30 hover:border-white text-white px-5 py-2 text-[10px] font-black uppercase rounded-full transition">Réalisations</a>
+            <a href="#rdv"
+                class="hidden md:inline-block btn-premium px-6 py-2 text-[10px] font-black uppercase rounded-full">Prendre
+                RDV</a>
+            <button id="burger-btn" class="md:hidden text-white text-2xl focus:outline-none p-2">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+
+        <div id="mobile-dropdown"
+            class="absolute top-full left-0 w-full bg-[#0a0a0a] border-b border-white/10 backdrop-blur-2xl hidden flex-col p-4 space-y-4 shadow-2xl">
+            <a href="#solutions" class="mobile-item">Solutions</a>
+            <a href="#configurateur" class="mobile-item">Configurateur</a>
+            <a href="#packs" class="mobile-item">Packs</a>
+            <a href="#pros" class="mobile-item">Concessions</a>
+            <a href="#contact" class="mobile-item">Contact</a>
+            <hr class="border-white/5">
+            <a href="realisations.html"
+                class="mobile-item border border-white/20 rounded-xl text-center">Réalisations</a>
+            <a href="#rdv"
+                class="mobile-item btn-premium w-full py-4 text-center text-xs font-black uppercase rounded-xl">Prendre
+                RDV</a>
+        </div>
+    </nav>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden"></div>
+
+    <section id="accueil"
+        class="relative h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden">
+        <img src="img/IMG_9931.jpeg" alt="Intérieur BYD premium avec écran embarqué XPERIENCE VISION"
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-30" loading="eager">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0a0a0a] z-10"></div>
+
+        <div class="relative z-20 mb-8 md:mb-20">
+            <span
+                class="text-xs md:text-sm font-bold tracking-[0.4em] text-gray-500 uppercase mb-4 md:mb-6 block">L'innovation
+                commence à bord</span>
+            <h1 class="text-5xl md:text-8xl font-black mb-6 md:mb-8 leading-none tracking-tighter uppercase">
+                VIVEZ CHAQUE <br> <span class="gradient-text">TRAJET</span>.
+            </h1>
+            <p
+                class="text-gray-400 uppercase tracking-[0.3em] text-xs md:text-sm mb-12 max-w-2xl mx-auto leading-relaxed">
+                Nous concevons des solutions digitales embarquées premium pour transformer l'expérience passager en un
+                moment d'exception.
+            </p>
+            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 justify-center">
+                <a href="#rdv"
+                    class="btn-premium px-10 md:px-12 py-5 md:py-6 rounded-full font-bold uppercase text-xs md:text-sm">Planifier
+                    une installation</a>
+                <a href="#solutions"
+                    class="px-10 md:px-12 py-5 md:py-6 rounded-full font-bold uppercase text-xs md:text-sm border border-white/20 hover:bg-white hover:text-black transition">Explorer
+                    la gamme</a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 w-full py-10 bg-gradient-to-t from-black to-transparent z-20">
+            <div class="flex flex-wrap justify-center gap-8 md:gap-20 opacity-40 grayscale items-center px-6">
+                <span class="text-xl md:text-3xl font-bold tracking-tighter">TESLA</span>
+                <span class="text-xl md:text-3xl font-bold tracking-tighter">BMW</span>
+                <span class="text-xl md:text-3xl font-bold tracking-tighter">MERCEDES-BENZ</span>
+                <span class="text-xl md:text-3xl font-bold tracking-tighter">RANGE ROVER</span>
+                <span class="text-xl md:text-3xl font-bold tracking-tighter">BYD</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="solutions" class="min-h-screen flex flex-col justify-center py-24 px-6 max-w-7xl mx-auto">
+        <div class="mb-20 text-center">
+            <h2 class="text-5xl font-black uppercase mb-6 italic">La Gamme Xperience</h2>
+            <p class="text-gray-500 uppercase tracking-widest text-sm max-w-2xl mx-auto">Une sélection rigoureuse
+                d'équipements haute technologie intégrés selon les standards constructeurs les plus exigeants.</p>
+        </div>
+
+        <div onscroll="updateScrollIndicators(this, 'solutions-dots')"
+            class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 md:grid md:grid-cols-3 md:gap-10 md:pb-0 no-scrollbar">
+            <div
+                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center">
+                <div class="h-80 rounded-[2rem] mb-8 overflow-hidden">
+                    <img src="img/IMG_9856.jpeg" alt="Écran plafonnier XL XPERIENCE VISION"
+                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Écrans Embarqués</h3>
+                    <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">Plafonniers 17.3" &
+                        Appuie-tête 10.1". Une immersion totale en résolution 4K pour vos passagers arrière.</p>
+                </div>
+            </div>
+            <div
+                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center">
+                <div class="h-80 rounded-[2rem] mb-8 overflow-hidden">
+                    <img src="img/IMG_9857.jpeg" alt="Écran intermédiaire XPERIENCE VISION"
+                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Technologie</h3>
+                    <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">CarPlay sans fil, Gaming HD
+                        et Dashcams intelligentes. Restez connecté au monde, même sur la route.</p>
+                </div>
+            </div>
+            <div
+                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center">
+                <div class="h-80 rounded-[2rem] mb-8 overflow-hidden">
+                    <img src="img/IMG_9855.jpeg" alt="Tablette embarquée XPERIENCE VISION"
+                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+                </div>
+                <div class="p-4 text-center">
+                    <h3 class="text-2xl font-bold mb-4 uppercase">Finition</h3>
+                    <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">Protections céramiques et
+                        accessoires sur-mesure. Préservez l'état neuf et la valeur de votre véhicule.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="solutions-dots" class="flex md:hidden justify-center gap-2 mt-4">
+            <div class="w-2 h-2 rounded-full bg-white opacity-100 transition-opacity duration-300"></div>
+            <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+            <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+        </div>
+    </section>
+
+    <section id="configurateur"
+        class="min-h-screen flex flex-col justify-center py-24 bg-[#0a0a0a] border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl font-black uppercase italic mb-6">Configuration sur-mesure</h2>
+                <p class="text-gray-500 uppercase tracking-widest text-sm">Analysez la compatibilité technique de votre
+                    intérieur en un clic.</p>
+            </div>
+
+            <div class="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-16 items-center w-full">
+                <div onscroll="updateScrollIndicators(this, 'config-dots')"
+                    class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-4 pb-2 md:flex-col md:overflow-visible md:space-y-6 w-[90vw] md:w-full -ml-4 md:ml-0 px-4 md:px-0 no-scrollbar">
+                    <button onmouseenter="showSolution('family')" onclick="showSolution('family')"
+                        class="flex-none w-[75vw] md:w-full snap-center text-left p-6 md:p-8 card-glass rounded-[2rem] border-l-8 md:border-b-8 lg:border-l-8 lg:border-b-0 border-transparent hover:border-white transition-all group">
+                        <h4 class="text-lg font-bold uppercase tracking-widest group-hover:text-white">Expérience
+                            Familiale</h4>
+                        <p class="text-xs text-gray-500 uppercase mt-2 font-bold">Le meilleur du divertissement passager
+                        </p>
+                    </button>
+                    <button onmouseenter="showSolution('pro')" onclick="showSolution('pro')"
+                        class="flex-none w-[75vw] md:w-full snap-center text-left p-6 md:p-8 card-glass rounded-[2rem] border-l-8 md:border-b-8 lg:border-l-8 lg:border-b-0 border-transparent hover:border-white transition-all group">
+                        <h4 class="text-lg font-bold uppercase tracking-widest group-hover:text-white">Productivité
+                            Business</h4>
+                        <p class="text-xs text-gray-500 uppercase mt-2 font-bold">Votre bureau mobile haute performance
+                        </p>
+                    </button>
+                    <button onmouseenter="showSolution('protection')" onclick="showSolution('protection')"
+                        class="flex-none w-[75vw] md:w-full snap-center text-left p-6 md:p-8 card-glass rounded-[2rem] border-l-8 md:border-b-8 lg:border-l-8 lg:border-b-0 border-transparent hover:border-white transition-all group">
+                        <h4 class="text-lg font-bold uppercase tracking-widest group-hover:text-white">Esthétique &
+                            Valeur</h4>
+                        <p class="text-xs text-gray-500 uppercase mt-2 font-bold">Maintenance et finitions exclusives
+                        </p>
+                    </button>
+                </div>
+
+                <div id="config-dots" class="flex md:hidden justify-center gap-2 mb-4">
+                    <div class="w-2 h-2 rounded-full bg-white opacity-100 transition-opacity duration-300"></div>
+                    <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+                    <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+                </div>
+
+                <div id="solution-display"
+                    class="card-glass p-12 rounded-[4rem] min-h-[500px] flex flex-col justify-center border border-white/10 relative shadow-2xl">
+                    <div id="solution-content">
+                        <h3 class="text-4xl font-black mb-6 italic uppercase text-gray-600 leading-tight">Prêt pour
+                            <br>l'exception ?
+                        </h3>
+                        <p class="text-gray-400 text-sm uppercase tracking-widest leading-loose">Choisissez un univers à
+                            gauche pour découvrir nos équipements compatibles avec votre véhicule.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="packs" class="min-h-screen flex flex-col justify-center py-24 bg-white text-black">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div>
+                    <h2 class="text-6xl font-black uppercase leading-none italic">Packs <br><span
+                            class="text-gray-300">Signature</span></h2>
+                    <p class="text-gray-400 text-sm uppercase tracking-[0.3em] font-bold mt-6">Solutions tout-en-un avec
+                        installation incluse.</p>
+                </div>
+                <div class="hidden md:block h-px flex-1 bg-gray-100 mx-10 mb-4"></div>
+                <a href="#rdv" class="text-sm font-black uppercase border-b-2 border-black pb-2">Voir tous les
+                    détails</a>
+            </div>
+
+            <div onscroll="updateScrollIndicators(this, 'packs-dots')"
+                class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 md:grid md:grid-cols-3 md:gap-10 md:pb-0 no-scrollbar">
+                <div
+                    class="p-6 md:p-12 border-2 border-gray-100 rounded-[3rem] md:rounded-[4rem] hover:border-black transition-all group flex-none w-[75vw] md:w-auto snap-center">
+                    <span
+                        class="bg-black text-white px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">Populaire</span>
+                    <h3 class="text-3xl font-black mt-8 mb-4 uppercase italic">Pack Livraison</h3>
+                    <p class="text-gray-500 text-xs font-bold uppercase mb-8">L'essentiel pour un véhicule neuf</p>
+                    <ul class="space-y-5 mb-12 text-sm font-bold uppercase text-gray-600">
+                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Protection écran HD</li>
+                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Tapis sur-mesure</li>
+                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Parfum d'ambiance</li>
+                    </ul>
+                    <button
+                        class="w-full py-5 bg-gray-50 rounded-2xl group-hover:bg-black group-hover:text-white transition font-black uppercase text-xs">Sélectionner</button>
+                </div>
+                <div
+                    class="p-6 md:p-12 border-2 border-gray-100 rounded-[3rem] md:rounded-[4rem] hover:border-black transition-all group flex-none w-[75vw] md:w-auto snap-center">
+                    <span
+                        class="bg-gray-100 text-gray-500 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">Indispensable</span>
+                    <h3 class="text-3xl font-black mt-8 mb-4 uppercase italic">Pack Clean</h3>
+                    <p class="text-gray-500 text-xs font-bold uppercase mb-8">Maintenance esthétique premium</p>
+                    <ul class="space-y-5 mb-12 text-sm font-bold uppercase text-gray-600">
+                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Nettoyage Vapeur</li>
+                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Soin des cuirs</li>
+                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Finition Showroom</li>
+                    </ul>
+                    <button
+                        class="w-full py-5 bg-gray-50 rounded-2xl group-hover:bg-black group-hover:text-white transition font-black uppercase text-xs">Sélectionner</button>
+                </div>
+                <div
+                    class="p-6 md:p-12 border-2 border-black bg-black text-white rounded-[3rem] md:rounded-[4rem] shadow-3xl group flex-none w-[75vw] md:w-auto snap-center">
+                    <span
+                        class="bg-white text-black px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">Exclusif</span>
+                    <h3 class="text-3xl font-black mt-8 mb-4 uppercase italic text-gold">Pack Café</h3>
+                    <p class="text-gray-400 text-xs font-bold uppercase mb-8">Le luxe ultime à bord</p>
+                    <ul class="space-y-5 mb-12 text-sm font-bold uppercase text-gray-300">
+                        <li><i class="fa-solid fa-mug-hot mr-3 text-white"></i> Machine intégrée</li>
+                        <li><i class="fa-solid fa-check-double mr-3 text-white"></i> Capsules Premium</li>
+                        <li><i class="fa-solid fa-check-double mr-3 text-white"></i> Pose Invisible</li>
+                    </ul>
+                    <button class="w-full py-5 bg-white text-black rounded-2xl font-black uppercase text-xs">Vivre
+                        l'expérience</button>
+                </div>
+            </div>
+
+            <div id="packs-dots" class="flex md:hidden justify-center gap-2 mt-4 relative z-10 w-full">
+                <div class="w-2 h-2 rounded-full bg-black opacity-100 transition-opacity duration-300"></div>
+                <div class="w-2 h-2 rounded-full bg-black opacity-30 transition-opacity duration-300"></div>
+                <div class="w-2 h-2 rounded-full bg-black opacity-30 transition-opacity duration-300"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pros" class="min-h-screen flex flex-col justify-center py-12 md:py-24 bg-zinc-900">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 md:gap-20 items-center mb-6 md:mb-20">
+            <div>
+                <span
+                    class="text-white font-black uppercase tracking-[0.5em] text-xs border-b-4 border-white pb-3">Partenariats</span>
+                <h2 class="text-4xl md:text-6xl font-black mt-8 md:mt-12 mb-6 md:mb-10 uppercase italic leading-tight">
+                    Business <br> & Performance.
+                </h2>
+                <p class="text-gray-400 text-xs md:text-base uppercase tracking-widest leading-loose mb-6 md:mb-10">
+                    Nous accompagnons les groupes automobiles dans la mise en place de centres de profits additionnels
+                    via l'équipement digital.
+                </p>
+                <div class="space-y-4 md:space-y-8">
+                    <div class="flex items-center">
+                        <div
+                            class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">
+                            01</div>
+                        <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Installation
+                            externalisée :
+                            Rentabilité immédiate.</p>
+                    </div>
+                    <div class="flex items-center">
+                        <div
+                            class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">
+                            02</div>
+                        <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Formation
+                            commerciale :
+                            Maîtrisez l'offre.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-glass p-8 md:p-16 rounded-[2rem] md:rounded-[4rem] text-center">
+                <h4
+                    class="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] mb-6 md:mb-12 text-gray-500 italic underline decoration-2 underline-offset-8">
+                    Impact Showroom</h4>
+                <div class="grid grid-cols-2 gap-4 md:gap-10">
+                    <div>
+                        <p class="text-3xl md:text-6xl font-black mb-2 md:mb-4 tracking-tighter text-white">+60%</p>
+                        <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-widest">Taux
+                            d'équipement</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl md:text-6xl font-black mb-2 md:mb-4 tracking-tighter text-white">80</p>
+                        <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-widest">
+                            Véhicules / Mois</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div onscroll="updateScrollIndicators(this, 'pros-dots')"
+                class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-10 md:pt-20 border-t border-white/10 md:grid md:grid-cols-4 md:gap-12 md:pb-0 no-scrollbar">
+                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
+                    <i class="fa-solid fa-shield text-3xl mb-6 text-gray-500 group-hover:text-white transition"></i>
+                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Garantie 1 an</h5>
+                    <p class="text-[10px] text-gray-600 uppercase font-bold">Sérénité totale</p>
+                </div>
+                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
+                    <i class="fa-solid fa-bolt text-3xl mb-6 text-gray-500 group-hover:text-white transition"></i>
+                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Plug & Play</h5>
+                    <p class="text-[10px] text-gray-600 uppercase font-bold">Zéro découpe faisceau</p>
+                </div>
+                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
+                    <i class="fa-solid fa-headset text-3xl mb-6 text-gray-500 group-hover:text-white transition"></i>
+                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">SAV Premium</h5>
+                    <p class="text-[10px] text-gray-600 uppercase font-bold">Réponse sous 24h</p>
+                </div>
+                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
+                    <i class="fa-solid fa-gem text-3xl mb-6 text-gray-500 group-hover:text-white transition"></i>
+                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Finition Luxe</h5>
+                    <p class="text-[10px] text-gray-600 uppercase font-bold">Standard constructeur</p>
+                </div>
+            </div>
+
+            <div id="pros-dots" class="flex md:hidden justify-center gap-2 mt-4">
+                <div class="w-2 h-2 rounded-full bg-white opacity-100 transition-opacity duration-300"></div>
+                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rdv" class="min-h-screen bg-white text-black flex flex-col items-center">
+        <div class="w-full py-10 pt-20 bg-black text-center mb-8 md:mb-20">
+            <h2 class="text-3xl md:text-5xl font-light italic text-gray-500 leading-tight">
+                "Vos enfants ne demanderont plus : <br>
+                <span class="text-white font-black not-italic uppercase tracking-tighter">On arrive quand ?</span>"
+            </h2>
+            <p class="mt-8 text-[10px] tracking-[0.6em] uppercase text-gray-700 font-bold">L'expérience familiale
+                réinventée</p>
+        </div>
+
+        <div class="max-w-6xl w-full px-6 py-10 pb-12 md:pb-24 flex flex-col items-center">
+            <h3 class="text-4xl md:text-5xl font-black text-center mb-6 md:mb-10 uppercase tracking-tighter italic">
+                Planifiez l'exception.</h3>
+
+            <div id="calendly-container"
+                class="w-full bg-white rounded-[3rem] border-2 border-gray-100 shadow-2xl overflow-hidden flex flex-col items-center justify-center min-h-[400px] transition-all duration-500">
+
+                <button id="load-calendly"
+                    class="btn-premium px-10 py-5 rounded-full text-xs font-black uppercase tracking-widest shadow-xl hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-calendar-days mr-3"></i> Voir les disponibilités
+                </button>
+
+                <div id="calendly-widget" class="hidden w-full h-full" style="height: 400px;"></div>
+            </div>
+
+            <p class="text-center mt-8 text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">
+                <i class="fa-solid fa-circle-check mr-2"></i> Confirmation immédiate par email
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-[#0a0a0a] border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-black uppercase italic mb-4 tracking-tighter">Demande <span
+                        class="text-gray-600">Spécifique</span></h2>
+                <p class="text-gray-500 uppercase tracking-widest text-[10px] font-bold">Un projet hors-norme ? Une
+                    question technique ? Écrivez-nous.</p>
+            </div>
+
+            <form action="#" method="POST" class="space-y-4 md:space-y-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="group">
+                        <label
+                            class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Nom
+                            complet</label>
+                        <input type="text" placeholder="JEAN DUPONT"
+                            class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
+                    </div>
+                    <div class="group">
+                        <label
+                            class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Votre
+                            Email</label>
+                        <input type="email" placeholder="CONTACT@EMAIL.COM"
+                            class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="group">
+                        <label
+                            class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Marque
+                            & Modèle</label>
+                        <input type="text" placeholder="EX: TESLA MODEL Y"
+                            class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
+                    </div>
+                    <div class="group">
+                        <label
+                            class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Objet</label>
+                        <select
+                            class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase text-zinc-400">
+                            <option>Demande de devis</option>
+                            <option>Partenariat professionnel</option>
+                            <option>Service après-vente</option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Votre
+                        Message</label>
+                    <textarea rows="5" placeholder="DÉTAILLEZ VOTRE PROJET..."
+                        class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700"></textarea>
+                </div>
+
+                <button type="submit"
+                    class="w-full btn-premium py-6 rounded-2xl font-black uppercase text-xs tracking-[0.3em]">
+                    Envoyer le message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-20 px-6 border-t border-white/5 bg-[#050505]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div>
+                <div class="text-3xl font-black mb-6 italic uppercase tracking-tighter">XPERIENCE <span
+                        class="text-gray-600">VISION</span></div>
+                <p class="text-gray-500 text-xs uppercase tracking-[0.2em] max-w-sm leading-loose font-bold">
+                    L'excellence digitale embarquée. <br>Installation premium pour véhicules d'exception.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 gap-16 uppercase text-[10px] font-black tracking-[0.3em] text-gray-500">
+                <div class="flex flex-col space-y-6">
+                    <span class="text-white border-b border-white/10 pb-3">Navigation</span>
+                    <a href="#solutions" class="hover:text-white transition">La Gamme</a>
+                    <a href="#configurateur" class="hover:text-white transition">Configurateur</a>
+                    <a href="#packs" class="hover:text-white transition">Packs</a>
+                    <a href="#pros" class="hover:text-white transition">Concessions</a>
+                    <a href="realisations.html" class="hover:text-white transition">Réalisations</a>
+                    <a href="#contact" class="hover:text-white transition">Contact</a>
+                </div>
+                <div class="flex flex-col space-y-6">
+                    <span class="text-white border-b border-white/10 pb-3">Légal</span>
+                    <a href="mentions-legales.html" class="hover:text-white transition">Mentions Légales</a>
+                    <a href="cgv.html" class="hover:text-white transition">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

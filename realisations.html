@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réalisations | XPERIENCE VISION</title>
+    <meta name="description"
+        content="Découvrez les réalisations XPERIENCE VISION : installations d'écrans embarqués premium pour BYD et autres véhicules électriques. Galerie photos et catalogue produits.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Lightbox */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        #lightbox.open {
+            display: flex;
+        }
+
+        #lightbox img {
+            max-height: 90vh;
+            max-width: 90vw;
+            border-radius: 1rem;
+            object-fit: contain;
+            box-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
+        }
+
+        #lightbox-prev,
+        #lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            backdrop-filter: blur(8px);
+        }
+
+        #lightbox-prev:hover,
+        #lightbox-next:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        #lightbox-prev {
+            left: 1.5rem;
+        }
+
+        #lightbox-next {
+            right: 1.5rem;
+        }
+
+        #lightbox-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            width: 2.75rem;
+            height: 2.75rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            backdrop-filter: blur(8px);
+        }
+
+        #lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.22);
+        }
+
+        #lightbox-counter {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        /* Gallery grid item hover */
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 2rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        /* Catalogue scroll */
+        .catalogue-track {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scroll-snap-type: x mandatory;
+            /* Scrollbar masquée sur mobile */
+            scrollbar-width: none;
+        }
+
+        @media (min-width: 768px) {
+            .catalogue-track {
+                scrollbar-width: thin;
+                scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.04);
+                padding-bottom: 1.2rem;
+            }
+        }
+
+        /* Webkit scrollbar (Chrome/Safari) — desktop uniquement */
+        .catalogue-track::-webkit-scrollbar {
+            height: 0;
+        }
+
+        @media (min-width: 768px) {
+            .catalogue-track::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .catalogue-track::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.04);
+                border-radius: 4px;
+            }
+
+            .catalogue-track::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 4px;
+            }
+
+            .catalogue-track::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        .catalogue-card {
+            flex: none;
+            width: 260px;
+            scroll-snap-align: center;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .catalogue-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-4px);
+        }
+
+        .catalogue-card img {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="bg-[#0a0a0a] text-white page-realisations">
+
+    <!-- NAV -->
+    <nav id="navbar"
+        class="fixed w-full z-50 px-6 py-4 flex justify-between items-center card-glass transition-all duration-300">
+        <div class="text-xl font-extrabold tracking-tighter italic uppercase">
+            <a href="index.html" class="hover:text-gray-400 transition">XPERIENCE<span
+                    class="text-gray-500 font-light">VISION</span></a>
+        </div>
+
+        <div class="hidden md:flex space-x-10 text-[12px] uppercase font-bold tracking-[0.2em]">
+            <a href="index.html#solutions" class="hover:text-gray-400 transition">Solutions</a>
+            <a href="index.html#configurateur" class="hover:text-gray-400 transition">Configurateur</a>
+            <a href="index.html#packs" class="hover:text-gray-400 transition">Packs</a>
+            <a href="index.html#pros" class="hover:text-gray-400 transition">Concessions</a>
+            <a href="index.html#contact" class="hover:text-gray-400 transition">Contact</a>
+        </div>
+
+        <div class="flex items-center space-x-3">
+            <a href="realisations.html"
+                class="hidden md:inline-block border border-white/60 text-white px-5 py-2 text-[10px] font-black uppercase rounded-full">Réalisations</a>
+            <a href="index.html#rdv"
+                class="hidden md:inline-block btn-premium px-6 py-2 text-[10px] font-black uppercase rounded-full">Prendre
+                RDV</a>
+            <button id="burger-btn" class="md:hidden text-white text-2xl focus:outline-none p-2">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+
+        <div id="mobile-dropdown"
+            class="absolute top-full left-0 w-full bg-[#0a0a0a] border-b border-white/10 backdrop-blur-2xl hidden flex-col p-4 space-y-4 shadow-2xl">
+            <a href="index.html#solutions" class="mobile-item">Solutions</a>
+            <a href="index.html#configurateur" class="mobile-item">Configurateur</a>
+            <a href="index.html#packs" class="mobile-item">Packs</a>
+            <a href="index.html#pros" class="mobile-item">Concessions</a>
+            <a href="index.html#contact" class="mobile-item">Contact</a>
+            <hr class="border-white/5">
+            <a href="realisations.html"
+                class="mobile-item border border-white/20 rounded-xl text-center">Réalisations</a>
+            <a href="index.html#rdv"
+                class="mobile-item btn-premium w-full py-4 text-center text-xs font-black uppercase rounded-xl">Prendre
+                RDV</a>
+        </div>
+    </nav>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden"></div>
+
+    <!-- HERO HEADER -->
+    <section class="relative pt-32 pb-10 px-6 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <img src="img/CAA81029-3947-47E7-A9B9-B40F1BB1BBED.jpeg" alt="XPERIENCE VISION produits"
+                class="w-full h-full object-cover object-center opacity-15">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/70 via-transparent to-[#0a0a0a]"></div>
+        </div>
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <span
+                class="text-white font-black uppercase tracking-[0.5em] text-[10px] md:text-xs border-b-2 md:border-b-4 border-white pb-3">Portfolio</span>
+            <h1 class="text-4xl md:text-7xl font-black mt-8 md:mt-12 uppercase italic tracking-tighter leading-tight">
+                Nos <br><span class="text-gray-500">Réalisations.</span>
+            </h1>
+            <p class="mt-6 md:mt-8 text-gray-400 uppercase tracking-widest text-xs md:text-sm leading-relaxed max-w-xl">
+                Découvrez nos installations terrain, notre gamme complète et les coffrets de livraison premium.
+            </p>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 pb-16">
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- SECTION 1 : GALERIE INSTALLATIONS  -->
+        <!-- ═══════════════════════════════════ -->
+        <section class="mb-10 md:mb-16">
+            <div class="mb-6">
+                <span
+                    class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-l-4 border-white pl-4">Installations</span>
+                <h2 class="text-3xl md:text-5xl font-black mt-6 uppercase italic tracking-tighter">Le travail sur le
+                    terrain</h2>
+                <p class="text-gray-500 text-xs uppercase tracking-widest mt-3">Showroom, livraisons et installations
+                    réelles</p>
+            </div>
+
+            <!-- Grid responsive -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+
+                <!-- Grande image à gauche -->
+                <div class="gallery-item md:row-span-2 h-72 md:h-full min-h-[340px]" data-gallery="installs"
+                    data-index="0">
+                    <img src="img/IMG_9903.jpeg" alt="Habitacle BYD avec écran plafonnier XPERIENCE VISION allumé"
+                        loading="lazy">
+                    <div class="overlay">
+                        <p class="text-white text-xs font-black uppercase tracking-widest"><i
+                                class="fa-solid fa-expand mr-2"></i>Écran allumé — BYD Seal</p>
+                    </div>
+                </div>
+
+                <!-- 3 images à droite -->
+                <div class="gallery-item h-56 md:h-auto" data-gallery="installs" data-index="1">
+                    <img src="img/IMG_9905.jpeg" alt="Installation écran plafonnier vue intérieur" loading="lazy">
+                    <div class="overlay">
+                        <p class="text-white text-xs font-black uppercase tracking-widest"><i
+                                class="fa-solid fa-expand mr-2"></i>Vue habitacle — Installation</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 md:gap-6">
+                    <div class="gallery-item h-44" data-gallery="installs" data-index="2">
+                        <img src="img/IMG_9895.jpeg" alt="BYD Dolphin showroom avec coffret cadeau XPERIENCE VISION"
+                            loading="lazy">
+                        <div class="overlay">
+                            <p class="text-white text-[9px] font-black uppercase tracking-wider"><i
+                                    class="fa-solid fa-expand mr-1"></i>Showroom</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item h-44" data-gallery="installs" data-index="3">
+                        <img src="img/FullSizeRender.jpeg"
+                            alt="Coffrets cadeaux XPERIENCE VISION dans le coffre d'un véhicule" loading="lazy">
+                        <div class="overlay">
+                            <p class="text-white text-[9px] font-black uppercase tracking-wider"><i
+                                    class="fa-solid fa-expand mr-1"></i>Pack livraison</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- SECTION 2 : COFFRETS CADEAUX       -->
+        <!-- ═══════════════════════════════════ -->
+        <section class="mb-10 md:mb-16">
+            <div class="mb-6">
+                <span
+                    class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-l-4 border-white pl-4">Packaging</span>
+                <h2 class="text-3xl md:text-5xl font-black mt-6 uppercase italic tracking-tighter">Coffrets & Cadeaux
+                </h2>
+                <p class="text-gray-500 text-xs uppercase tracking-widest mt-3">Une expérience client soignée jusqu'aux
+                    moindres détails</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="0">
+                    <img src="img/2F1BC4D4-1D8A-4E2A-83C7-C5567987EC58.jpeg"
+                        alt="Coffret cadeau XPERIENCE VISION — thermos, carnet, stylo" loading="lazy">
+                    <div class="overlay">
+                        <p class="text-white text-xs font-black uppercase tracking-widest"><i
+                                class="fa-solid fa-expand mr-2"></i>Pack Premium</p>
+                    </div>
+                </div>
+                <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="1">
+                    <img src="img/526A7A56-1FEA-4076-AC7A-8AE06D103A20.jpeg"
+                        alt="Coffret cadeau XPERIENCE VISION vue détaillée" loading="lazy">
+                    <div class="overlay">
+                        <p class="text-white text-xs font-black uppercase tracking-widest"><i
+                                class="fa-solid fa-expand mr-2"></i>Contenu du pack</p>
+                    </div>
+                </div>
+                <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="2">
+                    <img src="img/b9ff3402-42da-417d-aef6-11648fa115e9.jpeg"
+                        alt="Présentation du coffret cadeau XPERIENCE VISION" loading="lazy">
+                    <div class="overlay">
+                        <p class="text-white text-xs font-black uppercase tracking-widest"><i
+                                class="fa-solid fa-expand mr-2"></i>Présentation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- SECTION 3 : CATALOGUE BYD          -->
+        <!-- ═══════════════════════════════════ -->
+        <section>
+            <div class="mb-6 flex flex-col md:flex-row md:items-end md:justify-between gap-3">
+                <div>
+                    <span
+                        class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-l-4 border-white pl-4">Gamme
+                        BYD</span>
+                    <h2 class="text-3xl md:text-5xl font-black mt-6 uppercase italic tracking-tighter">Catalogue
+                        Produits</h2>
+                    <p class="text-gray-500 text-xs uppercase tracking-widest mt-3">Écrans plafonniers & Tablettes
+                        embarquées — Tarifs & Fiches techniques</p>
+                </div>
+                <p class="text-gray-600 text-[10px] font-black uppercase tracking-widest hidden md:block">
+                    <i class="fa-solid fa-arrows-left-right mr-2"></i>Utilisez la scrollbar ou cliquez pour agrandir
+                </p>
+            </div>
+
+            <div class="catalogue-track" id="catalogue-track">
+
+                <div class="catalogue-card" data-gallery="catalogue" data-index="0">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - Page d'Accueil.jpeg"
+                        alt="Catalogue BYD XPERIENCE VISION — Couverture" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="1">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - Sommaire.jpeg"
+                        alt="Sommaire gamme BYD" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="2">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 3.jpeg"
+                        alt="Écran plafonnier premium 1099€" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="3">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 4.jpeg"
+                        alt="Mise en situation écran plafonnier" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="4">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 5.jpeg"
+                        alt="BYD Sealion 7 — écran plafonnier" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="5">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 6.jpeg"
+                        alt="BYD Seal — écran plafonnier" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="6">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 7.jpeg"
+                        alt="BYD Dolphin — ecran 699€" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="7">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 8.jpeg"
+                        alt="BYD Dolphin variante" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="8">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 9.jpeg"
+                        alt="BYD Atto 3 — 1099€" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="9">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 10.jpeg"
+                        alt="BYD Atto 3 variante" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="10">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 11.jpeg"
+                        alt="BYD Atto 3 — 699€" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="11">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 12.jpeg" alt="BYD Tang"
+                        loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="12">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 13.jpeg"
+                        alt="Tableau comparatif — Tablette 600€ / Plafond 699€ / Premium 1099€" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="13">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 14.jpeg"
+                        alt="Fiche technique Tablette 10.1 pouces Android 11" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="14">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 15.jpeg"
+                        alt="Fiche technique Plafond Standard 13.3 pouces Android 12" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="15">
+                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 16.jpeg"
+                        alt="Fiche technique Plafond Premium 17.3 pouces Android 14" loading="lazy">
+                </div>
+
+
+            </div>
+
+            <!-- Scroll indicator : dots sur mobile, scrollbar sur desktop -->
+            <div id="catalogue-dots" class="md:hidden flex justify-center gap-1.5 mt-4 flex-wrap"></div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-20 px-6 border-t border-white/5 bg-[#050505]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div>
+                <div class="text-3xl font-black mb-6 italic uppercase tracking-tighter">XPERIENCE <span
+                        class="text-gray-600">VISION</span></div>
+                <p class="text-gray-500 text-xs uppercase tracking-[0.2em] max-w-sm leading-loose font-bold">
+                    L'excellence digitale embarquée. <br>Installation premium pour véhicules d'exception.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 gap-16 uppercase text-[10px] font-black tracking-[0.3em] text-gray-500">
+                <div class="flex flex-col space-y-6">
+                    <span class="text-white border-b border-white/10 pb-3">Navigation</span>
+                    <a href="index.html#solutions" class="hover:text-white transition">La Gamme</a>
+                    <a href="index.html#configurateur" class="hover:text-white transition">Configurateur</a>
+                    <a href="index.html#packs" class="hover:text-white transition">Packs</a>
+                    <a href="index.html#pros" class="hover:text-white transition">Concessions</a>
+                    <a href="realisations.html" class="text-white">Réalisations</a>
+                    <a href="index.html#contact" class="hover:text-white transition">Contact</a>
+                </div>
+                <div class="flex flex-col space-y-6">
+                    <span class="text-white border-b border-white/10 pb-3">Légal</span>
+                    <a href="mentions-legales.html" class="hover:text-white transition">Mentions Légales</a>
+                    <a href="cgv.html" class="hover:text-white transition">CGV</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5">
+            <p class="text-[9px] text-gray-600 font-bold tracking-[0.5em] uppercase">© 2025 XPERIENCE VISION — TOUS
+                DROITS RÉSERVÉS</p>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Vue agrandie">
+        <button id="lightbox-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+        <button id="lightbox-prev" aria-label="Image précédente"><i class="fa-solid fa-chevron-left"></i></button>
+        <img id="lightbox-img" src="" alt="">
+        <button id="lightbox-next" aria-label="Image suivante"><i class="fa-solid fa-chevron-right"></i></button>
+        <span id="lightbox-counter"></span>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // ── Burger / Nav ─────────────────────────────────────────────────────────
+        const burgerBtn = document.getElementById('burger-btn');
+        const mobileDropdown = document.getElementById('mobile-dropdown');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        if (burgerBtn) {
+            burgerBtn.addEventListener('click', () => {
+                mobileDropdown.classList.toggle('hidden');
+                mobileDropdown.classList.toggle('flex');
+                menuOverlay.classList.toggle('hidden');
+            });
+            menuOverlay.addEventListener('click', () => {
+                mobileDropdown.classList.add('hidden');
+                mobileDropdown.classList.remove('flex');
+                menuOverlay.classList.add('hidden');
+            });
+        }
+
+        // ── Galleries data ────────────────────────────────────────────────────────
+        const galleries = {
+            installs: [
+                { src: 'img/IMG_9903.jpeg', alt: 'Écran plafonnier allumé — BYD Seal' },
+                { src: 'img/IMG_9905.jpeg', alt: 'Vue habitacle — Installation écran' },
+                { src: 'img/IMG_9895.jpeg', alt: 'Showroom BYD Dolphin avec coffret cadeau' },
+                { src: 'img/FullSizeRender.jpeg', alt: 'Coffrets cadeaux XPERIENCE VISION en livraison' },
+            ],
+            packs: [
+                { src: 'img/2F1BC4D4-1D8A-4E2A-83C7-C5567987EC58.jpeg', alt: 'Coffret cadeau XPERIENCE VISION' },
+                { src: 'img/526A7A56-1FEA-4076-AC7A-8AE06D103A20.jpeg', alt: 'Contenu coffret cadeau' },
+                { src: 'img/b9ff3402-42da-417d-aef6-11648fa115e9.jpeg', alt: 'Présentation coffret cadeau' },
+            ],
+            catalogue: [
+                { src: "img/Black Purple Aesthetic Product Catalogue Instagram Post - Page d'Accueil.jpeg", alt: 'Couverture catalogue BYD' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - Sommaire.jpeg', alt: 'Sommaire' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 3.jpeg', alt: 'Écran plafonnier Premium 1099€' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 4.jpeg', alt: 'Mise en situation' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 5.jpeg', alt: 'BYD Sealion 7' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 6.jpeg', alt: 'BYD Seal' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 7.jpeg', alt: 'BYD Dolphin 699€' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 8.jpeg', alt: 'BYD Dolphin variante' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 9.jpeg', alt: 'BYD Atto 3 1099€' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 10.jpeg', alt: 'BYD Atto 3 variante' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 11.jpeg', alt: 'BYD Atto 3 699€' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 12.jpeg', alt: 'BYD Tang' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 13.jpeg', alt: 'Comparatif tarifs' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 14.jpeg', alt: 'Fiche Tablette 10.1"' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 15.jpeg', alt: 'Fiche Plafond Standard 13.3"' },
+                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 16.jpeg', alt: 'Fiche Plafond Premium 17.3"' },
+            ]
+        };
+
+        // ── Lightbox logic ─────────────────────────────────────────────────────────
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        const lbCounter = document.getElementById('lightbox-counter');
+        const lbClose = document.getElementById('lightbox-close');
+        const lbPrev = document.getElementById('lightbox-prev');
+        const lbNext = document.getElementById('lightbox-next');
+
+        let currentGallery = null;
+        let currentIndex = 0;
+
+        function openLightbox(galleryName, index) {
+            currentGallery = galleries[galleryName];
+            currentIndex = index;
+            updateLightbox();
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            const item = currentGallery[currentIndex];
+            lbImg.src = item.src;
+            lbImg.alt = item.alt;
+            lbCounter.textContent = (currentIndex + 1) + ' / ' + currentGallery.length;
+        }
+
+        lbClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+        lbPrev.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            updateLightbox();
+        });
+        lbNext.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            updateLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'ArrowLeft') { currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; updateLightbox(); }
+            if (e.key === 'ArrowRight') { currentIndex = (currentIndex + 1) % currentGallery.length; updateLightbox(); }
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Bind gallery items
+        document.querySelectorAll('[data-gallery]').forEach(el => {
+            el.addEventListener('click', () => {
+                openLightbox(el.dataset.gallery, parseInt(el.dataset.index));
+            });
+        });
+
+        // ── Catalogue dots ─────────────────────────────────────────────────────────
+        const track = document.getElementById('catalogue-track');
+        const dotsContainer = document.getElementById('catalogue-dots');
+        const cards = track.querySelectorAll('.catalogue-card');
+
+        cards.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = 'w-1.5 h-1.5 rounded-full bg-white transition-opacity duration-300 ' + (i === 0 ? 'opacity-100' : 'opacity-20');
+            dot.addEventListener('click', () => {
+                cards[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = dotsContainer.querySelectorAll('div');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const idx = Array.from(cards).indexOf(entry.target);
+                if (idx !== -1) {
+                    dots[idx].style.opacity = entry.isIntersecting ? '1' : '0.2';
+                }
+            });
+        }, { root: track, threshold: 0.5 });
+
+        cards.forEach(card => observer.observe(card));
+    </script>
+
+</body>
+
+</html>

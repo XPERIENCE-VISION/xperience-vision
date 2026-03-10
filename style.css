@@ -1,0 +1,450 @@
+/* --- 1. CONFIGURATION & VARIABLES --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+:root {
+    --accent: #ffffff;
+    --glass: rgba(120, 120, 120, 0.1);
+    --border: rgba(255, 255, 255, 0.1);
+    --bg-dark: #0a0a0a;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+    background-color: var(--bg-dark);
+    color: white;
+    overflow-x: hidden;
+}
+
+section {
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* Hauteur dynamique pour mobile (évite les bugs de barre d'adresse) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Centre le contenu verticalement */
+    position: relative;
+}
+
+/* Page Réalisations : sections à hauteur naturelle (pas 100vh) */
+.page-realisations section {
+    min-height: unset !important;
+    display: block !important;
+    justify-content: unset !important;
+}
+
+p {
+    line-height: 1.8;
+}
+
+footer {
+    min-height: 30vh;
+    /* Ajuste la taille de ton footer */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+/* --- 2. COMPOSANTS RÉUTILISABLES (GLASS & BOUTONS) --- */
+.card-glass {
+    background: var(--glass) !important;
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #ffffff 40%, #555555 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn-premium {
+    background: white;
+    color: black;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.btn-premium:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15);
+}
+
+/* --- 3. NAVIGATION & HEADER --- */
+#navbar {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+    background: rgba(10, 10, 10, 0.9) !important;
+    z-index: 100;
+}
+
+/* Menu Mobile Base */
+#mobile-dropdown {
+    background: rgba(10, 10, 10, 0.98) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 40;
+    display: none;
+    /* Géré par JS */
+    flex-direction: column;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Animations Menu */
+@keyframes slideDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+}
+
+#mobile-dropdown.show {
+    display: flex !important;
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+#mobile-dropdown.hide {
+    animation: slideUp 0.3s ease-in forwards;
+}
+
+.mobile-item {
+    padding: 1.2rem 1.5rem;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease;
+}
+
+/* Correctif Bouton Premium dans le menu */
+.mobile-item.btn-premium {
+    border-bottom: none !important;
+    padding: 1rem !important;
+    margin-top: 10px;
+    color: #000000 !important;
+}
+
+/* GESTION HOVER vs MOBILE (Pour éviter que le bouton reste "enfoncé") */
+@media (hover: hover) {
+    .btn-premium:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(255, 255, 255, 0.15);
+    }
+}
+
+.btn-premium:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+}
+
+/* --- 4. CONFIGURATEUR & SOLUTIONS --- */
+#solution-content {
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: opacity, transform;
+}
+
+/* --- 5. PACKS & EFFETS PREMIUM --- */
+#packs .grid>div {
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    position: relative;
+    top: 0;
+    overflow: hidden;
+}
+
+#packs .grid>div:hover {
+    top: -15px;
+}
+
+/* Pack Café (Noir & Gold) */
+#packs div.bg-black.group {
+    background-color: #000000 !important;
+    position: relative;
+    overflow: hidden;
+    /* Changed from !important to allow shadow but keep pseudo element inside */
+    border-radius: 4rem;
+    /* Ensure radius is kept for pseudo element */
+}
+
+#packs div.bg-black h3,
+#packs div.bg-black h4,
+#packs div.bg-black .text-2xl {
+    color: #ffffff !important;
+}
+
+#packs div.bg-black p {
+    color: #e0e0e0 !important;
+}
+
+#packs div.bg-black ul {
+    color: #d1d1d1 !important;
+}
+
+/* Hover effect for all cards */
+#packs .group {
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s ease;
+}
+
+#packs .group:hover {
+    transform: scale(1.02);
+    /* Slight scale on mobile */
+}
+
+@media (min-width: 768px) {
+    #packs .group:hover {
+        transform: scale(1.06);
+        /* Full scale on desktop */
+    }
+}
+
+/* White shadow for regular cards, white subtle shadow for black */
+#packs div.border-gray-100.group:hover {
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
+}
+
+#packs div.bg-black.group:hover {
+    box-shadow: 0 40px 100px rgba(255, 255, 255, 0.1);
+}
+
+/* Effet Or */
+.text-gold {
+    background: linear-gradient(to right, #bf953f 0%, #fcf6ba 30%, #b38728 50%, #fcf6ba 70%, #bf953f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldShine 5s linear infinite;
+    background-size: 200% auto;
+}
+
+@keyframes goldShine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* Effet Reflet (Shine) */
+#packs div.bg-black.group::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -200%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-30deg);
+    pointer-events: none;
+    /* Add this so it doesn't block hover on children */
+}
+
+#packs div.bg-black.group:hover::after {
+    left: 200%;
+    transition: all 1s ease-in-out;
+}
+
+/* Allow shadows to escape the flex container on desktop and mobile */
+#packs .flex-row {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-top: -2rem;
+}
+
+@media (max-width: 768px) {
+    #packs .flex-row {
+        /* Centrage du premier et dernier élément sur mobile : 
+           (100vw - 75vw) / 2 = 12.5vw.
+           Avec px-6, le parent réduit déjà la largeur. 
+           On annule la marge et on donne le padding en vw à la place. */
+        margin-left: -1.5rem;
+        /* Annule mb-6 (24px) */
+        margin-right: -1.5rem;
+        padding-left: 12.5vw;
+        padding-right: 12.5vw;
+    }
+}
+
+@media (min-width: 768px) {
+    #packs .md\:grid {
+        padding: 2rem;
+        margin: -2rem;
+    }
+}
+
+/* --- 6. FORMULAIRE DE CONTACT & INPUTS --- */
+input,
+textarea,
+select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    color: white;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background: rgba(255, 255, 255, 0.05) !important;
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    outline: none;
+}
+
+select option {
+    background: #1a1a1a;
+    color: white;
+}
+
+/* --- 7. RESPONSIVE OPTIMISÉ --- */
+@media (max-width: 768px) {
+    section {
+        /* On garde le 100vh même sur mobile pour l'effet plein écran */
+        min-height: 100vh !important;
+        min-height: 100dvh !important;
+        padding-top: 60px !important;
+        /* Espace pour la navbar */
+        padding-bottom: 20px !important;
+        justify-content: flex-start !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #rdv {
+        padding-top: 0px !important;
+        /* The banner has its own internal padding */
+    }
+
+    #accueil {
+        padding-top: 100px !important;
+        /* Push text down below the sticky header */
+    }
+
+    section>div.max-w-7xl,
+    section>div.max-w-6xl,
+    section>div.max-w-4xl {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    /* On réduit un peu les titres pour que tout tienne sans défiler sur un petit écran */
+    h1 {
+        font-size: 2.2rem !important;
+    }
+
+    h2 {
+        font-size: 1.6rem !important;
+        line-height: 1.1 !important;
+    }
+
+    h3 {
+        font-size: 1.3rem !important;
+    }
+
+    p {
+        font-size: 0.75rem !important;
+        line-height: 1.5 !important;
+    }
+
+    .mb-20 {
+        margin-bottom: 2rem !important;
+    }
+
+    .mb-16 {
+        margin-bottom: 1.5rem !important;
+    }
+
+    .mb-12 {
+        margin-bottom: 1.25rem !important;
+    }
+
+    .py-24 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+
+    .gap-20 {
+        gap: 1.5rem !important;
+    }
+
+    .gap-16 {
+        gap: 1rem !important;
+    }
+
+    .gap-10 {
+        gap: 1rem !important;
+    }
+
+    #solution-display {
+        min-height: 15rem !important;
+        padding: 1.5rem !important;
+    }
+
+    .text-6xl {
+        font-size: 2.5rem !important;
+    }
+
+    .text-5xl {
+        font-size: 2rem !important;
+    }
+
+    /* Make calendly smaller */
+    #calendly-container {
+        min-height: 360px !important;
+    }
+
+    #calendly-widget {
+        height: 360px !important;
+    }
+}
+
+#calendly-container {
+    /* Style pour l'état "vide" avant chargement */
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(245, 245, 245, 1) 100%);
+    transition: height 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#calendly-widget iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: none;
+}

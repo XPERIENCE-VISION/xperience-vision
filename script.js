@@ -147,7 +147,7 @@ document.getElementById('load-calendly').addEventListener('click', function () {
 
     script.onload = () => {
         Calendly.initInlineWidget({
-            url: 'https://calendly.com/jesuiseliot6?hide_landing_page_details=1&text_color=424242&primary_color=000000',
+            url: 'https://calendly.com/xperience-vision77?hide_landing_page_details=1&text_color=424242&primary_color=000000',
             parentElement: widget,
             prefill: {},
             utm: {}
@@ -230,3 +230,55 @@ window.addEventListener('scroll', () => {
 
     lastScrollTop = scrollTop;
 }, { passive: true });
+
+// --- GESTION DU FORMULAIRE DE CONTACT ---
+document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Empêche le rechargement de la page
+
+    const btn = document.getElementById('form-submit-btn');
+    const originalText = btn.innerText;
+    
+    // État de chargement
+    btn.innerText = 'ENVOI EN COURS...';
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
+
+    // Récupération des données
+    const formData = {
+        name: document.getElementById('form-name').value,
+        email: document.getElementById('form-email').value,
+        vehicle: document.getElementById('form-vehicle').value,
+        subject: document.getElementById('form-subject').value,
+        message: document.getElementById('form-message').value,
+    };
+
+    try {
+        // Appel de la Netlify Function
+        const response = await fetch('/.netlify/functions/sendEmail', {
+            method: 'POST',
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            btn.innerText = 'MESSAGE ENVOYÉ AVEC SUCCÈS !';
+            btn.style.backgroundColor = '#10B981'; // Vert succès
+            btn.style.color = '#fff';
+            e.target.reset(); // Vide le formulaire
+        } else {
+            throw new Error('Erreur réseau');
+        }
+    } catch (error) {
+        btn.innerText = 'ERREUR LORS DE L\'ENVOI';
+        btn.style.backgroundColor = '#EF4444'; // Rouge erreur
+        btn.style.color = '#fff';
+    }
+
+    // Remettre le bouton à la normale après 4 secondes
+    setTimeout(() => {
+        btn.innerText = originalText;
+        btn.style.backgroundColor = '';
+        btn.style.color = '';
+        btn.style.opacity = '1';
+        btn.disabled = false;
+    }, 4000);
+});

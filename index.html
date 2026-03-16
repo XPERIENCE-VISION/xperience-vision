@@ -396,53 +396,45 @@
                     question technique ? Écrivez-nous.</p>
             </div>
 
-            <form action="#" method="POST" class="space-y-4 md:space-y-8">
+            <form id="contact-form" action="#" method="POST" class="space-y-4 md:space-y-8">
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="group">
-                        <label
-                            class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Nom
-                            complet</label>
-                        <input type="text" placeholder="JEAN DUPONT"
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Nom complet</label>
+                        <input id="form-name" type="text" placeholder="JEAN DUPONT" required
                             class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
                     </div>
                     <div class="group">
-                        <label
-                            class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Votre
-                            Email</label>
-                        <input type="email" placeholder="CONTACT@EMAIL.COM"
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Votre Email</label>
+                        <input id="form-email" type="email" placeholder="CONTACT@EMAIL.COM" required
                             class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
                     </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="group">
-                        <label
-                            class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Marque
-                            & Modèle</label>
-                        <input type="text" placeholder="EX: TESLA MODEL Y"
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Marque & Modèle</label>
+                        <input id="form-vehicle" type="text" placeholder="EX: TESLA MODEL Y"
                             class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
                     </div>
                     <div class="group">
-                        <label
-                            class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Objet</label>
-                        <select
+                        <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Objet</label>
+                        <select id="form-subject"
                             class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase text-zinc-400">
-                            <option>Demande de devis</option>
-                            <option>Partenariat professionnel</option>
-                            <option>Service après-vente</option>
-                            <option>Autre</option>
+                            <option value="Demande de devis">Demande de devis</option>
+                            <option value="Partenariat professionnel">Partenariat professionnel</option>
+                            <option value="Service après-vente">Service après-vente</option>
+                            <option value="Autre">Autre</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="group">
-                    <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Votre
-                        Message</label>
-                    <textarea rows="5" placeholder="DÉTAILLEZ VOTRE PROJET..."
+                    <label class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">Votre Message</label>
+                    <textarea id="form-message" rows="5" placeholder="DÉTAILLEZ VOTRE PROJET..." required
                         class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700"></textarea>
                 </div>
 
-                <button type="submit"
+                <button id="form-submit-btn" type="submit"
                     class="w-full btn-premium py-6 rounded-2xl font-black uppercase text-xs tracking-[0.3em]">
                     Envoyer le message
                 </button>

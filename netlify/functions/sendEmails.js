@@ -12,7 +12,7 @@ exports.handler = async (event) => {
         // Tant que tu n'as pas de nom de domaine vérifié sur Resend, tu DOIS utiliser cette adresse d'expédition :
         from: 'XPERIENCE VISION <onboarding@resend.dev>', 
         // L'adresse où TU veux recevoir les messages de tes clients :
-        to: ['contact@xperience-vision.fr '], // <-- REMPLACE PAR TON EMAIL
+        to: ['contact@xperience-vision.fr'], // <-- REMPLACE PAR TON EMAIL
         reply_to: data.email, // Permet de faire "Répondre" directement au client
         subject: `Nouveau contact site : ${data.subject} - ${data.name}`,
         html: `

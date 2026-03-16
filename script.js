@@ -282,3 +282,30 @@ document.getElementById('contact-form')?.addEventListener('submit', async (e) =>
         btn.disabled = false;
     }, 4000);
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const subjectSelect = document.getElementById('form-subject');
+    const vehicleInput = document.getElementById('form-vehicle');
+    const vehicleAsterisk = document.getElementById('vehicle-asterisk');
+
+    // Fonction qui met à jour l'obligation du champ Véhicule
+    function updateVehicleRequirement() {
+        const subject = subjectSelect.value;
+        
+        // Si c'est un partenariat ou "Autre", le véhicule n'est pas obligatoire
+        if (subject === 'Partenariat professionnel' || subject === 'Autre') {
+            vehicleInput.removeAttribute('required');
+            vehicleAsterisk.classList.add('hidden'); // Cache l'astérisque (classe Tailwind)
+        } else {
+            // Pour Devis et SAV, c'est obligatoire
+            vehicleInput.setAttribute('required', 'required');
+            vehicleAsterisk.classList.remove('hidden'); // Affiche l'astérisque
+        }
+    }
+
+    // On lance la fonction au chargement de la page pour initialiser le bon état
+    updateVehicleRequirement();
+
+    // On écoute les changements dans la liste déroulante "Objet"
+    subjectSelect.addEventListener('change', updateVehicleRequirement);
+});

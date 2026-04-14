@@ -5,6 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XPERIENCE VISION | Intégrateur Digital Automobile Premium</title>
+    <meta name="description" content="XPERIENCE VISION — Spécialiste en écrans embarqués, accessoires sur-mesure et finitions premium pour Tesla, BYD, BMW, Mercedes, Range Rover et XPeng. Installation Plug & Play, garantie constructeur préservée.">
+
+    <!-- Open Graph / Partage réseaux sociaux -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="XPERIENCE VISION">
+    <meta property="og:title" content="XPERIENCE VISION | Intégrateur Digital Automobile Premium">
+    <meta property="og:description" content="Écrans embarqués, accessoires sur-mesure et finitions premium pour véhicules d'exception. Tesla, BYD, BMW, Mercedes, Range Rover. Installation Plug & Play.">
+    <meta property="og:image" content="https://xperiencevision.fr/img/hero-accueil.jpeg">
+    <meta property="og:url" content="https://xperiencevision.fr">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="canonical" href="https://xperiencevision.fr/">
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="XPERIENCE VISION | Intégrateur Digital Automobile Premium">
+    <meta name="twitter:description" content="Écrans embarqués, accessoires sur-mesure et finitions premium pour véhicules d'exception.">
+    <meta name="twitter:image" content="https://xperiencevision.fr/img/hero-accueil.jpeg">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -21,9 +39,10 @@
 
         <div class="hidden md:flex space-x-10 text-[12px] uppercase font-bold tracking-[0.2em]">
             <a href="#solutions" class="hover:text-gray-400 transition">Solutions</a>
-            <a href="#configurateur" class="hover:text-gray-400 transition">Configurateur</a>
-            <a href="#packs" class="hover:text-gray-400 transition">Packs</a>
             <a href="#pros" class="hover:text-gray-400 transition">Concessions</a>
+            <a href="#packs" class="hover:text-gray-400 transition">Packs</a>
+            <a href="#configurateur" class="hover:text-gray-400 transition">Configurateur</a>
+            <a href="#faq" class="hover:text-gray-400 transition">FAQ</a>
             <a href="#contact" class="hover:text-gray-400 transition">Contact</a>
         </div>
 
@@ -41,9 +60,10 @@
         <div id="mobile-dropdown"
             class="absolute top-full left-0 w-full bg-[#0a0a0a] border-b border-white/10 backdrop-blur-2xl hidden flex-col p-4 space-y-4 shadow-2xl">
             <a href="#solutions" class="mobile-item">Solutions</a>
-            <a href="#configurateur" class="mobile-item">Configurateur</a>
-            <a href="#packs" class="mobile-item">Packs</a>
             <a href="#pros" class="mobile-item">Concessions</a>
+            <a href="#packs" class="mobile-item">Packs</a>
+            <a href="#configurateur" class="mobile-item">Configurateur</a>
+            <a href="#faq" class="mobile-item">FAQ</a>
             <a href="#contact" class="mobile-item">Contact</a>
             <hr class="border-white/5">
             <a href="realisations.html"
@@ -58,8 +78,8 @@
 
     <section id="accueil"
         class="relative h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden">
-        <img src="img/IMG_9931.jpeg" alt="Intérieur BYD premium avec écran embarqué XPERIENCE VISION"
-            class="absolute inset-0 w-full h-full object-cover object-center opacity-30" loading="eager">
+        <img src="img/hero-accueil.jpeg" alt="Intérieur BYD premium avec écran embarqué XPERIENCE VISION"
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-30" loading="eager" width="1920" height="1080">
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0a0a0a] z-10"></div>
 
         <div class="relative z-20 mb-8 md:mb-20">
@@ -74,6 +94,13 @@
                 Nous concevons des solutions digitales embarquées premium pour transformer l'expérience passager en un
                 moment d'exception.
             </p>
+            <p class="hero-usp">
+                <span>&#10003; Écrans embarqués compatibles <strong>tous véhicules</strong></span>
+                <span class="hero-usp-sep">—</span>
+                <span>&#10003; Accessoires sur-mesure spécialisés
+                    <strong>Tesla · BYD · XPeng · BMW · Mercedes · Range Rover</strong>
+                </span>
+            </p>
             <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 justify-center">
                 <a href="#rdv"
                     class="btn-premium px-10 md:px-12 py-5 md:py-6 rounded-full font-bold uppercase text-xs md:text-sm">Planifier
@@ -84,31 +111,42 @@
             </div>
         </div>
 
-        <div class="absolute bottom-0 w-full py-10 bg-gradient-to-t from-black to-transparent z-20">
-            <div class="flex flex-wrap justify-center gap-8 md:gap-20 opacity-40 grayscale items-center px-6">
-                <span class="text-xl md:text-3xl font-bold tracking-tighter">TESLA</span>
-                <span class="text-xl md:text-3xl font-bold tracking-tighter">BMW</span>
-                <span class="text-xl md:text-3xl font-bold tracking-tighter">MERCEDES-BENZ</span>
-                <span class="text-xl md:text-3xl font-bold tracking-tighter">RANGE ROVER</span>
-                <span class="text-xl md:text-3xl font-bold tracking-tighter">BYD</span>
+        <div class="absolute bottom-0 w-full pb-6 bg-gradient-to-t from-black to-transparent z-20">
+            <p class="text-center text-[9px] font-black uppercase tracking-[0.3em] text-gray-700 mb-5">Spécialiste accessoires sur-mesure</p>
+            <div class="marquee-wrap">
+                <div class="marquee-track">
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="tesla">TESLA</a>
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="bmw">BMW</a>
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="mercedes">MERCEDES-BENZ</a>
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="range-rover">RANGE ROVER</a>
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="byd">BYD</a>
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="xpeng">XPENG</a>
+                    <!-- duplicate pour loop sans couture -->
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="tesla">TESLA</a>
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="bmw">BMW</a>
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="mercedes">MERCEDES-BENZ</a>
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="range-rover">RANGE ROVER</a>
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="byd">BYD</a>
+                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="xpeng">XPENG</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="solutions" class="min-h-screen flex flex-col justify-center py-24 px-6 max-w-7xl mx-auto">
-        <div class="mb-20 text-center">
+    <section id="solutions" class="min-h-screen flex flex-col justify-center py-12 px-6 max-w-7xl mx-auto">
+        <div class="mb-10 text-center reveal">
             <h2 class="text-5xl font-black uppercase mb-6 italic">La Gamme Xperience</h2>
             <p class="text-gray-500 uppercase tracking-widest text-sm max-w-2xl mx-auto">Une sélection rigoureuse
                 d'équipements haute technologie intégrés selon les standards constructeurs les plus exigeants.</p>
         </div>
 
         <div onscroll="updateScrollIndicators(this, 'solutions-dots')"
-            class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 md:grid md:grid-cols-3 md:gap-10 md:pb-0 no-scrollbar">
+            class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 md:grid md:grid-cols-3 md:gap-8 md:pb-0 no-scrollbar">
             <div
-                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center">
-                <div class="h-80 rounded-[2rem] mb-8 overflow-hidden">
-                    <img src="img/IMG_9856.jpeg" alt="Écran plafonnier XL XPERIENCE VISION"
-                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d1">
+                <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
+                    <img src="img/produit-ecran-xl.jpeg" alt="Écran plafonnier XL XPERIENCE VISION"
+                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224">
                 </div>
                 <div class="p-4 text-center">
                     <h3 class="text-2xl font-bold mb-4 uppercase">Écrans Embarqués</h3>
@@ -117,10 +155,10 @@
                 </div>
             </div>
             <div
-                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center">
-                <div class="h-80 rounded-[2rem] mb-8 overflow-hidden">
-                    <img src="img/IMG_9857.jpeg" alt="Écran intermédiaire XPERIENCE VISION"
-                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d2">
+                <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
+                    <img src="img/produit-ecran-intermediaire.jpeg" alt="Écran intermédiaire XPERIENCE VISION"
+                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224">
                 </div>
                 <div class="p-4 text-center">
                     <h3 class="text-2xl font-bold mb-4 uppercase">Technologie</h3>
@@ -129,10 +167,10 @@
                 </div>
             </div>
             <div
-                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center">
-                <div class="h-80 rounded-[2rem] mb-8 overflow-hidden">
-                    <img src="img/IMG_9855.jpeg" alt="Tablette embarquée XPERIENCE VISION"
-                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d3">
+                <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
+                    <img src="img/produit-tablette.jpeg" alt="Tablette embarquée XPERIENCE VISION"
+                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224">
                 </div>
                 <div class="p-4 text-center">
                     <h3 class="text-2xl font-bold mb-4 uppercase">Finition</h3>
@@ -149,64 +187,93 @@
         </div>
     </section>
 
-    <section id="configurateur"
-        class="min-h-screen flex flex-col justify-center py-24 bg-[#0a0a0a] border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6 w-full">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl font-black uppercase italic mb-6">Configuration sur-mesure</h2>
-                <p class="text-gray-500 uppercase tracking-widest text-sm">Analysez la compatibilité technique de votre
-                    intérieur en un clic.</p>
+    <section id="pros" class="min-h-screen flex flex-col justify-center py-10 md:py-12 bg-[#080a12]">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-4 md:mb-10">
+            <div class="reveal">
+                <span
+                    class="text-white font-black uppercase tracking-[0.5em] text-xs border-b-4 border-white pb-3">Partenariats</span>
+                <h2 class="text-4xl md:text-6xl font-black mt-8 md:mt-8 mb-6 md:mb-6 uppercase italic leading-tight">
+                    Business <br> & Performance.
+                </h2>
+                <p class="text-gray-400 text-xs md:text-base uppercase tracking-widest leading-loose mb-6 md:mb-6">
+                    Nous accompagnons les groupes automobiles dans la mise en place de centres de profits additionnels
+                    via l'équipement digital.
+                </p>
+                <div class="space-y-4 md:space-y-5">
+                    <div class="flex items-center">
+                        <div
+                            class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">
+                            01</div>
+                        <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Installation
+                            externalisée :
+                            Rentabilité immédiate.</p>
+                    </div>
+                    <div class="flex items-center">
+                        <div
+                            class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">
+                            02</div>
+                        <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Formation
+                            commerciale :
+                            Maîtrisez l'offre.</p>
+                    </div>
+                </div>
             </div>
-
-            <div class="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-16 items-center w-full">
-                <div onscroll="updateScrollIndicators(this, 'config-dots')"
-                    class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-4 pb-2 md:flex-col md:overflow-visible md:space-y-6 w-[90vw] md:w-full -ml-4 md:ml-0 px-4 md:px-0 no-scrollbar">
-                    <button onmouseenter="showSolution('family')" onclick="showSolution('family')"
-                        class="flex-none w-[75vw] md:w-full snap-center text-left p-6 md:p-8 card-glass rounded-[2rem] border-l-8 md:border-b-8 lg:border-l-8 lg:border-b-0 border-transparent hover:border-white transition-all group">
-                        <h4 class="text-lg font-bold uppercase tracking-widest group-hover:text-white">Expérience
-                            Familiale</h4>
-                        <p class="text-xs text-gray-500 uppercase mt-2 font-bold">Le meilleur du divertissement passager
-                        </p>
-                    </button>
-                    <button onmouseenter="showSolution('pro')" onclick="showSolution('pro')"
-                        class="flex-none w-[75vw] md:w-full snap-center text-left p-6 md:p-8 card-glass rounded-[2rem] border-l-8 md:border-b-8 lg:border-l-8 lg:border-b-0 border-transparent hover:border-white transition-all group">
-                        <h4 class="text-lg font-bold uppercase tracking-widest group-hover:text-white">Productivité
-                            Business</h4>
-                        <p class="text-xs text-gray-500 uppercase mt-2 font-bold">Votre bureau mobile haute performance
-                        </p>
-                    </button>
-                    <button onmouseenter="showSolution('protection')" onclick="showSolution('protection')"
-                        class="flex-none w-[75vw] md:w-full snap-center text-left p-6 md:p-8 card-glass rounded-[2rem] border-l-8 md:border-b-8 lg:border-l-8 lg:border-b-0 border-transparent hover:border-white transition-all group">
-                        <h4 class="text-lg font-bold uppercase tracking-widest group-hover:text-white">Esthétique &
-                            Valeur</h4>
-                        <p class="text-xs text-gray-500 uppercase mt-2 font-bold">Maintenance et finitions exclusives
-                        </p>
-                    </button>
-                </div>
-
-                <div id="config-dots" class="flex md:hidden justify-center gap-2 mb-4">
-                    <div class="w-2 h-2 rounded-full bg-white opacity-100 transition-opacity duration-300"></div>
-                    <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
-                    <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
-                </div>
-
-                <div id="solution-display"
-                    class="card-glass p-12 rounded-[4rem] min-h-[500px] flex flex-col justify-center border border-white/10 relative shadow-2xl">
-                    <div id="solution-content">
-                        <h3 class="text-4xl font-black mb-6 italic uppercase text-gray-600 leading-tight">Prêt pour
-                            <br>l'exception ?
-                        </h3>
-                        <p class="text-gray-400 text-sm uppercase tracking-widest leading-loose">Choisissez un univers à
-                            gauche pour découvrir nos équipements compatibles avec votre véhicule.</p>
+            <div class="card-glass p-8 md:p-10 rounded-[2rem] md:rounded-[4rem] text-center reveal reveal-d1">
+                <h4
+                    class="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] mb-6 md:mb-8 text-gray-500 italic underline decoration-2 underline-offset-8">
+                    Impact Showroom</h4>
+                <div class="grid grid-cols-2 gap-4 md:gap-6">
+                    <div>
+                        <p class="text-3xl md:text-6xl font-black mb-2 md:mb-4 tracking-tighter text-white" data-counter data-target="60" data-prefix="+" data-suffix="%">+60%</p>
+                        <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-widest">Taux
+                            d'équipement</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl md:text-6xl font-black mb-2 md:mb-4 tracking-tighter text-white" data-counter data-target="80">80</p>
+                        <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-widest">
+                            Véhicules / Mois</p>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div onscroll="updateScrollIndicators(this, 'pros-dots')"
+                class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-8 md:pt-10 border-t border-white/10 md:grid md:grid-cols-4 md:gap-8 md:pb-0 no-scrollbar">
+                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
+                    <i class="fa-solid fa-shield text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
+                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Garantie 1 an</h5>
+                    <p class="text-[10px] text-gray-600 uppercase font-bold">Sérénité totale</p>
+                </div>
+                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
+                    <i class="fa-solid fa-bolt text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
+                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Plug & Play</h5>
+                    <p class="text-[10px] text-gray-600 uppercase font-bold">Zéro découpe faisceau</p>
+                </div>
+                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
+                    <i class="fa-solid fa-headset text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
+                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">SAV Premium</h5>
+                    <p class="text-[10px] text-gray-600 uppercase font-bold">Réponse sous 24h</p>
+                </div>
+                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
+                    <i class="fa-solid fa-gem text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
+                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Finition Luxe</h5>
+                    <p class="text-[10px] text-gray-600 uppercase font-bold">Standard constructeur</p>
+                </div>
+            </div>
+
+            <div id="pros-dots" class="flex md:hidden justify-center gap-2 mt-4">
+                <div class="w-2 h-2 rounded-full bg-white opacity-100 transition-opacity duration-300"></div>
+                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+            </div>
+        </div>
     </section>
 
-    <section id="packs" class="min-h-screen flex flex-col justify-center py-24 bg-white text-black">
+    <section id="packs" class="min-h-screen flex flex-col justify-center py-24 bg-[#fafaf8] text-black">
         <div class="max-w-7xl mx-auto px-6 w-full">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8 reveal">
                 <div>
                     <h2 class="text-6xl font-black uppercase leading-none italic">Packs <br><span
                             class="text-gray-300">Signature</span></h2>
@@ -231,7 +298,7 @@
                         <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Tapis sur-mesure</li>
                         <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Parfum d'ambiance</li>
                     </ul>
-                    <button
+                    <button data-select-pack="pack-livraison-4h"
                         class="w-full py-5 bg-gray-50 rounded-2xl group-hover:bg-black group-hover:text-white transition font-black uppercase text-xs">Sélectionner</button>
                 </div>
                 <div
@@ -245,7 +312,7 @@
                         <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Soin des cuirs</li>
                         <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Finition Showroom</li>
                     </ul>
-                    <button
+                    <button data-select-pack="pack-clean-4h"
                         class="w-full py-5 bg-gray-50 rounded-2xl group-hover:bg-black group-hover:text-white transition font-black uppercase text-xs">Sélectionner</button>
                 </div>
                 <div
@@ -259,7 +326,8 @@
                         <li><i class="fa-solid fa-check-double mr-3 text-white"></i> Capsules Premium</li>
                         <li><i class="fa-solid fa-check-double mr-3 text-white"></i> Pose Invisible</li>
                     </ul>
-                    <button class="w-full py-5 bg-white text-black rounded-2xl font-black uppercase text-xs">Vivre
+                    <button data-select-pack="pack-cafe-4h"
+                        class="w-full py-5 bg-white text-black rounded-2xl font-black uppercase text-xs">Vivre
                         l'expérience</button>
                 </div>
             </div>
@@ -272,92 +340,114 @@
         </div>
     </section>
 
-    <section id="pros" class="min-h-screen flex flex-col justify-center py-12 md:py-24 bg-zinc-900">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 md:gap-20 items-center mb-6 md:mb-20">
-            <div>
-                <span
-                    class="text-white font-black uppercase tracking-[0.5em] text-xs border-b-4 border-white pb-3">Partenariats</span>
-                <h2 class="text-4xl md:text-6xl font-black mt-8 md:mt-12 mb-6 md:mb-10 uppercase italic leading-tight">
-                    Business <br> & Performance.
-                </h2>
-                <p class="text-gray-400 text-xs md:text-base uppercase tracking-widest leading-loose mb-6 md:mb-10">
-                    Nous accompagnons les groupes automobiles dans la mise en place de centres de profits additionnels
-                    via l'équipement digital.
+    <section id="configurateur" class="py-20 bg-[#0a0a0a] border-t border-white/5">
+        <div class="max-w-2xl mx-auto px-6 w-full">
+
+            <!-- Intro -->
+            <div class="text-center mb-14">
+                <h2 class="text-4xl md:text-5xl font-black uppercase italic mb-6">Votre Configuration</h2>
+                <p class="text-gray-400 text-sm uppercase tracking-[0.2em] leading-loose max-w-lg mx-auto">
+                    Nos écrans s'adaptent à <strong class="text-white">tous les véhicules</strong>.<br>
+                    Sélectionnez votre marque pour un devis sur-mesure.
                 </p>
-                <div class="space-y-4 md:space-y-8">
-                    <div class="flex items-center">
-                        <div
-                            class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">
-                            01</div>
-                        <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Installation
-                            externalisée :
-                            Rentabilité immédiate.</p>
-                    </div>
-                    <div class="flex items-center">
-                        <div
-                            class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">
-                            02</div>
-                        <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Formation
-                            commerciale :
-                            Maîtrisez l'offre.</p>
-                    </div>
-                </div>
             </div>
-            <div class="card-glass p-8 md:p-16 rounded-[2rem] md:rounded-[4rem] text-center">
-                <h4
-                    class="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] mb-6 md:mb-12 text-gray-500 italic underline decoration-2 underline-offset-8">
-                    Impact Showroom</h4>
-                <div class="grid grid-cols-2 gap-4 md:gap-10">
-                    <div>
-                        <p class="text-3xl md:text-6xl font-black mb-2 md:mb-4 tracking-tighter text-white">+60%</p>
-                        <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-widest">Taux
-                            d'équipement</p>
-                    </div>
-                    <div>
-                        <p class="text-3xl md:text-6xl font-black mb-2 md:mb-4 tracking-tighter text-white">80</p>
-                        <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-widest">
-                            Véhicules / Mois</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="max-w-7xl mx-auto px-6 w-full">
-            <div onscroll="updateScrollIndicators(this, 'pros-dots')"
-                class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-10 md:pt-20 border-t border-white/10 md:grid md:grid-cols-4 md:gap-12 md:pb-0 no-scrollbar">
-                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
-                    <i class="fa-solid fa-shield text-3xl mb-6 text-gray-500 group-hover:text-white transition"></i>
-                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Garantie 1 an</h5>
-                    <p class="text-[10px] text-gray-600 uppercase font-bold">Sérénité totale</p>
+            <!-- Barre de progression -->
+            <div class="config-progress mb-12">
+                <div class="config-progress-bar">
+                    <div class="config-step-dot active" data-dot="1">1</div>
+                    <div class="config-connector" data-conn="1"></div>
+                    <div class="config-step-dot" data-dot="2">2</div>
+                    <div class="config-connector" data-conn="2"></div>
+                    <div class="config-step-dot" data-dot="3">3</div>
+                    <div class="config-connector" data-conn="3"></div>
+                    <div class="config-step-dot" data-dot="4">4</div>
                 </div>
-                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
-                    <i class="fa-solid fa-bolt text-3xl mb-6 text-gray-500 group-hover:text-white transition"></i>
-                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Plug & Play</h5>
-                    <p class="text-[10px] text-gray-600 uppercase font-bold">Zéro découpe faisceau</p>
-                </div>
-                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
-                    <i class="fa-solid fa-headset text-3xl mb-6 text-gray-500 group-hover:text-white transition"></i>
-                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">SAV Premium</h5>
-                    <p class="text-[10px] text-gray-600 uppercase font-bold">Réponse sous 24h</p>
-                </div>
-                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
-                    <i class="fa-solid fa-gem text-3xl mb-6 text-gray-500 group-hover:text-white transition"></i>
-                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Finition Luxe</h5>
-                    <p class="text-[10px] text-gray-600 uppercase font-bold">Standard constructeur</p>
+                <div class="config-step-labels">
+                    <span>Marque</span>
+                    <span>Modèle</span>
+                    <span>Univers</span>
+                    <span>Récap</span>
                 </div>
             </div>
 
-            <div id="pros-dots" class="flex md:hidden justify-center gap-2 mt-4">
-                <div class="w-2 h-2 rounded-full bg-white opacity-100 transition-opacity duration-300"></div>
-                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
-                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
-                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+            <!-- Étape 1 : Marque -->
+            <div class="config-step" data-step="1">
+                <p class="config-step-title">Sélectionnez votre marque</p>
+                <div class="config-brands-grid">
+                    <button class="config-brand-btn" data-brand="tesla">Tesla</button>
+                    <button class="config-brand-btn" data-brand="byd">BYD</button>
+                    <button class="config-brand-btn" data-brand="xpeng">XPeng</button>
+                    <button class="config-brand-btn" data-brand="bmw">BMW</button>
+                    <button class="config-brand-btn" data-brand="mercedes">Mercedes-Benz</button>
+                    <button class="config-brand-btn" data-brand="range-rover">Range Rover</button>
+                    <button class="config-brand-btn config-brand-autre" data-brand="autre">Autre véhicule</button>
+                </div>
             </div>
+
+            <!-- Étape 2 : Modèle -->
+            <div class="config-step hidden" data-step="2">
+                <p class="config-step-title">Sélectionnez votre modèle</p>
+                <div id="config-models-grid" class="config-brands-grid"></div>
+                <div id="config-autre-wrap" class="hidden mt-6">
+                    <input id="config-autre-input" type="text" class="config-text-input"
+                        placeholder="Ex: AUDI A6, RENAULT CLIO..." autocomplete="off" />
+                    <button id="config-autre-confirm" class="config-confirm-btn">Confirmer mon véhicule →</button>
+                </div>
+                <button class="config-back-btn" data-target="1">
+                    <i class="fa-solid fa-arrow-left mr-2 text-xs"></i> Retour
+                </button>
+            </div>
+
+            <!-- Étape 3 : Univers -->
+            <div class="config-step hidden" data-step="3">
+                <p class="config-step-title">Quel est votre univers ?</p>
+                <div class="config-univers-grid">
+                    <button class="config-univers-btn" data-univers="familiale">
+                        <i class="fa-solid fa-film config-univers-icon"></i>
+                        <span class="config-univers-name">Expérience Familiale</span>
+                        <span class="config-univers-desc">Écrans, gaming, divertissement</span>
+                    </button>
+                    <button class="config-univers-btn" data-univers="business">
+                        <i class="fa-solid fa-briefcase config-univers-icon"></i>
+                        <span class="config-univers-name">Productivité Business</span>
+                        <span class="config-univers-desc">CarPlay, dashcam, connectivité</span>
+                    </button>
+                    <button class="config-univers-btn" data-univers="esthetique">
+                        <i class="fa-solid fa-star config-univers-icon"></i>
+                        <span class="config-univers-name">Esthétique & Valeur</span>
+                        <span class="config-univers-desc">PPF, habillage, tapis sur-mesure</span>
+                    </button>
+                </div>
+                <button class="config-back-btn" data-target="2">
+                    <i class="fa-solid fa-arrow-left mr-2 text-xs"></i> Retour
+                </button>
+            </div>
+
+            <!-- Étape 4 : Récap -->
+            <div class="config-step hidden" data-step="4">
+                <div class="card-glass rounded-[2rem] p-8 md:p-12">
+                    <p class="config-step-title mb-2">Votre sélection</p>
+                    <div id="config-recap-rows" class="mb-8"></div>
+                    <p class="text-gray-600 text-[10px] uppercase tracking-[0.18em] font-bold mb-8 text-center leading-loose">
+                        Nos équipements s'adaptent à votre véhicule.<br>
+                        Un conseiller vous recontacte sous 24h avec votre devis.
+                    </p>
+                    <button onclick="prefillContactForm()"
+                        class="btn-premium w-full py-5 rounded-2xl text-xs font-black uppercase tracking-widest">
+                        Demander mon devis personnalisé
+                    </button>
+                </div>
+                <button class="config-back-btn mt-4" data-target="3">
+                    <i class="fa-solid fa-arrow-left mr-2 text-xs"></i> Modifier ma sélection
+                </button>
+            </div>
+
         </div>
     </section>
 
-    <section id="rdv" class="min-h-screen bg-white text-black flex flex-col items-center">
-        <div class="w-full py-10 pt-20 bg-black text-center mb-8 md:mb-20">
+    <section id="rdv" class="bg-[#050508] text-white">
+        <div class="w-full py-10 pt-20 bg-black text-center">
             <h2 class="text-3xl md:text-5xl font-light italic text-gray-500 leading-tight">
                 "Vos enfants ne demanderont plus : <br>
                 <span class="text-white font-black not-italic uppercase tracking-tighter">On arrive quand ?</span>"
@@ -366,19 +456,38 @@
                 réinventée</p>
         </div>
 
-        <div class="max-w-6xl w-full px-6 py-10 pb-12 md:pb-24 flex flex-col items-center">
-            <h3 class="text-4xl md:text-5xl font-black text-center mb-6 md:mb-10 uppercase tracking-tighter italic">
+        <div class="max-w-6xl w-full mx-auto px-6 py-10 pb-16 flex flex-col items-center">
+            <h3 class="text-4xl md:text-5xl font-black text-center mb-6 md:mb-10 uppercase tracking-tighter italic reveal">
                 Planifiez l'exception.</h3>
 
-            <div id="calendly-container"
-                class="w-full bg-white rounded-[3rem] border-2 border-gray-100 shadow-2xl overflow-hidden flex flex-col items-center justify-center min-h-[400px] transition-all duration-500">
-
-                <button id="load-calendly"
-                    class="btn-premium px-10 py-5 rounded-full text-xs font-black uppercase tracking-widest shadow-xl hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-calendar-days mr-3"></i> Voir les disponibilités
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 w-full">
+                <button class="cal-pack-btn text-left p-6 rounded-2xl border-2 transition-all border-gray-200 text-gray-500 hover:border-black hover:bg-gray-50" data-pack="pack-livraison-4h">
+                    <div class="flex items-center gap-3 mb-1">
+                        <i class="fa-solid fa-box text-2xl transition flex-shrink-0"></i>
+                        <h4 class="font-black uppercase text-sm tracking-widest">Pack Livraison</h4>
+                    </div>
+                    <p class="text-[10px] font-bold uppercase opacity-60">Protection & accessoires</p>
                 </button>
+                <button class="cal-pack-btn text-left p-6 rounded-2xl border-2 transition-all border-gray-200 text-gray-500 hover:border-black hover:bg-gray-50" data-pack="pack-clean-4h">
+                    <div class="flex items-center gap-3 mb-1">
+                        <i class="fa-solid fa-spray-can-sparkles text-2xl transition flex-shrink-0"></i>
+                        <h4 class="font-black uppercase text-sm tracking-widest">Pack Clean</h4>
+                    </div>
+                    <p class="text-[10px] font-bold uppercase opacity-60">Maintenance esthétique</p>
+                </button>
+                <button class="cal-pack-btn text-left p-6 rounded-2xl border-2 transition-all border-gray-200 text-gray-500 hover:border-black hover:bg-gray-50" data-pack="pack-cafe-4h">
+                    <div class="flex items-center gap-3 mb-1">
+                        <i class="fa-solid fa-mug-hot text-2xl transition flex-shrink-0"></i>
+                        <h4 class="font-black uppercase text-sm tracking-widest">Pack Café</h4>
+                    </div>
+                    <p class="text-[10px] font-bold uppercase opacity-60">Le luxe ultime à bord</p>
+                </button>
+            </div>
 
-                <div id="calendly-widget" class="hidden w-full h-full" style="height: 400px;"></div>
+            <div id="cal-container" class="hidden w-full rounded-2xl overflow-hidden transition-all duration-500">
+                <div id="my-cal-inline-pack-livraison-4h" class="hidden w-full" style="min-height:500px;"></div>
+                <div id="my-cal-inline-pack-clean-4h" class="hidden w-full" style="min-height:500px;"></div>
+                <div id="my-cal-inline-pack-cafe-4h" class="hidden w-full" style="min-height:500px;"></div>
             </div>
 
             <p class="text-center mt-8 text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">
@@ -387,16 +496,56 @@
         </div>
     </section>
 
+    <section id="faq">
+        <h2 class="reveal">Questions fréquentes</h2>
+        <p class="faq-subtitle reveal">Tout ce que vous devez savoir</p>
+        <div class="faq-container">
+            <details>
+                <summary>Vos écrans sont-ils compatibles avec toutes les marques ?</summary>
+                <p><strong>Oui, sans exception.</strong> Nos écrans plafonniers 17.3", appuie-tête 10.1" et écrans passager s'installent sur n'importe quel véhicule, toutes marques et motorisations confondues. L'installation est entièrement sur-mesure : aucune découpe de faisceau, aucune modification irréversible. La garantie constructeur reste intacte.</p>
+            </details>
+            <details>
+                <summary>Sur quelles marques êtes-vous spécialisés pour les accessoires ?</summary>
+                <p>Nous sommes spécialistes des accessoires sur-mesure pour <strong>Tesla, BYD, XPeng, BMW, Mercedes-Benz et Range Rover</strong>. Pour chacune de ces marques, nous proposons une gamme complète : tapis 3D logotés, films de protection, habillages console, seuils LED, films PPF, protections coffre et dashcams intégrées.</p>
+            </details>
+            <details>
+                <summary>L'installation préserve-t-elle la garantie constructeur ?</summary>
+                <p>Oui, <strong>100% Plug & Play</strong>. Toutes nos installations sont réalisées sans découpe de faisceau électrique. La garantie constructeur reste entièrement intacte. Nous travaillons exclusivement avec des connecteurs certifiés et des fixations sur-mesure non destructives.</p>
+            </details>
+            <details>
+                <summary>Combien de temps dure une installation ?</summary>
+                <p>Entre <strong>2 heures et 1 journée</strong> selon le pack choisi. Un véhicule de courtoisie peut être mis à disposition sur demande pour les installations longue durée.</p>
+            </details>
+            <details>
+                <summary>Êtes-vous spécialisés sur les marques chinoises (BYD, XPeng) ?</summary>
+                <p>Oui, nous sommes l'un des rares installateurs en France maîtrisant parfaitement les architectures électroniques <strong>BYD, XPeng, Nio et Zeekr</strong>. Nos techniciens sont formés spécifiquement sur ces véhicules pour garantir une intégration parfaite.</p>
+            </details>
+            <details>
+                <summary>Proposez-vous un service à domicile ?</summary>
+                <p>Oui, <strong>sur demande pour les packs supérieurs à 1 500 €</strong>. Contactez-nous pour organiser un déplacement à votre adresse ou lieu de travail.</p>
+            </details>
+            <details>
+                <summary>Quels moyens de paiement acceptez-vous ?</summary>
+                <p>Nous acceptons la <strong>carte bancaire, le virement</strong> et le <strong>paiement en 3× sans frais</strong> à partir de 500 €.</p>
+            </details>
+            <details>
+                <summary>Que se passe-t-il si je revends mon véhicule ?</summary>
+                <p>Tous nos accessoires peuvent être <strong>démontés sans laisser de trace</strong>, ou conservés comme valeur ajoutée à la revente. L'installation Plug & Play garantit une réversibilité totale.</p>
+            </details>
+        </div>
+    </section>
+
     <section id="contact" class="py-24 bg-[#0a0a0a] border-t border-white/5">
         <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-5xl font-black uppercase italic mb-4 tracking-tighter">Demande <span
                         class="text-gray-600">Spécifique</span></h2>
                 <p class="text-gray-500 uppercase tracking-widest text-[10px] font-bold">Un projet hors-norme ? Une
                     question technique ? Écrivez-nous.</p>
             </div>
 
-            <form id="contact-form" action="#" method="POST" class="space-y-4 md:space-y-8">
+            <form id="contact-form" name="contact" method="POST" data-netlify="true" class="space-y-4 md:space-y-8">
+                <input type="hidden" name="form-name" value="contact">
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="group">
                         <label for="form-name" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">
@@ -440,7 +589,7 @@
                     <label for="form-message" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">
                         Votre Message <span class="text-red-500">*</span>
                     </label>
-                    <textarea id="form-message" name="message" rows="5" placeholder="DÉTAILLEZ VOTRE PROJET..." required
+                    <textarea id="form-message" name="message" placeholder="DÉTAILLEZ VOTRE PROJET..." required
                         class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700"></textarea>
                 </div>
 
@@ -465,9 +614,9 @@
                 <div class="flex flex-col space-y-6">
                     <span class="text-white border-b border-white/10 pb-3">Navigation</span>
                     <a href="#solutions" class="hover:text-white transition">La Gamme</a>
-                    <a href="#configurateur" class="hover:text-white transition">Configurateur</a>
-                    <a href="#packs" class="hover:text-white transition">Packs</a>
                     <a href="#pros" class="hover:text-white transition">Concessions</a>
+                    <a href="#packs" class="hover:text-white transition">Packs</a>
+                    <a href="#configurateur" class="hover:text-white transition">Configurateur</a>
                     <a href="realisations.html" class="hover:text-white transition">Réalisations</a>
                     <a href="#contact" class="hover:text-white transition">Contact</a>
                 </div>
@@ -478,8 +627,20 @@
                 </div>
             </div>
         </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5">
+            <p class="text-[9px] text-gray-600 font-bold tracking-[0.5em] uppercase text-center">© 2026 XPERIENCE VISION — TOUS DROITS RÉSERVÉS</p>
+        </div>
     </footer>
 
+    <a href="https://wa.me/33766306193?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20vos%20services."
+        class="whatsapp-float" target="_blank" rel="noopener" aria-label="Nous contacter sur WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.122 1.535 5.854L.057 23.885a.5.5 0 0 0 .611.61l6.198-1.494A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.017-1.378l-.36-.214-3.724.898.934-3.614-.235-.372A9.818 9.818 0 1 1 12 21.818z" />
+        </svg>
+    </a>
+
+    <div class="grain-overlay" aria-hidden="true"></div>
     <script src="script.js"></script>
 </body>
 

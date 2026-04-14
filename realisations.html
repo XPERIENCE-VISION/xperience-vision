@@ -7,6 +7,23 @@
     <title>Réalisations | XPERIENCE VISION</title>
     <meta name="description"
         content="Découvrez les réalisations XPERIENCE VISION : installations d'écrans embarqués premium pour BYD et autres véhicules électriques. Galerie photos et catalogue produits.">
+
+    <!-- Open Graph / Partage réseaux sociaux -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="XPERIENCE VISION">
+    <meta property="og:title" content="Réalisations | XPERIENCE VISION">
+    <meta property="og:description" content="Découvrez les réalisations XPERIENCE VISION : installations d'écrans embarqués premium pour BYD et autres véhicules électriques. Galerie photos et catalogue produits.">
+    <meta property="og:image" content="https://xperiencevision.fr/img/catalogue-01.jpeg">
+    <meta property="og:url" content="https://xperiencevision.fr/realisations.html">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="canonical" href="https://xperiencevision.fr/realisations.html">
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Réalisations | XPERIENCE VISION">
+    <meta name="twitter:description" content="Galerie de réalisations XPERIENCE VISION — écrans embarqués et accessoires premium.">
+    <meta name="twitter:image" content="https://xperiencevision.fr/img/catalogue-01.jpeg">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -255,7 +272,7 @@
     <!-- HERO HEADER -->
     <section class="relative pt-32 pb-10 px-6 overflow-hidden">
         <div class="absolute inset-0 overflow-hidden">
-            <img src="img/CAA81029-3947-47E7-A9B9-B40F1BB1BBED.jpeg" alt="XPERIENCE VISION produits"
+            <img src="img/hero-realisations.jpeg" alt="XPERIENCE VISION produits"
                 class="w-full h-full object-cover object-center opacity-15">
             <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/70 via-transparent to-[#0a0a0a]"></div>
         </div>
@@ -290,40 +307,28 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 
                 <!-- Grande image à gauche -->
-                <div class="gallery-item md:row-span-2 h-72 md:h-full min-h-[340px]" data-gallery="installs"
-                    data-index="0">
-                    <img src="img/IMG_9903.jpeg" alt="Habitacle BYD avec écran plafonnier XPERIENCE VISION allumé"
-                        loading="lazy">
-                    <div class="overlay">
-                        <p class="text-white text-xs font-black uppercase tracking-widest"><i
-                                class="fa-solid fa-expand mr-2"></i>Écran allumé — BYD Seal</p>
-                    </div>
-                </div>
-
-                <!-- 3 images à droite -->
-                <div class="gallery-item h-56 md:h-auto" data-gallery="installs" data-index="1">
-                    <img src="img/IMG_9905.jpeg" alt="Installation écran plafonnier vue intérieur" loading="lazy">
+                <div class="gallery-item h-72 md:h-[520px]" data-gallery="installs" data-index="0">
+                    <img src="img/installation-vue-interieur.jpeg" alt="Installation écran plafonnier vue intérieur" loading="lazy">
                     <div class="overlay">
                         <p class="text-white text-xs font-black uppercase tracking-widest"><i
                                 class="fa-solid fa-expand mr-2"></i>Vue habitacle — Installation</p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4 md:gap-6">
-                    <div class="gallery-item h-44" data-gallery="installs" data-index="2">
-                        <img src="img/IMG_9895.jpeg" alt="BYD Dolphin showroom avec coffret cadeau XPERIENCE VISION"
-                            loading="lazy">
+                <!-- Colonne droite : 2 images qui ensemble = hauteur de l'image gauche -->
+                <div class="flex flex-col gap-4 md:gap-6 md:h-[520px]">
+                    <div class="gallery-item h-48 md:flex-1" data-gallery="installs" data-index="1">
+                        <img src="img/installation-byd-dolphin.jpeg" alt="BYD Dolphin showroom avec coffret cadeau XPERIENCE VISION" loading="lazy">
                         <div class="overlay">
-                            <p class="text-white text-[9px] font-black uppercase tracking-wider"><i
-                                    class="fa-solid fa-expand mr-1"></i>Showroom</p>
+                            <p class="text-white text-xs font-black uppercase tracking-widest"><i
+                                    class="fa-solid fa-expand mr-2"></i>Showroom</p>
                         </div>
                     </div>
-                    <div class="gallery-item h-44" data-gallery="installs" data-index="3">
-                        <img src="img/FullSizeRender.jpeg"
-                            alt="Coffrets cadeaux XPERIENCE VISION dans le coffre d'un véhicule" loading="lazy">
+                    <div class="gallery-item h-48 md:flex-1" data-gallery="installs" data-index="2">
+                        <img src="img/installation-pack-livraison.jpeg" alt="Coffrets cadeaux XPERIENCE VISION dans le coffre d'un véhicule" loading="lazy">
                         <div class="overlay">
-                            <p class="text-white text-[9px] font-black uppercase tracking-wider"><i
-                                    class="fa-solid fa-expand mr-1"></i>Pack livraison</p>
+                            <p class="text-white text-xs font-black uppercase tracking-widest"><i
+                                    class="fa-solid fa-expand mr-2"></i>Pack livraison</p>
                         </div>
                     </div>
                 </div>
@@ -346,7 +351,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                 <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="0">
-                    <img src="img/2F1BC4D4-1D8A-4E2A-83C7-C5567987EC58.jpeg"
+                    <img src="img/coffret-premium.jpeg"
                         alt="Coffret cadeau XPERIENCE VISION — thermos, carnet, stylo" loading="lazy">
                     <div class="overlay">
                         <p class="text-white text-xs font-black uppercase tracking-widest"><i
@@ -354,7 +359,7 @@
                     </div>
                 </div>
                 <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="1">
-                    <img src="img/526A7A56-1FEA-4076-AC7A-8AE06D103A20.jpeg"
+                    <img src="img/coffret-contenu.jpeg"
                         alt="Coffret cadeau XPERIENCE VISION vue détaillée" loading="lazy">
                     <div class="overlay">
                         <p class="text-white text-xs font-black uppercase tracking-widest"><i
@@ -362,7 +367,7 @@
                     </div>
                 </div>
                 <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="2">
-                    <img src="img/b9ff3402-42da-417d-aef6-11648fa115e9.jpeg"
+                    <img src="img/coffret-presentation.jpeg"
                         alt="Présentation du coffret cadeau XPERIENCE VISION" loading="lazy">
                     <div class="overlay">
                         <p class="text-white text-xs font-black uppercase tracking-widest"><i
@@ -381,10 +386,8 @@
                     <span
                         class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-l-4 border-white pl-4">Gamme
                         BYD</span>
-                    <h2 class="text-3xl md:text-5xl font-black mt-6 uppercase italic tracking-tighter">Catalogue
-                        Produits</h2>
-                    <p class="text-gray-500 text-xs uppercase tracking-widest mt-3">Écrans plafonniers & Tablettes
-                        embarquées — Tarifs & Fiches techniques</p>
+                    <h2 class="text-3xl md:text-5xl font-black mt-6 uppercase italic tracking-tighter">Galerie</h2>
+                    <p class="text-gray-500 text-xs uppercase tracking-widest mt-3">Installations finalisées sur véhicule</p>
                 </div>
                 <p class="text-gray-600 text-[10px] font-black uppercase tracking-widest hidden md:block">
                     <i class="fa-solid fa-arrows-left-right mr-2"></i>Utilisez la scrollbar ou cliquez pour agrandir
@@ -394,70 +397,62 @@
             <div class="catalogue-track" id="catalogue-track">
 
                 <div class="catalogue-card" data-gallery="catalogue" data-index="0">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - Page d'Accueil.jpeg"
-                        alt="Catalogue BYD XPERIENCE VISION — Couverture" loading="lazy">
+                    <img src="img/catalogue-01.jpeg" alt="Catalogue XPERIENCE VISION — page 1" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="1">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - Sommaire.jpeg"
-                        alt="Sommaire gamme BYD" loading="lazy">
+                    <img src="img/catalogue-02.jpeg" alt="Catalogue XPERIENCE VISION — page 2" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="2">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 3.jpeg"
-                        alt="Écran plafonnier premium 1099€" loading="lazy">
+                    <img src="img/catalogue-03.jpeg" alt="Catalogue XPERIENCE VISION — page 3" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="3">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 4.jpeg"
-                        alt="Mise en situation écran plafonnier" loading="lazy">
+                    <img src="img/catalogue-04.jpeg" alt="Catalogue XPERIENCE VISION — page 4" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="4">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 5.jpeg"
-                        alt="BYD Sealion 7 — écran plafonnier" loading="lazy">
+                    <img src="img/catalogue-05.jpeg" alt="Catalogue XPERIENCE VISION — page 5" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="5">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 6.jpeg"
-                        alt="BYD Seal — écran plafonnier" loading="lazy">
+                    <img src="img/catalogue-06.jpeg" alt="Catalogue XPERIENCE VISION — page 6" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="6">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 7.jpeg"
-                        alt="BYD Dolphin — ecran 699€" loading="lazy">
+                    <img src="img/catalogue-07.jpeg" alt="Catalogue XPERIENCE VISION — page 7" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="7">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 8.jpeg"
-                        alt="BYD Dolphin variante" loading="lazy">
+                    <img src="img/catalogue-08.jpeg" alt="Catalogue XPERIENCE VISION — page 8" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="8">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 9.jpeg"
-                        alt="BYD Atto 3 — 1099€" loading="lazy">
+                    <img src="img/catalogue-09.jpeg" alt="Catalogue XPERIENCE VISION — page 9" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="9">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 10.jpeg"
-                        alt="BYD Atto 3 variante" loading="lazy">
+                    <img src="img/catalogue-10.jpeg" alt="Catalogue XPERIENCE VISION — page 10" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="10">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 11.jpeg"
-                        alt="BYD Atto 3 — 699€" loading="lazy">
+                    <img src="img/catalogue-11.jpeg" alt="Catalogue XPERIENCE VISION — page 11" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="11">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 12.jpeg" alt="BYD Tang"
-                        loading="lazy">
+                    <img src="img/catalogue-12.jpeg" alt="Catalogue XPERIENCE VISION — page 12" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="12">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 13.jpeg"
-                        alt="Tableau comparatif — Tablette 600€ / Plafond 699€ / Premium 1099€" loading="lazy">
+                    <img src="img/catalogue-13.jpeg" alt="Catalogue XPERIENCE VISION — page 13" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="13">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 14.jpeg"
-                        alt="Fiche technique Tablette 10.1 pouces Android 11" loading="lazy">
+                    <img src="img/catalogue-14.jpeg" alt="Catalogue XPERIENCE VISION — page 14" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="14">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 15.jpeg"
-                        alt="Fiche technique Plafond Standard 13.3 pouces Android 12" loading="lazy">
+                    <img src="img/catalogue-15.jpeg" alt="Catalogue XPERIENCE VISION — page 15" loading="lazy">
                 </div>
                 <div class="catalogue-card" data-gallery="catalogue" data-index="15">
-                    <img src="img/Black Purple Aesthetic Product Catalogue Instagram Post - 16.jpeg"
-                        alt="Fiche technique Plafond Premium 17.3 pouces Android 14" loading="lazy">
+                    <img src="img/catalogue-16.jpeg" alt="Catalogue XPERIENCE VISION — page 16" loading="lazy">
                 </div>
-
+                <div class="catalogue-card" data-gallery="catalogue" data-index="16">
+                    <img src="img/catalogue-17.jpeg" alt="Catalogue XPERIENCE VISION — page 17" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="17">
+                    <img src="img/catalogue-18.jpeg" alt="Catalogue XPERIENCE VISION — page 18" loading="lazy">
+                </div>
+                <div class="catalogue-card" data-gallery="catalogue" data-index="18">
+                    <img src="img/catalogue-19.jpeg" alt="Catalogue XPERIENCE VISION — page 19" loading="lazy">
+                </div>
 
             </div>
 
@@ -496,7 +491,7 @@
             </div>
         </div>
         <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5">
-            <p class="text-[9px] text-gray-600 font-bold tracking-[0.5em] uppercase">© 2025 XPERIENCE VISION — TOUS
+            <p class="text-[9px] text-gray-600 font-bold tracking-[0.5em] uppercase">© 2026 XPERIENCE VISION — TOUS
                 DROITS RÉSERVÉS</p>
         </div>
     </footer>
@@ -533,33 +528,35 @@
         // ── Galleries data ────────────────────────────────────────────────────────
         const galleries = {
             installs: [
-                { src: 'img/IMG_9903.jpeg', alt: 'Écran plafonnier allumé — BYD Seal' },
-                { src: 'img/IMG_9905.jpeg', alt: 'Vue habitacle — Installation écran' },
-                { src: 'img/IMG_9895.jpeg', alt: 'Showroom BYD Dolphin avec coffret cadeau' },
-                { src: 'img/FullSizeRender.jpeg', alt: 'Coffrets cadeaux XPERIENCE VISION en livraison' },
+                { src: 'img/installation-vue-interieur.jpeg', alt: 'Vue habitacle — Installation écran' },
+                { src: 'img/installation-byd-dolphin.jpeg', alt: 'Showroom BYD Dolphin avec coffret cadeau' },
+                { src: 'img/installation-pack-livraison.jpeg', alt: 'Coffrets cadeaux XPERIENCE VISION en livraison' },
             ],
             packs: [
-                { src: 'img/2F1BC4D4-1D8A-4E2A-83C7-C5567987EC58.jpeg', alt: 'Coffret cadeau XPERIENCE VISION' },
-                { src: 'img/526A7A56-1FEA-4076-AC7A-8AE06D103A20.jpeg', alt: 'Contenu coffret cadeau' },
-                { src: 'img/b9ff3402-42da-417d-aef6-11648fa115e9.jpeg', alt: 'Présentation coffret cadeau' },
+                { src: 'img/coffret-premium.jpeg', alt: 'Coffret cadeau XPERIENCE VISION' },
+                { src: 'img/coffret-contenu.jpeg', alt: 'Contenu coffret cadeau' },
+                { src: 'img/coffret-presentation.jpeg', alt: 'Présentation coffret cadeau' },
             ],
             catalogue: [
-                { src: "img/Black Purple Aesthetic Product Catalogue Instagram Post - Page d'Accueil.jpeg", alt: 'Couverture catalogue BYD' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - Sommaire.jpeg', alt: 'Sommaire' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 3.jpeg', alt: 'Écran plafonnier Premium 1099€' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 4.jpeg', alt: 'Mise en situation' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 5.jpeg', alt: 'BYD Sealion 7' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 6.jpeg', alt: 'BYD Seal' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 7.jpeg', alt: 'BYD Dolphin 699€' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 8.jpeg', alt: 'BYD Dolphin variante' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 9.jpeg', alt: 'BYD Atto 3 1099€' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 10.jpeg', alt: 'BYD Atto 3 variante' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 11.jpeg', alt: 'BYD Atto 3 699€' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 12.jpeg', alt: 'BYD Tang' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 13.jpeg', alt: 'Comparatif tarifs' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 14.jpeg', alt: 'Fiche Tablette 10.1"' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 15.jpeg', alt: 'Fiche Plafond Standard 13.3"' },
-                { src: 'img/Black Purple Aesthetic Product Catalogue Instagram Post - 16.jpeg', alt: 'Fiche Plafond Premium 17.3"' },
+                { src: 'img/catalogue-01.jpeg', alt: 'Catalogue XPERIENCE VISION — page 1' },
+                { src: 'img/catalogue-02.jpeg', alt: 'Catalogue XPERIENCE VISION — page 2' },
+                { src: 'img/catalogue-03.jpeg', alt: 'Catalogue XPERIENCE VISION — page 3' },
+                { src: 'img/catalogue-04.jpeg', alt: 'Catalogue XPERIENCE VISION — page 4' },
+                { src: 'img/catalogue-05.jpeg', alt: 'Catalogue XPERIENCE VISION — page 5' },
+                { src: 'img/catalogue-06.jpeg', alt: 'Catalogue XPERIENCE VISION — page 6' },
+                { src: 'img/catalogue-07.jpeg', alt: 'Catalogue XPERIENCE VISION — page 7' },
+                { src: 'img/catalogue-08.jpeg', alt: 'Catalogue XPERIENCE VISION — page 8' },
+                { src: 'img/catalogue-09.jpeg', alt: 'Catalogue XPERIENCE VISION — page 9' },
+                { src: 'img/catalogue-10.jpeg', alt: 'Catalogue XPERIENCE VISION — page 10' },
+                { src: 'img/catalogue-11.jpeg', alt: 'Catalogue XPERIENCE VISION — page 11' },
+                { src: 'img/catalogue-12.jpeg', alt: 'Catalogue XPERIENCE VISION — page 12' },
+                { src: 'img/catalogue-13.jpeg', alt: 'Catalogue XPERIENCE VISION — page 13' },
+                { src: 'img/catalogue-14.jpeg', alt: 'Catalogue XPERIENCE VISION — page 14' },
+                { src: 'img/catalogue-15.jpeg', alt: 'Catalogue XPERIENCE VISION — page 15' },
+                { src: 'img/catalogue-16.jpeg', alt: 'Catalogue XPERIENCE VISION — page 16' },
+                { src: 'img/catalogue-17.jpeg', alt: 'Catalogue XPERIENCE VISION — page 17' },
+                { src: 'img/catalogue-18.jpeg', alt: 'Catalogue XPERIENCE VISION — page 18' },
+                { src: 'img/catalogue-19.jpeg', alt: 'Catalogue XPERIENCE VISION — page 19' },
             ]
         };
 

@@ -2,3 +2,21 @@
 .vscode/
 .DS_Store
 Thumbs.db
+
+# npm
+node_modules/
+
+# Build output (régénéré au déploiement Netlify via npm run build)
+dist/
+
+# WebP générés (régénérés via npm run build:webp)
+img/*.webp
+
+# Variables d'environnement secrètes (clés Stripe, Resend, Cal.com)
+# JAMAIS commit. Configurer dans Netlify > Site Settings > Environment Variables.
+.env
+.env.local
+.env.*.local
+
+# Netlify Dev local cache
+.netlify/

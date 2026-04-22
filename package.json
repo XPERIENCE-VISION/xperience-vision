@@ -1,0 +1,20 @@
+{
+  "name": "xperience-vision",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site XPERIENCE VISION — intégrateur digital automobile premium",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css --watch",
+    "build:webp": "node scripts/webp.js",
+    "build": "npm run build:css"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5",
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "nodemailer": "^8.0.5",
+    "stripe": "^22.0.2"
+  }
+}

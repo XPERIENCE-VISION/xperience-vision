@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commande confirmée — XPERIENCE VISION</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="dist/tailwind.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background:
+                radial-gradient(circle at 30% 20%, rgba(95, 191, 100, 0.08), transparent 60%),
+                radial-gradient(circle at 70% 80%, rgba(191, 149, 63, 0.08), transparent 60%),
+                #0a0a0a;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+        .success-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+        .success-card {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(180deg, #131313, #0a0a0a);
+            border: 1px solid rgba(95, 191, 100, 0.2);
+            border-radius: 2rem;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #5fbf64, #4caf50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 12px 30px rgba(95, 191, 100, 0.3);
+        }
+        h1 {
+            font-size: clamp(1.6rem, 4vw, 2.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            color: white;
+            margin: 0 0 1rem;
+            line-height: 1.1;
+        }
+        .success-eyebrow {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #5fbf64;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(95, 191, 100, 0.3);
+        }
+        .success-text {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 1rem 0 2rem;
+        }
+        .success-text strong { color: white; }
+        .session-id-wrap {
+            position: relative;
+            display: inline-block;
+        }
+        .session-id {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #aaa;
+            padding: 0.55rem 1rem;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: inherit;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            word-break: break-all;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            max-width: 100%;
+        }
+        .session-id:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        .session-id:focus-visible {
+            outline: 2px solid #5fbf64;
+            outline-offset: 3px;
+        }
+        .session-id i {
+            flex-shrink: 0;
+            font-size: 0.95em;
+            opacity: 0.7;
+        }
+        .session-id.copied {
+            background: rgba(95, 191, 100, 0.15);
+            border-color: rgba(95, 191, 100, 0.4);
+            color: #b5e5b8;
+        }
+        .session-id.copied i::before {
+            content: "\f00c";
+        }
+        .session-id-prefix {
+            color: #666;
+            flex-shrink: 0;
+        }
+        .session-id-value {
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0;
+            text-transform: none;
+            font-size: 0.95em;
+            color: inherit;
+            word-break: break-all;
+            min-width: 0;
+        }
+        .session-id-toast {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background: linear-gradient(135deg, #5fbf64, #4caf50);
+            color: white;
+            padding: 0.5rem 0.9rem;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 8px 20px rgba(95, 191, 100, 0.3);
+        }
+        .session-id-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .session-id-toast::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: #5fbf64;
+        }
+        .success-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+        @media (min-width: 600px) {
+            .success-actions { flex-direction: row; justify-content: center; }
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            min-height: 44px;
+        }
+        .btn-primary {
+            background: white;
+            color: black;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        footer p {
+            color: #666;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            font-weight: 800;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="success-wrap">
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <span class="success-eyebrow">Commande confirmée</span>
+            <h1>Merci pour votre <span class="gradient-text">commande&nbsp;!</span></h1>
+            <p class="success-text">
+                Votre paiement a bien été reçu. Un email de confirmation vous a été envoyé à votre adresse, avec le détail de votre commande.
+            </p>
+            <p class="success-text" id="service-extra" hidden>
+                Votre <strong>rendez-vous est validé</strong> à la concession choisie. Vous recevrez un rappel 24h avant. Présentez-vous à l'heure convenue avec votre véhicule.
+            </p>
+            <p class="success-text" id="produit-extra" hidden>
+                Votre commande sera expédiée sous <strong>3 à 5 jours ouvrés</strong>. Vous recevrez un email avec le numéro de suivi dès l'expédition.
+            </p>
+
+            <div id="session-id-display"></div>
+
+            <div class="success-actions">
+                <a href="/" class="btn btn-primary">Retour à l'accueil</a>
+                <a href="contact.html" class="btn btn-secondary">Une question ?</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 XPERIENCE VISION</p>
+    </footer>
+
+    <script>
+        // Vide le panier (la commande est validée)
+        try {
+            localStorage.removeItem('xv-cart');
+            localStorage.removeItem('xv-cat-carts'); // ancien format (migration)
+            localStorage.removeItem('xv-selected-concession');
+        } catch (e) {}
+
+        // Affiche l'ID de session si présent dans l'URL
+        const params = new URLSearchParams(window.location.search);
+        const sessionId = params.get('session_id');
+        if (sessionId) {
+            const display = document.getElementById('session-id-display');
+            display.innerHTML = `
+                <p>
+                    <span class="session-id-wrap">
+                        <button class="session-id" type="button" title="Cliquer pour copier">
+                            <i class="fa-regular fa-copy"></i>
+                            <span class="session-id-prefix">N°</span>
+                            <span class="session-id-value">${sessionId}</span>
+                        </button>
+                        <span class="session-id-toast" role="status" aria-live="polite">
+                            <i class="fa-solid fa-check mr-2"></i>Copié
+                        </span>
+                    </span>
+                </p>
+            `;
+            const btn = display.querySelector('.session-id');
+            const toast = display.querySelector('.session-id-toast');
+            let resetTimer = null;
+            btn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(sessionId);
+                } catch (e) {
+                    const temp = document.createElement('textarea');
+                    temp.value = sessionId;
+                    temp.style.position = 'fixed';
+                    temp.style.opacity = '0';
+                    document.body.appendChild(temp);
+                    temp.select();
+                    try { document.execCommand('copy'); } catch (e) {}
+                    document.body.removeChild(temp);
+                }
+                btn.classList.add('copied');
+                toast.classList.add('show');
+                if (resetTimer) clearTimeout(resetTimer);
+                resetTimer = setTimeout(() => {
+                    btn.classList.remove('copied');
+                    toast.classList.remove('show');
+                }, 1500);
+                // Évite la sélection de texte après clic
+                btn.blur();
+                const sel = window.getSelection();
+                if (sel) sel.removeAllRanges();
+            });
+        }
+
+        // Par défaut on affiche les deux messages (livraison + RDV) :
+        // le client sait ce qui le concerne et reçoit un email détaillé par type.
+        document.getElementById('service-extra').hidden = false;
+        document.getElementById('produit-extra').hidden = false;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | XPERIENCE VISION</title>
+    <meta name="description" content="Contactez XPERIENCE VISION pour un projet hors-norme, une question technique, un partenariat ou une demande SAV.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="XPERIENCE VISION">
+    <meta property="og:title" content="Contact | XPERIENCE VISION">
+    <meta property="og:description" content="Demande spécifique, partenariat ou SAV — l'équipe XPERIENCE VISION vous répond sous 24h.">
+    <meta property="og:image" content="https://xperiencevision.fr/img/hero-accueil.jpeg">
+    <meta property="og:url" content="https://xperiencevision.fr/contact.html">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="canonical" href="https://xperiencevision.fr/contact.html">
+
+    <link rel="stylesheet" href="dist/tailwind.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="catalogue.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body.page-contact section {
+            min-height: unset;
+            height: auto;
+            display: block;
+            justify-content: unset;
+        }
+
+        body.page-contact {
+            background:
+                radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.04), transparent 55%),
+                radial-gradient(circle at 85% 40%, rgba(191, 149, 63, 0.04), transparent 55%),
+                #0a0a0a;
+            background-attachment: fixed;
+        }
+
+        .contact-hero {
+            position: relative;
+            padding: 6rem 1.5rem 1.5rem;
+            text-align: center;
+        }
+
+        .contact-page-wrap {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 1rem 0 2rem;
+        }
+
+        @media (max-height: 780px) {
+            .contact-hero { padding: 5rem 1.5rem 1rem; }
+            .contact-page-wrap { padding: 0.5rem 0 1rem; }
+        }
+
+        .contact-hero-eyebrow {
+            display: inline-block;
+            font-size: 11px;
+            letter-spacing: 0.4em;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-hero-title {
+            font-size: clamp(2rem, 5.5vw, 3.8rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .contact-hero-eyebrow {
+            margin-bottom: 0.9rem;
+        }
+
+        .contact-hero-sub {
+            color: #a0a0a0;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            line-height: 1.6;
+            font-weight: 600;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-quick-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+
+        @media (min-width: 768px) {
+            .contact-quick-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        }
+
+        .contact-quick-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.2rem;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: block;
+            color: white;
+        }
+
+        .contact-quick-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .contact-quick-icon {
+            font-size: 1.5rem;
+            color: #ffb84d;
+            margin-bottom: 0.7rem;
+        }
+
+        .contact-quick-card.wa .contact-quick-icon { color: #25D366; }
+
+        .contact-quick-card h3 {
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: white;
+            margin-bottom: 0.4rem;
+        }
+
+        .contact-quick-card p {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        textarea#form-message {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        /* Error state visuel quand l'utilisateur a tapé du contenu invalide */
+        #contact-form input:invalid:not(:placeholder-shown):not(:focus),
+        #contact-form textarea:invalid:not(:placeholder-shown):not(:focus) {
+            border-color: rgba(255, 107, 107, 0.5);
+            background: rgba(255, 107, 107, 0.04);
+        }
+
+        /* Touch target garanti pour tous les boutons de la page */
+        #contact-form button[type="submit"],
+        .contact-quick-card {
+            min-height: 44px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-[#0a0a0a] text-white page-contact">
+
+    <nav id="navbar" class="fixed w-full z-50 px-6 py-4 flex justify-between items-center card-glass transition-all duration-300">
+        <div class="text-xl font-extrabold tracking-tighter italic uppercase">
+            <a href="index.html" class="hover:text-gray-400 transition">XPERIENCE<span class="text-gray-500 font-light">VISION</span></a>
+        </div>
+        <div class="hidden md:flex space-x-10 text-[12px] uppercase font-bold tracking-[0.2em]">
+            <a href="index.html#installation" class="hover:text-gray-400 transition">Catalogue</a>
+            <a href="histoire.html" class="hover:text-gray-400 transition">Notre Histoire</a>
+            <a href="contact.html" class="hover:text-gray-400 transition">Contact</a>
+        </div>
+        <div class="flex items-center space-x-3">
+            <button class="nav-cart-btn" data-open-cart aria-label="Ouvrir le panier">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="nav-cart-label">Panier</span>
+                <span class="nav-cart-count" data-cart-count>0</span>
+            </button>
+            <button id="burger-btn" class="md:hidden text-white text-2xl focus:outline-none p-2" aria-label="Menu">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+        <div id="mobile-dropdown" class="absolute top-full left-0 w-full bg-[#0a0a0a] border-b border-white/10 backdrop-blur-2xl hidden flex-col p-4 space-y-4 shadow-2xl">
+            <a href="index.html#installation" class="mobile-item">Catalogue</a>
+            <a href="index.html#configurateur" class="mobile-item">Configurateur</a>
+            <a href="index.html#accessoires" class="mobile-item">Produits</a>
+            <a href="index.html#faq" class="mobile-item">FAQ</a>
+            <a href="histoire.html" class="mobile-item">Notre Histoire</a>
+            <a href="contact.html" class="mobile-item">Contact</a>
+        </div>
+    </nav>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden"></div>
+
+    <main class="contact-page-wrap">
+
+        <section class="contact-hero">
+            <div class="relative z-10 max-w-4xl mx-auto">
+                <span class="contact-hero-eyebrow">Contact</span>
+                <h1 class="contact-hero-title">Une question ?<br><span class="gradient-text">On vous répond.</span></h1>
+                <p class="contact-hero-sub">
+                    Demande hors-norme, partenariat, SAV — réponse garantie sous 48h
+                </p>
+            </div>
+        </section>
+
+        <section class="px-6">
+            <div class="max-w-4xl mx-auto">
+                <form id="contact-form" name="contact" method="POST" data-netlify="true" class="space-y-3 md:space-y-4">
+                    <input type="hidden" name="form-name" value="contact">
+
+                    <div class="grid md:grid-cols-2 gap-3 md:gap-4">
+                        <div class="group">
+                            <label for="form-name" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1.5 ml-4">
+                                Nom complet <span class="text-red-500">*</span>
+                            </label>
+                            <input id="form-name" name="nom" type="text" placeholder="JEAN DUPONT" required
+                                class="w-full bg-zinc-900/50 border border-white/5 rounded-xl px-5 py-3 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
+                        </div>
+                        <div class="group">
+                            <label for="form-email" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1.5 ml-4">
+                                Votre Email <span class="text-red-500">*</span>
+                            </label>
+                            <input id="form-email" name="email" type="email" placeholder="CONTACT@EMAIL.COM" required
+                                class="w-full bg-zinc-900/50 border border-white/5 rounded-xl px-5 py-3 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-3 md:gap-4">
+                        <div class="group">
+                            <label for="form-vehicle" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1.5 ml-4">
+                                Marque &amp; Modèle <span id="vehicle-asterisk" class="text-red-500 transition-opacity">*</span>
+                            </label>
+                            <input id="form-vehicle" name="vehicule" type="text" placeholder="EX: TESLA MODEL Y" required
+                                class="w-full bg-zinc-900/50 border border-white/5 rounded-xl px-5 py-3 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
+                        </div>
+                        <div class="group">
+                            <label for="form-subject" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1.5 ml-4">
+                                Objet <span class="text-red-500">*</span>
+                            </label>
+                            <select id="form-subject" name="sujet" required
+                                class="w-full bg-zinc-900/50 border border-white/5 rounded-xl px-5 py-3 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase text-zinc-400">
+                                <option value="Demande de devis">Demande de devis</option>
+                                <option value="Partenariat professionnel">Partenariat professionnel</option>
+                                <option value="Service après-vente">Service après-vente</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label for="form-message" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-1.5 ml-4">
+                            Votre Message <span class="text-red-500">*</span>
+                        </label>
+                        <textarea id="form-message" name="message" rows="3" placeholder="DÉTAILLEZ VOTRE PROJET..." required
+                            class="w-full bg-zinc-900/50 border border-white/5 rounded-xl px-5 py-3 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700 resize-none"></textarea>
+                    </div>
+
+                    <button id="form-submit-btn" type="submit"
+                        class="w-full btn-premium py-4 rounded-xl font-black uppercase text-xs tracking-[0.3em]">
+                        Envoyer le message
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-20 px-6 border-t border-white/5 bg-[#050505]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div>
+                <div class="text-3xl font-black mb-6 italic uppercase tracking-tighter">XPERIENCE <span class="text-gray-600">VISION</span></div>
+                <p class="text-gray-500 text-xs uppercase tracking-[0.2em] max-w-sm leading-loose font-bold">L'excellence digitale embarquée. <br>Installation premium pour véhicules d'exception.</p>
+            </div>
+            <div class="grid grid-cols-2 gap-16 uppercase text-[10px] font-black tracking-[0.3em] text-gray-500">
+                <div class="flex flex-col space-y-6">
+                    <span class="text-white border-b border-white/10 pb-3">Navigation</span>
+                    <a href="index.html#installation" class="hover:text-white transition">Services</a>
+                    <a href="index.html#accessoires" class="hover:text-white transition">Produits</a>
+                    <a href="histoire.html" class="hover:text-white transition">Notre Histoire</a>
+                    <a href="contact.html" class="text-white">Contact</a>
+                </div>
+                <div class="flex flex-col space-y-6">
+                    <span class="text-white border-b border-white/10 pb-3">Légal</span>
+                    <a href="mentions-legales.html" class="hover:text-white transition">Mentions Légales</a>
+                    <a href="cgv.html" class="hover:text-white transition">CGV</a>
+                    <a href="politique-confidentialite.html" class="hover:text-white transition">Confidentialité</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5">
+            <p class="text-[9px] text-gray-600 font-bold tracking-[0.5em] uppercase text-center">© 2026 XPERIENCE VISION — TOUS DROITS RÉSERVÉS</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/33766306193?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20vos%20services." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Nous contacter sur WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.122 1.535 5.854L.057 23.885a.5.5 0 0 0 .611.61l6.198-1.494A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.017-1.378l-.36-.214-3.724.898.934-3.614-.235-.372A9.818 9.818 0 1 1 12 21.818z" />
+        </svg>
+    </a>
+
+    <!-- DRAWER PANIER -->
+    <aside id="cart-drawer" class="cart-drawer" aria-hidden="true">
+        <div class="cart-drawer-overlay"></div>
+        <div class="cart-drawer-panel" role="dialog" aria-labelledby="cart-drawer-title">
+            <header class="cart-drawer-header">
+                <h2 id="cart-drawer-title">
+                    <i class="cart-drawer-icon fa-solid fa-bag-shopping"></i>
+                    <span class="cart-drawer-title-text">Votre panier</span>
+                </h2>
+                <button class="cart-drawer-close" aria-label="Fermer">&times;</button>
+            </header>
+            <div class="cart-drawer-body">
+                <ul class="cart-drawer-list" aria-live="polite"></ul>
+                <p class="cart-drawer-empty" hidden>Votre panier est vide.</p>
+            </div>
+            <footer class="cart-drawer-footer">
+                <div class="cart-drawer-breakdown" data-cart-breakdown hidden>
+                    <div class="cart-drawer-row">
+                        <span>Sous-total HT</span>
+                        <span data-cart-subtotal-ht>0,00 €</span>
+                    </div>
+                    <div class="cart-drawer-row">
+                        <span>TVA 20 %</span>
+                        <span data-cart-tva>0,00 €</span>
+                    </div>
+                    <div class="cart-drawer-row cart-drawer-row-shipping" data-cart-shipping hidden>
+                        <span><i class="fa-solid fa-truck-fast mr-2"></i>Livraison</span>
+                        <span class="cart-drawer-free">Offerte</span>
+                    </div>
+                </div>
+                <div class="cart-drawer-total">
+                    <span class="cart-drawer-total-label">Total TTC</span>
+                    <span class="cart-drawer-total-value">0,00 €</span>
+                </div>
+                <button class="cart-drawer-cta">
+                    <span class="cart-drawer-cta-text">Commander</span>
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+                <p class="cart-drawer-note"></p>
+            </footer>
+        </div>
+    </aside>
+
+    <!-- MODAL 1 — FORMULAIRE PRÉ-COMMANDE -->
+    <div id="checkout-form-modal" class="xv-modal" role="dialog" aria-labelledby="checkout-form-title" aria-modal="true" aria-hidden="true">
+        <div class="xv-modal-overlay" data-close></div>
+        <div class="xv-modal-card">
+            <button class="xv-modal-close" aria-label="Fermer" data-close>&times;</button>
+            <header class="xv-modal-header">
+                <span class="xv-modal-eyebrow"><i class="fa-solid fa-user-pen mr-2"></i>Vos informations</span>
+                <h3 id="checkout-form-title">Quelques infos avant de finaliser</h3>
+                <p class="xv-modal-sub">Ces informations nous servent à préparer votre commande.</p>
+            </header>
+            <form id="checkout-form" class="xv-form" novalidate>
+                <div class="xv-form-row">
+                    <label class="xv-form-field">
+                        <span>Prénom *</span>
+                        <input type="text" name="prenom" autocomplete="given-name" required>
+                    </label>
+                    <label class="xv-form-field">
+                        <span>Nom *</span>
+                        <input type="text" name="nom" autocomplete="family-name" required>
+                    </label>
+                </div>
+                <label class="xv-form-field">
+                    <span>Adresse email *</span>
+                    <input type="email" name="email" autocomplete="email" required>
+                </label>
+                <label class="xv-form-field">
+                    <span>Téléphone *</span>
+                    <input type="tel" name="telephone" autocomplete="tel" required>
+                </label>
+                <label class="xv-form-field">
+                    <span>Adresse *</span>
+                    <input type="text" name="adresse" autocomplete="street-address" placeholder="N° et rue" required>
+                </label>
+                <div class="xv-form-row xv-form-row-cp">
+                    <label class="xv-form-field">
+                        <span>Code postal *</span>
+                        <input type="text" name="code_postal" autocomplete="postal-code" placeholder="75001" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required>
+                    </label>
+                    <label class="xv-form-field">
+                        <span>Ville *</span>
+                        <input type="text" name="ville" autocomplete="address-level2" placeholder="Paris" required>
+                    </label>
+                </div>
+
+                <fieldset class="xv-form-services-group" data-services-group hidden>
+                    <legend><i class="fa-solid fa-car mr-2"></i>Votre véhicule</legend>
+                    <div class="xv-form-row">
+                        <label class="xv-form-field">
+                            <span>Marque *</span>
+                            <input type="text" name="marque" placeholder="Ex : Tesla, BYD, BMW…" data-services-required>
+                        </label>
+                        <label class="xv-form-field">
+                            <span>Modèle *</span>
+                            <input type="text" name="modele" placeholder="Ex : Model Y, Seal…" data-services-required>
+                        </label>
+                    </div>
+                    <label class="xv-form-field">
+                        <span>Plaque d'immatriculation *</span>
+                        <input type="text" name="immatriculation" placeholder="AA-123-AA" maxlength="12" data-services-required>
+                    </label>
+                    <fieldset class="xv-lieu-group">
+                        <legend>Lieu du RDV *</legend>
+                        <div class="xv-lieu-options">
+                            <label class="xv-lieu-option">
+                                <input type="radio" name="lieu_rdv" value="domicile" data-services-required checked>
+                                <div class="xv-lieu-option-inner">
+                                    <i class="fa-solid fa-house"></i>
+                                    <strong>À mon domicile</strong>
+                                    <span>À l'adresse renseignée ci-dessus</span>
+                                </div>
+                            </label>
+                            <label class="xv-lieu-option">
+                                <input type="radio" name="lieu_rdv" value="garage" data-services-required>
+                                <div class="xv-lieu-option-inner">
+                                    <i class="fa-solid fa-warehouse"></i>
+                                    <strong>Garage XPERIENCE VISION</strong>
+                                    <span>10 av. Fridingen · 77100 Nanteuil-lès-Meaux</span>
+                                </div>
+                            </label>
+                        </div>
+                    </fieldset>
+                </fieldset>
+
+                <p class="xv-form-error" data-form-error hidden></p>
+                <button type="submit" class="xv-form-submit">
+                    <span data-form-submit-label>Continuer</span>
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+                <p class="xv-form-note">
+                    <i class="fa-solid fa-lock mr-2"></i>Vos données sont chiffrées et protégées (RGPD).
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2 — PRISE DE RDV CAL.COM -->
+    <div id="booking-modal" class="xv-modal xv-modal-wide" role="dialog" aria-labelledby="booking-title" aria-modal="true" aria-hidden="true">
+        <div class="xv-modal-overlay" data-close></div>
+        <div class="xv-modal-card">
+            <button class="xv-modal-close" aria-label="Fermer" data-close>&times;</button>
+            <header class="xv-modal-header">
+                <span class="xv-modal-eyebrow xv-modal-eyebrow-gold"><i class="fa-solid fa-calendar-check mr-2"></i>Étape 2 · Créneau</span>
+                <h3 id="booking-title">Choisissez votre créneau</h3>
+                <p class="xv-modal-sub">Votre RDV sera validé dès le paiement.</p>
+            </header>
+            <div id="booking-cal-mount" class="xv-booking-mount"></div>
+            <p class="xv-modal-note"><i class="fa-solid fa-clock mr-2"></i>Une fois le créneau sélectionné, vous aurez 1h pour finaliser le paiement.</p>
+        </div>
+    </div>
+
+    <!-- MODAL 3 — PAIEMENT STRIPE EMBEDDED -->
+    <div id="stripe-modal" class="xv-modal xv-modal-wide" role="dialog" aria-labelledby="stripe-title" aria-modal="true" aria-hidden="true">
+        <div class="xv-modal-overlay" data-close></div>
+        <div class="xv-modal-card">
+            <button class="xv-modal-close" aria-label="Fermer" data-close>&times;</button>
+            <header class="xv-modal-header">
+                <span class="xv-modal-eyebrow"><i class="fa-solid fa-credit-card mr-2"></i>Paiement sécurisé</span>
+                <h3 id="stripe-title">Finalisez votre commande</h3>
+            </header>
+            <div id="stripe-checkout-mount" class="xv-stripe-mount"></div>
+            <p class="xv-modal-note"><i class="fa-solid fa-shield-halved mr-2"></i>Paiement sécurisé par Stripe · Cartes CB, Visa, Mastercard.</p>
+        </div>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="script.js"></script>
+    <script src="catalogue.js"></script>
+    <script src="js/concessions.js"></script>
+</body>
+</html>

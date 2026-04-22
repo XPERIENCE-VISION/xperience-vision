@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement annulé — XPERIENCE VISION</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="dist/tailwind.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background:
+                radial-gradient(circle at 50% 30%, rgba(255, 184, 77, 0.06), transparent 60%),
+                #0a0a0a;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+        .cancel-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+        .cancel-card {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(180deg, #131313, #0a0a0a);
+            border: 1px solid rgba(255, 184, 77, 0.2);
+            border-radius: 2rem;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+        }
+        .cancel-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: rgba(255, 184, 77, 0.12);
+            border: 1px solid rgba(255, 184, 77, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffb84d;
+            font-size: 2rem;
+        }
+        h1 {
+            font-size: clamp(1.6rem, 4vw, 2.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            color: white;
+            margin: 0 0 1rem;
+            line-height: 1.1;
+        }
+        .cancel-eyebrow {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #ffb84d;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(255, 184, 77, 0.3);
+        }
+        .cancel-text {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 1rem 0 2rem;
+        }
+        .cancel-text strong { color: white; }
+        .cancel-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+        @media (min-width: 600px) {
+            .cancel-actions { flex-direction: row; justify-content: center; }
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            min-height: 44px;
+        }
+        .btn-primary {
+            background: white;
+            color: black;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        footer {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        footer p {
+            color: #666;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            font-weight: 800;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="cancel-wrap">
+        <div class="cancel-card">
+            <div class="cancel-icon">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <span class="cancel-eyebrow">Paiement annulé</span>
+            <h1>Votre commande n'a pas été <span class="gradient-text">finalisée</span></h1>
+            <p class="cancel-text">
+                Aucun débit n'a été effectué. Votre panier a été conservé — vous pouvez reprendre votre commande à tout moment.
+            </p>
+            <p class="cancel-text" style="font-size: 0.85rem; color: #aaa;">
+                <strong>Si vous aviez réservé un créneau RDV :</strong> il sera automatiquement libéré dans 1 heure si aucun paiement n'est effectué.
+            </p>
+
+            <div class="cancel-actions">
+                <a href="/#installation" class="btn btn-primary">Retour au catalogue</a>
+                <a href="contact.html" class="btn btn-secondary">Contacter le support</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 XPERIENCE VISION</p>
+    </footer>
+</body>
+
+</html>

@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mentions Légales | XPERIENCE VISION</title>
-    <meta name="description" content="Mentions légales XPERIENCE VISION — Informations légales sur la société, éditeur du site et hébergeur.">
+    <meta name="description" content="Mentions légales XPERIENCE VISION — Informations légales sur la société, éditeur du site, hébergeur et données personnelles.">
     <meta name="robots" content="noindex, follow">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="dist/tailwind.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,93 +23,122 @@
 
     <main class="max-w-4xl mx-auto px-6 py-24 md:py-32 min-h-screen">
         <div class="mb-12 md:mb-24">
-            <span
-                class="text-white font-black uppercase tracking-[0.5em] text-[10px] md:text-xs border-b-2 md:border-b-4 border-white pb-3">Informations</span>
+            <span class="text-white font-black uppercase tracking-[0.5em] text-[10px] md:text-xs border-b-2 md:border-b-4 border-white pb-3">Informations</span>
             <h1 class="text-3xl md:text-6xl font-black mt-8 md:mt-12 uppercase italic tracking-tighter leading-tight">
                 Mentions <br><span class="text-gray-500">Légales.</span></h1>
+            <p class="mt-6 text-gray-500 text-[10px] uppercase tracking-widest">Dernière mise à jour : 20 avril 2026</p>
         </div>
 
-        <div
-            class="space-y-6 md:space-y-12 text-gray-400 text-[10px] md:text-sm leading-relaxed md:leading-loose uppercase tracking-widest">
+        <div class="space-y-6 md:space-y-12 text-gray-300 text-[11px] md:text-sm leading-relaxed md:leading-loose">
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    1.
-                    Éditeur du site</h2>
-                <div class="space-y-4">
-                    <p><span class="text-gray-300 font-bold mr-2">Nom de l'entreprise :</span> XPERIENCE-VISION</p>
-                    <p><span class="text-gray-300 font-bold mr-2">Statut :</span> SAS</p>
-                    <p><span class="text-gray-300 font-bold mr-2">Siège social :</span> 48 rue des tilleuls, 77270
-                        Villeparisis</p>
-                    <p><span class="text-gray-300 font-bold mr-2">SIRET :</span> 10037616900015</p>
-                    <p><span class="text-gray-300 font-bold mr-2">TVA Intracommunautaire :</span> FR70100376169</p>
-                    <p><span class="text-gray-300 font-bold mr-2">Contact :</span> Via le formulaire de contact du site
-                        ou par email à : <a href="mailto:contact@xperience-vision.fr"
-                            class="underline hover:text-white transition">contact@xperience-vision.fr</a></p>
-                    <p><span class="text-gray-300 font-bold mr-2">Directeur de la publication :</span> Yassine ZAHAF</p>
+            <!-- 1. ÉDITEUR -->
+            <section class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
+                <h2 class="text-white font-black mb-6 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">
+                    1. Éditeur du site
+                </h2>
+                <div class="space-y-3">
+                    <p><span class="text-white font-bold">Raison sociale :</span> XPERIENCE-VISION</p>
+                    <p><span class="text-white font-bold">Forme juridique :</span> Société par Actions Simplifiée (SAS)</p>
+                    <p><span class="text-white font-bold">Capital social :</span> [À COMPLÉTER : montant en €]</p>
+                    <p><span class="text-white font-bold">Siège social :</span> 48 rue des Tilleuls, 77270 Villeparisis, France</p>
+                    <p><span class="text-white font-bold">SIRET :</span> 100 376 169 00015</p>
+                    <p><span class="text-white font-bold">RCS :</span> [À COMPLÉTER : RCS Meaux N° XXX] (Villeparisis dépend du tribunal de commerce de Meaux)</p>
+                    <p><span class="text-white font-bold">Code APE/NAF :</span> [À COMPLÉTER : ex. 4520A — Entretien et réparation de véhicules automobiles légers]</p>
+                    <p><span class="text-white font-bold">N° TVA Intracommunautaire :</span> FR70100376169</p>
+                    <p><span class="text-white font-bold">Téléphone :</span> [À COMPLÉTER : numéro professionnel]</p>
+                    <p><span class="text-white font-bold">Email :</span> <a href="mailto:contact@xperience-vision.fr" class="text-white underline hover:text-gray-300 transition">contact@xperience-vision.fr</a></p>
+                    <p><span class="text-white font-bold">Directeur de la publication :</span> Yassine ZAHAF</p>
                 </div>
-            </div>
+            </section>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    2.
-                    Hébergement</h2>
-                <div class="space-y-4">
-                    <p><span class="text-gray-300 font-bold mr-2">Le site est hébergé par :</span> Netlify, Inc.</p>
-                    <p><span class="text-gray-300 font-bold mr-2">Adresse :</span> 44 Montgomery Street, Suite 300, San Francisco, CA 94104, États-Unis</p>
-                    <p><span class="text-gray-300 font-bold mr-2">Site web :</span> <a href="https://www.netlify.com" target="_blank" rel="noopener" class="text-gray-400 hover:text-white transition">www.netlify.com</a></p>
+            <!-- 2. HÉBERGEMENT -->
+            <section class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
+                <h2 class="text-white font-black mb-6 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">
+                    2. Hébergement
+                </h2>
+                <div class="space-y-3">
+                    <p><span class="text-white font-bold">Hébergeur :</span> Netlify, Inc.</p>
+                    <p><span class="text-white font-bold">Adresse :</span> 44 Montgomery Street, Suite 300, San Francisco, CA 94104, États-Unis</p>
+                    <p><span class="text-white font-bold">Site web :</span> <a href="https://www.netlify.com" target="_blank" rel="noopener" class="text-white underline hover:text-gray-300 transition">www.netlify.com</a></p>
                 </div>
-            </div>
+            </section>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    3.
-                    Assurance Professionnelle</h2>
-                <p>XPERIENCE VISION est couvert par une assurance de Responsabilité Civile Professionnelle souscrite
-                    auprès de AXA sous le numéro de contrat 0000022577269604. Cette assurance couvre la
-                    zone France pour les activités d'installation d'équipements embarqués.</p>
-            </div>
+            <!-- 3. ASSURANCE -->
+            <section class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
+                <h2 class="text-white font-black mb-6 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">
+                    3. Assurance professionnelle
+                </h2>
+                <p>XPERIENCE VISION est couvert par une assurance de Responsabilité Civile Professionnelle souscrite auprès de <strong class="text-white">AXA</strong>, contrat n° <strong class="text-white">0000022577269604</strong>. Cette assurance couvre la zone <strong class="text-white">France</strong> pour les activités d'installation d'équipements embarqués sur véhicules.</p>
+            </section>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    4.
-                    Propriété Intellectuelle</h2>
-                <p>La structure générale ainsi que les textes, images et logos sont la propriété exclusive de XPERIENCE
-                    VISION. Toute reproduction, totale ou partielle, sans autorisation préalable est interdite.</p>
-            </div>
+            <!-- 4. PROPRIÉTÉ INTELLECTUELLE -->
+            <section class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
+                <h2 class="text-white font-black mb-6 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">
+                    4. Propriété intellectuelle
+                </h2>
+                <p class="mb-4">L'ensemble des éléments composant le site (textes, photographies, logos, marques, structure, code source, design) sont la propriété exclusive de XPERIENCE-VISION ou de ses partenaires, et sont protégés par les lois françaises et internationales relatives à la propriété intellectuelle.</p>
+                <p>Toute reproduction, représentation, modification, publication ou adaptation, totale ou partielle, des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite sans autorisation écrite préalable. Toute exploitation non autorisée est constitutive de contrefaçon (articles L.335-2 et suivants du Code de la propriété intellectuelle).</p>
+            </section>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    5.
-                    Services Tiers et Données</h2>
-                <p>Les informations recueillies via le formulaire de contact ou le formulaire de prise de rendez-vous
-                    sont nécessaires pour la gestion de vos demandes. Le paiement peut être effectué en ligne via une
-                    application tierce sécurisée, ou sur place en espèces ou par carte bancaire. Conformément au RGPD,
-                    vous disposez d'un droit d'accès, de rectification et de suppression de vos données personnelles en
-                    contactant : <a href="mailto:contact@xperience-vision.fr"
-                        class="underline hover:text-white transition">contact@xperience-vision.fr</a></p>
-            </div>
+            <!-- 5. DONNÉES PERSONNELLES (résumé, détail dans politique de confidentialité) -->
+            <section class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
+                <h2 class="text-white font-black mb-6 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">
+                    5. Données personnelles
+                </h2>
+                <p class="mb-4">XPERIENCE-VISION traite les données personnelles collectées via le site dans le respect du Règlement Général sur la Protection des Données (RGPD) et de la loi Informatique et Libertés.</p>
+                <p class="mb-4"><span class="text-white font-bold">Responsable de traitement :</span> XPERIENCE-VISION, représentée par son directeur de la publication.</p>
+                <p class="mb-4"><span class="text-white font-bold">Contact RGPD :</span> <a href="mailto:contact@xperience-vision.fr" class="text-white underline hover:text-gray-300 transition">contact@xperience-vision.fr</a> [À COMPLÉTER : remplacer par dpo@xperience-vision.fr si un DPO est désigné]</p>
+                <p>Les détails complets concernant le traitement des données, les durées de conservation, les droits des personnes et les sous-traitants sont décrits dans notre <a href="politique-confidentialite.html" class="text-white underline hover:text-gray-300 transition">Politique de confidentialité</a>.</p>
+            </section>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    6.
-                    Cookies</h2>
-                <p>Ce site peut utiliser des cookies techniques pour améliorer l'expérience utilisateur et faciliter la
-                    prise de rendez-vous. En naviguant sur ce site, vous acceptez leur utilisation.</p>
-            </div>
+            <!-- 6. COOKIES -->
+            <section class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
+                <h2 class="text-white font-black mb-6 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">
+                    6. Cookies et traceurs
+                </h2>
+                <p class="mb-4">Le site utilise des cookies et traceurs nécessaires à son fonctionnement et à l'amélioration de l'expérience utilisateur. Conformément aux recommandations de la CNIL, vous pouvez à tout moment configurer vos préférences.</p>
+                <p class="mb-4"><span class="text-white font-bold">Cookies strictement nécessaires (sans consentement requis) :</span></p>
+                <ul class="list-disc pl-6 space-y-2 mb-4 text-gray-400">
+                    <li>État du panier d'achat (localStorage)</li>
+                    <li>Filtres actifs du catalogue (localStorage)</li>
+                    <li>Concession sélectionnée (localStorage)</li>
+                </ul>
+                <p class="mb-4"><span class="text-white font-bold">Cookies de service tiers (consentement requis) :</span></p>
+                <ul class="list-disc pl-6 space-y-2 text-gray-400">
+                    <li><strong class="text-white">Stripe</strong> — paiement sécurisé (cookies de session le temps du paiement)</li>
+                    <li><strong class="text-white">Cal.com</strong> — prise de rendez-vous (cookies de session)</li>
+                    <li><strong class="text-white">Nominatim/OpenStreetMap</strong> — géolocalisation pour le tri des concessions (aucun cookie persistant)</li>
+                </ul>
+            </section>
+
+            <!-- 7. MÉDIATION DE LA CONSOMMATION -->
+            <section class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
+                <h2 class="text-white font-black mb-6 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">
+                    7. Médiation de la consommation
+                </h2>
+                <p class="mb-4">Conformément aux articles L.612-1 et suivants du Code de la consommation, le client consommateur, en cas de litige non résolu avec XPERIENCE-VISION, peut recourir gratuitement au médiateur de la consommation suivant :</p>
+                <p class="mb-4"><span class="text-white font-bold">[À CONFIRMER : Médiateur conventionné — par défaut suggestion CMAP]</span><br>
+                <strong class="text-white">CMAP — Centre de Médiation et d'Arbitrage de Paris</strong><br>
+                39 avenue Franklin D. Roosevelt, 75008 Paris<br>
+                Site : <a href="https://www.cmap.fr/" target="_blank" rel="noopener" class="text-white underline hover:text-gray-300 transition">www.cmap.fr</a></p>
+                <p>En cas de litige relatif à un achat en ligne, le consommateur peut également utiliser la <strong class="text-white">plateforme européenne de Règlement en Ligne des Litiges (RLL)</strong> mise à disposition par la Commission Européenne :</p>
+                <p class="mt-3"><a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener" class="text-white underline hover:text-gray-300 transition">https://ec.europa.eu/consumers/odr/</a></p>
+            </section>
+
+            <!-- 8. CRÉDITS -->
+            <section class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
+                <h2 class="text-white font-black mb-6 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">
+                    8. Crédits & Conception
+                </h2>
+                <p>Conception et développement du site : <strong class="text-white">[À COMPLÉTER : ton nom / nom de ta structure si tu veux apparaître]</strong>.</p>
+                <p class="mt-3">Photographies et visuels : © XPERIENCE-VISION, sauf mention contraire.</p>
+            </section>
 
         </div>
     </main>
 
     <footer class="py-10 text-center border-t border-white/5 bg-[#050505] mt-auto w-full">
-        <p class="text-[9px] text-gray-600 font-bold tracking-[0.5em] uppercase">© 2026 XPERIENCE VISION - TOUS DROITS
-            RÉSERVÉS</p>
+        <p class="text-[9px] text-gray-600 font-bold tracking-[0.5em] uppercase">© 2026 XPERIENCE VISION — TOUS DROITS RÉSERVÉS</p>
     </footer>
 
 </body>

@@ -1,0 +1,53 @@
+{
+  "_comment": "Placeholders éditables. À remplacer par les vrais avis Google via Place API en phase 2.",
+  "reviews": [
+    {
+      "id": "rev-001",
+      "auteur": "Julien M.",
+      "vehicule": "Tesla Model Y",
+      "note": 5,
+      "texte": "Installation impeccable de l'écran plafonnier. Les enfants sont conquis. Travail propre, garantie constructeur préservée comme promis.",
+      "date": "2026-03-12"
+    },
+    {
+      "id": "rev-002",
+      "auteur": "Sophie L.",
+      "vehicule": "BYD Seal",
+      "note": 5,
+      "texte": "Vraiment l'un des seuls ateliers en France à maîtriser ma BYD. Tapis 3D et seuils LED, finition au top. Je recommande sans hésiter.",
+      "date": "2026-03-08"
+    },
+    {
+      "id": "rev-003",
+      "auteur": "Marc D.",
+      "vehicule": "Range Rover Sport",
+      "note": 5,
+      "texte": "PPF intégral réalisé en une journée comme prévu. Le résultat est invisible et le SAV ultra-réactif. Service haut de gamme.",
+      "date": "2026-02-28"
+    },
+    {
+      "id": "rev-004",
+      "auteur": "Camille R.",
+      "vehicule": "BMW iX3",
+      "note": 5,
+      "texte": "Pack ambient lighting installé sans découpe, comme s'il était d'origine. Un vrai plus pour le confort à bord. Équipe pro et passionnée.",
+      "date": "2026-02-15"
+    },
+    {
+      "id": "rev-005",
+      "auteur": "Antoine P.",
+      "vehicule": "XPeng G9",
+      "note": 5,
+      "texte": "CarPlay sans fil + dashcam : tout fonctionne parfaitement. Les techniciens connaissent l'architecture XPeng sur le bout des doigts.",
+      "date": "2026-02-03"
+    },
+    {
+      "id": "rev-006",
+      "auteur": "Léa B.",
+      "vehicule": "Tesla Model 3 Highland",
+      "note": 5,
+      "texte": "Boutons physiques sur le volant + console alcantara. Mon Highland a enfin la finition que je voulais. Délais respectés à la minute.",
+      "date": "2026-01-22"
+    }
+  ]
+}

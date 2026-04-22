@@ -5,10 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conditions Générales de Vente | XPERIENCE VISION</title>
-    <meta name="description" content="Conditions Générales de Vente XPERIENCE VISION — Intégrateur digital automobile premium. Consultez nos CGV pour toute commande de produits et services.">
+    <meta name="description" content="Conditions Générales de Vente XPERIENCE VISION — Vente de produits et services d'installation d'équipements embarqués. Droit de rétractation, garanties, livraison.">
     <meta name="robots" content="noindex, follow">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="dist/tailwind.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .cgv-section h3 {
+            color: white;
+            font-weight: 800;
+            font-size: 0.95rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.7rem;
+            letter-spacing: 0.02em;
+        }
+        .cgv-section ul {
+            list-style: disc;
+            padding-left: 1.4rem;
+            margin: 0.7rem 0;
+        }
+        .cgv-section ul li { margin-bottom: 0.4rem; color: #b0b0b0; }
+        .cgv-section p + p { margin-top: 0.8rem; }
+        .cgv-toc a {
+            display: block;
+            padding: 0.5rem 0;
+            color: #a0a0a0;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+        .cgv-toc a:hover { color: white; }
+        .cgv-form-retract {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: ui-monospace, monospace;
+            font-size: 0.78rem;
+            color: #b0b0b0;
+            white-space: pre-wrap;
+            line-height: 1.7;
+        }
+    </style>
 </head>
 
 <body class="bg-[#0a0a0a] text-white font-['Inter']">
@@ -22,113 +62,322 @@
     </nav>
 
     <main class="max-w-4xl mx-auto px-6 py-24 md:py-32 min-h-screen">
-        <div class="mb-12 md:mb-24">
-            <span
-                class="text-white font-black uppercase tracking-[0.5em] text-[10px] md:text-xs border-b-2 md:border-b-4 border-white pb-3">Informations</span>
+        <div class="mb-12 md:mb-16">
+            <span class="text-white font-black uppercase tracking-[0.5em] text-[10px] md:text-xs border-b-2 md:border-b-4 border-white pb-3">Informations</span>
             <h1 class="text-3xl md:text-6xl font-black mt-8 md:mt-12 uppercase italic tracking-tighter leading-tight">
                 Conditions <br><span class="text-gray-500">Générales de Vente.</span></h1>
+            <p class="mt-6 text-gray-500 text-[10px] uppercase tracking-widest">Version du 20 avril 2026 · Applicables à toute commande passée à compter de cette date</p>
         </div>
 
-        <div
-            class="space-y-6 md:space-y-12 text-gray-400 text-[10px] md:text-sm leading-relaxed md:leading-loose uppercase tracking-widest">
+        <!-- TABLE DES MATIÈRES -->
+        <details class="card-glass p-6 md:p-8 rounded-[1.5rem] border border-white/5 mb-10">
+            <summary class="cursor-pointer text-white font-black tracking-[0.2em] text-xs uppercase">Table des matières</summary>
+            <nav class="cgv-toc grid md:grid-cols-2 gap-x-8 mt-4">
+                <a href="#art-1">1. Identification du vendeur</a>
+                <a href="#art-2">2. Champ d'application</a>
+                <a href="#art-3">3. Définitions</a>
+                <a href="#art-4">4. Description des produits et services</a>
+                <a href="#art-5">5. Commande et formation du contrat</a>
+                <a href="#art-6">6. Prix</a>
+                <a href="#art-7">7. Paiement</a>
+                <a href="#art-8">8. Livraison des produits</a>
+                <a href="#art-9">9. Exécution des prestations en concession</a>
+                <a href="#art-10">10. Droit de rétractation</a>
+                <a href="#art-11">11. Garantie légale de conformité</a>
+                <a href="#art-12">12. Garantie commerciale</a>
+                <a href="#art-13">13. Garantie des vices cachés</a>
+                <a href="#art-14">14. Service après-vente</a>
+                <a href="#art-15">15. Responsabilité</a>
+                <a href="#art-16">16. Réserve de propriété</a>
+                <a href="#art-17">17. Force majeure</a>
+                <a href="#art-18">18. Données personnelles</a>
+                <a href="#art-19">19. Médiation et règlement des litiges</a>
+                <a href="#art-20">20. Droit applicable et juridiction</a>
+                <a href="#art-21">21. Modification des CGV</a>
+                <a href="#art-annexe">Annexe — Formulaire de rétractation</a>
+            </nav>
+        </details>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    1.
-                    Objet</h2>
-                <p>Les présentes CGV régissent la vente et l'installation d'équipements technologiques embarqués par
-                    XPERIENCE VISION. Toute commande, qu'elle soit effectuée via le formulaire de contact ou la
-                    plateforme de réservation, implique l'adhésion entière du client à ces conditions.</p>
-            </div>
+        <div class="space-y-6 md:space-y-10 text-gray-300 text-[12px] md:text-sm leading-relaxed md:leading-loose">
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    2.
-                    Devis et Commandes</h2>
-                <p>Les demandes spécifiques font l'objet d'un devis envoyé par mail. La prise de rendez-vous simple
-                    s'effectue via Calendly. XPERIENCE VISION se réserve le droit d'annuler une installation si le
-                    véhicule présente des modifications techniques incompatibles non signalées au préalable.</p>
-            </div>
+            <!-- ARTICLE 1 -->
+            <section id="art-1" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">1. Identification du vendeur</h2>
+                <p>Les présentes Conditions Générales de Vente (ci-après « CGV ») sont conclues entre :</p>
+                <p class="mt-3"><strong class="text-white">XPERIENCE-VISION</strong>, Société par Actions Simplifiée au capital de [À COMPLÉTER] €, immatriculée au Registre du Commerce et des Sociétés sous le n° [À COMPLÉTER : RCS Meaux N° XXX], dont le siège social est situé 48 rue des Tilleuls, 77270 Villeparisis, France. SIRET : 100 376 169 00015. TVA intracommunautaire : FR70100376169. Téléphone : [À COMPLÉTER]. Email : <a href="mailto:contact@xperience-vision.fr" class="text-white underline">contact@xperience-vision.fr</a>.</p>
+                <p>Ci-après dénommée « le Vendeur » ou « XPERIENCE VISION ».</p>
+                <p class="mt-3">Et toute personne physique ou morale, ci-après dénommée « le Client », souhaitant acheter un Produit ou réserver une Prestation auprès du Vendeur via le site <a href="https://xperiencevision.fr" class="text-white underline">xperiencevision.fr</a>.</p>
+            </section>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    3.
-                    Tarifs et Paiement</h2>
-                <p>Les tarifs sont indiqués sur le devis ou lors de la prise de rendez-vous. Le règlement peut être
-                    effectué en ligne via une application tierce sécurisée, ou intégralement le jour de la prestation en
-                    espèces ou par carte bancaire. Aucun véhicule ne sera restitué sans le paiement complet de la
-                    prestation.</p>
-            </div>
+            <!-- ARTICLE 2 -->
+            <section id="art-2" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">2. Champ d'application</h2>
+                <p>Les présentes CGV s'appliquent, sans restriction ni réserve, à l'ensemble des ventes de Produits et Prestations conclues par le Vendeur avec ses Clients, qu'ils soient consommateurs ou professionnels, via le site <a href="https://xperiencevision.fr" class="text-white underline">xperiencevision.fr</a>.</p>
+                <p>Toute commande implique l'acceptation pleine, entière et sans réserve par le Client des présentes CGV. Le Client reconnaît, en validant sa commande, en avoir pris connaissance et les avoir acceptées en cochant la case prévue à cet effet avant le paiement.</p>
+            </section>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    4.
-                    Services Tiers</h2>
-                <p>La prise de rendez-vous s'effectue via le formulaire dédié du site. Les paiements en ligne sont
-                    traités par une application tierce sécurisée. XPERIENCE VISION ne stocke aucune coordonnée
-                    bancaire.</p>
-            </div>
+            <!-- ARTICLE 3 -->
+            <section id="art-3" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">3. Définitions</h2>
+                <ul>
+                    <li><strong class="text-white">Produit</strong> : bien physique vendu par XPERIENCE VISION et livré à domicile (accessoires, kits d'entretien, machine espresso, etc.).</li>
+                    <li><strong class="text-white">Prestation</strong> ou <strong class="text-white">Service</strong> : prestation d'installation d'équipement embarqué effectuée en concession partenaire (écrans, films PPF, accessoires sur-mesure, etc.).</li>
+                    <li><strong class="text-white">Concession</strong> : atelier partenaire référencé par XPERIENCE VISION où sont réalisées les Prestations.</li>
+                    <li><strong class="text-white">Commande</strong> : opération par laquelle le Client achète un ou plusieurs Produits ou réserve une ou plusieurs Prestations.</li>
+                    <li><strong class="text-white">Consommateur</strong> : toute personne physique qui agit à des fins n'entrant pas dans le cadre de son activité professionnelle.</li>
+                </ul>
+            </section>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    5.
-                    Installation et Délais</h2>
-                <p>L'installation est réalisée sur le lieu convenu. Le client s'engage à fournir un accès dégagé au
-                    véhicule. Les délais sont donnés à titre indicatif ; un retard ne peut donner lieu à une annulation
-                    ou à des dommages-intérêts.</p>
-            </div>
+            <!-- ARTICLE 4 -->
+            <section id="art-4" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">4. Description des produits et services</h2>
+                <p>Les Produits et Prestations proposés à la vente sont ceux figurant sur le site au jour de la consultation. Les caractéristiques essentielles, les modèles de véhicules compatibles le cas échéant, et les prix sont décrits sur chaque fiche.</p>
+                <p>Les photographies, illustrations et vidéos n'ont qu'une valeur indicative et n'entrent pas dans le champ contractuel. Des variations mineures (teinte, finition) peuvent intervenir sans engager la responsabilité du Vendeur.</p>
+                <p>Le Vendeur se réserve le droit de modifier à tout moment l'offre proposée et de retirer un Produit ou une Prestation sans préavis.</p>
+            </section>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    6.
-                    Garanties</h2>
-                <p>Le matériel est garanti 12 mois. Sont exclus : les dommages causés par une mauvaise utilisation, les
-                    interventions de tiers non agréés, ou les mises à jour logicielles du constructeur automobile
-                    modifiant la compatibilité du système installé.</p>
-            </div>
+            <!-- ARTICLE 5 -->
+            <section id="art-5" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">5. Commande et formation du contrat</h2>
+                <h3>5.1 Processus de commande</h3>
+                <p>Le Client sélectionne ses Produits ou Prestations sur le site, les ajoute à son panier, puis valide sa commande après avoir :</p>
+                <ul>
+                    <li>renseigné ses coordonnées (nom, prénom, email, téléphone) ;</li>
+                    <li>indiqué l'adresse de livraison (Produits) ou la concession choisie (Prestations) ;</li>
+                    <li>fourni l'immatriculation du véhicule concerné (Prestations uniquement) ;</li>
+                    <li>réservé un créneau horaire en concession (Prestations) ;</li>
+                    <li>accepté expressément les présentes CGV en cochant la case prévue ;</li>
+                    <li>procédé au paiement sécurisé.</li>
+                </ul>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    7.
-                    Responsabilité</h2>
-                <p>XPERIENCE VISION décline toute responsabilité en cas de perte de garantie constructeur. Le client
-                    reconnaît avoir été informé des risques potentiels liés à la modification électronique de son
-                    véhicule.</p>
-            </div>
+                <h3>5.2 Formation du contrat</h3>
+                <p>Le contrat est définitivement formé à l'instant de l'encaissement du paiement intégral par le Vendeur. Un email de confirmation, valant accusé de réception, est alors adressé au Client à l'adresse indiquée lors de la commande.</p>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    8.
-                    Droit de Rétractation</h2>
-                <p>Conformément à l'article L221-28 du Code de la consommation, le droit de rétractation ne s'applique
-                    pas aux services pleinement exécutés avant la fin du délai légal ou aux produits personnalisés selon
-                    les spécificités du véhicule du client.</p>
-            </div>
+                <h3>5.3 Réservation de créneau (Prestations)</h3>
+                <p>Pour les Prestations, la réservation d'un créneau auprès d'une concession partenaire est valable une heure. À défaut de paiement intégral dans ce délai, le créneau est automatiquement libéré et le Client devra effectuer une nouvelle réservation.</p>
 
-            <div class="card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5">
-                <h2
-                    class="text-white font-black mb-4 md:mb-6 tracking-normal md:tracking-[0.4em] text-[11px] md:text-lg italic border-l-2 md:border-l-4 border-white pl-3 md:pl-4">
-                    9.
-                    Protection des Données</h2>
-                <p>Les informations collectées via le formulaire de contact ou Calendly sont strictement utilisées pour
-                    la gestion de la prestation. Conformément au RGPD, le client dispose d'un droit d'accès et de
-                    suppression de ses données sur simple demande.</p>
-            </div>
+                <h3>5.4 Refus de commande</h3>
+                <p>Le Vendeur se réserve le droit de refuser ou d'annuler toute commande pour motif légitime, notamment : indisponibilité du Produit, incompatibilité technique du véhicule signalée tardivement, paiement frauduleux, ou litige antérieur avec le Client.</p>
+            </section>
+
+            <!-- ARTICLE 6 -->
+            <section id="art-6" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">6. Prix</h2>
+                <p>Les prix sont indiqués en euros (€), toutes taxes comprises (TTC). [À CONFIRMER selon assujettissement TVA — la mention « TVA non applicable, art. 293 B du CGI » doit être ajoutée si le Vendeur bénéficie de la franchise en base.]</p>
+                <p>Les prix indiqués comprennent la TVA applicable au jour de la commande. Tout changement du taux de TVA pourra être répercuté sur le prix des Produits et Prestations.</p>
+                <p>Pour les Prestations, le prix indiqué est un prix « à partir de » fixé sur la base d'un véhicule standard. Le Vendeur peut être amené à émettre un complément de tarif en cas d'adaptations spécifiques nécessaires, après accord exprès du Client.</p>
+                <p>Le Vendeur se réserve la faculté de modifier ses prix à tout moment. Les Produits et Prestations sont facturés au tarif en vigueur lors de la validation de la commande.</p>
+            </section>
+
+            <!-- ARTICLE 7 -->
+            <section id="art-7" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">7. Paiement</h2>
+                <h3>7.1 Modalités</h3>
+                <p>Le paiement s'effectue intégralement (100 %) au moment de la commande, en ligne, par carte bancaire (Visa, Mastercard, American Express), Apple Pay ou Google Pay, via le prestataire de paiement sécurisé <strong class="text-white">Stripe Payments Europe Ltd</strong>.</p>
+
+                <h3>7.2 Sécurité</h3>
+                <p>Les transactions sont sécurisées par le protocole 3D Secure et chiffrées de bout en bout. Le Vendeur ne stocke aucune donnée bancaire sur ses serveurs : ces informations transitent et sont conservées exclusivement par Stripe, certifié PCI-DSS niveau 1.</p>
+
+                <h3>7.3 Échec de paiement</h3>
+                <p>En cas de refus de paiement par l'établissement bancaire ou de défaut de validation dans le délai imparti, la commande sera automatiquement annulée et, le cas échéant, le créneau réservé en concession sera libéré.</p>
+
+                <h3>7.4 Facturation</h3>
+                <p>Une facture électronique est adressée au Client par email à l'issue du paiement. Elle peut également être téléchargée depuis l'espace client Stripe lié à la commande. [À CONFIRMER : selon mise en place de la facturation Stripe.]</p>
+            </section>
+
+            <!-- ARTICLE 8 -->
+            <section id="art-8" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">8. Livraison des Produits</h2>
+                <h3>8.1 Zone géographique</h3>
+                <p>Les Produits sont livrés en <strong class="text-white">France métropolitaine</strong>. [À CONFIRMER : zones desservies — Corse, DOM-TOM, Belgique, etc.]</p>
+
+                <h3>8.2 Frais de port</h3>
+                <p>[À CONFIRMER : pour le moment, livraison gratuite sur l'ensemble de la commande. À ajuster lorsque les tarifs définitifs seront fixés.]</p>
+
+                <h3>8.3 Délais</h3>
+                <p>Les Produits sont expédiés sous un délai indicatif de [À CONFIRMER : 5 jours ouvrés] à compter de la confirmation de paiement. Le délai de livraison total dépend du transporteur retenu.</p>
+                <p>Conformément à l'article L216-1 du Code de la consommation, le Vendeur s'engage à livrer dans un délai maximal de <strong class="text-white">30 jours</strong>. À défaut, le Client peut, après mise en demeure restée sans effet, résoudre le contrat et obtenir le remboursement intégral.</p>
+
+                <h3>8.4 Transporteur</h3>
+                <p>[À CONFIRMER : nom du transporteur — Colissimo, Mondial Relay, Chronopost, etc.]</p>
+
+                <h3>8.5 Réception</h3>
+                <p>À réception, le Client doit vérifier l'état du colis. Toute anomalie (colis abîmé, manquant, ouvert) doit être signalée par écrit au transporteur et confirmée par email à <a href="mailto:contact@xperience-vision.fr" class="text-white underline">contact@xperience-vision.fr</a> dans un délai de 48 heures.</p>
+            </section>
+
+            <!-- ARTICLE 9 -->
+            <section id="art-9" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">9. Exécution des prestations en concession</h2>
+                <h3>9.1 Lieu et durée</h3>
+                <p>Les Prestations sont réalisées dans la concession partenaire choisie par le Client lors de la commande. La durée d'intervention est précisée sur la fiche de chaque Prestation et peut varier de 2 heures à une journée complète.</p>
+
+                <h3>9.2 Présence du véhicule</h3>
+                <p>Le Client s'engage à présenter son véhicule à la concession sélectionnée à la date et à l'heure réservées. Le véhicule doit être propre, dégagé et accessible.</p>
+
+                <h3>9.3 Annulation ou report par le Client</h3>
+                <p>Toute demande d'annulation ou de report doit être communiquée par email à <a href="mailto:contact@xperience-vision.fr" class="text-white underline">contact@xperience-vision.fr</a> au moins <strong class="text-white">48 heures avant le rendez-vous</strong>. Au-delà, la Prestation est due et aucun remboursement ne pourra être accordé, sauf cas de force majeure dûment justifié.</p>
+
+                <h3>9.4 Annulation par le Vendeur</h3>
+                <p>Le Vendeur se réserve le droit d'annuler ou de reporter une Prestation pour motif technique légitime (incompatibilité véhicule, indisponibilité de l'équipement, panne de matériel, etc.). Dans ce cas, un remboursement intégral ou un report seront proposés au Client.</p>
+
+                <h3>9.5 Garantie constructeur du véhicule</h3>
+                <p>L'ensemble des installations sont effectuées en mode <strong class="text-white">Plug &amp; Play</strong>, sans découpe de faisceau, et préservent la garantie constructeur du véhicule. Le Vendeur ne pourra toutefois être tenu pour responsable d'un éventuel refus du constructeur dans des cas extrêmes ne relevant pas de l'installation.</p>
+            </section>
+
+            <!-- ARTICLE 10 -->
+            <section id="art-10" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">10. Droit de rétractation</h2>
+                <h3>10.1 Délai et exercice (Produits)</h3>
+                <p>Conformément aux articles L221-18 et suivants du Code de la consommation, le Client consommateur dispose d'un délai de <strong class="text-white">14 jours calendaires</strong> à compter de la réception du Produit pour exercer son droit de rétractation, sans avoir à justifier de motif ni à payer de pénalités.</p>
+                <p>Pour exercer ce droit, le Client notifie sa décision par email à <a href="mailto:contact@xperience-vision.fr" class="text-white underline">contact@xperience-vision.fr</a>, ou en adressant le formulaire de rétractation type figurant en annexe.</p>
+
+                <h3>10.2 Modalités de retour</h3>
+                <p>Les Produits doivent être retournés dans leur état d'origine, complets, non utilisés, dans leur emballage d'origine, à l'adresse suivante : <strong class="text-white">XPERIENCE-VISION, 48 rue des Tilleuls, 77270 Villeparisis</strong>.</p>
+                <p>Les frais de retour sont à la charge du Client.</p>
+
+                <h3>10.3 Remboursement</h3>
+                <p>Le Vendeur procède au remboursement de l'intégralité des sommes versées (Produit + frais de port aller standard) au plus tard 14 jours après la date de réception du Produit retourné, par le même moyen de paiement utilisé lors de la commande.</p>
+
+                <h3>10.4 Exceptions au droit de rétractation (Prestations)</h3>
+                <p>Conformément à l'article L221-28 du Code de la consommation, <strong class="text-white">le droit de rétractation ne s'applique pas</strong> aux contrats :</p>
+                <ul>
+                    <li>de fourniture de services pleinement exécutés avant la fin du délai de rétractation, dont l'exécution a commencé après accord préalable exprès du consommateur et renoncement exprès à son droit de rétractation ;</li>
+                    <li>de fourniture de biens confectionnés selon les spécifications du consommateur ou nettement personnalisés (par exemple : adaptation sur-mesure au véhicule du Client) ;</li>
+                    <li>de prestations de services d'hébergement, de transport, de location de voitures, de restauration ou d'activités de loisirs fournis à une date ou selon une périodicité déterminée.</li>
+                </ul>
+                <p>En conséquence, les Prestations d'installation en concession, dès lors qu'elles ont été exécutées avec l'accord du Client, ne donnent pas lieu à rétractation.</p>
+            </section>
+
+            <!-- ARTICLE 11 -->
+            <section id="art-11" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">11. Garantie légale de conformité</h2>
+                <p>Conformément aux articles L217-3 et suivants du Code de la consommation, le Client bénéficie de la <strong class="text-white">garantie légale de conformité d'une durée de 2 ans</strong> à compter de la délivrance du Produit.</p>
+                <p>Le Client peut agir pendant 2 ans pour obtenir, au choix, la mise en conformité du Produit (réparation ou remplacement) ou, à défaut, une réduction de prix ou la résolution du contrat dans les conditions prévues par la loi.</p>
+                <p>Pendant les 24 mois suivant la délivrance, le défaut de conformité est présumé exister au moment de la livraison, sauf preuve contraire.</p>
+                <p>Le Client n'est pas tenu de prouver l'existence du défaut. Le Vendeur prend en charge la réparation ou le remplacement, sans frais pour le Client.</p>
+            </section>
+
+            <!-- ARTICLE 12 -->
+            <section id="art-12" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">12. Garantie commerciale</h2>
+                <p>En plus de la garantie légale, XPERIENCE VISION offre une <strong class="text-white">garantie commerciale de [À CONFIRMER : 12 mois] sur le matériel installé</strong>, à compter de la date d'installation ou de livraison.</p>
+                <p><strong class="text-white">Sont exclus de la garantie commerciale :</strong></p>
+                <ul>
+                    <li>les dommages résultant d'une mauvaise utilisation, négligence, modification ou réparation effectuée par un tiers non agréé ;</li>
+                    <li>les dommages liés à des mises à jour logicielles du constructeur automobile modifiant la compatibilité du système installé ;</li>
+                    <li>l'usure normale ;</li>
+                    <li>les dommages liés à un accident, un incendie, un vol ou tout évènement extérieur.</li>
+                </ul>
+                <p>La garantie commerciale ne se substitue pas à la garantie légale de conformité ni à la garantie des vices cachés ; elle vient en complément.</p>
+            </section>
+
+            <!-- ARTICLE 13 -->
+            <section id="art-13" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">13. Garantie des vices cachés</h2>
+                <p>Conformément aux articles 1641 et suivants du Code civil, le Client bénéficie de la garantie des vices cachés. Il dispose d'un délai de 2 ans à compter de la découverte du vice pour agir et peut choisir entre la résolution de la vente ou une réduction du prix.</p>
+            </section>
+
+            <!-- ARTICLE 14 -->
+            <section id="art-14" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">14. Service après-vente</h2>
+                <p>Toute demande SAV doit être adressée par email à <a href="mailto:contact@xperience-vision.fr" class="text-white underline">contact@xperience-vision.fr</a> en précisant le numéro de commande, le Produit ou la Prestation concernée et la nature du problème.</p>
+                <p>XPERIENCE VISION s'engage à répondre dans un délai maximal de <strong class="text-white">24 heures ouvrées</strong>.</p>
+            </section>
+
+            <!-- ARTICLE 15 -->
+            <section id="art-15" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">15. Responsabilité</h2>
+                <p>La responsabilité du Vendeur ne saurait être engagée en cas de manquement à ses obligations contractuelles résultant du fait du Client (information erronée, absence du véhicule au rendez-vous, etc.), du fait imprévisible et insurmontable d'un tiers étranger au contrat, ou d'un cas de force majeure.</p>
+                <p>La responsabilité du Vendeur est limitée au montant de la commande concernée.</p>
+                <p>Le Vendeur ne pourra en aucun cas être tenu pour responsable des dommages indirects ou immatériels (perte de chiffre d'affaires, perte d'exploitation, perte de données, etc.).</p>
+            </section>
+
+            <!-- ARTICLE 16 -->
+            <section id="art-16" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">16. Réserve de propriété</h2>
+                <p>Conformément à l'article L624-9 du Code de commerce, les Produits livrés demeurent la propriété de XPERIENCE VISION jusqu'au paiement intégral de leur prix par le Client. Cependant, les risques (perte, vol, dégradation) sont transférés au Client dès la livraison.</p>
+            </section>
+
+            <!-- ARTICLE 17 -->
+            <section id="art-17" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">17. Force majeure</h2>
+                <p>L'exécution des obligations du Vendeur sera suspendue en cas de survenance d'un cas fortuit ou de force majeure qui en empêcherait l'exécution. Le Vendeur informera le Client de la survenance d'un tel évènement dès que possible.</p>
+                <p>Sont notamment considérés comme force majeure : grève totale ou partielle, incendie, inondation, interruption des moyens de transport, pandémie, mesures gouvernementales, etc.</p>
+            </section>
+
+            <!-- ARTICLE 18 -->
+            <section id="art-18" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">18. Données personnelles</h2>
+                <p>Les données personnelles collectées dans le cadre des présentes CGV (nom, prénom, email, téléphone, adresse, immatriculation du véhicule) sont traitées par XPERIENCE-VISION en sa qualité de responsable de traitement, en vue de l'exécution du contrat de vente, du suivi de la commande et du service après-vente.</p>
+                <p>La base légale du traitement est l'<strong class="text-white">exécution du contrat</strong> (article 6.1.b du RGPD).</p>
+                <p>Les données sont conservées pendant la durée nécessaire à l'exécution du contrat et aux obligations légales (conservation comptable : 10 ans).</p>
+                <p>Les sous-traitants suivants peuvent avoir accès aux données nécessaires à leur intervention : <strong class="text-white">Stripe</strong> (paiement), <strong class="text-white">Resend</strong> (envoi d'emails), <strong class="text-white">Cal.com</strong> (prise de rendez-vous), <strong class="text-white">Netlify</strong> (hébergement).</p>
+                <p>Le Client dispose d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité de ses données. Il peut exercer ses droits par email à <a href="mailto:contact@xperience-vision.fr" class="text-white underline">contact@xperience-vision.fr</a>.</p>
+                <p>Pour plus de détails, consulter notre <a href="politique-confidentialite.html" class="text-white underline">Politique de confidentialité</a>.</p>
+            </section>
+
+            <!-- ARTICLE 19 -->
+            <section id="art-19" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">19. Médiation et règlement des litiges</h2>
+                <p>En cas de litige, le Client est invité à contacter en priorité le service client du Vendeur à <a href="mailto:contact@xperience-vision.fr" class="text-white underline">contact@xperience-vision.fr</a> afin de rechercher une solution amiable.</p>
+                <p>À défaut d'accord amiable et conformément à l'article L.612-1 du Code de la consommation, le Client consommateur peut recourir gratuitement au médiateur de la consommation suivant :</p>
+                <p class="mt-3"><strong class="text-white">[À CONFIRMER : Médiateur conventionné — proposition par défaut]</strong><br>
+                <strong class="text-white">CMAP — Centre de Médiation et d'Arbitrage de Paris</strong><br>
+                39 avenue Franklin D. Roosevelt, 75008 Paris<br>
+                <a href="https://www.cmap.fr/" target="_blank" rel="noopener" class="text-white underline">www.cmap.fr</a></p>
+                <p class="mt-3">Le Client peut également utiliser la plateforme européenne de Règlement en Ligne des Litiges :<br>
+                <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener" class="text-white underline">https://ec.europa.eu/consumers/odr/</a></p>
+            </section>
+
+            <!-- ARTICLE 20 -->
+            <section id="art-20" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">20. Droit applicable et juridiction</h2>
+                <p>Les présentes CGV sont régies par le <strong class="text-white">droit français</strong>.</p>
+                <p>En cas de litige avec un Client professionnel, compétence exclusive est attribuée au <strong class="text-white">Tribunal de Commerce de Meaux</strong>, nonobstant pluralité de défendeurs ou appel en garantie.</p>
+                <p>Pour les Clients consommateurs, les règles de compétence légales s'appliquent.</p>
+            </section>
+
+            <!-- ARTICLE 21 -->
+            <section id="art-21" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">21. Modification des CGV</h2>
+                <p>XPERIENCE-VISION se réserve le droit de modifier les présentes CGV à tout moment. Les CGV applicables à une commande sont celles en vigueur à la date de la commande.</p>
+                <p>Le Vendeur recommande au Client de consulter régulièrement la dernière version disponible sur le site.</p>
+            </section>
+
+            <!-- ANNEXE -->
+            <section id="art-annexe" class="cgv-section card-glass p-6 md:p-12 rounded-[1.5rem] md:rounded-[2rem] border border-white/5 scroll-mt-24">
+                <h2 class="text-white font-black mb-4 tracking-[0.3em] text-[11px] md:text-base italic border-l-4 border-white pl-4 uppercase">Annexe — Formulaire de rétractation</h2>
+                <p>Le présent formulaire est à compléter et à renvoyer uniquement si vous souhaitez vous rétracter de votre commande de Produit, dans les 14 jours suivant la réception.</p>
+                <div class="cgv-form-retract">À l'attention de :
+XPERIENCE-VISION
+48 rue des Tilleuls, 77270 Villeparisis, France
+Email : contact@xperience-vision.fr
+
+Je/Nous (*) vous notifie/notifions (*) par la présente ma/notre (*) rétractation
+du contrat portant sur la vente du bien (*)/pour la prestation de service (*)
+ci-dessous :
+
+Commandé le (*)/reçu le (*) : __________________
+
+Numéro de commande : __________________
+
+Nom du (des) consommateur(s) : __________________
+
+Adresse du (des) consommateur(s) : __________________
+
+Signature du (des) consommateur(s) (uniquement en cas de notification du présent
+formulaire sur papier) : __________________
+
+Date : __________________
+
+(*) Rayer la mention inutile.</div>
+            </section>
 
         </div>
     </main>
 
     <footer class="py-10 text-center border-t border-white/5 bg-[#050505] mt-auto w-full">
-        <p class="text-[9px] text-gray-600 font-bold tracking-[0.5em] uppercase">© 2026 XPERIENCE VISION - TOUS DROITS
-            RÉSERVÉS</p>
+        <p class="text-[9px] text-gray-600 font-bold tracking-[0.5em] uppercase">© 2026 XPERIENCE VISION — TOUS DROITS RÉSERVÉS</p>
     </footer>
 
 </body>

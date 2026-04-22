@@ -5,629 +5,517 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XPERIENCE VISION | Intégrateur Digital Automobile Premium</title>
-    <meta name="description" content="XPERIENCE VISION — Spécialiste en écrans embarqués, accessoires sur-mesure et finitions premium pour Tesla, BYD, BMW, Mercedes, Range Rover et XPeng. Installation Plug & Play, garantie constructeur préservée.">
+    <meta name="description" content="XPERIENCE VISION — Spécialiste écrans embarqués, accessoires sur-mesure et finitions premium. Expert Tesla, BYD, XPeng, Nio, Zeekr, Leapmotor, BMW, Mercedes, Range Rover. Installation Plug & Play en concession.">
 
-    <!-- Open Graph / Partage réseaux sociaux -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="XPERIENCE VISION">
     <meta property="og:title" content="XPERIENCE VISION | Intégrateur Digital Automobile Premium">
-    <meta property="og:description" content="Écrans embarqués, accessoires sur-mesure et finitions premium pour véhicules d'exception. Tesla, BYD, BMW, Mercedes, Range Rover. Installation Plug & Play.">
+    <meta property="og:description" content="Catalogue services & produits premium. Configurez votre véhicule, choisissez votre concession, prenez RDV.">
     <meta property="og:image" content="https://xperiencevision.fr/img/hero-accueil.jpeg">
     <meta property="og:url" content="https://xperiencevision.fr">
     <meta property="og:locale" content="fr_FR">
     <link rel="canonical" href="https://xperiencevision.fr/">
 
-    <!-- Twitter / X Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="XPERIENCE VISION | Intégrateur Digital Automobile Premium">
-    <meta name="twitter:description" content="Écrans embarqués, accessoires sur-mesure et finitions premium pour véhicules d'exception.">
+    <meta name="twitter:description" content="Configurateur, catalogue et prise de RDV en concession.">
     <meta name="twitter:image" content="https://xperiencevision.fr/img/hero-accueil.jpeg">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Préchargement du hero (WebP + fallback JPEG) — accélère le LCP -->
+    <link rel="preload" as="image" href="img/hero-accueil.webp" type="image/webp" fetchpriority="high">
+    <link rel="preload" as="image" href="img/hero-accueil.jpeg" fetchpriority="high">
+    <link rel="preload" as="style" href="dist/tailwind.css">
+    <link rel="preload" as="style" href="style.css">
+
+    <link rel="stylesheet" href="dist/tailwind.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="catalogue.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-[#0a0a0a] text-white">
+<body class="bg-[#0a0a0a] text-white page-ecommerce">
 
-    <nav id="navbar"
-        class="fixed w-full z-50 px-6 py-4 flex justify-between items-center card-glass transition-all duration-300">
+    <a href="#main-content" class="skip-link">Aller au contenu</a>
+
+    <nav id="navbar" class="fixed w-full z-50 px-6 py-4 flex justify-between items-center card-glass transition-all duration-300">
         <div class="text-xl font-extrabold tracking-tighter italic uppercase">
-            <a href="#accueil" class="hover:text-gray-400 transition">XPERIENCE<span
-                    class="text-gray-500 font-light">VISION</span></a>
+            <a href="#accueil" class="nav-logo hover:text-gray-400 transition">XPERIENCE<span class="text-gray-500 font-light">VISION</span></a>
         </div>
-
         <div class="hidden md:flex space-x-10 text-[12px] uppercase font-bold tracking-[0.2em]">
-            <a href="#solutions" class="hover:text-gray-400 transition">Solutions</a>
-            <a href="#pros" class="hover:text-gray-400 transition">Concessions</a>
-            <a href="#packs" class="hover:text-gray-400 transition">Packs</a>
-            <a href="#configurateur" class="hover:text-gray-400 transition">Configurateur</a>
-            <a href="#faq" class="hover:text-gray-400 transition">FAQ</a>
-            <a href="#contact" class="hover:text-gray-400 transition">Contact</a>
+            <a href="#installation" class="hover:text-gray-400 transition">Catalogue</a>
+            <a href="histoire.html" class="hover:text-gray-400 transition">Notre Histoire</a>
+            <a href="contact.html" class="hover:text-gray-400 transition">Contact</a>
         </div>
-
         <div class="flex items-center space-x-3">
-            <a href="realisations.html"
-                class="hidden md:inline-block border border-white/30 hover:border-white text-white px-5 py-2 text-[10px] font-black uppercase rounded-full transition">Réalisations</a>
-            <a href="catalogue.html"
-                class="hidden md:inline-block border border-white/30 hover:border-white text-white px-5 py-2 text-[10px] font-black uppercase rounded-full transition">Catalogue</a>
-            <a href="#rdv"
-                class="hidden md:inline-block btn-premium px-6 py-2 text-[10px] font-black uppercase rounded-full">Prendre
-                RDV</a>
-            <button id="burger-btn" class="md:hidden text-white text-2xl focus:outline-none p-2">
+            <button class="nav-cart-btn" data-open-cart aria-label="Ouvrir le panier">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="nav-cart-label">Panier</span>
+                <span class="nav-cart-count" data-cart-count>0</span>
+            </button>
+            <button id="burger-btn" class="md:hidden text-white text-2xl focus:outline-none p-2" aria-label="Menu">
                 <i class="fa-solid fa-bars-staggered"></i>
             </button>
         </div>
-
-        <div id="mobile-dropdown"
-            class="absolute top-full left-0 w-full bg-[#0a0a0a] border-b border-white/10 backdrop-blur-2xl hidden flex-col p-4 space-y-4 shadow-2xl">
-            <a href="#solutions" class="mobile-item">Solutions</a>
-            <a href="#pros" class="mobile-item">Concessions</a>
-            <a href="#packs" class="mobile-item">Packs</a>
+        <div id="mobile-dropdown" class="absolute top-full left-0 w-full bg-[#0a0a0a] border-b border-white/10 backdrop-blur-2xl hidden flex-col p-4 space-y-4 shadow-2xl">
+            <a href="#installation" class="mobile-item">Catalogue</a>
             <a href="#configurateur" class="mobile-item">Configurateur</a>
+            <a href="#accessoires" class="mobile-item">Produits</a>
             <a href="#faq" class="mobile-item">FAQ</a>
-            <a href="#contact" class="mobile-item">Contact</a>
-            <hr class="border-white/5">
-            <a href="realisations.html"
-                class="mobile-item border border-white/20 rounded-xl text-center">Réalisations</a>
-            <a href="catalogue.html"
-                class="mobile-item border border-white/20 rounded-xl text-center">Catalogue</a>
-            <a href="#rdv"
-                class="mobile-item btn-premium w-full py-4 text-center text-xs font-black uppercase rounded-xl">Prendre
-                RDV</a>
+            <a href="histoire.html" class="mobile-item">Notre Histoire</a>
+            <a href="contact.html" class="mobile-item">Contact</a>
         </div>
     </nav>
 
     <div id="menu-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden"></div>
 
-    <section id="accueil"
-        class="relative h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden">
-        <img src="img/hero-accueil.jpeg" alt="Intérieur BYD premium avec écran embarqué XPERIENCE VISION"
-            class="absolute inset-0 w-full h-full object-cover object-center opacity-30" loading="eager" width="1920" height="1080">
-        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0a0a0a] z-10"></div>
-
-        <div class="relative z-20 mb-8 md:mb-20">
-            <span
-                class="text-xs md:text-sm font-bold tracking-[0.4em] text-gray-500 uppercase mb-4 md:mb-6 block">L'innovation
-                commence à bord</span>
-            <h1 class="text-5xl md:text-8xl font-black mb-6 md:mb-8 leading-none tracking-tighter uppercase">
-                VIVEZ CHAQUE <br> <span class="gradient-text">TRAJET</span>.
-            </h1>
-            <p
-                class="text-gray-400 uppercase tracking-[0.3em] text-xs md:text-sm mb-12 max-w-2xl mx-auto leading-relaxed">
-                Nous concevons des solutions digitales embarquées premium pour transformer l'expérience passager en un
-                moment d'exception.
-            </p>
-            <p class="hero-usp">
-                <span>&#10003; Écrans embarqués compatibles <strong>tous véhicules</strong></span>
-                <span class="hero-usp-sep">—</span>
-                <span>&#10003; Accessoires sur-mesure spécialisés
-                    <strong>Tesla · BYD · XPeng · BMW · Mercedes · Range Rover</strong>
-                </span>
-            </p>
-            <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 justify-center">
-                <a href="#rdv"
-                    class="btn-premium px-10 md:px-12 py-5 md:py-6 rounded-full font-bold uppercase text-xs md:text-sm">Planifier
-                    une installation</a>
-                <a href="#solutions"
-                    class="px-10 md:px-12 py-5 md:py-6 rounded-full font-bold uppercase text-xs md:text-sm border border-white/20 hover:bg-white hover:text-black transition">Explorer
-                    la gamme</a>
-            </div>
+    <!-- SUBNAV CATALOGUE (sticky sous le navbar) -->
+    <nav class="cat-subnav" aria-label="Navigation rapide">
+        <div class="cat-subnav-inner">
+            <a href="#configurateur" class="cat-subnav-btn" data-target="configurateur">
+                <i class="fa-solid fa-sliders"></i><span>Configurateur</span>
+            </a>
+            <a href="#best-sellers" class="cat-subnav-btn" data-target="best-sellers">
+                <i class="fa-solid fa-star"></i><span>Best Sellers</span>
+            </a>
+            <a href="#installation" class="cat-subnav-btn active" data-target="installation">
+                <i class="fa-solid fa-tv"></i><span>Installation</span>
+            </a>
+            <a href="#accessoires" class="cat-subnav-btn" data-target="accessoires">
+                <i class="fa-solid fa-bag-shopping"></i><span>Accessoires</span>
+            </a>
+            <a href="#faq" class="cat-subnav-btn" data-target="faq">
+                <i class="fa-solid fa-circle-question"></i><span>FAQ</span>
+            </a>
+            <a href="#avis" class="cat-subnav-btn" data-target="avis">
+                <i class="fa-solid fa-star-half-stroke"></i><span>Avis</span>
+            </a>
         </div>
+    </nav>
 
-        <div class="absolute bottom-0 w-full pb-6 bg-gradient-to-t from-black to-transparent z-20">
-            <p class="text-center text-[9px] font-black uppercase tracking-[0.3em] text-gray-700 mb-5">Spécialiste accessoires sur-mesure</p>
-            <div class="marquee-wrap">
-                <div class="marquee-track">
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="tesla">TESLA</a>
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="bmw">BMW</a>
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="mercedes">MERCEDES-BENZ</a>
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="range-rover">RANGE ROVER</a>
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="byd">BYD</a>
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="xpeng">XPENG</a>
-                    <!-- duplicate pour loop sans couture -->
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="tesla">TESLA</a>
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="bmw">BMW</a>
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="mercedes">MERCEDES-BENZ</a>
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="range-rover">RANGE ROVER</a>
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="byd">BYD</a>
-                    <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="xpeng">XPENG</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <main id="main-content">
 
-    <section id="solutions" class="min-h-screen flex flex-col justify-center py-12 px-6 max-w-7xl mx-auto">
-        <div class="mb-10 text-center reveal">
-            <h2 class="text-5xl font-black uppercase mb-6 italic">La Gamme Xperience</h2>
-            <p class="text-gray-500 uppercase tracking-widest text-sm max-w-2xl mx-auto">Une sélection rigoureuse
-                d'équipements haute technologie intégrés selon les standards constructeurs les plus exigeants.</p>
-        </div>
+        <!-- ============================================================
+             1. HERO — CONSERVÉ TEL QUEL
+             ============================================================ -->
+        <section id="accueil" class="relative h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden">
+            <picture><source srcset="img/hero-accueil.webp" type="image/webp"><img src="img/hero-accueil.jpeg" alt="Intérieur BYD premium avec écran embarqué XPERIENCE VISION"
+                class="absolute inset-0 w-full h-full object-cover object-center opacity-30" loading="eager" width="1920" height="1080"></picture>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0a0a0a] z-10"></div>
 
-        <div onscroll="updateScrollIndicators(this, 'solutions-dots')"
-            class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 md:grid md:grid-cols-3 md:gap-8 md:pb-0 no-scrollbar">
-            <div
-                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d1">
-                <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
-                    <img src="img/produit-ecran-xl.jpeg" alt="Écran plafonnier XL XPERIENCE VISION"
-                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224">
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="text-2xl font-bold mb-4 uppercase">Écrans Embarqués</h3>
-                    <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">Plafonniers 17.3" &
-                        Appuie-tête 10.1". Une immersion totale en résolution 4K pour vos passagers arrière.</p>
-                </div>
-            </div>
-            <div
-                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d2">
-                <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
-                    <img src="img/produit-ecran-intermediaire.jpeg" alt="Écran intermédiaire XPERIENCE VISION"
-                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224">
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="text-2xl font-bold mb-4 uppercase">Technologie</h3>
-                    <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">CarPlay sans fil, Gaming HD
-                        et Dashcams intelligentes. Restez connecté au monde, même sur la route.</p>
-                </div>
-            </div>
-            <div
-                class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d3">
-                <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
-                    <img src="img/produit-tablette.jpeg" alt="Tablette embarquée XPERIENCE VISION"
-                        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224">
-                </div>
-                <div class="p-4 text-center">
-                    <h3 class="text-2xl font-bold mb-4 uppercase">Finition</h3>
-                    <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">Protections céramiques et
-                        accessoires sur-mesure. Préservez l'état neuf et la valeur de votre véhicule.</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="solutions-dots" class="flex md:hidden justify-center gap-2 mt-4">
-            <div class="w-2 h-2 rounded-full bg-white opacity-100 transition-opacity duration-300"></div>
-            <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
-            <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
-        </div>
-    </section>
-
-    <section id="pros" class="min-h-screen flex flex-col justify-center py-10 md:py-12 bg-[#080a12]">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-4 md:mb-10">
-            <div class="reveal">
-                <span
-                    class="text-white font-black uppercase tracking-[0.5em] text-xs border-b-4 border-white pb-3">Partenariats</span>
-                <h2 class="text-4xl md:text-6xl font-black mt-8 md:mt-8 mb-6 md:mb-6 uppercase italic leading-tight">
-                    Business <br> & Performance.
-                </h2>
-                <p class="text-gray-400 text-xs md:text-base uppercase tracking-widest leading-loose mb-6 md:mb-6">
-                    Nous accompagnons les groupes automobiles dans la mise en place de centres de profits additionnels
-                    via l'équipement digital.
+            <div class="relative z-20 mb-8 md:mb-20">
+                <span class="text-xs md:text-sm font-bold tracking-[0.4em] text-gray-500 uppercase mb-4 md:mb-6 block">L'innovation commence à bord</span>
+                <h1 class="text-5xl md:text-8xl font-black mb-6 md:mb-8 leading-none tracking-tighter uppercase">
+                    VIVEZ CHAQUE <br> <span class="gradient-text">TRAJET</span>.
+                </h1>
+                <p class="text-gray-400 uppercase tracking-[0.3em] text-xs md:text-sm mb-12 max-w-2xl mx-auto leading-relaxed">
+                    Nous concevons des solutions digitales embarquées premium pour transformer l'expérience passager en un moment d'exception.
                 </p>
-                <div class="space-y-4 md:space-y-5">
-                    <div class="flex items-center">
-                        <div
-                            class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">
-                            01</div>
-                        <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Installation
-                            externalisée :
-                            Rentabilité immédiate.</p>
-                    </div>
-                    <div class="flex items-center">
-                        <div
-                            class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">
-                            02</div>
-                        <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Formation
-                            commerciale :
-                            Maîtrisez l'offre.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-glass p-8 md:p-10 rounded-[2rem] md:rounded-[4rem] text-center reveal reveal-d1">
-                <h4
-                    class="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] mb-6 md:mb-8 text-gray-500 italic underline decoration-2 underline-offset-8">
-                    Impact Showroom</h4>
-                <div class="grid grid-cols-2 gap-4 md:gap-6">
-                    <div>
-                        <p class="text-3xl md:text-6xl font-black mb-2 md:mb-4 tracking-tighter text-white" data-counter data-target="60" data-prefix="+" data-suffix="%">+60%</p>
-                        <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-widest">Taux
-                            d'équipement</p>
-                    </div>
-                    <div>
-                        <p class="text-3xl md:text-6xl font-black mb-2 md:mb-4 tracking-tighter text-white" data-counter data-target="80">80</p>
-                        <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-widest">
-                            Véhicules / Mois</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-6 w-full">
-            <div onscroll="updateScrollIndicators(this, 'pros-dots')"
-                class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-8 md:pt-10 border-t border-white/10 md:grid md:grid-cols-4 md:gap-8 md:pb-0 no-scrollbar">
-                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
-                    <i class="fa-solid fa-shield text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
-                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Garantie 1 an</h5>
-                    <p class="text-[10px] text-gray-600 uppercase font-bold">Sérénité totale</p>
-                </div>
-                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
-                    <i class="fa-solid fa-bolt text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
-                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Plug & Play</h5>
-                    <p class="text-[10px] text-gray-600 uppercase font-bold">Zéro découpe faisceau</p>
-                </div>
-                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
-                    <i class="fa-solid fa-headset text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
-                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">SAV Premium</h5>
-                    <p class="text-[10px] text-gray-600 uppercase font-bold">Réponse sous 24h</p>
-                </div>
-                <div class="text-center group flex-none w-[45vw] md:w-auto snap-center">
-                    <i class="fa-solid fa-gem text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
-                    <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Finition Luxe</h5>
-                    <p class="text-[10px] text-gray-600 uppercase font-bold">Standard constructeur</p>
-                </div>
-            </div>
-
-            <div id="pros-dots" class="flex md:hidden justify-center gap-2 mt-4">
-                <div class="w-2 h-2 rounded-full bg-white opacity-100 transition-opacity duration-300"></div>
-                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
-                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
-                <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="packs" class="min-h-screen flex flex-col justify-center py-24 bg-[#fafaf8] text-black">
-        <div class="max-w-7xl mx-auto px-6 w-full">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8 reveal">
-                <div>
-                    <h2 class="text-6xl font-black uppercase leading-none italic">Packs <br><span
-                            class="text-gray-300">Signature</span></h2>
-                    <p class="text-gray-400 text-sm uppercase tracking-[0.3em] font-bold mt-6">Solutions tout-en-un avec
-                        installation incluse.</p>
-                </div>
-                <div class="hidden md:block h-px flex-1 bg-gray-100 mx-10 mb-4"></div>
-                <a href="#rdv" class="text-sm font-black uppercase border-b-2 border-black pb-2">Voir tous les
-                    détails</a>
-            </div>
-
-            <div onscroll="updateScrollIndicators(this, 'packs-dots')"
-                class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 md:grid md:grid-cols-3 md:gap-10 md:pb-0 no-scrollbar">
-                <div
-                    class="p-6 md:p-12 border-2 border-gray-100 rounded-[3rem] md:rounded-[4rem] hover:border-black transition-all group flex-none w-[75vw] md:w-auto snap-center">
-                    <span
-                        class="bg-black text-white px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">Populaire</span>
-                    <h3 class="text-3xl font-black mt-8 mb-4 uppercase italic">Pack Livraison</h3>
-                    <p class="text-gray-500 text-xs font-bold uppercase mb-8">L'essentiel pour un véhicule neuf</p>
-                    <ul class="space-y-5 mb-12 text-sm font-bold uppercase text-gray-600">
-                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Protection écran HD</li>
-                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Tapis sur-mesure</li>
-                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Parfum d'ambiance</li>
-                    </ul>
-                    <button data-select-pack="pack-livraison-4h"
-                        class="w-full py-5 bg-gray-50 rounded-2xl group-hover:bg-black group-hover:text-white transition font-black uppercase text-xs">Sélectionner</button>
-                </div>
-                <div
-                    class="p-6 md:p-12 border-2 border-gray-100 rounded-[3rem] md:rounded-[4rem] hover:border-black transition-all group flex-none w-[75vw] md:w-auto snap-center">
-                    <span
-                        class="bg-gray-100 text-gray-500 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">Indispensable</span>
-                    <h3 class="text-3xl font-black mt-8 mb-4 uppercase italic">Pack Clean</h3>
-                    <p class="text-gray-500 text-xs font-bold uppercase mb-8">Maintenance esthétique premium</p>
-                    <ul class="space-y-5 mb-12 text-sm font-bold uppercase text-gray-600">
-                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Nettoyage Vapeur</li>
-                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Soin des cuirs</li>
-                        <li><i class="fa-solid fa-check-double mr-3 text-black"></i> Finition Showroom</li>
-                    </ul>
-                    <button data-select-pack="pack-clean-4h"
-                        class="w-full py-5 bg-gray-50 rounded-2xl group-hover:bg-black group-hover:text-white transition font-black uppercase text-xs">Sélectionner</button>
-                </div>
-                <div
-                    class="p-6 md:p-12 border-2 border-black bg-black text-white rounded-[3rem] md:rounded-[4rem] shadow-3xl group flex-none w-[75vw] md:w-auto snap-center">
-                    <span
-                        class="bg-white text-black px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">Exclusif</span>
-                    <h3 class="text-3xl font-black mt-8 mb-4 uppercase italic text-gold">Pack Café</h3>
-                    <p class="text-gray-400 text-xs font-bold uppercase mb-8">Le luxe ultime à bord</p>
-                    <ul class="space-y-5 mb-12 text-sm font-bold uppercase text-gray-300">
-                        <li><i class="fa-solid fa-mug-hot mr-3 text-white"></i> Machine intégrée</li>
-                        <li><i class="fa-solid fa-check-double mr-3 text-white"></i> Capsules Premium</li>
-                        <li><i class="fa-solid fa-check-double mr-3 text-white"></i> Pose Invisible</li>
-                    </ul>
-                    <button data-select-pack="pack-cafe-4h"
-                        class="w-full py-5 bg-white text-black rounded-2xl font-black uppercase text-xs">Vivre
-                        l'expérience</button>
-                </div>
-            </div>
-
-            <div id="packs-dots" class="flex md:hidden justify-center gap-2 mt-4 relative z-10 w-full">
-                <div class="w-2 h-2 rounded-full bg-black opacity-100 transition-opacity duration-300"></div>
-                <div class="w-2 h-2 rounded-full bg-black opacity-30 transition-opacity duration-300"></div>
-                <div class="w-2 h-2 rounded-full bg-black opacity-30 transition-opacity duration-300"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="configurateur" class="py-20 bg-[#0a0a0a] border-t border-white/5">
-        <div class="max-w-2xl mx-auto px-6 w-full">
-
-            <!-- Intro -->
-            <div class="text-center mb-14">
-                <h2 class="text-4xl md:text-5xl font-black uppercase italic mb-6">Votre Configuration</h2>
-                <p class="text-gray-400 text-sm uppercase tracking-[0.2em] leading-loose max-w-lg mx-auto">
-                    Nos écrans s'adaptent à <strong class="text-white">tous les véhicules</strong>.<br>
-                    Sélectionnez votre marque pour un devis sur-mesure.
+                <p class="hero-usp">
+                    <span>&#10003; Écrans embarqués compatibles <strong>tous véhicules</strong></span>
+                    <span class="hero-usp-sep">—</span>
+                    <span>&#10003; Accessoires sur-mesure spécialisés
+                        <strong>Tesla · BYD · XPeng · Nio · Zeekr · Leapmotor</strong>
+                    </span>
                 </p>
-            </div>
-
-            <!-- Barre de progression -->
-            <div class="config-progress mb-12">
-                <div class="config-progress-bar">
-                    <div class="config-step-dot active" data-dot="1">1</div>
-                    <div class="config-connector" data-conn="1"></div>
-                    <div class="config-step-dot" data-dot="2">2</div>
-                    <div class="config-connector" data-conn="2"></div>
-                    <div class="config-step-dot" data-dot="3">3</div>
-                    <div class="config-connector" data-conn="3"></div>
-                    <div class="config-step-dot" data-dot="4">4</div>
-                </div>
-                <div class="config-step-labels">
-                    <span>Marque</span>
-                    <span>Modèle</span>
-                    <span>Univers</span>
-                    <span>Récap</span>
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 justify-center">
+                    <a href="#configurateur" class="btn-premium px-10 md:px-12 py-5 md:py-6 rounded-full font-bold uppercase text-xs md:text-sm">Configurer mon véhicule</a>
+                    <a href="#installation" class="px-10 md:px-12 py-5 md:py-6 rounded-full font-bold uppercase text-xs md:text-sm border border-white/20 hover:bg-white hover:text-black transition">Explorer le catalogue</a>
                 </div>
             </div>
 
-            <!-- Étape 1 : Marque -->
-            <div class="config-step" data-step="1">
-                <p class="config-step-title">Sélectionnez votre marque</p>
-                <div class="config-brands-grid">
-                    <button class="config-brand-btn" data-brand="tesla">Tesla</button>
-                    <button class="config-brand-btn" data-brand="byd">BYD</button>
-                    <button class="config-brand-btn" data-brand="xpeng">XPeng</button>
-                    <button class="config-brand-btn" data-brand="bmw">BMW</button>
-                    <button class="config-brand-btn" data-brand="mercedes">Mercedes-Benz</button>
-                    <button class="config-brand-btn" data-brand="range-rover">Range Rover</button>
-                    <button class="config-brand-btn config-brand-autre" data-brand="autre">Autre véhicule</button>
+            <div class="absolute bottom-0 w-full pb-6 bg-gradient-to-t from-black to-transparent z-20">
+                <p class="text-center text-[9px] font-black uppercase tracking-[0.3em] text-gray-700 mb-5">Spécialiste accessoires sur-mesure</p>
+                <div class="marquee-wrap">
+                    <div class="marquee-track">
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="tesla">TESLA</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="byd">BYD</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="xpeng">XPENG</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="nio">NIO</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="zeekr">ZEEKR</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="leapmotor">LEAPMOTOR</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="bmw">BMW</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="mercedes">MERCEDES-BENZ</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="range-rover">RANGE ROVER</a>
+                        <!-- duplicate pour loop sans couture -->
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="tesla">TESLA</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="byd">BYD</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="xpeng">XPENG</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="nio">NIO</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="zeekr">ZEEKR</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="leapmotor">LEAPMOTOR</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="bmw">BMW</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="mercedes">MERCEDES-BENZ</a>
+                        <a href="#configurateur" class="marquee-brand brand-logo-link" data-brand="range-rover">RANGE ROVER</a>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Étape 2 : Modèle -->
-            <div class="config-step hidden" data-step="2">
-                <p class="config-step-title">Sélectionnez votre modèle</p>
-                <div id="config-models-grid" class="config-brands-grid"></div>
-                <div id="config-autre-wrap" class="hidden mt-6">
-                    <input id="config-autre-input" type="text" class="config-text-input"
-                        placeholder="Ex: AUDI A6, RENAULT CLIO..." autocomplete="off" />
-                    <button id="config-autre-confirm" class="config-confirm-btn">Confirmer mon véhicule →</button>
+        <!-- ============================================================
+             2. CONFIGURATEUR — accessoires sur-mesure par marque
+             ============================================================ -->
+        <section id="configurateur" class="py-20 bg-[#0a0a0a] border-t border-white/5">
+            <div class="config-wrap">
+                <header class="cat-section-header config-header">
+                    <span class="cat-section-tag cat-section-tag-gold"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Accessoires sur-mesure</span>
+                    <h2>Accessoires <span class="gradient-text">Sur-Mesure</span></h2>
+                    <p>Sélectionnez votre marque pour découvrir nos accessoires dédiés · Livraison offerte</p>
+                </header>
+
+                <!-- Étape 1 : Marque -->
+                <div class="config-step" data-step="1">
+                    <p class="config-step-title">Étape 1 · Sélectionnez votre marque</p>
+                    <div class="config-brands-grid">
+                        <button class="config-brand-btn" data-brand="tesla">Tesla</button>
+                        <button class="config-brand-btn" data-brand="byd">BYD</button>
+                        <button class="config-brand-btn" data-brand="xpeng">XPeng</button>
+                        <button class="config-brand-btn" data-brand="bmw">BMW</button>
+                        <button class="config-brand-btn" data-brand="mercedes">Mercedes-Benz</button>
+                        <button class="config-brand-btn" data-brand="range-rover">Range Rover</button>
+                        <button class="config-brand-btn config-brand-autre" data-brand="autre">Autre véhicule</button>
+                    </div>
                 </div>
-                <button class="config-back-btn" data-target="1">
-                    <i class="fa-solid fa-arrow-left mr-2 text-xs"></i> Retour
-                </button>
-            </div>
 
-            <!-- Étape 3 : Univers -->
-            <div class="config-step hidden" data-step="3">
-                <p class="config-step-title">Quel est votre univers ?</p>
-                <div class="config-univers-grid">
-                    <button class="config-univers-btn" data-univers="familiale">
-                        <i class="fa-solid fa-film config-univers-icon"></i>
-                        <span class="config-univers-name">Expérience Familiale</span>
-                        <span class="config-univers-desc">Écrans, gaming, divertissement</span>
-                    </button>
-                    <button class="config-univers-btn" data-univers="business">
-                        <i class="fa-solid fa-briefcase config-univers-icon"></i>
-                        <span class="config-univers-name">Productivité Business</span>
-                        <span class="config-univers-desc">CarPlay, dashcam, connectivité</span>
-                    </button>
-                    <button class="config-univers-btn" data-univers="esthetique">
-                        <i class="fa-solid fa-star config-univers-icon"></i>
-                        <span class="config-univers-name">Esthétique & Valeur</span>
-                        <span class="config-univers-desc">PPF, habillage, tapis sur-mesure</span>
-                    </button>
+                <!-- Étape 2 : Modèle -->
+                <div class="config-step hidden" data-step="2">
+                    <p class="config-step-title">Étape 2 · Sélectionnez votre modèle <span id="config-step-brand">—</span></p>
+                    <div id="config-models-grid" class="config-brands-grid"></div>
+                    <div class="config-step-footer">
+                        <button class="config-back-cta" data-target="1">
+                            <i class="fa-solid fa-arrow-left mr-2"></i>
+                            Changer de marque
+                        </button>
+                    </div>
                 </div>
-                <button class="config-back-btn" data-target="2">
-                    <i class="fa-solid fa-arrow-left mr-2 text-xs"></i> Retour
-                </button>
-            </div>
 
-            <!-- Étape 4 : Récap -->
-            <div class="config-step hidden" data-step="4">
-                <div class="card-glass rounded-[2rem] p-8 md:p-12">
-                    <p class="config-step-title mb-2">Votre sélection</p>
-                    <div id="config-recap-rows" class="mb-8"></div>
-                    <p class="text-gray-600 text-[10px] uppercase tracking-[0.18em] font-bold mb-8 text-center leading-loose">
-                        Nos équipements s'adaptent à votre véhicule.<br>
-                        Un conseiller vous recontacte sous 24h avec votre devis.
+                <!-- Étape 3 : Résultats -->
+                <div class="config-step hidden" data-step="3">
+                    <div class="config-results-brand">
+                        <span class="config-results-eyebrow">Accessoires pour</span>
+                        <strong id="config-results-name">—</strong>
+                    </div>
+
+                    <div id="config-results-grid" class="cat-grid"></div>
+
+                    <p id="config-results-empty" class="config-results-empty" hidden>
+                        <i class="fa-solid fa-circle-info mr-2"></i>
+                        Aucun accessoire sur-mesure pour ce modèle. Consultez nos <a href="#accessoires">accessoires universels</a> ou <a href="contact.html">contactez-nous</a>.
                     </p>
-                    <button onclick="prefillContactForm()"
-                        class="btn-premium w-full py-5 rounded-2xl text-xs font-black uppercase tracking-widest">
-                        Demander mon devis personnalisé
-                    </button>
-                </div>
-                <button class="config-back-btn mt-4" data-target="3">
-                    <i class="fa-solid fa-arrow-left mr-2 text-xs"></i> Modifier ma sélection
-                </button>
-            </div>
 
-        </div>
-    </section>
-
-    <section id="rdv" class="bg-[#050508] text-white">
-        <div class="w-full py-10 pt-20 bg-black text-center">
-            <h2 class="text-3xl md:text-5xl font-light italic text-gray-500 leading-tight">
-                "Vos enfants ne demanderont plus : <br>
-                <span class="text-white font-black not-italic uppercase tracking-tighter">On arrive quand ?</span>"
-            </h2>
-            <p class="mt-8 text-[10px] tracking-[0.6em] uppercase text-gray-700 font-bold">L'expérience familiale
-                réinventée</p>
-        </div>
-
-        <div class="max-w-6xl w-full mx-auto px-6 py-10 pb-16 flex flex-col items-center">
-            <h3 class="text-4xl md:text-5xl font-black text-center mb-6 md:mb-10 uppercase tracking-tighter italic reveal">
-                Planifiez l'exception.</h3>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 w-full">
-                <button class="cal-pack-btn text-left p-6 rounded-2xl border-2 transition-all border-gray-200 text-gray-500 hover:border-black hover:bg-gray-50" data-pack="pack-livraison-4h">
-                    <div class="flex items-center gap-3 mb-1">
-                        <i class="fa-solid fa-box text-2xl transition flex-shrink-0"></i>
-                        <h4 class="font-black uppercase text-sm tracking-widest">Pack Livraison</h4>
-                    </div>
-                    <p class="text-[10px] font-bold uppercase opacity-60">Protection & accessoires</p>
-                </button>
-                <button class="cal-pack-btn text-left p-6 rounded-2xl border-2 transition-all border-gray-200 text-gray-500 hover:border-black hover:bg-gray-50" data-pack="pack-clean-4h">
-                    <div class="flex items-center gap-3 mb-1">
-                        <i class="fa-solid fa-spray-can-sparkles text-2xl transition flex-shrink-0"></i>
-                        <h4 class="font-black uppercase text-sm tracking-widest">Pack Clean</h4>
-                    </div>
-                    <p class="text-[10px] font-bold uppercase opacity-60">Maintenance esthétique</p>
-                </button>
-                <button class="cal-pack-btn text-left p-6 rounded-2xl border-2 transition-all border-gray-200 text-gray-500 hover:border-black hover:bg-gray-50" data-pack="pack-cafe-4h">
-                    <div class="flex items-center gap-3 mb-1">
-                        <i class="fa-solid fa-mug-hot text-2xl transition flex-shrink-0"></i>
-                        <h4 class="font-black uppercase text-sm tracking-widest">Pack Café</h4>
-                    </div>
-                    <p class="text-[10px] font-bold uppercase opacity-60">Le luxe ultime à bord</p>
-                </button>
-            </div>
-
-            <div id="cal-container" class="hidden w-full rounded-2xl overflow-hidden transition-all duration-500">
-                <div id="my-cal-inline-pack-livraison-4h" class="hidden w-full" style="min-height:500px;"></div>
-                <div id="my-cal-inline-pack-clean-4h" class="hidden w-full" style="min-height:500px;"></div>
-                <div id="my-cal-inline-pack-cafe-4h" class="hidden w-full" style="min-height:500px;"></div>
-            </div>
-
-            <p class="text-center mt-8 text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">
-                <i class="fa-solid fa-circle-check mr-2"></i> Confirmation immédiate par email
-            </p>
-        </div>
-    </section>
-
-    <section id="faq">
-        <h2 class="reveal">Questions fréquentes</h2>
-        <p class="faq-subtitle reveal">Tout ce que vous devez savoir</p>
-        <div class="faq-container">
-            <details>
-                <summary>Vos écrans sont-ils compatibles avec toutes les marques ?</summary>
-                <p><strong>Oui, sans exception.</strong> Nos écrans plafonniers 17.3", appuie-tête 10.1" et écrans passager s'installent sur n'importe quel véhicule, toutes marques et motorisations confondues. L'installation est entièrement sur-mesure : aucune découpe de faisceau, aucune modification irréversible. La garantie constructeur reste intacte.</p>
-            </details>
-            <details>
-                <summary>Sur quelles marques êtes-vous spécialisés pour les accessoires ?</summary>
-                <p>Nous sommes spécialistes des accessoires sur-mesure pour <strong>Tesla, BYD, XPeng, BMW, Mercedes-Benz et Range Rover</strong>. Pour chacune de ces marques, nous proposons une gamme complète : tapis 3D logotés, films de protection, habillages console, seuils LED, films PPF, protections coffre et dashcams intégrées.</p>
-            </details>
-            <details>
-                <summary>L'installation préserve-t-elle la garantie constructeur ?</summary>
-                <p>Oui, <strong>100% Plug & Play</strong>. Toutes nos installations sont réalisées sans découpe de faisceau électrique. La garantie constructeur reste entièrement intacte. Nous travaillons exclusivement avec des connecteurs certifiés et des fixations sur-mesure non destructives.</p>
-            </details>
-            <details>
-                <summary>Combien de temps dure une installation ?</summary>
-                <p>Entre <strong>2 heures et 1 journée</strong> selon le pack choisi. Un véhicule de courtoisie peut être mis à disposition sur demande pour les installations longue durée.</p>
-            </details>
-            <details>
-                <summary>Êtes-vous spécialisés sur les marques chinoises (BYD, XPeng) ?</summary>
-                <p>Oui, nous sommes l'un des rares installateurs en France maîtrisant parfaitement les architectures électroniques <strong>BYD, XPeng, Nio et Zeekr</strong>. Nos techniciens sont formés spécifiquement sur ces véhicules pour garantir une intégration parfaite.</p>
-            </details>
-            <details>
-                <summary>Proposez-vous un service à domicile ?</summary>
-                <p>Oui, <strong>sur demande pour les packs supérieurs à 1 500 €</strong>. Contactez-nous pour organiser un déplacement à votre adresse ou lieu de travail.</p>
-            </details>
-            <details>
-                <summary>Quels moyens de paiement acceptez-vous ?</summary>
-                <p>Nous acceptons la <strong>carte bancaire, le virement</strong> et le <strong>paiement en 3× sans frais</strong> à partir de 500 €.</p>
-            </details>
-            <details>
-                <summary>Que se passe-t-il si je revends mon véhicule ?</summary>
-                <p>Tous nos accessoires peuvent être <strong>démontés sans laisser de trace</strong>, ou conservés comme valeur ajoutée à la revente. L'installation Plug & Play garantit une réversibilité totale.</p>
-            </details>
-        </div>
-    </section>
-
-    <section id="contact" class="py-24 bg-[#0a0a0a] border-t border-white/5">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-5xl font-black uppercase italic mb-4 tracking-tighter">Demande <span
-                        class="text-gray-600">Spécifique</span></h2>
-                <p class="text-gray-500 uppercase tracking-widest text-[10px] font-bold">Un projet hors-norme ? Une
-                    question technique ? Écrivez-nous.</p>
-            </div>
-
-            <form id="contact-form" name="contact" method="POST" data-netlify="true" class="space-y-4 md:space-y-8">
-                <input type="hidden" name="form-name" value="contact">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="group">
-                        <label for="form-name" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">
-                            Nom complet <span class="text-red-500">*</span>
-                        </label>
-                        <input id="form-name" name="nom" type="text" placeholder="JEAN DUPONT" required
-                            class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
-                    </div>
-                    <div class="group">
-                        <label for="form-email" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">
-                            Votre Email <span class="text-red-500">*</span>
-                        </label>
-                        <input id="form-email" name="email" type="email" placeholder="CONTACT@EMAIL.COM" required
-                            class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
+                    <div class="config-step-footer">
+                        <button class="config-back-cta" data-target="2">
+                            <i class="fa-solid fa-arrow-left mr-2"></i>
+                            Changer de modèle
+                        </button>
+                        <button class="config-back-cta config-back-cta-alt" data-target="1">
+                            <i class="fa-solid fa-sync-alt mr-2"></i>
+                            Changer de marque
+                        </button>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="group">
-                        <label for="form-vehicle" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">
-                            Marque & Modèle <span id="vehicle-asterisk" class="text-red-500 transition-opacity">*</span>
-                        </label>
-                        <input id="form-vehicle" name="vehicule" type="text" placeholder="EX: TESLA MODEL Y" required
-                            class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700">
+        <!-- ============================================================
+             4. BEST SELLERS — 3 packs signature BYmyCAR (livrés)
+             ============================================================ -->
+        <section id="best-sellers" class="cat-section cat-section-best">
+            <div class="cat-section-inner">
+                <header class="cat-section-header">
+                    <span class="cat-section-tag cat-section-tag-gold"><i class="fa-solid fa-star mr-2"></i>Best Sellers</span>
+                    <h2>Packs <span class="gradient-text">Exclusifs</span></h2>
+                    <p>Offre exclusive BYmyCAR × XPERIENCE VISION · Livraison offerte</p>
+                    <p class="cat-section-pricing-note"><i class="fa-solid fa-tag mr-2"></i>Tous les prix affichés sont TTC (TVA 20 % incluse)</p>
+                </header>
+
+                <div class="cat-bs-wrap">
+                    <div class="cat-bs-grid">
+                        <article class="cat-bs-card">
+                            <div class="cat-bs-card-tag">Café à bord</div>
+                            <i class="fa-solid fa-mug-hot cat-bs-icon"></i>
+                            <h3>Pack Café</h3>
+                            <p class="cat-bs-cible">Café digne d'un barista à bord</p>
+                            <ul class="cat-bs-list">
+                                <li><i class="fa-solid fa-check"></i>Machine espresso portable</li>
+                                <li><i class="fa-solid fa-check"></i>Compatible Nespresso &amp; café moulu</li>
+                                <li><i class="fa-solid fa-check"></i>Pochette de transport premium</li>
+                            </ul>
+                            <div class="cat-bs-bottom">
+                                <span class="cat-bs-price">129 €</span>
+                                <button class="cat-buy-btn cat-acc-add" data-add-acc="PACK-CAF" data-name="Pack Café — Café Express" data-price="129">+ Panier</button>
+                            </div>
+                        </article>
+                        <article class="cat-bs-card cat-bs-card-feature">
+                            <div class="cat-bs-card-tag">Bestseller</div>
+                            <i class="fa-solid fa-spray-can-sparkles cat-bs-icon"></i>
+                            <h3>Pack Clean</h3>
+                            <p class="cat-bs-cible">Kit entretien 25 pièces complet</p>
+                            <ul class="cat-bs-list">
+                                <li><i class="fa-solid fa-check"></i>Aspirateur portable 120W</li>
+                                <li><i class="fa-solid fa-check"></i>5 brosses détailing + microfibres</li>
+                                <li><i class="fa-solid fa-check"></i>Gant chenille + sac de rangement</li>
+                            </ul>
+                            <div class="cat-bs-bottom">
+                                <span class="cat-bs-price">89 €</span>
+                                <button class="cat-buy-btn cat-acc-add" data-add-acc="PACK-CLN" data-name="Pack Clean — Clean &amp; Shine" data-price="89">+ Panier</button>
+                            </div>
+                        </article>
+                        <article class="cat-bs-card cat-bs-card-gold">
+                            <div class="cat-bs-card-tag cat-bs-card-tag-gold">Signature</div>
+                            <i class="fa-solid fa-gift cat-bs-icon"></i>
+                            <h3 class="text-gold">Pack Cadeau</h3>
+                            <p class="cat-bs-cible">Coffret co-brandé XV × BYmyCAR</p>
+                            <ul class="cat-bs-list">
+                                <li><i class="fa-solid fa-check"></i>Thermos inox 500 ml logotés</li>
+                                <li><i class="fa-solid fa-check"></i>Batterie MagSafe 10 000 mAh</li>
+                                <li><i class="fa-solid fa-check"></i>Carnet cuir + porte-clés premium</li>
+                            </ul>
+                            <div class="cat-bs-bottom">
+                                <span class="cat-bs-price">149 €</span>
+                                <button class="cat-buy-btn cat-pack-btn-gold cat-acc-add" data-add-acc="PACK-CAD" data-name="Pack Cadeau — Coffret Signature" data-price="149">+ Panier</button>
+                            </div>
+                        </article>
                     </div>
-                    <div class="group">
-                        <label for="form-subject" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">
-                            Objet <span class="text-red-500">*</span>
-                        </label>
-                        <select id="form-subject" name="sujet" required
-                            class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase text-zinc-400">
-                            <option value="Demande de devis">Demande de devis</option>
-                            <option value="Partenariat professionnel">Partenariat professionnel</option>
-                            <option value="Service après-vente">Service après-vente</option>
-                            <option value="Autre">Autre</option>
-                        </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             5. INSTALLATION — écrans installés par XPERIENCE VISION
+             ============================================================ -->
+        <section id="installation" class="cat-section cat-section-installation" data-section="installation">
+            <div class="cat-section-inner">
+                <header class="cat-section-header">
+                    <span class="cat-section-tag cat-section-tag-gold"><i class="fa-solid fa-tv mr-2"></i>Installation sur RDV · Domicile ou Garage XV</span>
+                    <h2>Installation <span class="gradient-text">Écrans</span></h2>
+                    <p>L'expérience cinéma à bord · Garantie constructeur préservée</p>
+                    <p class="cat-section-pricing-note"><i class="fa-solid fa-tag mr-2"></i>Prix TTC (TVA 20 % incluse)</p>
+                </header>
+
+                <div class="cat-content">
+                    <div class="cat-content-block" data-cat="ecrans" data-sub="tous">
+                        <div class="cat-bs-grid">
+                            <article class="cat-bs-card">
+                                <div class="cat-bs-card-tag">Famille</div>
+                                <i class="fa-solid fa-tablet-screen-button cat-bs-icon"></i>
+                                <h3>Tablette 10.1"</h3>
+                                <p class="cat-bs-cible">Les enfants regardent Netflix, les parents conduisent</p>
+                                <ul class="cat-bs-list">
+                                    <li><i class="fa-solid fa-check"></i>Android 11 · 4G natif</li>
+                                    <li><i class="fa-solid fa-check"></i>10.1" HD · 2 GB RAM / 32 GB</li>
+                                    <li><i class="fa-solid fa-check"></i>Netflix, YouTube, USB, HDMI</li>
+                                </ul>
+                                <div class="cat-bs-bottom">
+                                    <span class="cat-bs-price">600 €</span>
+                                    <button class="cat-rdv-btn cat-srv-add" data-add-service="ECR-FAM" data-name="Tablette 10.1&quot; Famille" data-price="600">+ Panier RDV</button>
+                                </div>
+                            </article>
+                            <article class="cat-bs-card cat-bs-card-feature">
+                                <div class="cat-bs-card-tag">Polyvalent</div>
+                                <i class="fa-solid fa-tv cat-bs-icon"></i>
+                                <h3>Plafond 13.3" FHD</h3>
+                                <p class="cat-bs-cible">Écran rabattable, image Full HD cristalline</p>
+                                <ul class="cat-bs-list">
+                                    <li><i class="fa-solid fa-check"></i>Android 12 · FHD 1080p</li>
+                                    <li><i class="fa-solid fa-check"></i>Dalle LCD / OLED selon config.</li>
+                                    <li><i class="fa-solid fa-check"></i>Télécommande incluse · A/V IN</li>
+                                </ul>
+                                <div class="cat-bs-bottom">
+                                    <span class="cat-bs-price">699 €</span>
+                                    <button class="cat-rdv-btn cat-srv-add" data-add-service="ECR-POL" data-name="Écran plafond 13.3&quot; FHD Polyvalent" data-price="699">+ Panier RDV</button>
+                                </div>
+                            </article>
+                            <article class="cat-bs-card cat-bs-card-gold">
+                                <div class="cat-bs-card-tag cat-bs-card-tag-gold">Premium · Recommandé</div>
+                                <i class="fa-solid fa-desktop cat-bs-icon"></i>
+                                <h3 class="text-gold">Plafond 17.3" FHD</h3>
+                                <p class="cat-bs-cible">Grand format toit panoramique · Finition premium</p>
+                                <ul class="cat-bs-list">
+                                    <li><i class="fa-solid fa-check"></i>Android 14 · WiFi · Bluetooth</li>
+                                    <li><i class="fa-solid fa-check"></i>4 GB RAM / 64 GB · 17.3" FHD</li>
+                                    <li><i class="fa-solid fa-check"></i>Streaming natif · Toit pano compatible</li>
+                                </ul>
+                                <div class="cat-bs-bottom">
+                                    <span class="cat-bs-price">1 099 €</span>
+                                    <button class="cat-rdv-btn cat-rdv-btn-gold cat-srv-add" data-add-service="ECR-PRE" data-name="Écran plafond 17.3&quot; FHD Premium" data-price="1099">+ Panier RDV</button>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             6. ACCESSOIRES — livraison à domicile
+             ============================================================ -->
+        <section id="accessoires" class="cat-section cat-section-produits" data-section="accessoires">
+            <div class="cat-section-inner">
+                <header class="cat-section-header">
+                    <span class="cat-section-tag"><i class="fa-solid fa-truck-fast mr-2"></i>Livraison offerte · Sous 3-5 jours ouvrés</span>
+                    <h2>Accessoires</h2>
+                    <p>Sélectionnez vos accessoires · Paiement Stripe sécurisé</p>
+                    <p class="cat-section-pricing-note"><i class="fa-solid fa-tag mr-2"></i>Tous les prix affichés sont TTC (TVA 20 % incluse) · Frais de port offerts</p>
+                </header>
+
+                <a href="#configurateur" class="cat-custom-banner">
+                    <div class="cat-custom-banner-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <div class="cat-custom-banner-content">
+                        <strong>Accessoires sur-mesure pour votre marque</strong>
+                        <span>Tesla · BYD · XPeng · BMW · Mercedes · Range Rover — 76 références dédiées</span>
+                    </div>
+                    <span class="cat-custom-banner-cta">Configurateur <i class="fa-solid fa-arrow-right ml-2"></i></span>
+                </a>
+
+                <div class="cat-filters">
+                    <div class="cat-filter-row" data-level="cat">
+                        <button class="cat-filter cat-filter-cat active" data-cat="interieur">Intérieur</button>
+                        <button class="cat-filter cat-filter-cat" data-cat="exterieur">Extérieur</button>
+                        <button class="cat-filter cat-filter-cat" data-cat="recharge">Recharge</button>
                     </div>
                 </div>
 
-                <div class="group">
-                    <label for="form-message" class="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2 ml-4">
-                        Votre Message <span class="text-red-500">*</span>
-                    </label>
-                    <textarea id="form-message" name="message" placeholder="DÉTAILLEZ VOTRE PROJET..." required
-                        class="w-full bg-zinc-900/50 border border-white/5 rounded-2xl px-6 py-4 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase placeholder:text-zinc-700"></textarea>
+                <div class="cat-content" aria-live="polite">
+
+                    <!-- EXTÉRIEUR -->
+                    <div class="cat-content-block" data-cat="exterieur" data-sub="all">
+                        <div class="cat-grid">
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-warehouse cat-card-icon"></i></div><div class="cat-card-body"><h4>Barres de toit aluminium</h4><p>Alu aéronautique, charge 75 kg. Compatible coffre de toit &amp; porte-vélos.</p><div class="cat-card-bottom"><span class="cat-price">349<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-001" data-name="Barres de toit aluminium" data-price="349">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-suitcase-rolling cat-card-icon"></i></div><div class="cat-card-body"><h4>Coffre de toit 440 L</h4><p>ABS aérodynamique, ouverture latérale intégrée, fixation antivol au choix.</p><div class="cat-card-bottom"><span class="cat-price">589<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-002" data-name="Coffre de toit 440 litres" data-price="589">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-bicycle cat-card-icon"></i></div><div class="cat-card-body"><h4>Porte-vélos attelage 2 pl.</h4><p>Éclairage LED homologué, pliable, charge max 60 kg. Montage 5 min.</p><div class="cat-card-bottom"><span class="cat-price">279<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-003" data-name="Porte-vélos attelage 2 places" data-price="279">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-droplet cat-card-icon"></i></div><div class="cat-card-body"><h4>Pare-boue sur-mesure x4</h4><p>Thermoformés résistant UV &amp; choc. Fixation d'origine sans perçage.</p><div class="cat-card-bottom"><span class="cat-price">79<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-004" data-name="Pare-boue sur-mesure x4" data-price="79">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-wave-square cat-card-icon"></i></div><div class="cat-card-body"><h4>Becquet sport arrière</h4><p>ABS peint teinte caisse. Améliore aérodynamique &amp; esthétique. Sans perçage.</p><div class="cat-card-bottom"><span class="cat-price">299<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-005" data-name="Becquet sport arrière" data-price="299">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-shield cat-card-icon"></i></div><div class="cat-card-body"><h4>Film PPF anti-rayures</h4><p>Polyuréthane auto-cicatrisant. Zones critiques ou full-body. Garantie 5 ans.</p><div class="cat-card-bottom"><span class="cat-price">490<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-006" data-name="Film PPF anti-rayures" data-price="490">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-grip-lines cat-card-icon"></i></div><div class="cat-card-body"><h4>Baguettes de portes inox</h4><p>Inox chromé anti-chocs de portière. Set 4 pièces, pose adhésive.</p><div class="cat-card-bottom"><span class="cat-price">129<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-007" data-name="Baguettes de portes inox" data-price="129">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-camera cat-card-icon"></i></div><div class="cat-card-body"><h4>Caméra de recul HD 1080p</h4><p>Vision nocturne, angle 170°. Intégration écran natif.</p><div class="cat-card-bottom"><span class="cat-price">249<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-008" data-name="Caméra de recul HD 1080p" data-price="249">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-compact-disc cat-card-icon"></i></div><div class="cat-card-body"><h4>Jantes sport 18-20 pouces</h4><p>Alliage forgé 5 branches. TÜV certifié. Noir, argent, bronze.</p><div class="cat-card-bottom"><span class="cat-price">899<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-009" data-name="Jantes sport 18-20 pouces" data-price="899">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-angles-right cat-card-icon"></i></div><div class="cat-card-body"><h4>Spoilers latéraux sport</h4><p>Kit ABS peint teinte caisse. Amélioré le Cx.</p><div class="cat-card-bottom"><span class="cat-price">389<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-010" data-name="Spoilers latéraux sport" data-price="389">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-border-all cat-card-icon"></i></div><div class="cat-card-body"><h4>Décorations chromées extér.</h4><p>Baguettes chrome lunettes, capot &amp; coffre. Set 8 pièces, pose adhésive.</p><div class="cat-card-bottom"><span class="cat-price">109<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-011" data-name="Décorations chromées extérieur" data-price="109">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-shield-halved cat-card-icon"></i></div><div class="cat-card-body"><h4>Protection pare-chocs arr.</h4><p>Plaque inox anti-rayures coffre. Design sport. Installation 15 min.</p><div class="cat-card-bottom"><span class="cat-price">89<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="EXT-012" data-name="Protection pare-chocs arrière" data-price="89">+ Panier</button></div></div></article>
+                        </div>
+                    </div>
+
+                    <!-- RECHARGE -->
+                    <div class="cat-content-block" data-cat="recharge" data-sub="all" hidden>
+                        <div class="cat-grid">
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-plug cat-card-icon"></i></div><div class="cat-card-body"><h4>Câble Type 2 7,4 kW — 6m</h4><p>Recharge rapide Type 2 → Type 2, 32A, IP65. Gaine anti-torsion.</p><div class="cat-card-bottom"><span class="cat-price">89<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-001" data-name="Câble Type 2 7,4 kW — 6m" data-price="89">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-bolt cat-card-icon"></i></div><div class="cat-card-body"><h4>Câble CCS DC Rapide</h4><p>CCS Combo 2 pour DC rapide jusqu'à 150 kW, 5m, certifié CE.</p><div class="cat-card-bottom"><span class="cat-price">149<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-002" data-name="Câble CCS DC Rapide" data-price="149">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-plug-circle-bolt cat-card-icon"></i></div><div class="cat-card-body"><h4>Câble T2 / prise domestique</h4><p>Mode 2 pour prise domestique. Sécurité EVSE intégrée, 6m, 10A.</p><div class="cat-card-bottom"><span class="cat-price">69<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-003" data-name="Câble T2 vers prise domestique" data-price="69">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-charging-station cat-card-icon"></i></div><div class="cat-card-body"><h4>Wallbox 11 kW connectée</h4><p>Borne murale triphasée 11 kW, Wi-Fi, app, compteur d'énergie.</p><div class="cat-card-bottom"><span class="cat-price">799<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-004" data-name="Wallbox 11 kW connectée" data-price="799">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-battery-full cat-card-icon"></i></div><div class="cat-card-body"><h4>Borne portable 3,7 kW</h4><p>Type 2, 3,7 kW, prise EF domestique. Compact 4,2 kg.</p><div class="cat-card-bottom"><span class="cat-price">229<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-005" data-name="Borne portable 3,7 kW" data-price="229">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-arrow-right-arrow-left cat-card-icon"></i></div><div class="cat-card-body"><h4>Adaptateur CCS / CHAdeMO</h4><p>Multi-standard. Compatible Ionity, Fastned &amp; Lidl Charge.</p><div class="cat-card-bottom"><span class="cat-price">119<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-006" data-name="Adaptateur CCS / CHAdeMO" data-price="119">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-briefcase cat-card-icon"></i></div><div class="cat-card-body"><h4>Sac transport câble premium</h4><p>Étanche, fermeture renforcée, poignées. Rangement complet.</p><div class="cat-card-bottom"><span class="cat-price">59<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-007" data-name="Sac de transport câble premium" data-price="59">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-shield cat-card-icon"></i></div><div class="cat-card-body"><h4>Protection prise de charge</h4><p>Capuchon anti-poussière &amp; anti-eau pour prise Type 2. Lot de 2.</p><div class="cat-card-bottom"><span class="cat-price">39<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-008" data-name="Protection prise de charge (lot 2)" data-price="39">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-industry cat-card-icon"></i></div><div class="cat-card-body"><h4>Wallbox 22 kW pro triphasée</h4><p>22 kW, RFID, gestion de charge, API ouverte. Domicile ou entreprise.</p><div class="cat-card-bottom"><span class="cat-price">1190<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-009" data-name="Wallbox 22 kW pro triphasée" data-price="1190">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-arrows-left-right cat-card-icon"></i></div><div class="cat-card-body"><h4>Câble T2/T2 10m rallonge</h4><p>Extra-long 10 m pour garages profonds, 32A, IP65.</p><div class="cat-card-bottom"><span class="cat-price">119<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-010" data-name="Câble T2 / T2 10m rallonge" data-price="119">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-plug-circle-check cat-card-icon"></i></div><div class="cat-card-body"><h4>Adaptateur Schuko mobile</h4><p>Schuko → Type 2 pour recharge d'appoint, 2,3 kW, 10A.</p><div class="cat-card-bottom"><span class="cat-price">49<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-011" data-name="Adaptateur Schuko mobile" data-price="49">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-hand-holding cat-card-icon"></i></div><div class="cat-card-body"><h4>Support câble mural garage</h4><p>Crochet enrouleur avec verrouillage. Support universel.</p><div class="cat-card-bottom"><span class="cat-price">29<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="REC-012" data-name="Support câble mural garage" data-price="29">+ Panier</button></div></div></article>
+                        </div>
+                    </div>
+
+                    <!-- INTÉRIEUR & QUOTIDIEN -->
+                    <div class="cat-content-block" data-cat="interieur" data-sub="all" hidden>
+                        <div class="cat-grid">
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-road cat-card-icon"></i></div><div class="cat-card-body"><h4>Tapis de sol premium</h4><p>Sur-mesure toutes saisons. Antidérapant, rebords hauts anti-projection.</p><div class="cat-card-bottom"><span class="cat-price">89<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-001" data-name="Tapis de sol premium" data-price="89">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-box cat-card-icon"></i></div><div class="cat-card-body"><h4>Protection coffre bac</h4><p>Thermoformé sur-mesure. Anti-glissement, imperméable.</p><div class="cat-card-bottom"><span class="cat-price">119<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-002" data-name="Protection coffre bac" data-price="119">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-door-open cat-card-icon"></i></div><div class="cat-card-body"><h4>Seuils de porte lumineux</h4><p>Inox brossé rétroéclairé. Set 4 pièces, alimentation d'origine.</p><div class="cat-card-bottom"><span class="cat-price">149<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-003" data-name="Seuils de porte lumineux" data-price="149">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-wallet cat-card-icon"></i></div><div class="cat-card-body"><h4>Rangement console cuir</h4><p>Organiseur multifonction cuir recyclé. Phone, cartes, clés.</p><div class="cat-card-bottom"><span class="cat-price">69<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-004" data-name="Rangement console cuir" data-price="69">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-key cat-card-icon"></i></div><div class="cat-card-body"><h4>Housse de clé anti-RFID</h4><p>Cuir véritable anti-RFID. Compatible toutes télécommandes, 3 coloris.</p><div class="cat-card-bottom"><span class="cat-price">39<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-005" data-name="Housse de clé anti-RFID" data-price="39">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-eye-slash cat-card-icon"></i></div><div class="cat-card-body"><h4>Écran anti-espion</h4><p>Filtre polarisé 180° écran central. Anti-reflet, pose sans bulles.</p><div class="cat-card-bottom"><span class="cat-price">199<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-006" data-name="Écran anti-espion" data-price="199">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-sun cat-card-icon"></i></div><div class="cat-card-body"><h4>Pare-soleil magnétique</h4><p>Sur-mesure magnétique. Protection UV 99%, montage en 5 sec.</p><div class="cat-card-bottom"><span class="cat-price">79<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-007" data-name="Pare-soleil magnétique" data-price="79">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-chair cat-card-icon"></i></div><div class="cat-card-body"><h4>Housses de siège premium</h4><p>Éco-responsable respirant. Sur-mesure, compatible airbags latéraux.</p><div class="cat-card-bottom"><span class="cat-price">289<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-008" data-name="Housses de siège premium" data-price="289">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-network-wired cat-card-icon"></i></div><div class="cat-card-body"><h4>Filet séparation coffre</h4><p>Élastique rétractable pour sécuriser les objets. Fixation rapide.</p><div class="cat-card-bottom"><span class="cat-price">49<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-009" data-name="Filet séparation coffre" data-price="49">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-lightbulb cat-card-icon"></i></div><div class="cat-card-body"><h4>Éclairage LED ambiance RGB</h4><p>Ruban LED 16 M couleurs. App smartphone. Compatible CarPlay.</p><div class="cat-card-bottom"><span class="cat-price">189<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-010" data-name="Éclairage LED ambiance RGB" data-price="189">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-mobile-screen cat-card-icon"></i></div><div class="cat-card-body"><h4>Chargeur à induction 15W</h4><p>Qi 2.0 compatible MagSafe. Support console, charge auto à la montée.</p><div class="cat-card-bottom"><span class="cat-price">89<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-011" data-name="Chargeur à induction 15W" data-price="89">+ Panier</button></div></div></article>
+                            <article class="cat-card"><div class="cat-card-media"><i class="fa-solid fa-scroll cat-card-icon"></i></div><div class="cat-card-body"><h4>Cache-bagages enrouleur</h4><p>Store enrouleur coffre, résistant et discret. Montage 2 min sans outils.</p><div class="cat-card-bottom"><span class="cat-price">139<span class="cat-price-cents">,00 €</span></span><button class="cat-buy-btn cat-acc-add" data-add-acc="INT-012" data-name="Cache-bagages enrouleur" data-price="139">+ Panier</button></div></div></article>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+        </section>
 
-                <button id="form-submit-btn" type="submit"
-                    class="w-full btn-premium py-6 rounded-2xl font-black uppercase text-xs tracking-[0.3em]">
-                    Envoyer le message
-                </button>
-            </form>
-        </div>
-    </section>
+        <!-- ============================================================
+             6. FAQ
+             ============================================================ -->
+        <section id="faq">
+            <h2 class="reveal">Questions fréquentes</h2>
+            <p class="faq-subtitle reveal">Tout ce que vous devez savoir</p>
+            <div class="faq-container">
+                <details>
+                    <summary>Vos écrans sont-ils compatibles avec toutes les marques ?</summary>
+                    <p><strong>Oui, sans exception.</strong> Nos écrans plafonniers 17.3", appuie-tête 10.1" et écrans passager s'installent sur n'importe quel véhicule, toutes marques et motorisations confondues. L'installation est entièrement sur-mesure : aucune découpe de faisceau, aucune modification irréversible. La garantie constructeur reste intacte.</p>
+                </details>
+                <details>
+                    <summary>Sur quelles marques êtes-vous spécialisés pour les accessoires ?</summary>
+                    <p>Nous sommes <strong>experts</strong> sur Tesla, BYD, XPeng, et <strong>spécialistes</strong> sur Nio/Zeekr et Leapmotor. Nous proposons aussi des accessoires sur-mesure pour BMW, Mercedes-Benz, Range Rover, Renault, Peugeot et MG Motor : tapis 3D logotés, films de protection, habillages console, seuils LED, films PPF, protections coffre et dashcams intégrées.</p>
+                </details>
+                <details>
+                    <summary>L'installation préserve-t-elle la garantie constructeur ?</summary>
+                    <p>Oui, <strong>100% Plug &amp; Play</strong>. Toutes nos installations sont réalisées sans découpe de faisceau électrique. La garantie constructeur reste entièrement intacte. Nous travaillons exclusivement avec des connecteurs certifiés et des fixations sur-mesure non destructives.</p>
+                </details>
+                <details>
+                    <summary>Comment se passe une installation en concession ?</summary>
+                    <p>Vous choisissez vos services dans le catalogue, votre concession la plus proche, payez l'acompte qui valide votre RDV. Le jour J vous déposez votre véhicule à la concession sélectionnée. <strong>Entre 2 heures et 1 journée</strong> selon la prestation. Un véhicule de courtoisie peut être mis à disposition sur demande.</p>
+                </details>
+                <details>
+                    <summary>Êtes-vous spécialisés sur les marques chinoises (BYD, XPeng, Nio, Zeekr) ?</summary>
+                    <p>Oui, nous sommes l'un des rares installateurs en France maîtrisant parfaitement les architectures électroniques <strong>BYD, XPeng, Nio, Zeekr et Leapmotor</strong>. Nos techniciens sont formés spécifiquement sur ces véhicules pour garantir une intégration parfaite.</p>
+                </details>
+                <details>
+                    <summary>Proposez-vous un service à domicile ?</summary>
+                    <p>Oui, <strong>sur demande pour les prestations supérieures à 1 500 €</strong>. Contactez-nous pour organiser un déplacement à votre adresse ou lieu de travail.</p>
+                </details>
+                <details>
+                    <summary>Quels moyens de paiement acceptez-vous ?</summary>
+                    <p>Nous acceptons la <strong>carte bancaire (via Stripe)</strong>, le virement et le <strong>paiement en 3× sans frais</strong> à partir de 500 €.</p>
+                </details>
+                <details>
+                    <summary>Que se passe-t-il si je revends mon véhicule ?</summary>
+                    <p>Tous nos accessoires peuvent être <strong>démontés sans laisser de trace</strong>, ou conservés comme valeur ajoutée à la revente. L'installation Plug &amp; Play garantit une réversibilité totale.</p>
+                </details>
+            </div>
+        </section>
 
+        <!-- ============================================================
+             9. AVIS CLIENTS (NOUVEAU)
+             ============================================================ -->
+        <section id="avis" class="cat-section reviews-section">
+            <div class="cat-section-inner">
+                <header class="cat-section-header">
+                    <span class="cat-section-tag cat-section-tag-gold"><i class="fa-solid fa-star mr-2"></i>Avis clients</span>
+                    <h2>Ils nous font <span class="gradient-text">confiance.</span></h2>
+                    <p>Les retours de nos installations · Note moyenne 5★</p>
+                </header>
+
+                <div class="reviews-grid">
+                    <p class="reviews-loading">Chargement des avis…</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
     <footer class="py-20 px-6 border-t border-white/5 bg-[#050505]">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
             <div>
-                <div class="text-3xl font-black mb-6 italic uppercase tracking-tighter">XPERIENCE <span
-                        class="text-gray-600">VISION</span></div>
-                <p class="text-gray-500 text-xs uppercase tracking-[0.2em] max-w-sm leading-loose font-bold">
-                    L'excellence digitale embarquée. <br>Installation premium pour véhicules d'exception.
-                </p>
+                <div class="text-3xl font-black mb-6 italic uppercase tracking-tighter">XPERIENCE <span class="text-gray-600">VISION</span></div>
+                <p class="text-gray-500 text-xs uppercase tracking-[0.2em] max-w-sm leading-loose font-bold">L'excellence digitale embarquée. <br>Installation premium pour véhicules d'exception.</p>
             </div>
             <div class="grid grid-cols-2 gap-16 uppercase text-[10px] font-black tracking-[0.3em] text-gray-500">
                 <div class="flex flex-col space-y-6">
                     <span class="text-white border-b border-white/10 pb-3">Navigation</span>
-                    <a href="#solutions" class="hover:text-white transition">La Gamme</a>
-                    <a href="#pros" class="hover:text-white transition">Concessions</a>
-                    <a href="#packs" class="hover:text-white transition">Packs</a>
+                    <a href="#installation" class="hover:text-white transition">Services</a>
+                    <a href="#accessoires" class="hover:text-white transition">Produits</a>
                     <a href="#configurateur" class="hover:text-white transition">Configurateur</a>
-                    <a href="realisations.html" class="hover:text-white transition">Réalisations</a>
-                    <a href="#contact" class="hover:text-white transition">Contact</a>
+                    <a href="histoire.html" class="hover:text-white transition">Notre Histoire</a>
+                    <a href="contact.html" class="hover:text-white transition">Contact</a>
                 </div>
                 <div class="flex flex-col space-y-6">
                     <span class="text-white border-b border-white/10 pb-3">Légal</span>
                     <a href="mentions-legales.html" class="hover:text-white transition">Mentions Légales</a>
                     <a href="cgv.html" class="hover:text-white transition">CGV</a>
+                    <a href="politique-confidentialite.html" class="hover:text-white transition">Confidentialité</a>
                 </div>
             </div>
         </div>
@@ -636,16 +524,187 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/33766306193?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20vos%20services."
-        class="whatsapp-float" target="_blank" rel="noopener" aria-label="Nous contacter sur WhatsApp">
+    <a href="https://wa.me/33766306193?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20vos%20services." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Nous contacter sur WhatsApp">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
             <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.122 1.535 5.854L.057 23.885a.5.5 0 0 0 .611.61l6.198-1.494A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.017-1.378l-.36-.214-3.724.898.934-3.614-.235-.372A9.818 9.818 0 1 1 12 21.818z" />
         </svg>
     </a>
 
-    <div class="grain-overlay" aria-hidden="true"></div>
-    <script src="script.js"></script>
-</body>
+    <!-- DRAWER PANIER -->
+    <aside id="cart-drawer" class="cart-drawer" aria-hidden="true">
+        <div class="cart-drawer-overlay"></div>
+        <div class="cart-drawer-panel" role="dialog" aria-labelledby="cart-drawer-title">
+            <header class="cart-drawer-header">
+                <h2 id="cart-drawer-title">
+                    <i class="cart-drawer-icon fa-solid fa-bag-shopping"></i>
+                    <span class="cart-drawer-title-text">Votre panier</span>
+                </h2>
+                <button class="cart-drawer-close" aria-label="Fermer">&times;</button>
+            </header>
+            <div class="cart-drawer-body">
+                <ul class="cart-drawer-list" aria-live="polite"></ul>
+                <p class="cart-drawer-empty" hidden>Votre panier est vide.</p>
+            </div>
+            <footer class="cart-drawer-footer">
+                <div class="cart-drawer-breakdown" data-cart-breakdown hidden>
+                    <div class="cart-drawer-row">
+                        <span>Sous-total HT</span>
+                        <span data-cart-subtotal-ht>0,00 €</span>
+                    </div>
+                    <div class="cart-drawer-row">
+                        <span>TVA 20 %</span>
+                        <span data-cart-tva>0,00 €</span>
+                    </div>
+                    <div class="cart-drawer-row cart-drawer-row-shipping" data-cart-shipping hidden>
+                        <span><i class="fa-solid fa-truck-fast mr-2"></i>Livraison</span>
+                        <span class="cart-drawer-free">Offerte</span>
+                    </div>
+                </div>
+                <div class="cart-drawer-total">
+                    <span class="cart-drawer-total-label">Total TTC</span>
+                    <span class="cart-drawer-total-value">0,00 €</span>
+                </div>
+                <button class="cart-drawer-cta">
+                    <span class="cart-drawer-cta-text">Commander</span>
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+                <p class="cart-drawer-note"></p>
+            </footer>
+        </div>
+    </aside>
 
+    <!-- MODAL 1 — FORMULAIRE PRÉ-COMMANDE -->
+    <div id="checkout-form-modal" class="xv-modal" role="dialog" aria-labelledby="checkout-form-title" aria-modal="true" aria-hidden="true">
+        <div class="xv-modal-overlay" data-close></div>
+        <div class="xv-modal-card">
+            <button class="xv-modal-close" aria-label="Fermer" data-close>&times;</button>
+            <header class="xv-modal-header">
+                <span class="xv-modal-eyebrow"><i class="fa-solid fa-user-pen mr-2"></i>Vos informations</span>
+                <h3 id="checkout-form-title">Quelques infos avant de finaliser</h3>
+                <p class="xv-modal-sub">Ces informations nous servent à préparer votre commande.</p>
+            </header>
+            <form id="checkout-form" class="xv-form" novalidate>
+                <div class="xv-form-row">
+                    <label class="xv-form-field">
+                        <span>Prénom *</span>
+                        <input type="text" name="prenom" autocomplete="given-name" required>
+                    </label>
+                    <label class="xv-form-field">
+                        <span>Nom *</span>
+                        <input type="text" name="nom" autocomplete="family-name" required>
+                    </label>
+                </div>
+                <label class="xv-form-field">
+                    <span>Adresse email *</span>
+                    <input type="email" name="email" autocomplete="email" required>
+                </label>
+                <label class="xv-form-field">
+                    <span>Téléphone *</span>
+                    <input type="tel" name="telephone" autocomplete="tel" required>
+                </label>
+                <label class="xv-form-field">
+                    <span>Adresse *</span>
+                    <input type="text" name="adresse" autocomplete="street-address" placeholder="N° et rue" required>
+                </label>
+                <div class="xv-form-row xv-form-row-cp">
+                    <label class="xv-form-field">
+                        <span>Code postal *</span>
+                        <input type="text" name="code_postal" autocomplete="postal-code" placeholder="75001" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required>
+                    </label>
+                    <label class="xv-form-field">
+                        <span>Ville *</span>
+                        <input type="text" name="ville" autocomplete="address-level2" placeholder="Paris" required>
+                    </label>
+                </div>
+
+                <!-- Groupe conditionnel SERVICES -->
+                <fieldset class="xv-form-services-group" data-services-group hidden>
+                    <legend><i class="fa-solid fa-car mr-2"></i>Votre véhicule</legend>
+                    <div class="xv-form-row">
+                        <label class="xv-form-field">
+                            <span>Marque *</span>
+                            <input type="text" name="marque" placeholder="Ex : Tesla, BYD, BMW…" data-services-required>
+                        </label>
+                        <label class="xv-form-field">
+                            <span>Modèle *</span>
+                            <input type="text" name="modele" placeholder="Ex : Model Y, Seal…" data-services-required>
+                        </label>
+                    </div>
+                    <label class="xv-form-field">
+                        <span>Plaque d'immatriculation *</span>
+                        <input type="text" name="immatriculation" placeholder="AA-123-AA" maxlength="12" data-services-required>
+                    </label>
+                    <fieldset class="xv-lieu-group">
+                        <legend>Lieu du RDV *</legend>
+                        <div class="xv-lieu-options">
+                            <label class="xv-lieu-option">
+                                <input type="radio" name="lieu_rdv" value="domicile" data-services-required checked>
+                                <div class="xv-lieu-option-inner">
+                                    <i class="fa-solid fa-house"></i>
+                                    <strong>À mon domicile</strong>
+                                    <span>À l'adresse renseignée ci-dessus</span>
+                                </div>
+                            </label>
+                            <label class="xv-lieu-option">
+                                <input type="radio" name="lieu_rdv" value="garage" data-services-required>
+                                <div class="xv-lieu-option-inner">
+                                    <i class="fa-solid fa-warehouse"></i>
+                                    <strong>Garage XPERIENCE VISION</strong>
+                                    <span>10 av. Fridingen · 77100 Nanteuil-lès-Meaux</span>
+                                </div>
+                            </label>
+                        </div>
+                    </fieldset>
+                </fieldset>
+
+                <p class="xv-form-error" data-form-error hidden></p>
+                <button type="submit" class="xv-form-submit">
+                    <span data-form-submit-label>Continuer</span>
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+                <p class="xv-form-note">
+                    <i class="fa-solid fa-lock mr-2"></i>Vos données sont chiffrées et protégées (RGPD).
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2 — PRISE DE RDV CAL.COM -->
+    <div id="booking-modal" class="xv-modal xv-modal-wide" role="dialog" aria-labelledby="booking-title" aria-modal="true" aria-hidden="true">
+        <div class="xv-modal-overlay" data-close></div>
+        <div class="xv-modal-card">
+            <button class="xv-modal-close" aria-label="Fermer" data-close>&times;</button>
+            <header class="xv-modal-header">
+                <span class="xv-modal-eyebrow xv-modal-eyebrow-gold"><i class="fa-solid fa-calendar-check mr-2"></i>Étape 2 · Créneau</span>
+                <h3 id="booking-title">Choisissez votre créneau</h3>
+                <p class="xv-modal-sub">Votre RDV sera validé dès le paiement.</p>
+            </header>
+            <div id="booking-cal-mount" class="xv-booking-mount"></div>
+            <p class="xv-modal-note"><i class="fa-solid fa-clock mr-2"></i>Une fois le créneau sélectionné, vous aurez 1h pour finaliser le paiement.</p>
+        </div>
+    </div>
+
+    <!-- MODAL 3 — PAIEMENT STRIPE EMBEDDED -->
+    <div id="stripe-modal" class="xv-modal xv-modal-wide" role="dialog" aria-labelledby="stripe-title" aria-modal="true" aria-hidden="true">
+        <div class="xv-modal-overlay" data-close></div>
+        <div class="xv-modal-card">
+            <button class="xv-modal-close" aria-label="Fermer" data-close>&times;</button>
+            <header class="xv-modal-header">
+                <span class="xv-modal-eyebrow"><i class="fa-solid fa-credit-card mr-2"></i>Paiement sécurisé</span>
+                <h3 id="stripe-title">Finalisez votre commande</h3>
+            </header>
+            <div id="stripe-checkout-mount" class="xv-stripe-mount"></div>
+            <p class="xv-modal-note"><i class="fa-solid fa-shield-halved mr-2"></i>Paiement sécurisé par Stripe · Cartes CB, Visa, Mastercard.</p>
+        </div>
+    </div>
+
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="script.js"></script>
+    <script src="catalogue.js"></script>
+    <script src="js/concessions.js"></script>
+    <script src="js/reviews.js"></script>
+</body>
 </html>

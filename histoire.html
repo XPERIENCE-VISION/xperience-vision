@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notre Histoire | XPERIENCE VISION</title>
+    <meta name="description" content="L'histoire et l'expertise XPERIENCE VISION : intégrateur digital automobile premium. Nos chiffres, nos partenariats concessions et nos réalisations.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="XPERIENCE VISION">
+    <meta property="og:title" content="Notre Histoire | XPERIENCE VISION">
+    <meta property="og:description" content="Intégrateur digital automobile premium — installations, partenariats concessions, expertise marques chinoises.">
+    <meta property="og:image" content="https://xperiencevision.fr/img/hero-realisations.jpeg">
+    <meta property="og:url" content="https://xperiencevision.fr/histoire.html">
+    <meta property="og:locale" content="fr_FR">
+    <link rel="canonical" href="https://xperiencevision.fr/histoire.html">
+
+    <link rel="stylesheet" href="dist/tailwind.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="catalogue.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Sections à hauteur naturelle (pas plein écran) */
+        body.page-histoire section {
+            min-height: unset;
+            height: auto;
+            display: block;
+            justify-content: unset;
+        }
+
+        /* Hero histoire */
+        .histoire-hero {
+            position: relative;
+            padding: 9rem 1.5rem 5rem;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .histoire-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.05), transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(191, 149, 63, 0.05), transparent 60%),
+                #0a0a0a;
+            z-index: 0;
+        }
+
+        .histoire-hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .histoire-hero-eyebrow {
+            display: inline-block;
+            font-size: 11px;
+            letter-spacing: 0.4em;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .histoire-hero-title {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .histoire-hero-sub {
+            color: #a0a0a0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            line-height: 2.2;
+            font-weight: 600;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Chiffres société */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: white;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value-small {
+            font-size: 0.6em;
+            color: #888;
+            font-weight: 700;
+            margin-left: 0.2rem;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-weight: 800;
+        }
+
+        .stat-pending {
+            color: #ffb84d;
+            font-style: italic;
+        }
+
+        /* Galerie */
+        .gallery-item {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            cursor: pointer;
+            background: #1a1a1a;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .gallery-item:hover img { transform: scale(1.05); }
+
+        .gallery-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.85));
+            display: flex;
+            align-items: flex-end;
+            padding: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .overlay { opacity: 1; }
+
+        .catalogue-track {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.2) transparent;
+        }
+
+        .catalogue-card {
+            flex: 0 0 auto;
+            width: 280px;
+            border-radius: 1rem;
+            overflow: hidden;
+            cursor: pointer;
+            background: #1a1a1a;
+            scroll-snap-align: start;
+            transition: transform 0.3s ease;
+        }
+
+        .catalogue-card:hover { transform: translateY(-4px); }
+
+        .catalogue-card img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+        }
+
+        @media (min-width: 768px) {
+            .catalogue-card { width: 320px; }
+            .catalogue-card img { height: 440px; }
+        }
+
+        /* Lightbox */
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        #lightbox.open { display: flex; }
+
+        #lightbox img {
+            max-height: 90vh;
+            max-width: 90vw;
+            border-radius: 1rem;
+            object-fit: contain;
+            box-shadow: 0 0 80px rgba(0, 0, 0, 0.8);
+        }
+
+        #lightbox button {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            backdrop-filter: blur(8px);
+        }
+
+        #lightbox button:hover { background: rgba(255, 255, 255, 0.18); }
+        #lightbox-close { top: 1.25rem; right: 1.25rem; }
+        #lightbox-prev { top: 50%; left: 1.5rem; transform: translateY(-50%); }
+        #lightbox-next { top: 50%; right: 1.5rem; transform: translateY(-50%); }
+
+        #lightbox-counter {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        section[id] { scroll-margin-top: 100px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ============================================================
+           SOUS-MENU ONGLETS (Notre histoire / Notre gamme / Partenariats)
+           ============================================================ */
+        .histoire-tabs {
+            position: sticky;
+            top: 64px;
+            z-index: 40;
+            background: rgba(8, 8, 8, 0.95);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 0.6rem 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .histoire-tabs { top: 56px; padding: 0.5rem 0.5rem; }
+        }
+
+        .histoire-tabs-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .histoire-tabs-inner::-webkit-scrollbar { display: none; }
+
+        .histoire-tab {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.2rem;
+            background: transparent;
+            border: 1px solid transparent;
+            color: #888;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            cursor: pointer;
+            transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+            min-height: 40px;
+        }
+
+        @media (hover: hover) {
+            .histoire-tab:hover {
+                color: #ccc;
+                background: rgba(255, 255, 255, 0.04);
+            }
+        }
+
+        .histoire-tab.active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .histoire-tab i { font-size: 0.85em; }
+
+        @media (max-width: 540px) {
+            .histoire-tab { padding: 0.55rem 0.9rem; letter-spacing: 0.12em; font-size: 10px; }
+            .histoire-tab span { display: none; }
+        }
+
+        .histoire-panel[hidden] { display: none; }
+
+        /* ============================================================
+           CHAPITRES NARRATIFS
+           ============================================================ */
+        .chap-section {
+            padding: 5rem 1.5rem;
+        }
+        .chap-dark { background: #0a0a0a; }
+        .chap-darker {
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .chap-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .chap-eyebrow {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #888;
+            padding: 0.45rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            margin-bottom: 1.5rem;
+        }
+
+        .chap-eyebrow-gold {
+            color: #fcf6ba;
+            border-color: rgba(191, 149, 63, 0.3);
+            background: rgba(191, 149, 63, 0.05);
+        }
+
+        .chap-title {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            color: #fff;
+            margin: 0 0 2rem;
+        }
+
+        .chap-body {
+            text-align: left;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .chap-body p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.85;
+            margin: 0 0 1.2rem;
+        }
+
+        .chap-body p strong {
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .chap-body-tight {
+            margin-top: -0.5rem;
+        }
+
+        .chap-punchline {
+            margin: 2.5rem auto;
+            padding: 0 1rem;
+            font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+            font-weight: 800;
+            font-style: italic;
+            line-height: 1.3;
+            color: #ddd;
+            max-width: 700px;
+            letter-spacing: -0.01em;
+            border: none;
+        }
+
+        .chap-punchline-gold {
+            color: #fcf6ba;
+        }
+
+        .chap-closing {
+            margin-top: 1.5rem;
+            color: #fff;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+
+        .chap-closing strong {
+            color: #fff;
+        }
+
+        /* Features (listes d'atouts avec icônes) */
+        .chap-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+            max-width: 720px;
+            margin: 2rem auto;
+            text-align: left;
+        }
+
+        @media (min-width: 768px) {
+            .chap-features { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .chap-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 0.9rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0.8rem;
+            color: #ddd;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .chap-feature i {
+            color: #fcf6ba;
+            font-size: 1rem;
+            margin-top: 0.15rem;
+        }
+
+        /* Promise (bloc garantie/SAV) */
+        .chap-promise {
+            margin: 2.5rem auto 0;
+            max-width: 720px;
+            padding: 2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            text-align: center;
+        }
+
+        .chap-promise h3 {
+            font-size: 0.85rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #fcf6ba;
+            margin: 0 0 1rem;
+        }
+
+        .chap-promise p {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin: 0 0 1.5rem;
+        }
+
+        .chap-promise-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .chap-promise-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .chap-promise-grid > div {
+            padding: 0.8rem 0.6rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0.7rem;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .chap-promise-grid i {
+            font-size: 1rem;
+            color: #fcf6ba;
+        }
+
+        /* Stats (bloc statistiques 195, ×3-5, etc.) */
+        .chap-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            max-width: 780px;
+            margin: 2.5rem auto;
+        }
+
+        @media (min-width: 640px) {
+            .chap-stats { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .chap-stat {
+            padding: 1.5rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .chap-stat-value {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            color: #fff;
+            line-height: 1;
+            margin: 0 0 0.5rem;
+        }
+
+        .chap-stat-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #888;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .chap-brands {
+            margin: 2rem auto 0;
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 700;
+            max-width: 780px;
+            line-height: 2.2;
+        }
+
+        .chap-brands em {
+            color: #fcf6ba;
+            font-style: italic;
+            font-weight: 900;
+        }
+
+        /* Business stats (réseaux) */
+        .chap-business-stats {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            max-width: 780px;
+            margin: 2.5rem auto 0;
+        }
+
+        @media (min-width: 640px) {
+            .chap-business-stats { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .chap-bstat {
+            padding: 1.8rem 1rem;
+            background: linear-gradient(180deg, rgba(191, 149, 63, 0.08), rgba(191, 149, 63, 0.02));
+            border: 1px solid rgba(191, 149, 63, 0.25);
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .chap-bstat-value {
+            font-size: clamp(2.2rem, 4.5vw, 3rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            color: #fcf6ba;
+            line-height: 1;
+            margin: 0 0 0.5rem;
+        }
+
+        .chap-bstat-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #ccc;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Signature outro */
+        .chap-signature {
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .chap-signature-logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .chap-signature-logo span {
+            color: #888;
+            font-weight: 300;
+        }
+
+        .chap-signature-tag {
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 700;
+            line-height: 1.9;
+            margin: 0 0 1.5rem;
+        }
+
+        .chap-signature-baseline {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-weight: 900;
+            font-style: italic;
+            color: #fff;
+            letter-spacing: -0.01em;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-[#0a0a0a] text-white page-histoire">
+
+    <nav id="navbar" class="fixed w-full z-50 px-6 py-4 flex justify-between items-center card-glass transition-all duration-300">
+        <div class="text-xl font-extrabold tracking-tighter italic uppercase">
+            <a href="index.html" class="hover:text-gray-400 transition">XPERIENCE<span class="text-gray-500 font-light">VISION</span></a>
+        </div>
+        <div class="hidden md:flex space-x-10 text-[12px] uppercase font-bold tracking-[0.2em]">
+            <a href="index.html#installation" class="hover:text-gray-400 transition">Catalogue</a>
+            <a href="histoire.html" class="hover:text-gray-400 transition">Notre Histoire</a>
+            <a href="contact.html" class="hover:text-gray-400 transition">Contact</a>
+        </div>
+        <div class="flex items-center space-x-3">
+            <button class="nav-cart-btn" data-open-cart aria-label="Ouvrir le panier">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="nav-cart-label">Panier</span>
+                <span class="nav-cart-count" data-cart-count>0</span>
+            </button>
+            <button id="burger-btn" class="md:hidden text-white text-2xl focus:outline-none p-2" aria-label="Menu">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+        <div id="mobile-dropdown" class="absolute top-full left-0 w-full bg-[#0a0a0a] border-b border-white/10 backdrop-blur-2xl hidden flex-col p-4 space-y-4 shadow-2xl">
+            <a href="index.html#installation" class="mobile-item">Catalogue</a>
+            <a href="index.html#configurateur" class="mobile-item">Configurateur</a>
+            <a href="index.html#accessoires" class="mobile-item">Produits</a>
+            <a href="index.html#faq" class="mobile-item">FAQ</a>
+            <a href="histoire.html" class="mobile-item">Notre Histoire</a>
+            <a href="contact.html" class="mobile-item">Contact</a>
+        </div>
+    </nav>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden"></div>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="histoire-hero">
+            <picture><source srcset="img/hero-realisations.webp" type="image/webp"><img src="img/hero-realisations.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-15" loading="eager"></picture>
+            <div class="histoire-hero-inner">
+                <span class="histoire-hero-eyebrow">À propos</span>
+                <h1 class="histoire-hero-title">Qui nous<br><span class="gradient-text">sommes</span>.</h1>
+                <p class="histoire-hero-sub">
+                    XPERIENCE VISION · La révolution qui commence là où les constructeurs s'arrêtent
+                </p>
+            </div>
+        </section>
+
+        <!-- SUB-TABS -->
+        <nav class="histoire-tabs" aria-label="Sections de la page">
+            <div class="histoire-tabs-inner">
+                <button class="histoire-tab active" data-tab="histoire">
+                    <i class="fa-solid fa-book-open"></i><span>Notre histoire</span>
+                </button>
+                <button class="histoire-tab" data-tab="gamme">
+                    <i class="fa-solid fa-cubes"></i><span>Notre gamme</span>
+                </button>
+                <button class="histoire-tab" data-tab="partenariats">
+                    <i class="fa-solid fa-handshake"></i><span>Partenariats</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- PANEL : NOTRE HISTOIRE -->
+        <div class="histoire-panel active" data-panel="histoire">
+
+        <!-- CHAPITRE I -->
+        <section class="chap-section chap-dark">
+            <div class="chap-inner">
+                <span class="chap-eyebrow">I — L'ouverture</span>
+                <h2 class="chap-title">L'endroit que personne<br>n'a <span class="gradient-text">osé conquérir</span>.</h2>
+
+                <div class="chap-body">
+                    <p>Entre le moment où vous signez pour votre véhicule et celui où vous disparaissez sur la route — il y a une fenêtre. Un espace que l'industrie automobile entière a laissé vide depuis des décennies.</p>
+                    <p>Cet espace, c'est l'intérieur de votre voiture. <strong>Pas le moteur, pas la carrosserie, pas les chiffres.</strong> L'expérience. Le ressenti. Ce que vous vivez à chaque kilomètre.</p>
+                    <p>Les voitures sont devenues des chefs-d'œuvre technologiques. Et pourtant — le jour J, on vous tend des clés dans un couloir. L'intérieur de ce véhicule à 45 000 euros ressemble à celui de n'importe quel autre. Mêmes plastiques. Même absence totale de personnalité.</p>
+                </div>
+
+                <blockquote class="chap-punchline">
+                    Les constructeurs ont tout pensé — <span class="gradient-text">sauf vous.</span>
+                </blockquote>
+
+                <p class="chap-body chap-body-tight">
+                    Sauf ce que vous ressentez en montant à bord. Sauf ce que vos enfants vivent sur le siège arrière pendant deux heures d'autoroute. Sauf la fierté que vous devriez éprouver le matin en regardant votre voiture depuis le trottoir.
+                </p>
+
+                <p class="chap-closing">
+                    <strong>XPERIENCE VISION est née pour corriger cette erreur historique.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- CHAPITRE II -->
+        <section class="chap-section chap-darker">
+            <div class="chap-inner">
+                <span class="chap-eyebrow chap-eyebrow-gold">II — La promesse</span>
+                <h2 class="chap-title">Nous ne sommes pas un accessoiriste.<br><span class="gradient-text">Nous sommes une révolution embarquée.</span></h2>
+
+                <div class="chap-body">
+                    <p>Ce que nous faisons n'a pas de nom dans l'industrie — parce que personne ne l'avait fait avant. Nous prenons le véhicule le plus sophistiqué du monde. Et nous lui donnons <strong>l'intérieur qu'il méritait depuis le début.</strong></p>
+                </div>
+
+                <div class="chap-features">
+                    <div class="chap-feature"><i class="fa-solid fa-tv"></i><span>Écran 4K 17" au plafond — comme une salle de cinéma privée</span></div>
+                    <div class="chap-feature"><i class="fa-solid fa-lightbulb"></i><span>Ambiance LED qui respire avec votre humeur</span></div>
+                    <div class="chap-feature"><i class="fa-solid fa-wifi"></i><span>CarPlay sans fil qui s'active dès que vous montez</span></div>
+                    <div class="chap-feature"><i class="fa-solid fa-video"></i><span>Dashcam vision nocturne intégrée comme d'origine</span></div>
+                    <div class="chap-feature"><i class="fa-solid fa-shield"></i><span>Film PPF invisible qui protège votre carrosserie pendant des années</span></div>
+                </div>
+
+                <blockquote class="chap-punchline chap-punchline-gold">
+                    Ce n'est pas de l'accessoire.<br><span class="gradient-text">C'est de la transformation.</span>
+                </blockquote>
+
+                <div class="chap-promise">
+                    <h3>La promesse que personne d'autre ne peut faire</h3>
+                    <p>Toute cette révolution — et la garantie constructeur reste <strong>100 % intacte</strong>.</p>
+                    <div class="chap-promise-grid">
+                        <div><i class="fa-solid fa-bolt"></i>Plug &amp; Play</div>
+                        <div><i class="fa-solid fa-ban"></i>Aucune modification irréversible</div>
+                        <div><i class="fa-solid fa-shield-halved"></i>Garantie 1 an</div>
+                        <div><i class="fa-solid fa-headset"></i>SAV sous 24 h</div>
+                    </div>
+                    <p class="chap-closing">Une vraie révolution ne détruit pas ce qu'elle améliore. <strong>Elle l'élève.</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPITRE III -->
+        <section class="chap-section chap-dark">
+            <div class="chap-inner">
+                <span class="chap-eyebrow">III — L'expertise</span>
+                <h2 class="chap-title">Ce que nous avons vu<br><span class="gradient-text">avant tout le monde</span>.</h2>
+
+                <div class="chap-body">
+                    <p>Pendant que l'industrie regardait les motorisations, nous regardions les habitacles. Pendant que tout le monde ignorait les nouvelles marques chinoises — <strong>BYD, XPeng, Nio, Zeekr, Leapmotor</strong> — nous les maîtrisions déjà.</p>
+                </div>
+
+                <div class="chap-stats">
+                    <div class="chap-stat">
+                        <p class="chap-stat-value">195</p>
+                        <p class="chap-stat-label">Points de vente BYD &amp; XPeng en France</p>
+                    </div>
+                    <div class="chap-stat">
+                        <p class="chap-stat-value">×3-5</p>
+                        <p class="chap-stat-label">Investissement accessoires vs moyenne</p>
+                    </div>
+                    <div class="chap-stat">
+                        <p class="chap-stat-value">1</p>
+                        <p class="chap-stat-label">Seul intégrateur à ce niveau d'expertise</p>
+                    </div>
+                </div>
+
+                <div class="chap-body">
+                    <p>Nos techniciens sont formés spécifiquement sur ces architectures. Quand un propriétaire de BYD cherche un installateur capable de transformer son habitacle sans toucher à l'électronique de bord — <strong>il n'y en a qu'un.</strong></p>
+                </div>
+
+                <blockquote class="chap-punchline">
+                    XPERIENCE VISION.<br>Ce n'est pas un hasard. <span class="gradient-text">C'est une vision.</span>
+                </blockquote>
+
+                <p class="chap-brands">Tesla · BYD · XPeng · Nio · Zeekr · Leapmotor · BMW · Mercedes · Range Rover · <em>Toutes marques</em></p>
+            </div>
+        </section>
+
+        <!-- CHAPITRE IV -->
+        <section class="chap-section chap-darker">
+            <div class="chap-inner">
+                <span class="chap-eyebrow chap-eyebrow-gold">IV — L'expérience</span>
+                <h2 class="chap-title">L'expérience commence<br><span class="gradient-text">avant le premier kilomètre</span>.</h2>
+
+                <div class="chap-body">
+                    <p>Le jour de votre livraison, vous ne recevez pas des clés. Vous recevez <strong>une boîte noire et or</strong> — avec vos premiers accessoires XV, une carte manuscrite, un QR code vers une vidéo d'activation créée pour vous.</p>
+                    <p>L'unboxing d'un véhicule devrait ressembler à celui d'un iPhone. Cette sensation que quelqu'un a pensé à chaque détail avant vous. Que vous n'avez pas acheté un produit. <strong>Que vous êtes entré dans un univers.</strong></p>
+                </div>
+
+                <blockquote class="chap-punchline chap-punchline-gold">
+                    Nous y avons <span class="gradient-text">pensé</span>.
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- CHAPITRE V — RÉSEAUX -->
+        <section class="chap-section chap-dark">
+            <div class="chap-inner">
+                <span class="chap-eyebrow">V — Pour les réseaux</span>
+                <h2 class="chap-title">Ce que nous offrons<br><span class="gradient-text">aux réseaux</span>.</h2>
+
+                <div class="chap-body">
+                    <p>Nous apportons aux groupes de distribution un <strong>centre de profit clé en main</strong> — sans investissement, sans stock, sans risque. Nos techniciens interviennent en concession. Nos équipes forment vos conseillers. Nos campagnes co-brandées sont prêtes à poster, douze fois par an.</p>
+                </div>
+
+                <div class="chap-features">
+                    <div class="chap-feature"><i class="fa-solid fa-box-open"></i><span>Coffret de livraison XV inclus dans chaque véhicule neuf</span></div>
+                    <div class="chap-feature"><i class="fa-solid fa-wrench"></i><span>Pack installation avant livraison</span></div>
+                    <div class="chap-feature"><i class="fa-solid fa-chalkboard-user"></i><span>Formation commerciale à la vente par le désir</span></div>
+                    <div class="chap-feature"><i class="fa-solid fa-chart-line"></i><span>Tableau de bord partenaire — commissions en temps réel</span></div>
+                </div>
+
+                <div class="chap-business-stats">
+                    <div class="chap-bstat">
+                        <p class="chap-bstat-value">+60 %</p>
+                        <p class="chap-bstat-label">Taux d'équipement observé</p>
+                    </div>
+                    <div class="chap-bstat">
+                        <p class="chap-bstat-value">×3</p>
+                        <p class="chap-bstat-label">Conversion sur les options premium</p>
+                    </div>
+                    <div class="chap-bstat">
+                        <p class="chap-bstat-value">0 €</p>
+                        <p class="chap-bstat-label">Investissement requis</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OUTRO -->
+        <section class="chap-section chap-darker chap-outro">
+            <div class="chap-inner">
+                <span class="chap-eyebrow chap-eyebrow-gold">Pour ceux qui refusent l'ordinaire</span>
+                <h2 class="chap-title">Un véhicule n'est pas un outil.<br><span class="gradient-text">C'est un territoire.</span></h2>
+
+                <div class="chap-body">
+                    <p>Il existe deux types de personnes. Celles qui achètent une voiture. Et celles qui décident de vivre chaque trajet.</p>
+                    <p>XPERIENCE VISION s'adresse aux secondes. Celles qui savent qu'un véhicule n'est pas un outil de déplacement — c'est un territoire. Un espace de vie. Un endroit où les souvenirs se fabriquent, où on arrive différent de comment on est parti.</p>
+                    <p><strong>Ces personnes-là méritaient une marque à leur hauteur. Elles l'ont maintenant.</strong></p>
+                </div>
+
+                <div class="chap-signature">
+                    <div class="chap-signature-logo">XPERIENCE <span>VISION</span></div>
+                    <p class="chap-signature-tag">L'intégrateur digital embarqué premium.<br>De la livraison à la revente. Toutes marques. Sans compromis.</p>
+                    <p class="chap-signature-baseline">Voyez plus loin. <span class="gradient-text">Vivez plus fort.</span></p>
+                </div>
+            </div>
+        </section>
+
+        </div><!-- /panel histoire -->
+
+        <!-- PANEL : NOTRE GAMME -->
+        <div class="histoire-panel" data-panel="gamme" hidden>
+
+        <!-- LA GAMME XPERIENCE -->
+        <section id="solutions" class="py-16 md:py-20 px-6 bg-[#0a0a0a]">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-10 text-center reveal">
+                    <span class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-b-2 border-white pb-3">Notre savoir-faire</span>
+                    <h2 class="text-4xl md:text-5xl font-black uppercase mb-6 italic mt-8">La Gamme Xperience</h2>
+                    <p class="text-gray-500 uppercase tracking-widest text-sm max-w-2xl mx-auto">Une sélection rigoureuse d'équipements haute technologie intégrés selon les standards constructeurs les plus exigeants.</p>
+                </div>
+
+                <div onscroll="updateScrollIndicators(this, 'solutions-dots')"
+                    class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 md:grid md:grid-cols-3 md:gap-8 md:pb-0 no-scrollbar">
+                    <div class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d1">
+                        <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
+                            <picture><source srcset="img/produit-ecran-xl.webp" type="image/webp"><img src="img/produit-ecran-xl.jpeg" alt="Écran plafonnier XL XPERIENCE VISION"
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224"></picture>
+                        </div>
+                        <div class="p-4 text-center">
+                            <h3 class="text-2xl font-bold mb-4 uppercase">Écrans Embarqués</h3>
+                            <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">Plafonniers 17.3" &amp; Appuie-tête 10.1". Une immersion totale en résolution 4K pour vos passagers arrière.</p>
+                        </div>
+                    </div>
+                    <div class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d2">
+                        <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
+                            <picture><source srcset="img/produit-ecran-intermediaire.webp" type="image/webp"><img src="img/produit-ecran-intermediaire.jpeg" alt="Écran intermédiaire XPERIENCE VISION"
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224"></picture>
+                        </div>
+                        <div class="p-4 text-center">
+                            <h3 class="text-2xl font-bold mb-4 uppercase">Technologie</h3>
+                            <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">CarPlay sans fil, Gaming HD et Dashcams intelligentes. Restez connecté au monde, même sur la route.</p>
+                        </div>
+                    </div>
+                    <div class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d3">
+                        <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
+                            <picture><source srcset="img/produit-tablette.webp" type="image/webp"><img src="img/produit-tablette.jpeg" alt="Tablette embarquée XPERIENCE VISION"
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224"></picture>
+                        </div>
+                        <div class="p-4 text-center">
+                            <h3 class="text-2xl font-bold mb-4 uppercase">Finition</h3>
+                            <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">Protections céramiques et accessoires sur-mesure. Préservez l'état neuf et la valeur de votre véhicule.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="solutions-dots" class="flex md:hidden justify-center gap-2 mt-4">
+                    <div class="w-2 h-2 rounded-full bg-white opacity-100 transition-opacity duration-300"></div>
+                    <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+                    <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RÉALISATIONS -->
+        <section id="realisations" class="py-16 md:py-20 px-6 bg-[#080808]">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12">
+                    <span class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-b-2 border-white pb-3">Portfolio</span>
+                    <h2 class="text-3xl md:text-5xl font-black mt-8 mb-4 uppercase italic tracking-tighter">Nos <span class="text-gray-500">Réalisations.</span></h2>
+                    <p class="text-gray-500 text-xs uppercase tracking-widest">Showroom, livraisons et installations terrain</p>
+                </div>
+
+                <!-- Installations terrain -->
+                <div class="mb-12 md:mb-16">
+                    <span class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-l-4 border-white pl-4">Installations</span>
+                    <h3 class="text-2xl md:text-4xl font-black mt-6 mb-6 uppercase italic tracking-tighter">Le travail sur le terrain</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <div class="gallery-item h-72 md:h-[520px]" data-gallery="installs" data-index="0">
+                            <picture><source srcset="img/installation-vue-interieur.webp" type="image/webp"><img src="img/installation-vue-interieur.jpeg" alt="Installation écran plafonnier vue intérieur" loading="lazy"></picture>
+                            <div class="overlay">
+                                <p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Vue habitacle</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-4 md:gap-6 md:h-[520px]">
+                            <div class="gallery-item h-48 md:flex-1" data-gallery="installs" data-index="1">
+                                <picture><source srcset="img/installation-byd-dolphin.webp" type="image/webp"><img src="img/installation-byd-dolphin.jpeg" alt="BYD Dolphin showroom avec coffret cadeau XV" loading="lazy"></picture>
+                                <div class="overlay">
+                                    <p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Showroom</p>
+                                </div>
+                            </div>
+                            <div class="gallery-item h-48 md:flex-1" data-gallery="installs" data-index="2">
+                                <picture><source srcset="img/installation-pack-livraison.webp" type="image/webp"><img src="img/installation-pack-livraison.jpeg" alt="Coffrets cadeaux XV dans le coffre" loading="lazy"></picture>
+                                <div class="overlay">
+                                    <p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Pack livraison</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coffrets -->
+                <div class="mb-12 md:mb-16">
+                    <span class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-l-4 border-white pl-4">Packaging</span>
+                    <h3 class="text-2xl md:text-4xl font-black mt-6 mb-6 uppercase italic tracking-tighter">Coffrets &amp; Cadeaux</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                        <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="0">
+                            <picture><source srcset="img/coffret-premium.webp" type="image/webp"><img src="img/coffret-premium.jpeg" alt="Coffret cadeau XV — thermos, carnet, stylo" loading="lazy"></picture>
+                            <div class="overlay"><p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Pack Premium</p></div>
+                        </div>
+                        <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="1">
+                            <picture><source srcset="img/coffret-contenu.webp" type="image/webp"><img src="img/coffret-contenu.jpeg" alt="Coffret cadeau XV vue détaillée" loading="lazy"></picture>
+                            <div class="overlay"><p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Contenu du pack</p></div>
+                        </div>
+                        <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="2">
+                            <picture><source srcset="img/coffret-presentation.webp" type="image/webp"><img src="img/coffret-presentation.jpeg" alt="Présentation du coffret cadeau XV" loading="lazy"></picture>
+                            <div class="overlay"><p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Présentation</p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catalogue BYD -->
+                <div>
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-6">
+                        <div>
+                            <span class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-l-4 border-white pl-4">Gamme BYD</span>
+                            <h3 class="text-2xl md:text-4xl font-black mt-6 uppercase italic tracking-tighter">Galerie</h3>
+                            <p class="text-gray-500 text-xs uppercase tracking-widest mt-3">Installations finalisées sur véhicule</p>
+                        </div>
+                        <p class="text-gray-600 text-[10px] font-black uppercase tracking-widest hidden md:block">
+                            <i class="fa-solid fa-arrows-left-right mr-2"></i>Faites défiler ou cliquez pour agrandir
+                        </p>
+                    </div>
+
+                    <div class="catalogue-track" id="catalogue-track">
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="0"><picture><source srcset="img/catalogue-01.webp" type="image/webp"><img src="img/catalogue-01.jpeg" alt="Catalogue page 1" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="1"><picture><source srcset="img/catalogue-02.webp" type="image/webp"><img src="img/catalogue-02.jpeg" alt="Catalogue page 2" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="2"><picture><source srcset="img/catalogue-03.webp" type="image/webp"><img src="img/catalogue-03.jpeg" alt="Catalogue page 3" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="3"><picture><source srcset="img/catalogue-04.webp" type="image/webp"><img src="img/catalogue-04.jpeg" alt="Catalogue page 4" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="4"><picture><source srcset="img/catalogue-05.webp" type="image/webp"><img src="img/catalogue-05.jpeg" alt="Catalogue page 5" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="5"><picture><source srcset="img/catalogue-06.webp" type="image/webp"><img src="img/catalogue-06.jpeg" alt="Catalogue page 6" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="6"><picture><source srcset="img/catalogue-07.webp" type="image/webp"><img src="img/catalogue-07.jpeg" alt="Catalogue page 7" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="7"><picture><source srcset="img/catalogue-08.webp" type="image/webp"><img src="img/catalogue-08.jpeg" alt="Catalogue page 8" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="8"><picture><source srcset="img/catalogue-09.webp" type="image/webp"><img src="img/catalogue-09.jpeg" alt="Catalogue page 9" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="9"><picture><source srcset="img/catalogue-10.webp" type="image/webp"><img src="img/catalogue-10.jpeg" alt="Catalogue page 10" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="10"><picture><source srcset="img/catalogue-11.webp" type="image/webp"><img src="img/catalogue-11.jpeg" alt="Catalogue page 11" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="11"><picture><source srcset="img/catalogue-12.webp" type="image/webp"><img src="img/catalogue-12.jpeg" alt="Catalogue page 12" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="12"><picture><source srcset="img/catalogue-13.webp" type="image/webp"><img src="img/catalogue-13.jpeg" alt="Catalogue page 13" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="13"><picture><source srcset="img/catalogue-14.webp" type="image/webp"><img src="img/catalogue-14.jpeg" alt="Catalogue page 14" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="14"><picture><source srcset="img/catalogue-15.webp" type="image/webp"><img src="img/catalogue-15.jpeg" alt="Catalogue page 15" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="15"><picture><source srcset="img/catalogue-16.webp" type="image/webp"><img src="img/catalogue-16.jpeg" alt="Catalogue page 16" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="16"><picture><source srcset="img/catalogue-17.webp" type="image/webp"><img src="img/catalogue-17.jpeg" alt="Catalogue page 17" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="17"><picture><source srcset="img/catalogue-18.webp" type="image/webp"><img src="img/catalogue-18.jpeg" alt="Catalogue page 18" loading="lazy"></picture></div>
+                        <div class="catalogue-card" data-gallery="catalogue" data-index="18"><picture><source srcset="img/catalogue-19.webp" type="image/webp"><img src="img/catalogue-19.jpeg" alt="Catalogue page 19" loading="lazy"></picture></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </div><!-- /panel gamme -->
+
+        <!-- PANEL : PARTENARIATS -->
+        <div class="histoire-panel" data-panel="partenariats" hidden>
+
+        <!-- BUSINESS & PERFORMANCE -->
+        <section id="business" class="py-16 md:py-20 bg-[#080a12] px-6">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="reveal">
+                    <span class="text-white font-black uppercase tracking-[0.5em] text-xs border-b-4 border-white pb-3">Partenariats</span>
+                    <h2 class="text-4xl md:text-6xl font-black mt-8 mb-6 uppercase italic leading-tight">
+                        Business <br> &amp; Performance.
+                    </h2>
+                    <p class="text-gray-400 text-xs md:text-base uppercase tracking-widest leading-loose mb-6">
+                        Nous accompagnons les groupes automobiles dans la mise en place de centres de profits additionnels via l'équipement digital.
+                    </p>
+                    <div class="space-y-4 md:space-y-5">
+                        <div class="flex items-center">
+                            <div class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">01</div>
+                            <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Installation externalisée : Rentabilité immédiate.</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">02</div>
+                            <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Formation commerciale : Maîtrisez l'offre.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-glass p-8 md:p-10 rounded-[2rem] md:rounded-[4rem] text-center reveal reveal-d1">
+                    <h4 class="text-[10px] md:text-xs font-black uppercase tracking-[0.4em] mb-6 md:mb-8 text-gray-500 italic underline decoration-2 underline-offset-8">Impact Showroom</h4>
+                    <div class="grid grid-cols-2 gap-4 md:gap-6">
+                        <div>
+                            <p class="text-3xl md:text-6xl font-black mb-2 md:mb-4 tracking-tighter text-white" data-counter data-target="60" data-prefix="+" data-suffix="%">+60%</p>
+                            <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-widest">Taux d'équipement</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl md:text-6xl font-black mb-2 md:mb-4 tracking-tighter text-white" data-counter data-target="80">80</p>
+                            <p class="text-[8px] md:text-[10px] text-gray-500 uppercase font-black tracking-widest">Véhicules / Mois</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-0 mt-10">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 pt-8 md:pt-10 border-t border-white/10">
+                    <div class="text-center group">
+                        <i class="fa-solid fa-shield text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
+                        <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Garantie 1 an</h5>
+                        <p class="text-[10px] text-gray-600 uppercase font-bold">Sérénité totale</p>
+                    </div>
+                    <div class="text-center group">
+                        <i class="fa-solid fa-bolt text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
+                        <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Plug &amp; Play</h5>
+                        <p class="text-[10px] text-gray-600 uppercase font-bold">Zéro découpe faisceau</p>
+                    </div>
+                    <div class="text-center group">
+                        <i class="fa-solid fa-headset text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
+                        <h5 class="font-bold uppercase text-xs tracking-widest mb-2">SAV Premium</h5>
+                        <p class="text-[10px] text-gray-600 uppercase font-bold">Réponse sous 24h</p>
+                    </div>
+                    <div class="text-center group">
+                        <i class="fa-solid fa-gem text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
+                        <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Finition Luxe</h5>
+                        <p class="text-[10px] text-gray-600 uppercase font-bold">Standard constructeur</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Placeholder partenariats (en attente infos client) -->
+        <section class="py-16 px-6 bg-[#0a0a0a] text-center">
+            <div class="max-w-2xl mx-auto card-glass rounded-[2rem] p-8 md:p-10">
+                <i class="fa-solid fa-handshake text-4xl text-gray-600 mb-5"></i>
+                <h3 class="text-xl md:text-2xl font-black uppercase italic mb-4">Vous êtes un réseau ou un groupe automobile&nbsp;?</h3>
+                <p class="text-gray-400 text-sm leading-relaxed mb-8">
+                    Nos équipes préparent en ce moment un espace dédié avec études de cas, conditions partenariat et contact direct. En attendant, contactez-nous pour discuter d'un partenariat.
+                </p>
+                <a href="contact.html" class="btn-premium inline-block px-10 py-5 rounded-full font-black uppercase text-xs tracking-widest">Nous contacter</a>
+            </div>
+        </section>
+
+        </div><!-- /panel partenariats -->
+
+        <!-- CTA (toujours visible) -->
+        <section class="py-20 px-6 text-center bg-[#0a0a0a]">
+            <h2 class="text-3xl md:text-5xl font-black uppercase italic tracking-tighter mb-4">
+                Prêt à <span class="gradient-text">transformer</span> votre véhicule ?
+            </h2>
+            <p class="text-gray-400 text-xs md:text-sm uppercase tracking-[0.3em] mb-8 max-w-xl mx-auto">
+                Découvrez le catalogue, choisissez votre concession, prenez RDV.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index.html#installation" class="btn-premium px-10 py-5 rounded-full font-black uppercase text-xs tracking-widest">Voir le catalogue</a>
+                <a href="contact.html" class="px-10 py-5 rounded-full font-black uppercase text-xs tracking-widest border border-white/20 hover:bg-white hover:text-black transition">Nous contacter</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-20 px-6 border-t border-white/5 bg-[#050505]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div>
+                <div class="text-3xl font-black mb-6 italic uppercase tracking-tighter">XPERIENCE <span class="text-gray-600">VISION</span></div>
+                <p class="text-gray-500 text-xs uppercase tracking-[0.2em] max-w-sm leading-loose font-bold">L'excellence digitale embarquée. <br>Installation premium pour véhicules d'exception.</p>
+            </div>
+            <div class="grid grid-cols-2 gap-16 uppercase text-[10px] font-black tracking-[0.3em] text-gray-500">
+                <div class="flex flex-col space-y-6">
+                    <span class="text-white border-b border-white/10 pb-3">Navigation</span>
+                    <a href="index.html#installation" class="hover:text-white transition">Services</a>
+                    <a href="index.html#accessoires" class="hover:text-white transition">Produits</a>
+                    <a href="histoire.html" class="text-white">Notre Histoire</a>
+                    <a href="contact.html" class="hover:text-white transition">Contact</a>
+                </div>
+                <div class="flex flex-col space-y-6">
+                    <span class="text-white border-b border-white/10 pb-3">Légal</span>
+                    <a href="mentions-legales.html" class="hover:text-white transition">Mentions Légales</a>
+                    <a href="cgv.html" class="hover:text-white transition">CGV</a>
+                    <a href="politique-confidentialite.html" class="hover:text-white transition">Confidentialité</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5">
+            <p class="text-[9px] text-gray-600 font-bold tracking-[0.5em] uppercase text-center">© 2026 XPERIENCE VISION — TOUS DROITS RÉSERVÉS</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/33766306193?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20vos%20services." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Nous contacter sur WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.122 1.535 5.854L.057 23.885a.5.5 0 0 0 .611.61l6.198-1.494A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.017-1.378l-.36-.214-3.724.898.934-3.614-.235-.372A9.818 9.818 0 1 1 12 21.818z" />
+        </svg>
+    </a>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Vue agrandie">
+        <button id="lightbox-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+        <button id="lightbox-prev" aria-label="Image précédente"><i class="fa-solid fa-chevron-left"></i></button>
+        <img id="lightbox-img" src="" alt="">
+        <button id="lightbox-next" aria-label="Image suivante"><i class="fa-solid fa-chevron-right"></i></button>
+        <span id="lightbox-counter"></span>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Burger menu
+        document.getElementById('burger-btn')?.addEventListener('click', () => {
+            const menu = document.getElementById('mobile-dropdown');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('show');
+        });
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        let currentGallery = [];
+        let currentIndex = 0;
+
+        function openLightbox(galleryName, index) {
+            currentGallery = Array.from(document.querySelectorAll(`[data-gallery="${galleryName}"]`));
+            currentIndex = index;
+            updateLightbox();
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function updateLightbox() {
+            const item = currentGallery[currentIndex];
+            const img = item.querySelector('img');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightboxCounter.textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('[data-gallery]').forEach(el => {
+            el.addEventListener('click', () => {
+                openLightbox(el.dataset.gallery, parseInt(el.dataset.index));
+            });
+        });
+
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        document.getElementById('lightbox-prev').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            updateLightbox();
+        });
+        document.getElementById('lightbox-next').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            updateLightbox();
+        });
+        lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', e => {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') document.getElementById('lightbox-prev').click();
+            if (e.key === 'ArrowRight') document.getElementById('lightbox-next').click();
+        });
+
+        // ========== ONGLETS (histoire / gamme / partenariats) ==========
+        (function () {
+            const tabs = document.querySelectorAll('.histoire-tab[data-tab]');
+            const panels = document.querySelectorAll('.histoire-panel[data-panel]');
+            if (!tabs.length || !panels.length) return;
+
+            function activate(name) {
+                tabs.forEach(t => {
+                    const on = t.dataset.tab === name;
+                    t.classList.toggle('active', on);
+                    t.setAttribute('aria-current', on ? 'true' : 'false');
+                });
+                panels.forEach(p => {
+                    p.hidden = p.dataset.panel !== name;
+                });
+                try { history.replaceState(null, '', '#' + name); } catch (e) {}
+                // Scroll vers les tabs pour voir immédiatement le contenu
+                const tabNav = document.querySelector('.histoire-tabs');
+                if (tabNav) {
+                    const rect = tabNav.getBoundingClientRect();
+                    if (rect.top < 0 || rect.top > 200) {
+                        window.scrollTo({
+                            top: window.scrollY + rect.top - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            }
+
+            tabs.forEach(t => {
+                t.addEventListener('click', () => activate(t.dataset.tab));
+            });
+
+            // Auto-activation selon le hash de l'URL (#gamme, #partenariats)
+            const validHashes = ['histoire', 'gamme', 'partenariats'];
+            const hash = (location.hash || '').replace('#', '');
+            if (validHashes.includes(hash)) {
+                // activation sans scroll
+                tabs.forEach(t => {
+                    const on = t.dataset.tab === hash;
+                    t.classList.toggle('active', on);
+                });
+                panels.forEach(p => {
+                    p.hidden = p.dataset.panel !== hash;
+                });
+            }
+        })();
+    </script>
+
+    <!-- DRAWER PANIER -->
+    <aside id="cart-drawer" class="cart-drawer" aria-hidden="true">
+        <div class="cart-drawer-overlay"></div>
+        <div class="cart-drawer-panel" role="dialog" aria-labelledby="cart-drawer-title">
+            <header class="cart-drawer-header">
+                <h2 id="cart-drawer-title">
+                    <i class="cart-drawer-icon fa-solid fa-bag-shopping"></i>
+                    <span class="cart-drawer-title-text">Votre panier</span>
+                </h2>
+                <button class="cart-drawer-close" aria-label="Fermer">&times;</button>
+            </header>
+            <div class="cart-drawer-body">
+                <ul class="cart-drawer-list" aria-live="polite"></ul>
+                <p class="cart-drawer-empty" hidden>Votre panier est vide.</p>
+            </div>
+            <footer class="cart-drawer-footer">
+                <div class="cart-drawer-breakdown" data-cart-breakdown hidden>
+                    <div class="cart-drawer-row">
+                        <span>Sous-total HT</span>
+                        <span data-cart-subtotal-ht>0,00 €</span>
+                    </div>
+                    <div class="cart-drawer-row">
+                        <span>TVA 20 %</span>
+                        <span data-cart-tva>0,00 €</span>
+                    </div>
+                    <div class="cart-drawer-row cart-drawer-row-shipping" data-cart-shipping hidden>
+                        <span><i class="fa-solid fa-truck-fast mr-2"></i>Livraison</span>
+                        <span class="cart-drawer-free">Offerte</span>
+                    </div>
+                </div>
+                <div class="cart-drawer-total">
+                    <span class="cart-drawer-total-label">Total TTC</span>
+                    <span class="cart-drawer-total-value">0,00 €</span>
+                </div>
+                <button class="cart-drawer-cta">
+                    <span class="cart-drawer-cta-text">Commander</span>
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+                <p class="cart-drawer-note"></p>
+            </footer>
+        </div>
+    </aside>
+
+    <!-- MODAL 1 — FORMULAIRE PRÉ-COMMANDE -->
+    <div id="checkout-form-modal" class="xv-modal" role="dialog" aria-labelledby="checkout-form-title" aria-modal="true" aria-hidden="true">
+        <div class="xv-modal-overlay" data-close></div>
+        <div class="xv-modal-card">
+            <button class="xv-modal-close" aria-label="Fermer" data-close>&times;</button>
+            <header class="xv-modal-header">
+                <span class="xv-modal-eyebrow"><i class="fa-solid fa-user-pen mr-2"></i>Vos informations</span>
+                <h3 id="checkout-form-title">Quelques infos avant de finaliser</h3>
+                <p class="xv-modal-sub">Ces informations nous servent à préparer votre commande.</p>
+            </header>
+            <form id="checkout-form" class="xv-form" novalidate>
+                <div class="xv-form-row">
+                    <label class="xv-form-field">
+                        <span>Prénom *</span>
+                        <input type="text" name="prenom" autocomplete="given-name" required>
+                    </label>
+                    <label class="xv-form-field">
+                        <span>Nom *</span>
+                        <input type="text" name="nom" autocomplete="family-name" required>
+                    </label>
+                </div>
+                <label class="xv-form-field">
+                    <span>Adresse email *</span>
+                    <input type="email" name="email" autocomplete="email" required>
+                </label>
+                <label class="xv-form-field">
+                    <span>Téléphone *</span>
+                    <input type="tel" name="telephone" autocomplete="tel" required>
+                </label>
+                <label class="xv-form-field">
+                    <span>Adresse *</span>
+                    <input type="text" name="adresse" autocomplete="street-address" placeholder="N° et rue" required>
+                </label>
+                <div class="xv-form-row xv-form-row-cp">
+                    <label class="xv-form-field">
+                        <span>Code postal *</span>
+                        <input type="text" name="code_postal" autocomplete="postal-code" placeholder="75001" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required>
+                    </label>
+                    <label class="xv-form-field">
+                        <span>Ville *</span>
+                        <input type="text" name="ville" autocomplete="address-level2" placeholder="Paris" required>
+                    </label>
+                </div>
+
+                <fieldset class="xv-form-services-group" data-services-group hidden>
+                    <legend><i class="fa-solid fa-car mr-2"></i>Votre véhicule</legend>
+                    <div class="xv-form-row">
+                        <label class="xv-form-field">
+                            <span>Marque *</span>
+                            <input type="text" name="marque" placeholder="Ex : Tesla, BYD, BMW…" data-services-required>
+                        </label>
+                        <label class="xv-form-field">
+                            <span>Modèle *</span>
+                            <input type="text" name="modele" placeholder="Ex : Model Y, Seal…" data-services-required>
+                        </label>
+                    </div>
+                    <label class="xv-form-field">
+                        <span>Plaque d'immatriculation *</span>
+                        <input type="text" name="immatriculation" placeholder="AA-123-AA" maxlength="12" data-services-required>
+                    </label>
+                    <fieldset class="xv-lieu-group">
+                        <legend>Lieu du RDV *</legend>
+                        <div class="xv-lieu-options">
+                            <label class="xv-lieu-option">
+                                <input type="radio" name="lieu_rdv" value="domicile" data-services-required checked>
+                                <div class="xv-lieu-option-inner">
+                                    <i class="fa-solid fa-house"></i>
+                                    <strong>À mon domicile</strong>
+                                    <span>À l'adresse renseignée ci-dessus</span>
+                                </div>
+                            </label>
+                            <label class="xv-lieu-option">
+                                <input type="radio" name="lieu_rdv" value="garage" data-services-required>
+                                <div class="xv-lieu-option-inner">
+                                    <i class="fa-solid fa-warehouse"></i>
+                                    <strong>Garage XPERIENCE VISION</strong>
+                                    <span>10 av. Fridingen · 77100 Nanteuil-lès-Meaux</span>
+                                </div>
+                            </label>
+                        </div>
+                    </fieldset>
+                </fieldset>
+
+                <p class="xv-form-error" data-form-error hidden></p>
+                <button type="submit" class="xv-form-submit">
+                    <span data-form-submit-label>Continuer</span>
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+                <p class="xv-form-note">
+                    <i class="fa-solid fa-lock mr-2"></i>Vos données sont chiffrées et protégées (RGPD).
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2 — PRISE DE RDV CAL.COM -->
+    <div id="booking-modal" class="xv-modal xv-modal-wide" role="dialog" aria-labelledby="booking-title" aria-modal="true" aria-hidden="true">
+        <div class="xv-modal-overlay" data-close></div>
+        <div class="xv-modal-card">
+            <button class="xv-modal-close" aria-label="Fermer" data-close>&times;</button>
+            <header class="xv-modal-header">
+                <span class="xv-modal-eyebrow xv-modal-eyebrow-gold"><i class="fa-solid fa-calendar-check mr-2"></i>Étape 2 · Créneau</span>
+                <h3 id="booking-title">Choisissez votre créneau</h3>
+                <p class="xv-modal-sub">Votre RDV sera validé dès le paiement.</p>
+            </header>
+            <div id="booking-cal-mount" class="xv-booking-mount"></div>
+            <p class="xv-modal-note"><i class="fa-solid fa-clock mr-2"></i>Une fois le créneau sélectionné, vous aurez 1h pour finaliser le paiement.</p>
+        </div>
+    </div>
+
+    <!-- MODAL 3 — PAIEMENT STRIPE EMBEDDED -->
+    <div id="stripe-modal" class="xv-modal xv-modal-wide" role="dialog" aria-labelledby="stripe-title" aria-modal="true" aria-hidden="true">
+        <div class="xv-modal-overlay" data-close></div>
+        <div class="xv-modal-card">
+            <button class="xv-modal-close" aria-label="Fermer" data-close>&times;</button>
+            <header class="xv-modal-header">
+                <span class="xv-modal-eyebrow"><i class="fa-solid fa-credit-card mr-2"></i>Paiement sécurisé</span>
+                <h3 id="stripe-title">Finalisez votre commande</h3>
+            </header>
+            <div id="stripe-checkout-mount" class="xv-stripe-mount"></div>
+            <p class="xv-modal-note"><i class="fa-solid fa-shield-halved mr-2"></i>Paiement sécurisé par Stripe · Cartes CB, Visa, Mastercard.</p>
+        </div>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="catalogue.js"></script>
+    <script src="js/concessions.js"></script>
+</body>
+</html>

@@ -42,7 +42,7 @@ function showSolution(type) {
         <ul class="space-y-4 mb-8">
             ${data.items.map(item => `<li class="flex items-center text-sm"><i class="fa-solid fa-circle-check mr-3 text-white"></i> ${item}</li>`).join('')}
         </ul>
-        <a href="#rdv" class="text-white border-b border-white pb-1 font-bold uppercase text-[10px] tracking-widest hover:text-gray-400 transition">${data.link}</a>
+        <a href="#installation" class="text-white border-b border-white pb-1 font-bold uppercase text-[10px] tracking-widest hover:text-gray-400 transition">${data.link}</a>
     `;
 
     // 3. ANIMATION DE SORTIE
@@ -68,6 +68,17 @@ document.addEventListener('click', function (e) {
     if (!link || link.classList.contains('brand-logo-link')) return;
     const href = link.getAttribute('href');
     if (href === '#') return;
+
+    // Logo nav : toujours scroll vers le tout haut (pas l'ancre #accueil)
+    if (link.classList.contains('nav-logo')) {
+        e.preventDefault();
+        isMenuNavigation = true;
+        clearTimeout(menuNavTimeout);
+        menuNavTimeout = setTimeout(() => { isMenuNavigation = false; }, 1200);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+
     const target = document.querySelector(href);
     if (!target) return;
     e.preventDefault();
@@ -84,29 +95,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.getElementById('menu-overlay');
     const mobileLinks = document.querySelectorAll('.mobile-item');
 
-    function toggleMenu() {
-        // Enlève le focus du bouton (évite le style "sélectionné")
-        if (document.activeElement) document.activeElement.blur();
+    if (!burgerBtn || !dropdown) return;
 
+    let burgerLastFocus = null;
+
+    function toggleMenu() {
         const isOpen = dropdown.classList.contains('show');
+        if (document.activeElement) document.activeElement.blur();
 
         if (!isOpen) {
             // OUVERTURE
+            burgerLastFocus = burgerBtn;
             dropdown.classList.remove('hide');
             dropdown.classList.add('show');
-            overlay.classList.remove('hidden');
+            if (overlay) overlay.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+            // Focus sur le 1er lien pour accès clavier
+            const first = dropdown.querySelector('a, button');
+            if (first) setTimeout(() => first.focus(), 50);
         } else {
-            // FERMETURE ANIMÉE
+            // FERMETURE
             dropdown.classList.add('hide');
-            overlay.classList.add('hidden');
+            if (overlay) overlay.classList.add('hidden');
             document.body.style.overflow = '';
-
-            // On attend la fin de l'animation (300ms) avant de masquer
             setTimeout(() => {
                 dropdown.classList.remove('show');
                 dropdown.classList.remove('hide');
             }, 300);
+            if (burgerLastFocus) burgerLastFocus.focus();
+            burgerLastFocus = null;
         }
     }
 
@@ -115,86 +132,17 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleMenu();
     };
 
-    overlay.onclick = toggleMenu;
+    if (overlay) overlay.onclick = toggleMenu;
 
     mobileLinks.forEach(link => {
         link.onclick = () => {
-            // On laisse un tout petit délai pour que le clic soit bien pris en compte
             setTimeout(toggleMenu, 100);
         };
     });
-});
 
-(function () {
-    const packBtns = document.querySelectorAll('.cal-pack-btn');
-    const calContainer = document.getElementById('cal-container');
-
-    const widgets = {
-        'pack-livraison-4h': document.getElementById('my-cal-inline-pack-livraison-4h'),
-        'pack-clean-4h': document.getElementById('my-cal-inline-pack-clean-4h'),
-        'pack-cafe-4h': document.getElementById('my-cal-inline-pack-cafe-4h'),
-    };
-    const initialized = {};
-
-    function ensureCalScript() {
-        if (!window.Cal) {
-            (function (C, A, L) {
-                let p = function (a, ar) { a.q.push(ar); };
-                let d = C.document;
-                C.Cal = C.Cal || function () {
-                    let cal = C.Cal; let ar = arguments;
-                    if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; }
-                    if (ar[0] === L) {
-                        const api = function () { p(api, arguments); };
-                        const namespace = ar[1]; api.q = api.q || [];
-                        if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return;
-                    } p(cal, ar);
-                };
-            })(window, "https://app.cal.eu/embed/embed.js", "init");
-        }
-    }
-
-    function loadPack(packName) {
-        ensureCalScript();
-
-        calContainer.classList.remove('hidden');
-        Object.values(widgets).forEach(w => w.classList.add('hidden'));
-        widgets[packName].classList.remove('hidden');
-
-        if (!initialized[packName]) {
-            initialized[packName] = true;
-            Cal("init", packName, { origin: "https://app.cal.eu" });
-            Cal.ns[packName]("inline", {
-                elementOrSelector: `#my-cal-inline-${packName}`,
-                config: { "layout": "month_view", "useSlotsViewOnSmallScreen": "true", "locale": "fr", "theme": "dark" },
-                calLink: `xperience-vision/${packName}?locale=fr`,
-            });
-            Cal.ns[packName]("ui", { "hideEventTypeDetails": false, "layout": "month_view", "theme": "dark" });
-        }
-    }
-
-    packBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            const pack = this.dataset.pack;
-
-            packBtns.forEach(b => {
-                b.classList.remove('bg-black', 'text-white', 'border-black');
-                b.classList.add('border-gray-200', 'text-gray-500');
-            });
-            this.classList.remove('border-gray-200', 'text-gray-500');
-            this.classList.add('bg-black', 'text-white', 'border-black');
-
-            loadPack(pack);
-        });
-    });
-})();
-
-document.querySelectorAll('[data-select-pack]').forEach(btn => {
-    btn.addEventListener('click', function () {
-        const packName = this.dataset.selectPack;
-        const calBtn = document.querySelector(`.cal-pack-btn[data-pack="${packName}"]`);
-        if (calBtn) calBtn.click();
-        document.getElementById('rdv').scrollIntoView({ behavior: 'smooth' });
+    // Escape ferme le menu
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && dropdown.classList.contains('show')) toggleMenu();
     });
 });
 
@@ -343,10 +291,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const vehicleInput = document.getElementById('form-vehicle');
     const vehicleAsterisk = document.getElementById('vehicle-asterisk');
 
+    // Guard : ces éléments n'existent que sur contact.html (form Netlify)
+    if (!subjectSelect || !vehicleInput || !vehicleAsterisk) return;
+
     // Fonction qui met à jour l'obligation du champ Véhicule
     function updateVehicleRequirement() {
         const subject = subjectSelect.value;
-        
+
         // Si c'est un partenariat ou "Autre", le véhicule n'est pas obligatoire
         if (subject === 'Partenariat professionnel' || subject === 'Autre') {
             vehicleInput.removeAttribute('required');
@@ -366,17 +317,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // =====================================================================
-// CONFIGURATEUR MULTI-STEP
+// CONFIGURATEUR — accessoires sur-mesure par marque (2 étapes)
 // =====================================================================
-
-const MODELES = {
-    tesla:          ['Model 3', 'Model Y', 'Model S', 'Model X', 'Cybertruck'],
-    byd:            ['Atto 3', 'Seal', 'Seal U', 'Han', 'Tang', 'Dolphin', 'Sealion 7'],
-    xpeng:          ['G6', 'G9', 'P7'],
-    bmw:            ['Série 3', 'Série 5', 'X3', 'X5', 'iX', 'i4', 'i7'],
-    mercedes:       ['Classe C', 'Classe E', 'Classe S', 'GLC', 'GLE', 'EQE', 'EQS'],
-    'range-rover':  ['Evoque', 'Velar', 'Sport', 'Range Rover']
-};
 
 const NOMS_MARQUES = {
     tesla:          'Tesla',
@@ -388,175 +330,261 @@ const NOMS_MARQUES = {
     autre:          'Autre véhicule'
 };
 
-const NOMS_UNIVERS = {
-    familiale:  'Expérience Familiale',
-    business:   'Productivité Business',
-    esthetique: 'Esthétique & Valeur'
+// Liste exhaustive des modèles par marque (pour l'étape 2 du configurateur)
+const MODELES = {
+    byd:            ['Seal', 'Seal U', 'Han', 'Tang', 'Atto 3'],
+    tesla:          ['Model 3', 'Model 3 Highland', 'Model Y'],
+    xpeng:          ['G6', 'G9', 'P7'],
+    bmw:            ['Série 3', 'Série 5', 'X3', 'X5', 'X7', 'Série M'],
+    mercedes:       ['Classe C', 'Classe E', 'Classe S', 'GLC', 'GLE', 'GLS'],
+    'range-rover':  ['Velar', 'Sport', 'Range Rover']
 };
 
-const configState = { brand: null, model: null, univers: null };
+// Catalogue produits par marque. Les IDs et prix DOIVENT correspondre à
+// netlify/functions/_lib/products.js (validation server-side zero-trust).
+// modeles = liste des modèles compatibles ou ['all'] = tous modèles de la marque.
+const PRODUCTS_BY_BRAND = {
+    byd: [
+        { id: 'BYD-001', name: 'Film protection écran rotatif 15.6"',   price: 89,   modeles: ['Seal', 'Han', 'Tang', 'Atto 3'], icon: 'fa-shield-halved' },
+        { id: 'BYD-002', name: 'Tapis TPE 3D logotés BYD',               price: 149,  modeles: ['all'], icon: 'fa-road' },
+        { id: 'BYD-003', name: 'Coque clé cuir nappa',                   price: 59,   modeles: ['all'], icon: 'fa-key' },
+        { id: 'BYD-004', name: 'Seuils de porte LED « BYD »',            price: 189,  modeles: ['all'], icon: 'fa-door-open' },
+        { id: 'BYD-005', name: 'Protection coffre sur-mesure',           price: 119,  modeles: ['Seal U', 'Atto 3', 'Tang'], icon: 'fa-box' },
+        { id: 'BYD-006', name: 'Habillage console centrale carbone',     price: 249,  modeles: ['Seal', 'Han'], icon: 'fa-layer-group' },
+        { id: 'BYD-007', name: 'Habillage console alcantara',            price: 299,  modeles: ['Seal', 'Han', 'Tang'], icon: 'fa-layer-group' },
+        { id: 'BYD-008', name: 'Films teintés homologués',               price: 349,  modeles: ['all'], icon: 'fa-window-maximize' },
+        { id: 'BYD-009', name: 'Protection toit panoramique UV',         price: 199,  modeles: ['Seal', 'Tang', 'Han'], icon: 'fa-sun' },
+        { id: 'BYD-010', name: 'Adaptateur charge Type 2 / CCS premium', price: 179,  modeles: ['all'], icon: 'fa-plug' },
+        { id: 'BYD-011', name: 'Support smartphone magnétique',          price: 49,   modeles: ['all'], icon: 'fa-mobile-screen' },
+        { id: 'BYD-012', name: 'Caches valves logotés BYD',              price: 29,   modeles: ['all'], icon: 'fa-circle-dot' },
+        { id: 'BYD-013', name: 'Pédales aluminium sport',                price: 89,   modeles: ['all'], icon: 'fa-shoe-prints' },
+        { id: 'BYD-014', name: 'Dashcam intégrée discrète',              price: 449,  modeles: ['all'], icon: 'fa-video' }
+    ],
+    tesla: [
+        { id: 'TSL-001', name: 'Console centrale wrap alcantara',        price: 229,  modeles: ['Model 3', 'Model Y'], icon: 'fa-layer-group' },
+        { id: 'TSL-002', name: 'Console centrale wrap carbone',          price: 199,  modeles: ['Model 3', 'Model Y'], icon: 'fa-layer-group' },
+        { id: 'TSL-003', name: 'Boutons physiques volant Highland',      price: 159,  modeles: ['Model 3 Highland'], icon: 'fa-circle-dot' },
+        { id: 'TSL-004', name: 'Films PPF capot',                        price: 690,  modeles: ['all'], icon: 'fa-shield-halved' },
+        { id: 'TSL-005', name: 'Films PPF pare-chocs avant',             price: 490,  modeles: ['all'], icon: 'fa-shield-halved' },
+        { id: 'TSL-006', name: 'Pack PPF intégral',                      price: 2890, modeles: ['all'], icon: 'fa-shield' },
+        { id: 'TSL-007', name: 'Jantes aero covers alternatifs',         price: 349,  modeles: ['Model 3', 'Model Y'], icon: 'fa-compact-disc' },
+        { id: 'TSL-008', name: 'Tapis coffre + frunk',                   price: 189,  modeles: ['all'], icon: 'fa-box' },
+        { id: 'TSL-009', name: 'Caméra recul HD améliorée',              price: 299,  modeles: ['all'], icon: 'fa-camera' },
+        { id: 'TSL-010', name: 'Hub USB multiport boîte à gants',        price: 79,   modeles: ['Model 3', 'Model Y'], icon: 'fa-plug' },
+        { id: 'TSL-011', name: 'Pédales aluminium Tesla',                price: 99,   modeles: ['Model 3', 'Model Y'], icon: 'fa-shoe-prints' },
+        { id: 'TSL-012', name: 'Tapis 3D TPE logotés',                   price: 169,  modeles: ['all'], icon: 'fa-road' },
+        { id: 'TSL-013', name: 'Seuils de porte LED',                    price: 199,  modeles: ['all'], icon: 'fa-door-open' },
+        { id: 'TSL-014', name: 'Film protection écran central',          price: 79,   modeles: ['all'], icon: 'fa-shield-halved' },
+        { id: 'TSL-015', name: 'Dashcam Sentry Mode pro',                price: 399,  modeles: ['all'], icon: 'fa-video' }
+    ],
+    xpeng: [
+        { id: 'XPG-001', name: 'Films écran double dashboard',           price: 129,  modeles: ['G6', 'G9', 'P7'], icon: 'fa-shield-halved' },
+        { id: 'XPG-002', name: 'Pédales aluminium sport',                price: 89,   modeles: ['all'], icon: 'fa-shoe-prints' },
+        { id: 'XPG-003', name: 'Habillage volant cuir nappa',             price: 349,  modeles: ['G6', 'G9'], icon: 'fa-circle-half-stroke' },
+        { id: 'XPG-004', name: 'Capot chargeur sans fil renforcé',        price: 79,   modeles: ['G6', 'G9'], icon: 'fa-bolt' },
+        { id: 'XPG-005', name: 'Module CarPlay sans fil XPeng',           price: 249,  modeles: ['all'], icon: 'fa-wifi' },
+        { id: 'XPG-006', name: 'Tapis 3D TPE logotés',                    price: 159,  modeles: ['all'], icon: 'fa-road' },
+        { id: 'XPG-007', name: 'Films teintés homologués',                price: 349,  modeles: ['all'], icon: 'fa-window-maximize' },
+        { id: 'XPG-008', name: 'Protection coffre sur-mesure',            price: 119,  modeles: ['G6', 'G9'], icon: 'fa-box' },
+        { id: 'XPG-009', name: 'Coque clé premium',                       price: 49,   modeles: ['all'], icon: 'fa-key' },
+        { id: 'XPG-010', name: 'Seuils de porte LED « XPeng »',           price: 179,  modeles: ['all'], icon: 'fa-door-open' }
+    ],
+    bmw: [
+        { id: 'BMW-001', name: 'Tapis 3D TPE logotés BMW M',             price: 179,  modeles: ['all'], icon: 'fa-road' },
+        { id: 'BMW-002', name: 'Films PPF capot',                         price: 690,  modeles: ['all'], icon: 'fa-shield-halved' },
+        { id: 'BMW-003', name: 'Habillage console carbone M',             price: 349,  modeles: ['Série 3', 'Série 5', 'X3', 'X5'], icon: 'fa-layer-group' },
+        { id: 'BMW-004', name: 'Pédales aluminium M',                     price: 119,  modeles: ['all'], icon: 'fa-shoe-prints' },
+        { id: 'BMW-005', name: 'Seuils LED illuminés BMW',                price: 219,  modeles: ['all'], icon: 'fa-door-open' },
+        { id: 'BMW-006', name: 'Films teintés homologués',                price: 349,  modeles: ['all'], icon: 'fa-window-maximize' },
+        { id: 'BMW-007', name: 'Coque clé cuir cousu main',               price: 79,   modeles: ['all'], icon: 'fa-key' },
+        { id: 'BMW-008', name: 'Protection coffre cuir',                  price: 149,  modeles: ['X3', 'X5', 'X7'], icon: 'fa-box' },
+        { id: 'BMW-009', name: 'Caches valves BMW M',                     price: 39,   modeles: ['all'], icon: 'fa-circle-dot' },
+        { id: 'BMW-010', name: 'Habillage volant alcantara',              price: 449,  modeles: ['Série 3', 'Série 5', 'X3', 'X5', 'X7'], icon: 'fa-circle-half-stroke' },
+        { id: 'BMW-011', name: 'Cache moteur alu brossé',                 price: 199,  modeles: ['Série M'], icon: 'fa-gear' },
+        { id: 'BMW-012', name: 'Dashcam intégrée BMW',                    price: 499,  modeles: ['all'], icon: 'fa-video' }
+    ],
+    mercedes: [
+        { id: 'MRC-001', name: 'Tapis 3D TPE logotés Mercedes',          price: 189,  modeles: ['all'], icon: 'fa-road' },
+        { id: 'MRC-002', name: 'Films PPF capot',                         price: 690,  modeles: ['all'], icon: 'fa-shield-halved' },
+        { id: 'MRC-003', name: 'Habillage console bois précieux',         price: 449,  modeles: ['Classe E', 'Classe S', 'GLE'], icon: 'fa-layer-group' },
+        { id: 'MRC-004', name: 'Pédales aluminium AMG',                   price: 129,  modeles: ['all'], icon: 'fa-shoe-prints' },
+        { id: 'MRC-005', name: 'Seuils LED illuminés Mercedes',           price: 229,  modeles: ['all'], icon: 'fa-door-open' },
+        { id: 'MRC-006', name: 'Films teintés homologués',                price: 349,  modeles: ['all'], icon: 'fa-window-maximize' },
+        { id: 'MRC-007', name: 'Coque clé cuir nappa',                    price: 89,   modeles: ['all'], icon: 'fa-key' },
+        { id: 'MRC-008', name: 'Protection coffre sur-mesure SUV',        price: 169,  modeles: ['GLC', 'GLE', 'GLS'], icon: 'fa-box' },
+        { id: 'MRC-009', name: 'Étoile éclairée calandre',                price: 299,  modeles: ['Classe E', 'Classe S', 'GLE', 'GLS'], icon: 'fa-star' },
+        { id: 'MRC-010', name: 'Habillage volant cuir/alcantara',         price: 499,  modeles: ['all'], icon: 'fa-circle-half-stroke' },
+        { id: 'MRC-011', name: 'Pack ambient lighting upgrade',           price: 590,  modeles: ['Classe C', 'Classe E', 'Classe S'], icon: 'fa-lightbulb' },
+        { id: 'MRC-012', name: 'Dashcam intégrée discrète',               price: 499,  modeles: ['all'], icon: 'fa-video' }
+    ],
+    'range-rover': [
+        { id: 'RR-001', name: 'Tapis cuir/TPE logotés',                   price: 229,  modeles: ['all'], icon: 'fa-road' },
+        { id: 'RR-002', name: 'Films PPF intégral',                       price: 2990, modeles: ['all'], icon: 'fa-shield' },
+        { id: 'RR-003', name: 'Habillage console bois noyer',             price: 549,  modeles: ['Velar', 'Sport', 'Range Rover'], icon: 'fa-layer-group' },
+        { id: 'RR-004', name: 'Marche-pieds rétractables LED',            price: 1290, modeles: ['Sport', 'Range Rover'], icon: 'fa-stairs' },
+        { id: 'RR-005', name: 'Seuils LED illuminés',                     price: 249,  modeles: ['all'], icon: 'fa-door-open' },
+        { id: 'RR-006', name: 'Films teintés homologués',                 price: 449,  modeles: ['all'], icon: 'fa-window-maximize' },
+        { id: 'RR-007', name: 'Coque clé cuir cousu main',                price: 99,   modeles: ['all'], icon: 'fa-key' },
+        { id: 'RR-008', name: 'Protection coffre cuir',                   price: 199,  modeles: ['all'], icon: 'fa-box' },
+        { id: 'RR-009', name: 'Habillage volant cuir/alcantara',          price: 549,  modeles: ['all'], icon: 'fa-circle-half-stroke' },
+        { id: 'RR-010', name: 'Dashcam intégrée premium',                 price: 549,  modeles: ['all'], icon: 'fa-video' }
+    ]
+};
 
-function goToStep(n) {
-    // Masquer tous les steps
-    document.querySelectorAll('.config-step').forEach(s => s.classList.add('hidden'));
-    // Afficher le step cible
-    const target = document.querySelector(`.config-step[data-step="${n}"]`);
-    if (target) {
-        target.classList.remove('hidden');
-        // Scroll vers le configurateur (doux)
-        document.getElementById('configurateur').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    // Mettre à jour la barre de progression
-    for (let i = 1; i <= 4; i++) {
-        const dot = document.querySelector(`.config-step-dot[data-dot="${i}"]`);
-        if (!dot) continue;
-        dot.classList.remove('active', 'done');
-        if (i < n) dot.classList.add('done');
-        else if (i === n) dot.classList.add('active');
-    }
-    for (let i = 1; i <= 3; i++) {
-        const conn = document.querySelector(`.config-connector[data-conn="${i}"]`);
-        if (!conn) continue;
-        conn.classList.toggle('done', i < n);
-    }
+const configState = { brand: null, model: '' };
+
+function configGoToStep(n) {
+    document.querySelectorAll('#configurateur .config-step').forEach(s => s.classList.add('hidden'));
+    const target = document.querySelector(`#configurateur .config-step[data-step="${n}"]`);
+    if (target) target.classList.remove('hidden');
+    // Libère le 100vh strict quand on affiche les résultats (étape 3)
+    const section = document.getElementById('configurateur');
+    if (section) section.classList.toggle('config-showing-results', n === 3);
 }
 
-function renderModels(brand) {
-    const grid = document.getElementById('config-models-grid');
-    const autreWrap = document.getElementById('config-autre-wrap');
-    grid.innerHTML = '';
-    autreWrap.classList.add('hidden');
+function configFmtPrice(n) {
+    return n.toLocaleString('fr-FR') + ' €';
+}
 
-    if (brand === 'autre') {
-        autreWrap.classList.remove('hidden');
-        document.getElementById('config-autre-input').focus();
+function configEscapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[c]);
+}
+
+function configRenderModelsGrid(brand) {
+    const grid = document.getElementById('config-models-grid');
+    if (!grid) return;
+    const models = MODELES[brand] || [];
+    const buttons = [
+        `<button class="config-brand-btn config-model-all" data-model="all">Tous les modèles</button>`,
+        ...models.map(m => `<button class="config-brand-btn" data-model="${configEscapeHtml(m)}">${configEscapeHtml(m)}</button>`)
+    ];
+    grid.innerHTML = buttons.join('');
+    grid.querySelectorAll('[data-model]').forEach(btn => {
+        btn.addEventListener('click', () => configSelectModel(btn.dataset.model));
+    });
+}
+
+function configRenderResults() {
+    const grid = document.getElementById('config-results-grid');
+    const empty = document.getElementById('config-results-empty');
+    if (!grid || !empty) return;
+
+    const brand = configState.brand;
+    const model = configState.model;
+    const products = PRODUCTS_BY_BRAND[brand] || [];
+
+    // Filtre par modèle si choisi
+    const filtered = model
+        ? products.filter(p => p.modeles.includes('all') || p.modeles.includes(model))
+        : products;
+
+    if (!filtered.length) {
+        grid.innerHTML = '';
+        empty.hidden = false;
         return;
     }
 
-    const models = MODELES[brand] || [];
-    models.forEach(m => {
-        const btn = document.createElement('button');
-        btn.className = 'config-brand-btn';
-        btn.textContent = m;
-        btn.addEventListener('click', () => selectModel(m));
-        grid.appendChild(btn);
-    });
+    empty.hidden = true;
+
+    grid.innerHTML = filtered.map(p => {
+        const modelsLabel = p.modeles.includes('all')
+            ? 'Compatible tous modèles'
+            : 'Compatible : ' + p.modeles.join(', ');
+        const encodedName = configEscapeHtml(p.name);
+        return `
+            <article class="cat-card">
+                <div class="cat-card-media">
+                    <i class="fa-solid ${p.icon} cat-card-icon"></i>
+                </div>
+                <div class="cat-card-body">
+                    <h4>${encodedName}</h4>
+                    <p>${configEscapeHtml(modelsLabel)}</p>
+                    <div class="cat-card-bottom">
+                        <span class="cat-price">${p.price}<span class="cat-price-cents">,00 €</span></span>
+                        <button class="cat-buy-btn cat-acc-add"
+                                data-add-acc="${p.id}"
+                                data-name="${encodedName}"
+                                data-price="${p.price}">+ Panier</button>
+                    </div>
+                </div>
+            </article>
+        `;
+    }).join('');
+    // Les boutons .cat-acc-add sont captés par l'event delegation de catalogue.js
 }
 
-function selectBrand(brand) {
+function configSelectBrand(brand) {
     configState.brand = brand;
-    configState.model = null;
-    configState.univers = null;
-    renderModels(brand);
-    goToStep(2);
+    configState.model = '';
+
+    // "Autre véhicule" → redirige directement vers les accessoires universels
+    if (brand === 'autre') {
+        document.getElementById('accessoires')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+    }
+
+    // Affiche le nom de la marque dans les en-têtes
+    const brandName = NOMS_MARQUES[brand] || brand;
+    const stepBrandEl = document.getElementById('config-step-brand');
+    if (stepBrandEl) stepBrandEl.textContent = brandName;
+
+    // Remplit la grille des modèles pour l'étape 2
+    configRenderModelsGrid(brand);
+
+    configGoToStep(2);
+
+    // Persister pour usage éventuel cross-page
+    try {
+        localStorage.setItem('xv-config-result', JSON.stringify({
+            brand, brandName
+        }));
+    } catch (e) {}
 }
 
-function selectModel(model) {
-    configState.model = model;
-    goToStep(3);
-}
+function configSelectModel(model) {
+    configState.model = (model === 'all') ? '' : model;
 
-function selectUnivers(univers) {
-    configState.univers = univers;
-    renderRecap();
-    goToStep(4);
-}
-
-function renderRecap() {
-    const container = document.getElementById('config-recap-rows');
-    if (!container) return;
+    // En-tête résultats : "Votre BYD Seal" ou "Votre BYD (tous modèles)"
     const brandName = NOMS_MARQUES[configState.brand] || configState.brand;
-    const rows = [
-        { label: 'Marque',  value: brandName },
-        { label: 'Modèle',  value: configState.model || '—' },
-        { label: 'Univers', value: NOMS_UNIVERS[configState.univers] || configState.univers }
-    ];
-    container.innerHTML = rows.map(r => `
-        <div class="config-recap-row">
-            <span class="config-recap-label">${r.label}</span>
-            <span class="config-recap-value">${r.value}</span>
-        </div>
-    `).join('');
-}
+    const nameEl = document.getElementById('config-results-name');
+    if (nameEl) {
+        nameEl.textContent = configState.model
+            ? `${brandName} ${configState.model}`
+            : `${brandName} (tous modèles)`;
+    }
 
-function prefillContactForm() {
-    const brandName = NOMS_MARQUES[configState.brand] || configState.brand;
-    const vehicleStr = configState.model
-        ? `${brandName} ${configState.model}`
-        : brandName;
-    const univers = NOMS_UNIVERS[configState.univers] || configState.univers;
-
-    const msg = `Bonjour,
-
-Je souhaite obtenir un devis personnalisé pour mon ${vehicleStr}.
-
-Univers sélectionné via le configurateur : ${univers}.
-
-Pourriez-vous me proposer les solutions adaptées à mon véhicule et me communiquer les tarifs correspondants ?
-
-Je reste disponible pour tout échange complémentaire.
-
-Cordialement`;
-
-    const vehicleInput = document.getElementById('form-vehicle');
-    const messageInput = document.getElementById('form-message');
-    const subjectSelect = document.getElementById('form-subject');
-
-    if (vehicleInput) vehicleInput.value = vehicleStr.toUpperCase();
-    if (subjectSelect) subjectSelect.value = 'Demande de devis';
-    if (messageInput) messageInput.value = msg;
-
-    if (typeof window._resizeMessageTextarea === 'function') window._resizeMessageTextarea();
-
-    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    configRenderResults();
+    configGoToStep(3);
 }
 
 function preselectBrand(brand) {
-    selectBrand(brand);
-    document.getElementById('configurateur').scrollIntoView({ behavior: 'smooth' });
+    configSelectBrand(brand);
+    document.getElementById('configurateur')?.scrollIntoView({ behavior: 'smooth' });
 }
 
 function initConfigurator() {
-    // Boutons marques (step 1)
-    document.querySelectorAll('.config-brand-btn[data-brand]').forEach(btn => {
-        btn.addEventListener('click', () => selectBrand(btn.dataset.brand));
+    // Boutons marques (étape 1)
+    document.querySelectorAll('#configurateur .config-step[data-step="1"] .config-brand-btn[data-brand]').forEach(btn => {
+        btn.addEventListener('click', () => configSelectBrand(btn.dataset.brand));
     });
 
-    // Boutons univers (step 3)
-    document.querySelectorAll('.config-univers-btn[data-univers]').forEach(btn => {
-        btn.addEventListener('click', () => selectUnivers(btn.dataset.univers));
+    // Boutons retour (étapes 2 et 3) — config-back-btn OU config-back-cta
+    document.querySelectorAll('#configurateur [data-target]').forEach(btn => {
+        btn.addEventListener('click', () => configGoToStep(parseInt(btn.dataset.target)));
     });
 
-    // Boutons retour
-    document.querySelectorAll('.config-back-btn[data-target]').forEach(btn => {
-        btn.addEventListener('click', () => goToStep(parseInt(btn.dataset.target)));
-    });
-
-    // Confirm "autre véhicule"
-    const confirmBtn = document.getElementById('config-autre-confirm');
-    if (confirmBtn) {
-        confirmBtn.addEventListener('click', () => {
-            const val = document.getElementById('config-autre-input').value.trim();
-            if (val) selectModel(val);
-        });
-    }
-
-    // Enter dans le champ autre
-    const autreInput = document.getElementById('config-autre-input');
-    if (autreInput) {
-        autreInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const val = autreInput.value.trim();
-                if (val) selectModel(val);
-            }
-        });
-    }
-
-    // Logos marques du bandeau
+    // Logos marques du hero marquee → pré-sélection
     document.querySelectorAll('.brand-logo-link[data-brand]').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            preselectBrand(link.dataset.brand);
+            const b = link.dataset.brand;
+            if (NOMS_MARQUES[b]) {
+                preselectBrand(b);
+            } else {
+                document.getElementById('configurateur')?.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 }

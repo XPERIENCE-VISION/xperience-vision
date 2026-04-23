@@ -11,7 +11,7 @@
     "fetch:images:dry": "node scripts/fetch-product-images.js --dry-run",
     "rename:images": "node scripts/rename-static-images.js",
     "apply:images": "node scripts/apply-product-images.js",
-    "build": "npm run build:css"
+    "build": "npm run build:css && npm run build:webp"
   },
   "devDependencies": {
     "dotenv": "^16.6.1",

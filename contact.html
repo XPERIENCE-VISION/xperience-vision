@@ -11,15 +11,78 @@
     <meta property="og:site_name" content="XPERIENCE VISION">
     <meta property="og:title" content="Contact | XPERIENCE VISION">
     <meta property="og:description" content="Demande spécifique, partenariat ou SAV — l'équipe XPERIENCE VISION vous répond sous 24h.">
-    <meta property="og:image" content="https://xperiencevision.fr/img/hero-accueil.jpeg">
-    <meta property="og:url" content="https://xperiencevision.fr/contact.html">
+    <meta property="og:image" content="https://xperiencevision.com/img/accueil-installation-ecran-voiture-xperience-vision.jpeg">
+    <meta property="og:url" content="https://xperiencevision.com/contact.html">
     <meta property="og:locale" content="fr_FR">
-    <link rel="canonical" href="https://xperiencevision.fr/contact.html">
+    <link rel="canonical" href="https://xperiencevision.com/contact.html">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact | XPERIENCE VISION">
+    <meta name="twitter:description" content="Demande spécifique, partenariat ou SAV — l'équipe XPERIENCE VISION vous répond sous 24h.">
+    <meta name="twitter:image" content="https://xperiencevision.com/img/accueil-installation-ecran-voiture-xperience-vision.jpeg">
+
+    <!-- Preconnect / DNS-prefetch tiers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://js.stripe.com" crossorigin>
+    <link rel="dns-prefetch" href="https://api.stripe.com">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap">
 
     <link rel="stylesheet" href="dist/tailwind.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="catalogue.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- JSON-LD : Organization + LocalBusiness + ContactPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://xperiencevision.com/#organization",
+                "name": "XPERIENCE VISION",
+                "legalName": "XPERIENCE VISION SAS",
+                "url": "https://xperiencevision.com",
+                "logo": "https://xperiencevision.com/img/accueil-installation-ecran-voiture-xperience-vision.jpeg",
+                "email": "contact@xperience-vision.fr",
+                "telephone": "+33766306193",
+                "founder": { "@type": "Person", "name": "Yassine ZAHAF" },
+                "vatID": "FR70100376169",
+                "taxID": "100376169"
+            },
+            {
+                "@type": "LocalBusiness",
+                "@id": "https://xperiencevision.com/#localbusiness",
+                "name": "XPERIENCE VISION",
+                "parentOrganization": { "@id": "https://xperiencevision.com/#organization" },
+                "url": "https://xperiencevision.com",
+                "image": "https://xperiencevision.com/img/accueil-installation-ecran-voiture-xperience-vision.jpeg",
+                "priceRange": "€€€",
+                "email": "contact@xperience-vision.fr",
+                "telephone": "+33766306193",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "10 av. Fridingen",
+                    "postalCode": "77100",
+                    "addressLocality": "Nanteuil-lès-Meaux",
+                    "addressCountry": "FR"
+                },
+                "areaServed": { "@type": "Country", "name": "France" }
+            },
+            {
+                "@type": "ContactPage",
+                "url": "https://xperiencevision.com/contact.html",
+                "name": "Contact — XPERIENCE VISION",
+                "inLanguage": "fr-FR",
+                "isPartOf": { "@id": "https://xperiencevision.com/#website" }
+            }
+        ]
+    }
+    </script>
 
     <style>
         body.page-contact section {
@@ -93,57 +156,6 @@
             margin: 0 auto;
         }
 
-        .contact-quick-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            max-width: 900px;
-            margin: 3rem auto 0;
-        }
-
-        @media (min-width: 768px) {
-            .contact-quick-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        }
-
-        .contact-quick-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 1.2rem;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            display: block;
-            color: white;
-        }
-
-        .contact-quick-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .contact-quick-icon {
-            font-size: 1.5rem;
-            color: #ffb84d;
-            margin-bottom: 0.7rem;
-        }
-
-        .contact-quick-card.wa .contact-quick-icon { color: #25D366; }
-
-        .contact-quick-card h3 {
-            font-size: 11px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: white;
-            margin-bottom: 0.4rem;
-        }
-
-        .contact-quick-card p {
-            font-size: 0.85rem;
-            color: #aaa;
-        }
-
         textarea#form-message {
             min-height: 180px;
             resize: vertical;
@@ -157,9 +169,65 @@
         }
 
         /* Touch target garanti pour tous les boutons de la page */
-        #contact-form button[type="submit"],
-        .contact-quick-card {
+        #contact-form button[type="submit"] {
             min-height: 44px;
+        }
+
+        /* Bandeau de feedback (succès / erreur) */
+        .form-banner {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            border-radius: 1rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.25rem;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            animation: bannerSlide 0.4s ease;
+        }
+
+        .form-banner i {
+            font-size: 1.15rem;
+            flex-shrink: 0;
+        }
+
+        .form-banner.success {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #10B981;
+        }
+
+        .form-banner.error {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #EF4444;
+        }
+
+        @keyframes bannerSlide {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-rgpd {
+            margin-top: 0.9rem;
+            font-size: 9px;
+            text-align: center;
+            color: #666;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .form-rgpd a {
+            color: #aaa;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+
+        .form-rgpd a:hover {
+            color: #fff;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -178,7 +246,7 @@
             <a href="index.html" class="hover:text-gray-400 transition">XPERIENCE<span class="text-gray-500 font-light">VISION</span></a>
         </div>
         <div class="hidden md:flex space-x-10 text-[12px] uppercase font-bold tracking-[0.2em]">
-            <a href="index.html#installation" class="hover:text-gray-400 transition">Catalogue</a>
+            <a href="index.html" class="hover:text-gray-400 transition">Catalogue</a>
             <a href="histoire.html" class="hover:text-gray-400 transition">Notre Histoire</a>
             <a href="contact.html" class="hover:text-gray-400 transition">Contact</a>
         </div>
@@ -193,10 +261,7 @@
             </button>
         </div>
         <div id="mobile-dropdown" class="absolute top-full left-0 w-full bg-[#0a0a0a] border-b border-white/10 backdrop-blur-2xl hidden flex-col p-4 space-y-4 shadow-2xl">
-            <a href="index.html#installation" class="mobile-item">Catalogue</a>
-            <a href="index.html#configurateur" class="mobile-item">Configurateur</a>
-            <a href="index.html#accessoires" class="mobile-item">Produits</a>
-            <a href="index.html#faq" class="mobile-item">FAQ</a>
+            <a href="index.html" class="mobile-item">Catalogue</a>
             <a href="histoire.html" class="mobile-item">Notre Histoire</a>
             <a href="contact.html" class="mobile-item">Contact</a>
         </div>
@@ -211,15 +276,19 @@
                 <span class="contact-hero-eyebrow">Contact</span>
                 <h1 class="contact-hero-title">Une question ?<br><span class="gradient-text">On vous répond.</span></h1>
                 <p class="contact-hero-sub">
-                    Demande hors-norme, partenariat, SAV — réponse garantie sous 48h
+                    Demande hors-norme, partenariat, SAV — réponse garantie sous 48h jours ouvrés
                 </p>
             </div>
         </section>
 
         <section class="px-6">
             <div class="max-w-4xl mx-auto">
-                <form id="contact-form" name="contact" method="POST" data-netlify="true" class="space-y-3 md:space-y-4">
+                <div id="form-banner" class="form-banner" hidden></div>
+                <form id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="space-y-3 md:space-y-4">
                     <input type="hidden" name="form-name" value="contact">
+                    <p class="hidden" aria-hidden="true">
+                        <label>Ne pas remplir : <input name="bot-field"></label>
+                    </p>
 
                     <div class="grid md:grid-cols-2 gap-3 md:gap-4">
                         <div class="group">
@@ -252,9 +321,10 @@
                             </label>
                             <select id="form-subject" name="sujet" required
                                 class="w-full bg-zinc-900/50 border border-white/5 rounded-xl px-5 py-3 text-sm focus:outline-none focus:border-white/20 transition italic font-bold uppercase text-zinc-400">
-                                <option value="Demande de devis">Demande de devis</option>
-                                <option value="Partenariat professionnel">Partenariat professionnel</option>
+                                <option value="Conseil avant achat">Conseil avant achat</option>
+                                <option value="Devis sur-mesure / installation">Devis sur-mesure / installation</option>
                                 <option value="Service après-vente">Service après-vente</option>
+                                <option value="Concession / Partenariat pro">Concession / Partenariat pro</option>
                                 <option value="Autre">Autre</option>
                             </select>
                         </div>
@@ -272,6 +342,9 @@
                         class="w-full btn-premium py-4 rounded-xl font-black uppercase text-xs tracking-[0.3em]">
                         Envoyer le message
                     </button>
+                    <p class="form-rgpd">
+                        En envoyant ce message, vous acceptez notre <a href="politique-confidentialite.html">politique de confidentialité</a>
+                    </p>
                 </form>
             </div>
         </section>
@@ -282,6 +355,16 @@
             <div>
                 <div class="text-3xl font-black mb-6 italic uppercase tracking-tighter">XPERIENCE <span class="text-gray-600">VISION</span></div>
                 <p class="text-gray-500 text-xs uppercase tracking-[0.2em] max-w-sm leading-loose font-bold">L'excellence digitale embarquée. <br>Installation premium pour véhicules d'exception.</p>
+                <div class="mt-8 space-y-3 text-gray-500 text-[10px] uppercase tracking-[0.2em] font-bold">
+                    <p class="flex items-start gap-3">
+                        <i class="fa-solid fa-location-dot text-[#bf953f] mt-0.5"></i>
+                        <span>10 av. Fridingen<br>77100 Nanteuil-lès-Meaux</span>
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <i class="fa-solid fa-clock text-[#bf953f]"></i>
+                        <span>Lun - Ven · 9h - 18h</span>
+                    </p>
+                </div>
             </div>
             <div class="grid grid-cols-2 gap-16 uppercase text-[10px] font-black tracking-[0.3em] text-gray-500">
                 <div class="flex flex-col space-y-6">
@@ -481,6 +564,29 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script src="script.js"></script>
     <script src="catalogue.js"></script>
-    <script src="js/concessions.js"></script>
+    <script>
+        // Pré-remplit l'objet du formulaire selon le paramètre ?sujet=
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const sujet = params.get('sujet');
+            if (!sujet) return;
+            const mapping = {
+                'partenaire': 'Concession / Partenariat pro',
+                'conseil': 'Conseil avant achat',
+                'devis': 'Devis sur-mesure / installation',
+                'sav': 'Service après-vente',
+                'autre': 'Autre',
+            };
+            const target = mapping[sujet.toLowerCase()];
+            if (!target) return;
+            const select = document.getElementById('form-subject');
+            if (!select) return;
+            const opt = Array.from(select.options).find(o => o.value === target);
+            if (opt) {
+                select.value = target;
+                select.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        })();
+    </script>
 </body>
 </html>

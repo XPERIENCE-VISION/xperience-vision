@@ -240,7 +240,7 @@
                 Votre paiement a bien été reçu. Un email de confirmation vous a été envoyé à votre adresse, avec le détail de votre commande.
             </p>
             <p class="success-text" id="service-extra" hidden>
-                Votre <strong>rendez-vous est validé</strong> à la concession choisie. Vous recevrez un rappel 24h avant. Présentez-vous à l'heure convenue avec votre véhicule.
+                Votre <strong>rendez-vous est validé</strong> au lieu d'installation choisi (domicile ou garage XPERIENCE VISION). Vous recevrez un rappel 24h avant. Présentez-vous ou tenez-vous disponible à l'heure convenue avec votre véhicule.
             </p>
             <p class="success-text" id="produit-extra" hidden>
                 Votre commande sera expédiée sous <strong>3 à 5 jours ouvrés</strong>. Vous recevrez un email avec le numéro de suivi dès l'expédition.
@@ -264,7 +264,6 @@
         try {
             localStorage.removeItem('xv-cart');
             localStorage.removeItem('xv-cat-carts'); // ancien format (migration)
-            localStorage.removeItem('xv-selected-concession');
         } catch (e) {}
 
         // Affiche l'ID de session si présent dans l'URL

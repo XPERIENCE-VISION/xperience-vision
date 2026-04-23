@@ -9,7 +9,7 @@
  * Tous inline CSS (compatibilité Outlook, Gmail, etc.).
  */
 
-const SITE_URL = process.env.SITE_URL || 'https://xperiencevision.fr';
+const SITE_URL = process.env.SITE_URL || 'https://xperiencevision.com';
 
 function fmtPrice(cents) {
     return (cents / 100).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
@@ -198,7 +198,7 @@ function wrap(content, title) {
                 <p style="color:#888;font-weight:700;">XPERIENCE VISION</p>
                 <p>10 avenue Fridingen · 77100 Nanteuil-lès-Meaux</p>
                 <p class="footer-links">
-                    <a href="${SITE_URL}">xperiencevision.fr</a>
+                    <a href="${SITE_URL}">xperiencevision.com</a>
                     &nbsp;·&nbsp;
                     <a href="mailto:contact@xperience-vision.fr">contact@xperience-vision.fr</a>
                 </p>
@@ -257,7 +257,7 @@ function adminOrder({ session, items, customer, lieuRdv, booking, hasServices, h
         const lieuIsGarage = lieuRdv?.type === 'garage';
         servicesBlock = `
             <div class="info-box">
-                <p><strong>🛠️ ${lieuIsGarage ? 'PRESTATION EN GARAGE XV' : 'PRESTATION À DOMICILE'}</strong></p>
+                <p><strong>🛠️ ${lieuIsGarage ? 'PRESTATION EN GARAGE XPERIENCE VISION' : 'PRESTATION À DOMICILE'}</strong></p>
             </div>
             ${renderMetaGrid([
                 { label: 'Véhicule',     value: formatVehicle(customer) },

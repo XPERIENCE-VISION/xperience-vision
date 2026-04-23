@@ -1,5 +1,5 @@
 /* --- 1. CONFIGURATION & VARIABLES --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+/* Google Fonts chargé via <link rel="stylesheet"> dans chaque <head> pour éviter le render-blocking @import */
 
 :root {
     --accent: #ffffff;
@@ -8,12 +8,19 @@
     --bg-dark: #0a0a0a;
 }
 
+html {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     letter-spacing: -0.01em;
     background-color: var(--bg-dark);
     color: white;
     overflow-x: hidden;
+    max-width: 100vw;
+    position: relative;
 }
 
 section {
@@ -27,7 +34,8 @@ section {
 }
 
 /* Page Réalisations : sections à hauteur naturelle */
-.page-realisations section {
+.page-realisations section,
+.page-legal section {
     height: auto !important;
     min-height: unset !important;
     max-height: unset !important;
@@ -104,10 +112,23 @@ footer {
 
 /* --- 3. NAVIGATION & HEADER --- */
 #navbar {
-    padding-top: 0.75rem !important;
-    padding-bottom: 0.75rem !important;
-    background: rgba(10, 10, 10, 0.9) !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    background: rgba(10, 10, 10, 0.92) !important;
     z-index: 100;
+    height: 64px;
+    min-height: 64px;
+}
+
+@media (min-width: 768px) {
+    #navbar {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        height: 72px;
+        min-height: 72px;
+    }
 }
 
 /* Menu Mobile Base */
@@ -115,7 +136,7 @@ footer {
     background: rgba(10, 10, 10, 0.98) !important;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    z-index: 40;
+    z-index: 101;
     display: none;
     /* Géré par JS */
     flex-direction: column;
@@ -338,6 +359,34 @@ footer {
     opacity: 0.25;
 }
 
+/* Marques cliquables dans le hero USP */
+.hero-usp-brands {
+    display: inline;
+}
+
+.hero-usp-brand {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 900;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+    cursor: pointer;
+    padding: 0 0.05em;
+}
+
+@media (hover: hover) {
+    .hero-usp-brand:hover {
+        color: #fcf6ba;
+        text-shadow: 0 0 14px rgba(252, 246, 186, 0.35);
+    }
+}
+
+.hero-usp-brand-dot {
+    display: inline-block;
+    margin: 0 0.15em;
+    opacity: 0.4;
+    font-weight: 400;
+}
+
 @media (max-width: 640px) {
     .hero-usp {
         font-size: 10px;
@@ -439,9 +488,9 @@ footer {
 }
 
 #faq summary {
-    padding: 22px 28px;
+    padding: clamp(16px, 3vw, 22px) clamp(18px, 4vw, 28px);
     cursor: pointer;
-    font-size: 12px;
+    font-size: clamp(12px, 2.4vw, 14px);
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -450,7 +499,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: clamp(10px, 2.5vw, 20px);
     user-select: none;
     transition: color 0.2s;
 }
@@ -501,15 +550,14 @@ footer {
 }
 
 #faq details p {
-    padding: 0 28px 24px;
+    padding: 16px clamp(18px, 4vw, 28px) clamp(18px, 4vw, 24px);
     color: #888;
-    font-size: 13px;
-    line-height: 1.85;
+    font-size: clamp(13px, 2.6vw, 15px);
+    line-height: 1.75;
     font-weight: 500;
     text-transform: none;
     letter-spacing: 0.01em;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 16px;
 }
 
 #faq details strong {
@@ -619,6 +667,87 @@ footer {
 
     .config-step-labels span:not(:last-child) {
         margin-right: 64px;
+    }
+}
+
+/* CTA aide : sous la grille des marques */
+.config-help-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 760px;
+    margin: 1.5rem auto 0;
+    padding: 0.9rem 1.2rem;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015) 60%, transparent);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+    color: #fff;
+}
+
+@media (hover: hover) {
+    .config-help-cta:hover {
+        border-color: rgba(255, 255, 255, 0.22);
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03) 60%, transparent);
+        transform: translateY(-1px);
+    }
+}
+
+.config-help-cta-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+}
+
+.config-help-cta-text strong {
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: #fff;
+}
+
+.config-help-cta-text span {
+    font-size: 0.75rem;
+    color: #a0a0a0;
+    letter-spacing: 0.02em;
+}
+
+.config-help-cta-btn {
+    flex-shrink: 0;
+    padding: 0.55rem 1.1rem;
+    background: #fff;
+    color: #000;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+}
+
+@media (max-width: 640px) {
+    .config-help-cta {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 1.2rem;
+        padding: 0.9rem 1rem 1rem;
+        text-align: center;
+        gap: 0.7rem;
+    }
+    .config-help-cta-text strong {
+        font-size: 0.8rem;
+    }
+    .config-help-cta-text span {
+        font-size: 0.7rem;
+    }
+    .config-help-cta-btn {
+        align-self: center;
+        padding: 0.5rem 1rem;
+        font-size: 9px;
     }
 }
 
@@ -872,6 +1001,11 @@ select option {
         padding-bottom: 20px !important;
     }
 
+    /* Hero histoire : doit passer sous navbar (64px) + histoire-tabs (~62px) */
+    body.page-histoire .histoire-hero {
+        padding-top: 10rem !important;
+    }
+
     /* FAQ compact : les 8 items fermés tiennent dans 100dvh sans scroll interne */
     #faq h2 {
         margin-bottom: 16px !important;
@@ -883,8 +1017,8 @@ select option {
     }
 
     #faq summary {
-        padding: 12px 16px !important;
-        font-size: 11px !important;
+        padding: 14px 18px !important;
+        font-size: 12px !important;
         gap: 10px !important;
     }
 
@@ -1023,10 +1157,10 @@ select option {
    ===================================================================== */
 .marquee-wrap {
     overflow: hidden;
-    max-width: 1180px;
+    max-width: 1330px;
     margin: 0 auto;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
 }
 
 .marquee-track {
@@ -1048,6 +1182,7 @@ select option {
     padding: 6px 32px;
     transition: opacity 0.3s;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .marquee-brand:hover {

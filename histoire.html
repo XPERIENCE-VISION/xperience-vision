@@ -11,15 +11,69 @@
     <meta property="og:site_name" content="XPERIENCE VISION">
     <meta property="og:title" content="Notre Histoire | XPERIENCE VISION">
     <meta property="og:description" content="Intégrateur digital automobile premium — installations, partenariats concessions, expertise marques chinoises.">
-    <meta property="og:image" content="https://xperiencevision.fr/img/hero-realisations.jpeg">
-    <meta property="og:url" content="https://xperiencevision.fr/histoire.html">
+    <meta property="og:image" content="https://xperiencevision.com/img/realisations-installations-ecrans-voiture-premium.jpeg">
+    <meta property="og:url" content="https://xperiencevision.com/histoire.html">
     <meta property="og:locale" content="fr_FR">
-    <link rel="canonical" href="https://xperiencevision.fr/histoire.html">
+    <link rel="canonical" href="https://xperiencevision.com/histoire.html">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Notre Histoire | XPERIENCE VISION">
+    <meta name="twitter:description" content="Intégrateur digital automobile premium — installations, partenariats concessions, expertise marques chinoises.">
+    <meta name="twitter:image" content="https://xperiencevision.com/img/realisations-installations-ecrans-voiture-premium.jpeg">
+
+    <!-- Preconnect / DNS-prefetch tiers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap">
 
     <link rel="stylesheet" href="dist/tailwind.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="catalogue.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- JSON-LD : Organization + LocalBusiness -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://xperiencevision.com/#organization",
+                "name": "XPERIENCE VISION",
+                "legalName": "XPERIENCE VISION SAS",
+                "url": "https://xperiencevision.com",
+                "logo": "https://xperiencevision.com/img/accueil-installation-ecran-voiture-xperience-vision.jpeg",
+                "email": "contact@xperience-vision.fr",
+                "telephone": "+33766306193",
+                "founder": { "@type": "Person", "name": "Yassine ZAHAF" },
+                "vatID": "FR70100376169",
+                "taxID": "100376169"
+            },
+            {
+                "@type": "LocalBusiness",
+                "@id": "https://xperiencevision.com/#localbusiness",
+                "name": "XPERIENCE VISION",
+                "parentOrganization": { "@id": "https://xperiencevision.com/#organization" },
+                "url": "https://xperiencevision.com",
+                "image": "https://xperiencevision.com/img/accueil-installation-ecran-voiture-xperience-vision.jpeg",
+                "priceRange": "€€€",
+                "email": "contact@xperience-vision.fr",
+                "telephone": "+33766306193",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "10 av. Fridingen",
+                    "postalCode": "77100",
+                    "addressLocality": "Nanteuil-lès-Meaux",
+                    "addressCountry": "FR"
+                },
+                "areaServed": { "@type": "Country", "name": "France" }
+            }
+        ]
+    }
+    </script>
 
     <style>
         /* Sections à hauteur naturelle (pas plein écran) */
@@ -33,7 +87,7 @@
         /* Hero histoire */
         .histoire-hero {
             position: relative;
-            padding: 9rem 1.5rem 5rem;
+            padding: clamp(11rem, 16vw, 12rem) clamp(1rem, 3vw, 1.5rem) clamp(3rem, 8vw, 5rem);
             text-align: center;
             overflow: hidden;
         }
@@ -80,10 +134,10 @@
 
         .histoire-hero-sub {
             color: #a0a0a0;
-            font-size: 12px;
+            font-size: clamp(11px, 1.8vw, 13px);
             text-transform: uppercase;
             letter-spacing: 0.25em;
-            line-height: 2.2;
+            line-height: 2;
             font-weight: 600;
             max-width: 700px;
             margin: 0 auto;
@@ -126,7 +180,7 @@
         }
 
         .stat-label {
-            font-size: 9px;
+            font-size: clamp(9px, 1.6vw, 11px);
             color: #888;
             text-transform: uppercase;
             letter-spacing: 0.25em;
@@ -258,6 +312,217 @@
             font-weight: 700;
         }
 
+        /* Pillar modal — lightbox enrichi (image + description + tags + CTA)
+           Réutilisé par #partenaire-modal (même thème visuel, contenu différent) */
+        #pillar-modal,
+        #partenaire-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        #pillar-modal.open,
+        #partenaire-modal.open { display: flex; }
+
+        .pillar-modal-card {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            max-height: 90vh;
+            background: linear-gradient(180deg, #141414, #0a0a0a);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.2rem;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: pillar-modal-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes pillar-modal-in {
+            from { opacity: 0; transform: translateY(20px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @media (min-width: 768px) {
+            .pillar-modal-card { flex-direction: row; }
+        }
+
+        .pillar-modal-media {
+            flex: 1 1 55%;
+            background: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+            min-height: 260px;
+        }
+
+        .pillar-modal-media picture,
+        .pillar-modal-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .pillar-modal-body {
+            flex: 1 1 45%;
+            padding: 2rem 2rem 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            overflow-y: auto;
+        }
+
+        .pillar-modal-title {
+            font-size: 1.7rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            color: #fff;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        .pillar-modal-desc {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .pillar-modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-top: 0.2rem;
+        }
+
+        .pillar-modal-tag {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 0.4rem 0.85rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ddd;
+        }
+
+        .pillar-modal-cta {
+            margin-top: auto;
+            align-self: center;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.85rem 1.6rem;
+            background: #fff;
+            color: #0a0a0a;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .pillar-modal-cta i { font-size: 0.85em; transition: transform 0.3s ease; }
+        @media (hover: hover) {
+            .pillar-modal-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255, 255, 255, 0.2); }
+            .pillar-modal-cta:hover i { transform: translateX(4px); }
+        }
+
+        #pillar-modal .pillar-modal-close,
+        #pillar-modal .pillar-modal-prev,
+        #pillar-modal .pillar-modal-next,
+        #partenaire-modal .pillar-modal-close,
+        #partenaire-modal .pillar-modal-prev,
+        #partenaire-modal .pillar-modal-next {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            backdrop-filter: blur(8px);
+            z-index: 2;
+        }
+        #pillar-modal .pillar-modal-close:hover,
+        #pillar-modal .pillar-modal-prev:hover,
+        #pillar-modal .pillar-modal-next:hover,
+        #partenaire-modal .pillar-modal-close:hover,
+        #partenaire-modal .pillar-modal-prev:hover,
+        #partenaire-modal .pillar-modal-next:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        #pillar-modal .pillar-modal-close,
+        #partenaire-modal .pillar-modal-close { top: 0.9rem; right: 0.9rem; }
+        #pillar-modal .pillar-modal-prev,
+        #partenaire-modal .pillar-modal-prev { top: 50%; left: 0.9rem; transform: translateY(-50%); }
+        #pillar-modal .pillar-modal-next,
+        #partenaire-modal .pillar-modal-next { top: 50%; right: 0.9rem; transform: translateY(-50%); }
+
+        /* Variante partenaire : logo s'affiche en grand dans la zone media au lieu d'une photo */
+        #partenaire-modal .pillar-modal-media {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem;
+            background: #000;
+        }
+        #partenaire-modal .pillar-modal-media.media-light {
+            background: #fff;
+        }
+        /* Tous les logos à la même largeur (comme AutoDetail), proportions respectées */
+        #partenaire-modal .pillar-modal-media picture {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 75%;
+            max-width: 360px;
+        }
+        #partenaire-modal .pillar-modal-media img {
+            width: 100%;
+            height: auto;
+            max-height: 70%;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+        /* Cas AutoDetail (img directe sans <picture>) : même contrainte de largeur */
+        #partenaire-modal .pillar-modal-media > img {
+            width: 75%;
+            max-width: 360px;
+            height: auto;
+        }
+
+        .pillar-modal-counter {
+            position: absolute;
+            bottom: 0.9rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 800;
+            background: rgba(0, 0, 0, 0.45);
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+        }
+
         section[id] { scroll-margin-top: 100px; }
 
         @media (prefers-reduced-motion: reduce) {
@@ -272,9 +537,11 @@
            SOUS-MENU ONGLETS (Notre histoire / Notre gamme / Partenariats)
            ============================================================ */
         .histoire-tabs {
-            position: sticky;
+            position: fixed;
             top: 64px;
-            z-index: 40;
+            left: 0;
+            right: 0;
+            z-index: 99;
             background: rgba(8, 8, 8, 0.95);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
@@ -282,8 +549,12 @@
             padding: 0.6rem 1rem;
         }
 
-        @media (max-width: 768px) {
-            .histoire-tabs { top: 56px; padding: 0.5rem 0.5rem; }
+        @media (min-width: 768px) {
+            .histoire-tabs { top: 72px; }
+        }
+
+        @media (max-width: 767px) {
+            .histoire-tabs { padding: 0.5rem 0.5rem; }
         }
 
         .histoire-tabs-inner {
@@ -330,11 +601,13 @@
             border-color: rgba(255, 255, 255, 0.15);
         }
 
-        .histoire-tab i { font-size: 0.85em; }
+        .histoire-tab i { font-size: 1.3em; }
 
-        @media (max-width: 540px) {
-            .histoire-tab { padding: 0.55rem 0.9rem; letter-spacing: 0.12em; font-size: 10px; }
+        /* Mobile + tablette : icônes seules, plus grosses */
+        @media (max-width: 1023px) {
+            .histoire-tab { padding: 0.55rem 0.95rem; letter-spacing: 0.12em; font-size: 10px; }
             .histoire-tab span { display: none; }
+            .histoire-tab i { font-size: 1.4rem; }
         }
 
         .histoire-panel[hidden] { display: none; }
@@ -666,6 +939,1211 @@
             letter-spacing: -0.01em;
             margin: 0;
         }
+
+        /* ============================================================
+           REFONTE — CHAPITRES NARRATIFS v2
+           ============================================================ */
+        .chap-section { position: relative; overflow: hidden; }
+
+        .chap-bignum {
+            position: absolute;
+            top: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(9rem, 26vw, 22rem);
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: -0.08em;
+            line-height: 0.85;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .chap-section .chap-inner { position: relative; z-index: 1; }
+
+        .chap-eyebrow {
+            transition: transform 0.6s ease, opacity 0.6s ease;
+        }
+
+        /* Tableau chiffres refondé (Expertise / Réseaux) */
+        .stat-table {
+            margin: 3rem auto;
+            max-width: 860px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+        }
+
+        .stat-table-head {
+            display: grid;
+            grid-template-columns: 1fr;
+            padding: 1.25rem 1.5rem;
+            background: rgba(191, 149, 63, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+
+        .stat-table-head-label {
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #fcf6ba;
+        }
+
+        .stat-table-body {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 700px) {
+            .stat-table-body { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .stat-row {
+            padding: 2.2rem 1.5rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+            transition: background 0.4s ease;
+        }
+
+        @media (min-width: 700px) {
+            .stat-row {
+                border-top: none;
+                border-left: 1px solid rgba(255, 255, 255, 0.06);
+            }
+            .stat-row:first-child { border-left: none; }
+        }
+
+        .stat-row:hover {
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .stat-row-value {
+            font-size: clamp(2.4rem, 5vw, 3.4rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            color: #fff;
+            line-height: 1;
+            margin: 0 0 0.8rem;
+            font-style: italic;
+            background: linear-gradient(135deg, #fff 40%, #8d7536 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-row-label {
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #aaa;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .stat-row-sub {
+            display: block;
+            font-size: 9px;
+            color: #666;
+            letter-spacing: 0.15em;
+            margin-top: 0.6rem;
+            font-weight: 700;
+        }
+
+        /* Marques en chips (remplace la ligne texte) */
+        .brand-chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            max-width: 780px;
+            margin: 2.5rem auto 0;
+        }
+
+        .brand-chip {
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #ccc;
+            padding: 0.55rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        .brand-chip-gold {
+            color: #fcf6ba;
+            border-color: rgba(191, 149, 63, 0.3);
+            background: rgba(191, 149, 63, 0.05);
+        }
+
+        .brand-chip:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-2px);
+        }
+
+        /* Timeline verticale (reliée entre chapitres) */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.12) 15%,
+                rgba(191, 149, 63, 0.25) 50%,
+                rgba(255, 255, 255, 0.12) 85%,
+                transparent 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Reveal progressif amélioré */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.is-visible { opacity: 1; transform: none; }
+
+        .reveal-stagger > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: none; }
+        .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: none; }
+        .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.25s; opacity: 1; transform: none; }
+        .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.35s; opacity: 1; transform: none; }
+        .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.45s; opacity: 1; transform: none; }
+        .reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.55s; opacity: 1; transform: none; }
+
+        /* Indicateur chapitre au-dessus titre */
+        .chap-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        .chap-indicator-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #fcf6ba;
+            box-shadow: 0 0 12px rgba(252, 246, 186, 0.5);
+        }
+
+        .chap-indicator-line {
+            width: 40px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* ============================================================
+           REFONTE — NOTRE GAMME v2
+           ============================================================ */
+        .gamme-intro {
+            padding: 4rem 1.5rem 2.5rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .gamme-intro-eyebrow {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #888;
+            padding: 0.5rem 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            margin-bottom: 1.5rem;
+        }
+
+        .gamme-intro-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            margin: 0 0 1.5rem;
+        }
+
+        .gamme-intro-sub {
+            color: #999;
+            font-size: 12px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 600;
+            line-height: 2;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .gamme-intro-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 1.8rem;
+            background: #fff;
+            color: #0a0a0a;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gamme-intro-cta i { font-size: 0.85em; transition: transform 0.3s ease; }
+        @media (hover: hover) {
+            .gamme-intro-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255, 255, 255, 0.15); }
+            .gamme-intro-cta:hover i { transform: translateX(4px); }
+        }
+
+        .gamme-pillars-cta-wrap {
+            display: flex;
+            justify-content: center;
+            margin: -3rem auto 5rem;
+            padding: 0 1.5rem;
+        }
+
+        /* Piliers (3 cartes premium) — slider horizontal mobile/tablette, grille desktop */
+        .gamme-pillars {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1rem;
+            max-width: 1400px;
+            margin: 3rem auto 5rem;
+            overflow-x: auto;
+            overflow-y: visible;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 0.75rem 1rem 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+        }
+        .gamme-pillars::-webkit-scrollbar { height: 4px; }
+        .gamme-pillars::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 999px;
+        }
+        .gamme-pillars > .gamme-pillar {
+            flex: 0 0 calc(100% - 2.5rem);
+            min-width: 0;
+            scroll-snap-align: center;
+        }
+
+        @media (min-width: 560px) and (max-width: 1023px) {
+            .gamme-pillars > .gamme-pillar { flex: 0 0 calc(60% - 0.5rem); }
+        }
+        @media (min-width: 1024px) {
+            .gamme-pillars {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+                overflow: visible;
+                scroll-snap-type: none;
+                padding: 0 1.5rem;
+            }
+            .gamme-pillars > .gamme-pillar { flex: none; scroll-snap-align: none; }
+        }
+
+        .gamme-pillar {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            background: #0f0f0f;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.5s ease,
+                        box-shadow 0.5s ease;
+            cursor: pointer;
+        }
+
+        @media (hover: hover) {
+            .gamme-pillar:hover {
+                transform: translateY(-6px);
+                border-color: rgba(255, 255, 255, 0.15);
+                box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        .gamme-pillar-media {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            background: #0a0a0a;
+        }
+
+        .gamme-pillar-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @media (hover: hover) {
+            .gamme-pillar:hover .gamme-pillar-media img { transform: scale(1.05); }
+        }
+
+        .gamme-pillar-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+        }
+
+        .gamme-pillar-body {
+            padding: 1.6rem 1.5rem 1.8rem;
+        }
+
+        .gamme-pillar-title {
+            font-size: 1.35rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: -0.01em;
+            margin: 0 0 0.8rem;
+            color: #fff;
+        }
+
+        .gamme-pillar-desc {
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: #aaa;
+            margin: 0 0 1.3rem;
+        }
+
+        .gamme-pillar-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .gamme-pillar-tag {
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #ccc;
+            padding: 0.4rem 0.7rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+        }
+
+        /* Magazine catalogue BYD */
+        .gamme-mag {
+            padding: 4rem 1.5rem 5rem;
+            background: linear-gradient(180deg, #050505, #0a0a0a);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .gamme-mag-header {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+        }
+
+        @media (min-width: 760px) {
+            .gamme-mag-header {
+                flex-direction: row;
+                align-items: flex-end;
+                justify-content: space-between;
+                gap: 2rem;
+            }
+        }
+
+        .gamme-mag-header-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .gamme-mag-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #fcf6ba;
+        }
+
+        .gamme-mag-eyebrow i { font-size: 0.8em; }
+
+        .gamme-mag-title {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .gamme-mag-hint {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #666;
+        }
+
+        /* Desktop : on cache le hint "Défilez" (propre au mobile) */
+        @media (min-width: 768px) {
+            .gamme-mag-hint > span:last-child {
+                display: none;
+            }
+        }
+
+        .gamme-mag-counter {
+            font-variant-numeric: tabular-nums;
+            color: #ccc;
+            font-weight: 900;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.4rem 0.8rem;
+            border-radius: 999px;
+        }
+
+        .gamme-mag-track {
+            display: flex;
+            gap: 1.2rem;
+            overflow-x: auto;
+            padding: 0.5rem 1rem 1.2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            scrollbar-width: auto;
+            scrollbar-color: rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.05);
+        }
+
+        .gamme-mag-track::-webkit-scrollbar { height: 10px; }
+        .gamme-mag-track::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 999px;
+        }
+        .gamme-mag-track::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 999px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        .gamme-mag-track::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.55);
+            background-clip: padding-box;
+        }
+
+        .gamme-mag-card {
+            position: relative;
+            flex: 0 0 auto;
+            width: 260px;
+            aspect-ratio: 3 / 4;
+            border-radius: 1rem;
+            overflow: hidden;
+            cursor: pointer;
+            background: #1a1a1a;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.4s ease;
+        }
+
+        @media (min-width: 768px) {
+            .gamme-mag-card { width: 300px; }
+        }
+
+        .gamme-mag-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-orientation: from-image;
+            transition: transform 0.6s ease;
+        }
+
+        .gamme-mag-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.75));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        @media (hover: hover) {
+            .gamme-mag-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6); }
+            .gamme-mag-card:hover img { transform: scale(1.05); }
+            .gamme-mag-card:hover::after { opacity: 1; }
+        }
+
+        .gamme-mag-card-num {
+            position: absolute;
+            bottom: 0.8rem;
+            right: 0.9rem;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 900;
+            letter-spacing: 0.25em;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Réalisations — grid moderne */
+        .gamme-reals {
+            padding: 4rem 1.5rem 5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gamme-reals-head {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .gamme-reals-eyebrow {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #888;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding-bottom: 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .gamme-reals-title {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin: 0 0 0.8rem;
+        }
+
+        .gamme-reals-sub {
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #666;
+            font-weight: 700;
+        }
+
+        .gamme-reals-group {
+            margin-bottom: 3rem;
+        }
+
+        .gamme-reals-group-title {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .gamme-reals-group-title::before {
+            content: "";
+            width: 28px;
+            height: 2px;
+            background: #fcf6ba;
+        }
+
+        /* Masonry installations : slider mobile/tablette, masonry desktop */
+        .gamme-mason-installs {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 0.8rem;
+            overflow-x: auto;
+            overflow-y: visible;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 0.5rem 1rem 0.75rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+        }
+        .gamme-mason-installs::-webkit-scrollbar { height: 4px; }
+        .gamme-mason-installs::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 999px;
+        }
+        .gamme-mason-installs > .gamme-mason-cell {
+            flex: 0 0 calc(100% - 2.5rem);
+            scroll-snap-align: center;
+        }
+
+        @media (min-width: 560px) and (max-width: 1023px) {
+            .gamme-mason-installs > .gamme-mason-cell { flex: 0 0 70%; }
+        }
+
+        @media (min-width: 1024px) {
+            .gamme-mason-installs {
+                display: grid;
+                grid-template-columns: 1.5fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                gap: 1.2rem;
+                height: 560px;
+                overflow: visible;
+                scroll-snap-type: none;
+                padding: 0;
+            }
+            .gamme-mason-installs > .gamme-mason-cell {
+                flex: none;
+                scroll-snap-align: none;
+            }
+            .gamme-mason-installs > :nth-child(1) { grid-row: 1 / 3; }
+        }
+
+        .gamme-mason-cell {
+            position: relative;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            cursor: pointer;
+            background: #111;
+            aspect-ratio: 4 / 3;
+        }
+
+        @media (min-width: 1024px) {
+            .gamme-mason-cell { aspect-ratio: unset; height: 100%; }
+        }
+
+        .gamme-mason-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-orientation: from-image;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gamme-mason-cell::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.85));
+            pointer-events: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        @media (hover: hover) {
+            .gamme-mason-cell:hover img { transform: scale(1.06); }
+            .gamme-mason-cell:hover::after { opacity: 0.9; }
+        }
+
+        .gamme-mason-cell-label {
+            position: absolute;
+            bottom: 1rem;
+            left: 1.2rem;
+            right: 1.2rem;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .gamme-mason-cell-label i {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Coffrets : slider mobile/tablette, grille 3 cols desktop */
+        .gamme-packs {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 1rem;
+            overflow-x: auto;
+            overflow-y: visible;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding: 0.5rem 1rem 0.75rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+        }
+        .gamme-packs::-webkit-scrollbar { height: 4px; }
+        .gamme-packs::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.18);
+            border-radius: 999px;
+        }
+        .gamme-packs > .gamme-pack-cell {
+            flex: 0 0 calc(100% - 2.5rem);
+            scroll-snap-align: center;
+        }
+
+        @media (min-width: 560px) and (max-width: 1023px) {
+            .gamme-packs > .gamme-pack-cell { flex: 0 0 calc(55% - 0.5rem); }
+        }
+        @media (min-width: 1024px) {
+            .gamme-packs {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.2rem;
+                overflow: visible;
+                scroll-snap-type: none;
+                padding: 0;
+            }
+            .gamme-packs > .gamme-pack-cell {
+                flex: none;
+                scroll-snap-align: none;
+            }
+        }
+
+        .gamme-pack-cell {
+            position: relative;
+            aspect-ratio: 4 / 5;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            cursor: pointer;
+            background: #111;
+        }
+
+        .gamme-pack-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-orientation: from-image;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gamme-pack-cell::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.8));
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        @media (hover: hover) {
+            .gamme-pack-cell:hover img { transform: scale(1.05); }
+        }
+
+        .gamme-pack-cell-label {
+            position: absolute;
+            bottom: 1rem;
+            left: 1.2rem;
+            right: 1.2rem;
+            z-index: 2;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        /* Force l'orientation EXIF pour toutes les images de ces panels */
+        .histoire-panel img { image-orientation: from-image; }
+
+        /* ============================================================
+           NOS PARTENAIRES (BYD, BYmyCAR, AutoDetail)
+           ============================================================ */
+        .partenaires-section {
+            padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 3vw, 1.5rem);
+            background: radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.03), transparent 60%), #0a0a0a;
+        }
+        .partenaires-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .partenaires-head {
+            text-align: center;
+            margin-bottom: clamp(2rem, 4vw, 3rem);
+        }
+        .partenaires-eyebrow {
+            display: inline-block;
+            font-size: 11px;
+            letter-spacing: 0.35em;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .partenaires-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            margin: 0 0 0.75rem;
+            color: #fff;
+        }
+        .partenaires-sub {
+            color: #a0a0a0;
+            font-size: clamp(12px, 1.8vw, 14px);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 600;
+        }
+
+        .partenaires-showroom {
+            margin: 0 auto clamp(2rem, 4vw, 3rem);
+            max-width: 960px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+            background: #111;
+        }
+        .partenaires-showroom picture,
+        .partenaires-showroom img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+        }
+        .partenaires-showroom figcaption {
+            padding: 0.85rem 1.2rem;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #888;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .partenaires-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+        }
+        @media (min-width: 600px) {
+            .partenaires-grid { grid-template-columns: repeat(2, 1fr); gap: 1.4rem; }
+        }
+        @media (min-width: 900px) {
+            .partenaires-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        }
+
+        .partenaire-card {
+            background: linear-gradient(180deg, #131313 0%, #0a0a0a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.4rem;
+            padding: 1.8rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        @media (hover: hover) {
+            .partenaire-card:hover {
+                border-color: rgba(255, 255, 255, 0.2);
+                transform: translateY(-4px);
+                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        .partenaire-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 120px;
+            margin-bottom: 0.8rem;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 1rem;
+            overflow: hidden;
+            padding: 1rem 1.25rem;
+        }
+        /* Logos : proportions natives respectées, adaptés au cadre */
+        .partenaire-logo picture {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .partenaire-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Variante fond noir (BYD) */
+        .partenaire-logo-dark {
+            background: #000;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Variante fond blanc (BYmyCAR, AutoDetail — logos monochromes sombres) */
+        .partenaire-logo-light {
+            background: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Zoom léger sur un logo (ex. AutoDetail, dont le logo carré paraît petit dans le cadre) */
+        .partenaire-logo-zoom img { transform: scale(1.35); }
+
+        /* Carte partenaire cliquable */
+        .partenaire-card {
+            cursor: pointer;
+            position: relative;
+        }
+        .partenaire-card::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            border-radius: inherit;
+            border: 1px solid transparent;
+            pointer-events: none;
+            transition: border-color 0.3s ease;
+        }
+        @media (hover: hover) {
+            .partenaire-card:hover::after {
+                border-color: rgba(255, 255, 255, 0.18);
+            }
+        }
+        .partenaire-card-hint {
+            margin-top: auto;
+            padding-top: 0.8rem;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #777;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .partenaire-card-hint i {
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+        .partenaire-card:hover .partenaire-card-hint i {
+            transform: translateX(3px);
+        }
+
+        /* Mobile : carousel swipeable horizontal */
+        @media (max-width: 599px) {
+            .partenaires-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                gap: 1rem;
+                padding: 0.5rem 1rem 1.2rem;
+                margin: 0 -1rem;
+                scroll-padding-left: 1rem;
+            }
+            .partenaires-grid::-webkit-scrollbar { display: none; }
+            .partenaires-grid .partenaire-card {
+                flex: 0 0 85%;
+                scroll-snap-align: start;
+            }
+            .partenaires-carousel-hint {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-top: 0.4rem;
+                color: #666;
+                font-size: 9px;
+                font-weight: 800;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+            }
+            .partenaires-carousel-hint i {
+                animation: partenaires-swipe 1.6s ease-in-out infinite;
+            }
+            @keyframes partenaires-swipe {
+                0%, 100% { transform: translateX(0); }
+                50% { transform: translateX(6px); }
+            }
+        }
+        @media (min-width: 600px) {
+            .partenaires-carousel-hint { display: none; }
+        }
+
+        /* Section vitrine showroom (2 colonnes : image + texte) */
+        .vitrine-section {
+            padding: clamp(3rem, 7vw, 5rem) clamp(1rem, 3vw, 1.5rem);
+            background: #0a0a0a;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .vitrine-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        @media (min-width: 900px) {
+            .vitrine-grid {
+                grid-template-columns: 1.1fr 1fr;
+                gap: 4rem;
+            }
+        }
+        .vitrine-media {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.7);
+            background: #111;
+        }
+        .vitrine-media picture, .vitrine-media img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+        }
+        .vitrine-eyebrow {
+            display: inline-block;
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            color: #888;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .vitrine-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            color: #fff;
+            margin: 0 0 1.2rem;
+        }
+        .vitrine-text {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin: 0 0 1rem;
+        }
+        .vitrine-features {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0;
+            display: grid;
+            gap: 0.8rem;
+        }
+        .vitrine-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.5;
+        }
+        .vitrine-features li i {
+            color: #bf953f;
+            font-size: 0.75rem;
+            margin-top: 0.35rem;
+            flex-shrink: 0;
+        }
+
+        .partenaire-name {
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            color: #fff;
+            margin: 0;
+        }
+        .partenaire-tagline {
+            font-size: 0.7rem;
+            color: #888;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin: 0 0 0.3rem;
+        }
+        .partenaire-desc {
+            font-size: 0.85rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .partenaire-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.8rem 0 0;
+            padding: 0;
+            list-style: none;
+        }
+        .partenaire-tags li {
+            padding: 0.3rem 0.7rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 999px;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #ccc;
+        }
     </style>
 </head>
 
@@ -676,7 +2154,7 @@
             <a href="index.html" class="hover:text-gray-400 transition">XPERIENCE<span class="text-gray-500 font-light">VISION</span></a>
         </div>
         <div class="hidden md:flex space-x-10 text-[12px] uppercase font-bold tracking-[0.2em]">
-            <a href="index.html#installation" class="hover:text-gray-400 transition">Catalogue</a>
+            <a href="index.html" class="hover:text-gray-400 transition">Catalogue</a>
             <a href="histoire.html" class="hover:text-gray-400 transition">Notre Histoire</a>
             <a href="contact.html" class="hover:text-gray-400 transition">Contact</a>
         </div>
@@ -691,10 +2169,7 @@
             </button>
         </div>
         <div id="mobile-dropdown" class="absolute top-full left-0 w-full bg-[#0a0a0a] border-b border-white/10 backdrop-blur-2xl hidden flex-col p-4 space-y-4 shadow-2xl">
-            <a href="index.html#installation" class="mobile-item">Catalogue</a>
-            <a href="index.html#configurateur" class="mobile-item">Configurateur</a>
-            <a href="index.html#accessoires" class="mobile-item">Produits</a>
-            <a href="index.html#faq" class="mobile-item">FAQ</a>
+            <a href="index.html" class="mobile-item">Catalogue</a>
             <a href="histoire.html" class="mobile-item">Notre Histoire</a>
             <a href="contact.html" class="mobile-item">Contact</a>
         </div>
@@ -706,7 +2181,7 @@
 
         <!-- HERO -->
         <section class="histoire-hero">
-            <picture><source srcset="img/hero-realisations.webp" type="image/webp"><img src="img/hero-realisations.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-15" loading="eager"></picture>
+            <picture><source srcset="img/realisations-installations-ecrans-voiture-premium.webp" type="image/webp"><img src="img/realisations-installations-ecrans-voiture-premium.jpeg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-15" loading="eager"></picture>
             <div class="histoire-hero-inner">
                 <span class="histoire-hero-eyebrow">À propos</span>
                 <h1 class="histoire-hero-title">Qui nous<br><span class="gradient-text">sommes</span>.</h1>
@@ -736,25 +2211,34 @@
 
         <!-- CHAPITRE I -->
         <section class="chap-section chap-dark">
+            <span class="chap-bignum" aria-hidden="true">I</span>
             <div class="chap-inner">
-                <span class="chap-eyebrow">I — L'ouverture</span>
-                <h2 class="chap-title">L'endroit que personne<br>n'a <span class="gradient-text">osé conquérir</span>.</h2>
+                <div class="reveal-up">
+                    <div class="chap-indicator">
+                        <span class="chap-indicator-line"></span>
+                        <span class="chap-indicator-dot"></span>
+                        <span>Chapitre 01 · L'ouverture</span>
+                        <span class="chap-indicator-dot"></span>
+                        <span class="chap-indicator-line"></span>
+                    </div>
+                    <h2 class="chap-title">L'endroit que personne<br>n'a <span class="gradient-text">osé conquérir</span>.</h2>
+                </div>
 
-                <div class="chap-body">
+                <div class="chap-body reveal-up">
                     <p>Entre le moment où vous signez pour votre véhicule et celui où vous disparaissez sur la route — il y a une fenêtre. Un espace que l'industrie automobile entière a laissé vide depuis des décennies.</p>
                     <p>Cet espace, c'est l'intérieur de votre voiture. <strong>Pas le moteur, pas la carrosserie, pas les chiffres.</strong> L'expérience. Le ressenti. Ce que vous vivez à chaque kilomètre.</p>
                     <p>Les voitures sont devenues des chefs-d'œuvre technologiques. Et pourtant — le jour J, on vous tend des clés dans un couloir. L'intérieur de ce véhicule à 45 000 euros ressemble à celui de n'importe quel autre. Mêmes plastiques. Même absence totale de personnalité.</p>
                 </div>
 
-                <blockquote class="chap-punchline">
+                <blockquote class="chap-punchline reveal-up">
                     Les constructeurs ont tout pensé — <span class="gradient-text">sauf vous.</span>
                 </blockquote>
 
-                <p class="chap-body chap-body-tight">
+                <p class="chap-body chap-body-tight reveal-up">
                     Sauf ce que vous ressentez en montant à bord. Sauf ce que vos enfants vivent sur le siège arrière pendant deux heures d'autoroute. Sauf la fierté que vous devriez éprouver le matin en regardant votre voiture depuis le trottoir.
                 </p>
 
-                <p class="chap-closing">
+                <p class="chap-closing reveal-up">
                     <strong>XPERIENCE VISION est née pour corriger cette erreur historique.</strong>
                 </p>
             </div>
@@ -762,15 +2246,24 @@
 
         <!-- CHAPITRE II -->
         <section class="chap-section chap-darker">
+            <span class="chap-bignum" aria-hidden="true">II</span>
             <div class="chap-inner">
-                <span class="chap-eyebrow chap-eyebrow-gold">II — La promesse</span>
-                <h2 class="chap-title">Nous ne sommes pas un accessoiriste.<br><span class="gradient-text">Nous sommes une révolution embarquée.</span></h2>
+                <div class="reveal-up">
+                    <div class="chap-indicator">
+                        <span class="chap-indicator-line"></span>
+                        <span class="chap-indicator-dot"></span>
+                        <span>Chapitre 02 · La promesse</span>
+                        <span class="chap-indicator-dot"></span>
+                        <span class="chap-indicator-line"></span>
+                    </div>
+                    <h2 class="chap-title">Nous ne sommes pas un accessoiriste.<br><span class="gradient-text">Nous sommes une révolution embarquée.</span></h2>
+                </div>
 
-                <div class="chap-body">
+                <div class="chap-body reveal-up">
                     <p>Ce que nous faisons n'a pas de nom dans l'industrie — parce que personne ne l'avait fait avant. Nous prenons le véhicule le plus sophistiqué du monde. Et nous lui donnons <strong>l'intérieur qu'il méritait depuis le début.</strong></p>
                 </div>
 
-                <div class="chap-features">
+                <div class="chap-features reveal-stagger">
                     <div class="chap-feature"><i class="fa-solid fa-tv"></i><span>Écran 4K 17" au plafond — comme une salle de cinéma privée</span></div>
                     <div class="chap-feature"><i class="fa-solid fa-lightbulb"></i><span>Ambiance LED qui respire avec votre humeur</span></div>
                     <div class="chap-feature"><i class="fa-solid fa-wifi"></i><span>CarPlay sans fil qui s'active dès que vous montez</span></div>
@@ -778,17 +2271,17 @@
                     <div class="chap-feature"><i class="fa-solid fa-shield"></i><span>Film PPF invisible qui protège votre carrosserie pendant des années</span></div>
                 </div>
 
-                <blockquote class="chap-punchline chap-punchline-gold">
+                <blockquote class="chap-punchline chap-punchline-gold reveal-up">
                     Ce n'est pas de l'accessoire.<br><span class="gradient-text">C'est de la transformation.</span>
                 </blockquote>
 
-                <div class="chap-promise">
+                <div class="chap-promise reveal-up">
                     <h3>La promesse que personne d'autre ne peut faire</h3>
                     <p>Toute cette révolution — et la garantie constructeur reste <strong>100 % intacte</strong>.</p>
                     <div class="chap-promise-grid">
                         <div><i class="fa-solid fa-bolt"></i>Plug &amp; Play</div>
                         <div><i class="fa-solid fa-ban"></i>Aucune modification irréversible</div>
-                        <div><i class="fa-solid fa-shield-halved"></i>Garantie 1 an</div>
+                        <div><i class="fa-solid fa-shield"></i>Garantie 1 an</div>
                         <div><i class="fa-solid fa-headset"></i>SAV sous 24 h</div>
                     </div>
                     <p class="chap-closing">Une vraie révolution ne détruit pas ce qu'elle améliore. <strong>Elle l'élève.</strong></p>
@@ -796,89 +2289,143 @@
             </div>
         </section>
 
-        <!-- CHAPITRE III -->
+        <!-- CHAPITRE III — Expertise avec tableau chiffres -->
         <section class="chap-section chap-dark">
+            <span class="chap-bignum" aria-hidden="true">III</span>
             <div class="chap-inner">
-                <span class="chap-eyebrow">III — L'expertise</span>
-                <h2 class="chap-title">Ce que nous avons vu<br><span class="gradient-text">avant tout le monde</span>.</h2>
+                <div class="reveal-up">
+                    <div class="chap-indicator">
+                        <span class="chap-indicator-line"></span>
+                        <span class="chap-indicator-dot"></span>
+                        <span>Chapitre 03 · L'expertise</span>
+                        <span class="chap-indicator-dot"></span>
+                        <span class="chap-indicator-line"></span>
+                    </div>
+                    <h2 class="chap-title">Ce que nous avons vu<br><span class="gradient-text">avant tout le monde</span>.</h2>
+                </div>
 
-                <div class="chap-body">
+                <div class="chap-body reveal-up">
                     <p>Pendant que l'industrie regardait les motorisations, nous regardions les habitacles. Pendant que tout le monde ignorait les nouvelles marques chinoises — <strong>BYD, XPeng, Nio, Zeekr, Leapmotor</strong> — nous les maîtrisions déjà.</p>
                 </div>
 
-                <div class="chap-stats">
-                    <div class="chap-stat">
-                        <p class="chap-stat-value">195</p>
-                        <p class="chap-stat-label">Points de vente BYD &amp; XPeng en France</p>
+                <div class="stat-table reveal-up">
+                    <div class="stat-table-head">
+                        <span class="stat-table-head-label">Les chiffres qui nous distinguent</span>
                     </div>
-                    <div class="chap-stat">
-                        <p class="chap-stat-value">×3-5</p>
-                        <p class="chap-stat-label">Investissement accessoires vs moyenne</p>
-                    </div>
-                    <div class="chap-stat">
-                        <p class="chap-stat-value">1</p>
-                        <p class="chap-stat-label">Seul intégrateur à ce niveau d'expertise</p>
+                    <div class="stat-table-body">
+                        <div class="stat-row">
+                            <p class="stat-row-value" data-counter data-target="195">0</p>
+                            <p class="stat-row-label">Points de vente BYD &amp; XPeng<br>couverts en France</p>
+                            <span class="stat-row-sub">Réseau national</span>
+                        </div>
+                        <div class="stat-row">
+                            <p class="stat-row-value">×3<span style="font-size:0.6em;color:#888">-</span>5</p>
+                            <p class="stat-row-label">Investissement accessoires<br>vs moyenne du marché</p>
+                            <span class="stat-row-sub">Client premium</span>
+                        </div>
+                        <div class="stat-row">
+                            <p class="stat-row-value">N°1</p>
+                            <p class="stat-row-label">Intégrateur expert<br>sur les marques chinoises</p>
+                            <span class="stat-row-sub">Position unique</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="chap-body">
+                <div class="chap-body reveal-up">
                     <p>Nos techniciens sont formés spécifiquement sur ces architectures. Quand un propriétaire de BYD cherche un installateur capable de transformer son habitacle sans toucher à l'électronique de bord — <strong>il n'y en a qu'un.</strong></p>
                 </div>
 
-                <blockquote class="chap-punchline">
+                <blockquote class="chap-punchline reveal-up">
                     XPERIENCE VISION.<br>Ce n'est pas un hasard. <span class="gradient-text">C'est une vision.</span>
                 </blockquote>
 
-                <p class="chap-brands">Tesla · BYD · XPeng · Nio · Zeekr · Leapmotor · BMW · Mercedes · Range Rover · <em>Toutes marques</em></p>
+                <div class="brand-chips reveal-stagger">
+                    <span class="brand-chip">Tesla</span>
+                    <span class="brand-chip brand-chip-gold">BYD</span>
+                    <span class="brand-chip brand-chip-gold">XPeng</span>
+                    <span class="brand-chip">Nio</span>
+                    <span class="brand-chip">Zeekr</span>
+                    <span class="brand-chip">Leapmotor</span>
+                    <span class="brand-chip">BMW</span>
+                    <span class="brand-chip">Mercedes</span>
+                    <span class="brand-chip">Range Rover</span>
+                    <span class="brand-chip">Toutes marques</span>
+                </div>
             </div>
         </section>
 
         <!-- CHAPITRE IV -->
         <section class="chap-section chap-darker">
+            <span class="chap-bignum" aria-hidden="true">IV</span>
             <div class="chap-inner">
-                <span class="chap-eyebrow chap-eyebrow-gold">IV — L'expérience</span>
-                <h2 class="chap-title">L'expérience commence<br><span class="gradient-text">avant le premier kilomètre</span>.</h2>
+                <div class="reveal-up">
+                    <div class="chap-indicator">
+                        <span class="chap-indicator-line"></span>
+                        <span class="chap-indicator-dot"></span>
+                        <span>Chapitre 04 · L'expérience</span>
+                        <span class="chap-indicator-dot"></span>
+                        <span class="chap-indicator-line"></span>
+                    </div>
+                    <h2 class="chap-title">L'expérience commence<br><span class="gradient-text">avant le premier kilomètre</span>.</h2>
+                </div>
 
-                <div class="chap-body">
-                    <p>Le jour de votre livraison, vous ne recevez pas des clés. Vous recevez <strong>une boîte noire et or</strong> — avec vos premiers accessoires XV, une carte manuscrite, un QR code vers une vidéo d'activation créée pour vous.</p>
+                <div class="chap-body reveal-up">
+                    <p>Le jour de votre livraison, vous ne recevez pas des clés. Vous recevez <strong>une boîte noire et or</strong> — avec vos premiers accessoires XPERIENCE VISION, une carte manuscrite, un QR code vers une vidéo d'activation créée pour vous.</p>
                     <p>L'unboxing d'un véhicule devrait ressembler à celui d'un iPhone. Cette sensation que quelqu'un a pensé à chaque détail avant vous. Que vous n'avez pas acheté un produit. <strong>Que vous êtes entré dans un univers.</strong></p>
                 </div>
 
-                <blockquote class="chap-punchline chap-punchline-gold">
+                <blockquote class="chap-punchline chap-punchline-gold reveal-up">
                     Nous y avons <span class="gradient-text">pensé</span>.
                 </blockquote>
             </div>
         </section>
 
-        <!-- CHAPITRE V — RÉSEAUX -->
+        <!-- CHAPITRE V — RÉSEAUX + tableau -->
         <section class="chap-section chap-dark">
+            <span class="chap-bignum" aria-hidden="true">V</span>
             <div class="chap-inner">
-                <span class="chap-eyebrow">V — Pour les réseaux</span>
-                <h2 class="chap-title">Ce que nous offrons<br><span class="gradient-text">aux réseaux</span>.</h2>
+                <div class="reveal-up">
+                    <div class="chap-indicator">
+                        <span class="chap-indicator-line"></span>
+                        <span class="chap-indicator-dot"></span>
+                        <span>Chapitre 05 · Pour les réseaux</span>
+                        <span class="chap-indicator-dot"></span>
+                        <span class="chap-indicator-line"></span>
+                    </div>
+                    <h2 class="chap-title">Ce que nous offrons<br><span class="gradient-text">aux réseaux</span>.</h2>
+                </div>
 
-                <div class="chap-body">
+                <div class="chap-body reveal-up">
                     <p>Nous apportons aux groupes de distribution un <strong>centre de profit clé en main</strong> — sans investissement, sans stock, sans risque. Nos techniciens interviennent en concession. Nos équipes forment vos conseillers. Nos campagnes co-brandées sont prêtes à poster, douze fois par an.</p>
                 </div>
 
-                <div class="chap-features">
-                    <div class="chap-feature"><i class="fa-solid fa-box-open"></i><span>Coffret de livraison XV inclus dans chaque véhicule neuf</span></div>
+                <div class="chap-features reveal-stagger">
+                    <div class="chap-feature"><i class="fa-solid fa-box-open"></i><span>Coffret de livraison XPERIENCE VISION inclus dans chaque véhicule neuf</span></div>
                     <div class="chap-feature"><i class="fa-solid fa-wrench"></i><span>Pack installation avant livraison</span></div>
                     <div class="chap-feature"><i class="fa-solid fa-chalkboard-user"></i><span>Formation commerciale à la vente par le désir</span></div>
                     <div class="chap-feature"><i class="fa-solid fa-chart-line"></i><span>Tableau de bord partenaire — commissions en temps réel</span></div>
                 </div>
 
-                <div class="chap-business-stats">
-                    <div class="chap-bstat">
-                        <p class="chap-bstat-value">+60 %</p>
-                        <p class="chap-bstat-label">Taux d'équipement observé</p>
+                <div class="stat-table reveal-up">
+                    <div class="stat-table-head">
+                        <span class="stat-table-head-label">Résultats observés chez nos partenaires</span>
                     </div>
-                    <div class="chap-bstat">
-                        <p class="chap-bstat-value">×3</p>
-                        <p class="chap-bstat-label">Conversion sur les options premium</p>
-                    </div>
-                    <div class="chap-bstat">
-                        <p class="chap-bstat-value">0 €</p>
-                        <p class="chap-bstat-label">Investissement requis</p>
+                    <div class="stat-table-body">
+                        <div class="stat-row">
+                            <p class="stat-row-value"><span data-counter data-target="60" data-prefix="+" data-suffix="">0</span>%</p>
+                            <p class="stat-row-label">Taux d'équipement<br>observé en concession</p>
+                            <span class="stat-row-sub">Showroom équipé</span>
+                        </div>
+                        <div class="stat-row">
+                            <p class="stat-row-value">×3</p>
+                            <p class="stat-row-label">Conversion<br>sur les options premium</p>
+                            <span class="stat-row-sub">Vente par le désir</span>
+                        </div>
+                        <div class="stat-row">
+                            <p class="stat-row-value">0<span style="font-size:0.6em;margin-left:0.15em">€</span></p>
+                            <p class="stat-row-label">Investissement<br>requis à l'ouverture</p>
+                            <span class="stat-row-sub">Clé en main</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -887,16 +2434,18 @@
         <!-- OUTRO -->
         <section class="chap-section chap-darker chap-outro">
             <div class="chap-inner">
-                <span class="chap-eyebrow chap-eyebrow-gold">Pour ceux qui refusent l'ordinaire</span>
-                <h2 class="chap-title">Un véhicule n'est pas un outil.<br><span class="gradient-text">C'est un territoire.</span></h2>
+                <div class="reveal-up">
+                    <span class="chap-eyebrow chap-eyebrow-gold">Pour ceux qui refusent l'ordinaire</span>
+                    <h2 class="chap-title">Un véhicule n'est pas un outil.<br><span class="gradient-text">C'est un territoire.</span></h2>
+                </div>
 
-                <div class="chap-body">
+                <div class="chap-body reveal-up">
                     <p>Il existe deux types de personnes. Celles qui achètent une voiture. Et celles qui décident de vivre chaque trajet.</p>
                     <p>XPERIENCE VISION s'adresse aux secondes. Celles qui savent qu'un véhicule n'est pas un outil de déplacement — c'est un territoire. Un espace de vie. Un endroit où les souvenirs se fabriquent, où on arrive différent de comment on est parti.</p>
                     <p><strong>Ces personnes-là méritaient une marque à leur hauteur. Elles l'ont maintenant.</strong></p>
                 </div>
 
-                <div class="chap-signature">
+                <div class="chap-signature reveal-up">
                     <div class="chap-signature-logo">XPERIENCE <span>VISION</span></div>
                     <p class="chap-signature-tag">L'intégrateur digital embarqué premium.<br>De la livraison à la revente. Toutes marques. Sans compromis.</p>
                     <p class="chap-signature-baseline">Voyez plus loin. <span class="gradient-text">Vivez plus fort.</span></p>
@@ -909,161 +2458,203 @@
         <!-- PANEL : NOTRE GAMME -->
         <div class="histoire-panel" data-panel="gamme" hidden>
 
-        <!-- LA GAMME XPERIENCE -->
-        <section id="solutions" class="py-16 md:py-20 px-6 bg-[#0a0a0a]">
-            <div class="max-w-7xl mx-auto">
-                <div class="mb-10 text-center reveal">
-                    <span class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-b-2 border-white pb-3">Notre savoir-faire</span>
-                    <h2 class="text-4xl md:text-5xl font-black uppercase mb-6 italic mt-8">La Gamme Xperience</h2>
-                    <p class="text-gray-500 uppercase tracking-widest text-sm max-w-2xl mx-auto">Une sélection rigoureuse d'équipements haute technologie intégrés selon les standards constructeurs les plus exigeants.</p>
-                </div>
+            <!-- INTRO GAMME -->
+            <section class="gamme-intro reveal-up">
+                <span class="gamme-intro-eyebrow">Notre savoir-faire</span>
+                <h2 class="gamme-intro-title">La Gamme <span class="gradient-text">Xperience</span></h2>
+                <p class="gamme-intro-sub">
+                    Trois piliers. Une obsession commune : transformer chaque habitacle en territoire d'exception.
+                </p>
+            </section>
 
-                <div onscroll="updateScrollIndicators(this, 'solutions-dots')"
-                    class="flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 pb-6 md:grid md:grid-cols-3 md:gap-8 md:pb-0 no-scrollbar">
-                    <div class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d1">
-                        <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
-                            <picture><source srcset="img/produit-ecran-xl.webp" type="image/webp"><img src="img/produit-ecran-xl.jpeg" alt="Écran plafonnier XL XPERIENCE VISION"
-                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224"></picture>
-                        </div>
-                        <div class="p-4 text-center">
-                            <h3 class="text-2xl font-bold mb-4 uppercase">Écrans Embarqués</h3>
-                            <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">Plafonniers 17.3" &amp; Appuie-tête 10.1". Une immersion totale en résolution 4K pour vos passagers arrière.</p>
+            <!-- 3 PILIERS -->
+            <div class="gamme-pillars reveal-stagger">
+                <article class="gamme-pillar" data-gallery="pillars" data-index="0" data-description="Transformez les places arrière en véritable salle de cinéma privée. Nos écrans plafonniers 17.3&quot; et appuie-tête 10.1&quot; affichent en 4K Ultra HD avec une dalle LCD ou OLED haute luminosité pour des noirs profonds et des couleurs éclatantes. Android embarqué avec streaming Netflix, Disney+, YouTube et Prime Video natifs, ports HDMI, USB et A/V, casques Bluetooth sans fil et manettes gaming disponibles en option. Installation Plug &amp; Play réalisée par nos techniciens XPERIENCE VISION, compatible toit panoramique et toutes marques. La garantie constructeur reste 100 % intacte — aucune découpe, aucune modification irréversible. Transformation en 2-4 h à domicile ou dans notre atelier de Nanteuil-lès-Meaux.">
+                    <div class="gamme-pillar-media">
+                        <picture><source srcset="img/ecran-plafond-17-pouces-xl-premium-voiture.webp" type="image/webp"><img src="img/ecran-plafond-17-pouces-xl-premium-voiture.jpeg" alt="Écrans plafonniers XPERIENCE VISION" loading="lazy"></picture>
+                    </div>
+                    <div class="gamme-pillar-body">
+                        <h3 class="gamme-pillar-title">Écrans Embarqués</h3>
+                        <p class="gamme-pillar-desc">Plafonniers 17.3" &amp; appuie-tête 10.1". Une immersion 4K pensée pour les passagers arrière, intégrée aux standards constructeur.</p>
+                        <div class="gamme-pillar-tags">
+                            <span class="gamme-pillar-tag">4K Ultra HD</span>
+                            <span class="gamme-pillar-tag">17.3"</span>
+                            <span class="gamme-pillar-tag">10.1"</span>
+                            <span class="gamme-pillar-tag">Plug &amp; Play</span>
                         </div>
                     </div>
-                    <div class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d2">
-                        <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
-                            <picture><source srcset="img/produit-ecran-intermediaire.webp" type="image/webp"><img src="img/produit-ecran-intermediaire.jpeg" alt="Écran intermédiaire XPERIENCE VISION"
-                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224"></picture>
-                        </div>
-                        <div class="p-4 text-center">
-                            <h3 class="text-2xl font-bold mb-4 uppercase">Technologie</h3>
-                            <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">CarPlay sans fil, Gaming HD et Dashcams intelligentes. Restez connecté au monde, même sur la route.</p>
-                        </div>
-                    </div>
-                    <div class="product-card card-glass p-4 rounded-[3rem] overflow-hidden group flex-none w-[85vw] md:w-auto snap-center reveal reveal-d3">
-                        <div class="h-56 rounded-[2rem] mb-4 overflow-hidden">
-                            <picture><source srcset="img/produit-tablette.webp" type="image/webp"><img src="img/produit-tablette.jpeg" alt="Tablette embarquée XPERIENCE VISION"
-                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700" width="600" height="224"></picture>
-                        </div>
-                        <div class="p-4 text-center">
-                            <h3 class="text-2xl font-bold mb-4 uppercase">Finition</h3>
-                            <p class="text-gray-400 text-sm uppercase tracking-wide leading-loose">Protections céramiques et accessoires sur-mesure. Préservez l'état neuf et la valeur de votre véhicule.</p>
-                        </div>
-                    </div>
-                </div>
+                </article>
 
-                <div id="solutions-dots" class="flex md:hidden justify-center gap-2 mt-4">
-                    <div class="w-2 h-2 rounded-full bg-white opacity-100 transition-opacity duration-300"></div>
-                    <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
-                    <div class="w-2 h-2 rounded-full bg-white opacity-30 transition-opacity duration-300"></div>
-                </div>
+                <article class="gamme-pillar" data-gallery="pillars" data-index="1" data-description="Votre véhicule connecté au XXIe siècle, quelle que soit son année. Module CarPlay et Android Auto sans fil qui s'active automatiquement dès la mise en route — plus jamais de câble à brancher. Dashcams 4K avant + Full HD arrière à vision nocturne avec mode stationnement 24/7, enregistrement sur SSD haute endurance intégré. Solutions gaming HD pour occuper les longs trajets, modem 4G/5G pour Wi-Fi embarqué partagé. Intégration invisible derrière le rétroviseur ou dans la boîte à gants, alimentation sur le faisceau d'origine avec fusible dédié. Compatible Tesla, BYD, XPeng, BMW, Mercedes, Range Rover et toutes les marques du marché.">
+                    <div class="gamme-pillar-media">
+                        <picture><source srcset="img/ecran-plafond-13-pouces-fhd-polyvalent-voiture.webp" type="image/webp"><img src="img/ecran-plafond-13-pouces-fhd-polyvalent-voiture.jpeg" alt="Technologie embarquée XPERIENCE VISION" loading="lazy"></picture>
+                    </div>
+                    <div class="gamme-pillar-body">
+                        <h3 class="gamme-pillar-title">Technologie</h3>
+                        <p class="gamme-pillar-desc">CarPlay sans fil, gaming HD et dashcams intelligentes. Connecté, protégé, prêt à l'emploi — dès que vous montez à bord.</p>
+                        <div class="gamme-pillar-tags">
+                            <span class="gamme-pillar-tag">CarPlay</span>
+                            <span class="gamme-pillar-tag">Android Auto</span>
+                            <span class="gamme-pillar-tag">Dashcam 4K</span>
+                            <span class="gamme-pillar-tag">Gaming</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="gamme-pillar" data-gallery="pillars" data-index="2" data-description="Protégez durablement votre véhicule et préservez sa valeur à la revente. Nos finitions incluent la céramique 9H qui fait perler l'eau pendant 3 à 5 ans, le film PPF polyuréthane 8 mil auto-cicatrisant (zones critiques ou full-body), les tapis TPE 3D logotés sur-mesure, les films teintés céramiques homologués route, les seuils LED en inox brossé, et l'ensemble des accessoires sur-mesure par marque. Tous thermoformés au gabarit exact de votre modèle pour un rendu constructeur. Pose réalisée par nos installateurs XPERIENCE VISION en atelier climatisé. Garantie de 1 à 7 ans selon produit, SAV réactif sous 24 h. Votre voiture reste en état concours pendant des années.">
+                    <div class="gamme-pillar-media">
+                        <picture><source srcset="img/tablette-10-pouces-appuie-tete-famille-voiture.webp" type="image/webp"><img src="img/tablette-10-pouces-appuie-tete-famille-voiture.jpeg" alt="Finition XPERIENCE VISION" loading="lazy"></picture>
+                    </div>
+                    <div class="gamme-pillar-body">
+                        <h3 class="gamme-pillar-title">Finition</h3>
+                        <p class="gamme-pillar-desc">Protections céramiques, films PPF, accessoires sur-mesure. Préservez la valeur et l'état neuf de votre véhicule pour les années à venir.</p>
+                        <div class="gamme-pillar-tags">
+                            <span class="gamme-pillar-tag">Céramique</span>
+                            <span class="gamme-pillar-tag">Film PPF</span>
+                            <span class="gamme-pillar-tag">Sur-mesure</span>
+                            <span class="gamme-pillar-tag">Garantie 1 an</span>
+                        </div>
+                    </div>
+                </article>
             </div>
-        </section>
 
-        <!-- RÉALISATIONS -->
-        <section id="realisations" class="py-16 md:py-20 px-6 bg-[#080808]">
-            <div class="max-w-7xl mx-auto">
-                <div class="text-center mb-12">
-                    <span class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-b-2 border-white pb-3">Portfolio</span>
-                    <h2 class="text-3xl md:text-5xl font-black mt-8 mb-4 uppercase italic tracking-tighter">Nos <span class="text-gray-500">Réalisations.</span></h2>
-                    <p class="text-gray-500 text-xs uppercase tracking-widest">Showroom, livraisons et installations terrain</p>
+            <div class="gamme-pillars-cta-wrap reveal-up">
+                <a href="index.html#installation" class="gamme-intro-cta">
+                    <span>Voir les offres</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- RÉALISATIONS -->
+            <section class="gamme-reals">
+                <div class="gamme-reals-head reveal-up">
+                    <span class="gamme-reals-eyebrow">Portfolio</span>
+                    <h2 class="gamme-reals-title">Nos <span class="gradient-text">Réalisations</span></h2>
+                    <p class="gamme-reals-sub">Showroom · Livraisons · Installations terrain</p>
                 </div>
 
                 <!-- Installations terrain -->
-                <div class="mb-12 md:mb-16">
-                    <span class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-l-4 border-white pl-4">Installations</span>
-                    <h3 class="text-2xl md:text-4xl font-black mt-6 mb-6 uppercase italic tracking-tighter">Le travail sur le terrain</h3>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                        <div class="gallery-item h-72 md:h-[520px]" data-gallery="installs" data-index="0">
-                            <picture><source srcset="img/installation-vue-interieur.webp" type="image/webp"><img src="img/installation-vue-interieur.jpeg" alt="Installation écran plafonnier vue intérieur" loading="lazy"></picture>
-                            <div class="overlay">
-                                <p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Vue habitacle</p>
+                <div class="gamme-reals-group reveal-up">
+                    <h3 class="gamme-reals-group-title">Le travail sur le terrain</h3>
+                    <div class="gamme-mason-installs">
+                        <div class="gamme-mason-cell" data-gallery="installs" data-index="0">
+                            <picture><source srcset="img/installation-ecran-plafond-vue-interieur-voiture.webp" type="image/webp"><img src="img/installation-ecran-plafond-vue-interieur-voiture.jpeg" alt="Installation écran plafonnier vue intérieur" loading="lazy"></picture>
+                            <div class="gamme-mason-cell-label">
+                                <span>Vue habitacle</span>
+                                <i class="fa-solid fa-expand"></i>
                             </div>
                         </div>
-                        <div class="flex flex-col gap-4 md:gap-6 md:h-[520px]">
-                            <div class="gallery-item h-48 md:flex-1" data-gallery="installs" data-index="1">
-                                <picture><source srcset="img/installation-byd-dolphin.webp" type="image/webp"><img src="img/installation-byd-dolphin.jpeg" alt="BYD Dolphin showroom avec coffret cadeau XV" loading="lazy"></picture>
-                                <div class="overlay">
-                                    <p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Showroom</p>
-                                </div>
+                        <div class="gamme-mason-cell" data-gallery="installs" data-index="1">
+                            <picture><source srcset="img/installation-ecran-byd-dolphin-xperience-vision.webp" type="image/webp"><img src="img/installation-ecran-byd-dolphin-xperience-vision.jpeg" alt="BYD Dolphin showroom avec coffret cadeau XPERIENCE VISION" loading="lazy"></picture>
+                            <div class="gamme-mason-cell-label">
+                                <span>Showroom BYD</span>
+                                <i class="fa-solid fa-expand"></i>
                             </div>
-                            <div class="gallery-item h-48 md:flex-1" data-gallery="installs" data-index="2">
-                                <picture><source srcset="img/installation-pack-livraison.webp" type="image/webp"><img src="img/installation-pack-livraison.jpeg" alt="Coffrets cadeaux XV dans le coffre" loading="lazy"></picture>
-                                <div class="overlay">
-                                    <p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Pack livraison</p>
-                                </div>
+                        </div>
+                        <div class="gamme-mason-cell" data-gallery="installs" data-index="2">
+                            <picture><source srcset="img/pack-livraison-installation-ecran-voiture.webp" type="image/webp"><img src="img/pack-livraison-installation-ecran-voiture.jpeg" alt="Coffrets cadeaux XPERIENCE VISION dans le coffre" loading="lazy"></picture>
+                            <div class="gamme-mason-cell-label">
+                                <span>Pack livraison</span>
+                                <i class="fa-solid fa-expand"></i>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Coffrets -->
-                <div class="mb-12 md:mb-16">
-                    <span class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-l-4 border-white pl-4">Packaging</span>
-                    <h3 class="text-2xl md:text-4xl font-black mt-6 mb-6 uppercase italic tracking-tighter">Coffrets &amp; Cadeaux</h3>
-
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                        <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="0">
-                            <picture><source srcset="img/coffret-premium.webp" type="image/webp"><img src="img/coffret-premium.jpeg" alt="Coffret cadeau XV — thermos, carnet, stylo" loading="lazy"></picture>
-                            <div class="overlay"><p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Pack Premium</p></div>
+                <div class="gamme-reals-group reveal-up">
+                    <h3 class="gamme-reals-group-title">Coffrets &amp; Cadeaux</h3>
+                    <div class="gamme-packs">
+                        <div class="gamme-pack-cell" data-gallery="packs" data-index="0">
+                            <picture><source srcset="img/coffret-premium-signature-cadeau-voiture.webp" type="image/webp"><img src="img/coffret-premium-signature-cadeau-voiture.jpeg" alt="Coffret cadeau XPERIENCE VISION — thermos, carnet, stylo" loading="lazy"></picture>
+                            <div class="gamme-pack-cell-label">Pack Premium</div>
                         </div>
-                        <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="1">
-                            <picture><source srcset="img/coffret-contenu.webp" type="image/webp"><img src="img/coffret-contenu.jpeg" alt="Coffret cadeau XV vue détaillée" loading="lazy"></picture>
-                            <div class="overlay"><p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Contenu du pack</p></div>
+                        <div class="gamme-pack-cell" data-gallery="packs" data-index="1">
+                            <picture><source srcset="img/coffret-signature-contenu-premium-voiture.webp" type="image/webp"><img src="img/coffret-signature-contenu-premium-voiture.jpeg" alt="Coffret cadeau XPERIENCE VISION vue détaillée" loading="lazy"></picture>
+                            <div class="gamme-pack-cell-label">Contenu du pack</div>
                         </div>
-                        <div class="gallery-item h-72 md:h-80" data-gallery="packs" data-index="2">
-                            <picture><source srcset="img/coffret-presentation.webp" type="image/webp"><img src="img/coffret-presentation.jpeg" alt="Présentation du coffret cadeau XV" loading="lazy"></picture>
-                            <div class="overlay"><p class="text-white text-xs font-black uppercase tracking-widest"><i class="fa-solid fa-expand mr-2"></i>Présentation</p></div>
+                        <div class="gamme-pack-cell" data-gallery="packs" data-index="2">
+                            <picture><source srcset="img/coffret-signature-presentation-cadeau-voiture.webp" type="image/webp"><img src="img/coffret-signature-presentation-cadeau-voiture.jpeg" alt="Présentation du coffret cadeau XPERIENCE VISION" loading="lazy"></picture>
+                            <div class="gamme-pack-cell-label">Présentation</div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- Catalogue BYD -->
-                <div>
-                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-6">
-                        <div>
-                            <span class="text-white font-black uppercase tracking-[0.4em] text-[10px] border-l-4 border-white pl-4">Gamme BYD</span>
-                            <h3 class="text-2xl md:text-4xl font-black mt-6 uppercase italic tracking-tighter">Galerie</h3>
-                            <p class="text-gray-500 text-xs uppercase tracking-widest mt-3">Installations finalisées sur véhicule</p>
-                        </div>
-                        <p class="text-gray-600 text-[10px] font-black uppercase tracking-widest hidden md:block">
-                            <i class="fa-solid fa-arrows-left-right mr-2"></i>Faites défiler ou cliquez pour agrandir
-                        </p>
+            <!-- CATALOGUE BYD EN MAGAZINE -->
+            <section class="gamme-mag">
+                <div class="gamme-mag-header reveal-up">
+                    <div class="gamme-mag-header-left">
+                        <span class="gamme-mag-eyebrow"><i class="fa-solid fa-book-bookmark"></i>Catalogue BYD 2026</span>
+                        <h2 class="gamme-mag-title">Notre <span class="gradient-text">catalogue</span> officiel</h2>
                     </div>
-
-                    <div class="catalogue-track" id="catalogue-track">
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="0"><picture><source srcset="img/catalogue-01.webp" type="image/webp"><img src="img/catalogue-01.jpeg" alt="Catalogue page 1" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="1"><picture><source srcset="img/catalogue-02.webp" type="image/webp"><img src="img/catalogue-02.jpeg" alt="Catalogue page 2" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="2"><picture><source srcset="img/catalogue-03.webp" type="image/webp"><img src="img/catalogue-03.jpeg" alt="Catalogue page 3" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="3"><picture><source srcset="img/catalogue-04.webp" type="image/webp"><img src="img/catalogue-04.jpeg" alt="Catalogue page 4" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="4"><picture><source srcset="img/catalogue-05.webp" type="image/webp"><img src="img/catalogue-05.jpeg" alt="Catalogue page 5" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="5"><picture><source srcset="img/catalogue-06.webp" type="image/webp"><img src="img/catalogue-06.jpeg" alt="Catalogue page 6" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="6"><picture><source srcset="img/catalogue-07.webp" type="image/webp"><img src="img/catalogue-07.jpeg" alt="Catalogue page 7" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="7"><picture><source srcset="img/catalogue-08.webp" type="image/webp"><img src="img/catalogue-08.jpeg" alt="Catalogue page 8" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="8"><picture><source srcset="img/catalogue-09.webp" type="image/webp"><img src="img/catalogue-09.jpeg" alt="Catalogue page 9" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="9"><picture><source srcset="img/catalogue-10.webp" type="image/webp"><img src="img/catalogue-10.jpeg" alt="Catalogue page 10" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="10"><picture><source srcset="img/catalogue-11.webp" type="image/webp"><img src="img/catalogue-11.jpeg" alt="Catalogue page 11" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="11"><picture><source srcset="img/catalogue-12.webp" type="image/webp"><img src="img/catalogue-12.jpeg" alt="Catalogue page 12" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="12"><picture><source srcset="img/catalogue-13.webp" type="image/webp"><img src="img/catalogue-13.jpeg" alt="Catalogue page 13" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="13"><picture><source srcset="img/catalogue-14.webp" type="image/webp"><img src="img/catalogue-14.jpeg" alt="Catalogue page 14" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="14"><picture><source srcset="img/catalogue-15.webp" type="image/webp"><img src="img/catalogue-15.jpeg" alt="Catalogue page 15" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="15"><picture><source srcset="img/catalogue-16.webp" type="image/webp"><img src="img/catalogue-16.jpeg" alt="Catalogue page 16" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="16"><picture><source srcset="img/catalogue-17.webp" type="image/webp"><img src="img/catalogue-17.jpeg" alt="Catalogue page 17" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="17"><picture><source srcset="img/catalogue-18.webp" type="image/webp"><img src="img/catalogue-18.jpeg" alt="Catalogue page 18" loading="lazy"></picture></div>
-                        <div class="catalogue-card" data-gallery="catalogue" data-index="18"><picture><source srcset="img/catalogue-19.webp" type="image/webp"><img src="img/catalogue-19.jpeg" alt="Catalogue page 19" loading="lazy"></picture></div>
+                    <div class="gamme-mag-hint">
+                        <span class="gamme-mag-counter" id="gamme-mag-counter">01 / 19</span>
+                        <span><i class="fa-solid fa-arrows-left-right mr-2"></i>Défilez</span>
                     </div>
                 </div>
-            </div>
-        </section>
+
+                <div class="gamme-mag-track" id="gamme-mag-track">
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="0"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-01.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-01.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 1" loading="lazy"></picture><span class="gamme-mag-card-num">01 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="1"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-02.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-02.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 2" loading="lazy"></picture><span class="gamme-mag-card-num">02 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="2"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-03.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-03.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 3" loading="lazy"></picture><span class="gamme-mag-card-num">03 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="3"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-04.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-04.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 4" loading="lazy"></picture><span class="gamme-mag-card-num">04 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="4"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-05.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-05.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 5" loading="lazy"></picture><span class="gamme-mag-card-num">05 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="5"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-06.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-06.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 6" loading="lazy"></picture><span class="gamme-mag-card-num">06 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="6"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-07.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-07.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 7" loading="lazy"></picture><span class="gamme-mag-card-num">07 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="7"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-08.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-08.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 8" loading="lazy"></picture><span class="gamme-mag-card-num">08 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="8"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-09.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-09.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 9" loading="lazy"></picture><span class="gamme-mag-card-num">09 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="9"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-10.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-10.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 10" loading="lazy"></picture><span class="gamme-mag-card-num">10 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="10"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-11.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-11.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 11" loading="lazy"></picture><span class="gamme-mag-card-num">11 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="11"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-12.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-12.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 12" loading="lazy"></picture><span class="gamme-mag-card-num">12 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="12"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-13.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-13.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 13" loading="lazy"></picture><span class="gamme-mag-card-num">13 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="13"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-14.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-14.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 14" loading="lazy"></picture><span class="gamme-mag-card-num">14 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="14"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-15.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-15.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 15" loading="lazy"></picture><span class="gamme-mag-card-num">15 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="15"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-16.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-16.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 16" loading="lazy"></picture><span class="gamme-mag-card-num">16 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="16"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-17.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-17.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 17" loading="lazy"></picture><span class="gamme-mag-card-num">17 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="17"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-18.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-18.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 18" loading="lazy"></picture><span class="gamme-mag-card-num">18 / 19</span></div>
+                    <div class="gamme-mag-card" data-gallery="catalogue" data-index="18"><picture><source srcset="img/brochure-xv-accessoires-voiture-electrique-page-19.webp" type="image/webp"><img src="img/brochure-xv-accessoires-voiture-electrique-page-19.jpeg" alt="Catalogue XPERIENCE VISION accessoires voiture électrique — page 19" loading="lazy"></picture><span class="gamme-mag-card-num">19 / 19</span></div>
+                </div>
+            </section>
 
         </div><!-- /panel gamme -->
 
         <!-- PANEL : PARTENARIATS -->
         <div class="histoire-panel" data-panel="partenariats" hidden>
 
+        <!-- MANIFESTE PARTENARIAT -->
+        <section class="py-16 md:py-24 px-6 bg-[#0a0a0a]">
+            <div class="max-w-4xl mx-auto text-center reveal">
+                <span class="text-gray-500 font-black uppercase tracking-[0.4em] text-[10px] md:text-xs border-b border-white/20 pb-2">Écosystème pro</span>
+                <h2 class="text-3xl md:text-5xl font-black mt-6 mb-6 uppercase italic leading-tight text-white">
+                    Un partenariat <br class="hidden md:block"> <span class="gradient-text">pensé pour durer.</span>
+                </h2>
+                <p class="text-gray-400 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+                    XPERIENCE VISION travaille exclusivement avec des acteurs qui partagent notre exigence&nbsp;: constructeurs, réseaux de distribution et ateliers de préparation. Notre modèle repose sur trois principes&nbsp;— rentabilité immédiate pour nos partenaires, expérience client irréprochable, et montée en compétence durable des équipes en concession.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-12 text-left">
+                    <div class="card-glass rounded-2xl p-6 reveal reveal-d1">
+                        <i class="fa-solid fa-chart-line text-2xl text-gray-500 mb-4"></i>
+                        <h4 class="font-black uppercase text-xs tracking-widest mb-2 text-white">Centre de profit</h4>
+                        <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed">Un levier d'upsell à forte marge sans mobiliser d'atelier&nbsp;: nous intervenons en autonomie, vous encaissez la vente.</p>
+                    </div>
+                    <div class="card-glass rounded-2xl p-6 reveal reveal-d2">
+                        <i class="fa-solid fa-user-tie text-2xl text-gray-500 mb-4"></i>
+                        <h4 class="font-black uppercase text-xs tracking-widest mb-2 text-white">Expérience VIP</h4>
+                        <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed">Présentation coffret signature, livraison soignée, niveau de finition constructeur — votre client vit un moment premium.</p>
+                    </div>
+                    <div class="card-glass rounded-2xl p-6 reveal reveal-d3">
+                        <i class="fa-solid fa-graduation-cap text-2xl text-gray-500 mb-4"></i>
+                        <h4 class="font-black uppercase text-xs tracking-widest mb-2 text-white">Équipe formée</h4>
+                        <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed">Vos commerciaux maîtrisent l'argumentaire, les compatibilités et les marges — formation express dispensée sur site.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- BUSINESS & PERFORMANCE -->
-        <section id="business" class="py-16 md:py-20 bg-[#080a12] px-6">
+        <section id="business" class="py-16 md:py-20 bg-[#0a0a0a] px-6">
             <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                 <div class="reveal">
                     <span class="text-white font-black uppercase tracking-[0.5em] text-xs border-b-4 border-white pb-3">Partenariats</span>
@@ -1071,16 +2662,24 @@
                         Business <br> &amp; Performance.
                     </h2>
                     <p class="text-gray-400 text-xs md:text-base uppercase tracking-widest leading-loose mb-6">
-                        Nous accompagnons les groupes automobiles dans la mise en place de centres de profits additionnels via l'équipement digital.
+                        Nous accompagnons les groupes automobiles dans la mise en place de centres de profits additionnels via l'équipement digital — sans immobilisation d'atelier ni recrutement supplémentaire.
                     </p>
                     <div class="space-y-4 md:space-y-5">
                         <div class="flex items-center">
                             <div class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">01</div>
-                            <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Installation externalisée : Rentabilité immédiate.</p>
+                            <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Installation externalisée&nbsp;: rentabilité immédiate.</p>
                         </div>
                         <div class="flex items-center">
                             <div class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">02</div>
-                            <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Formation commerciale : Maîtrisez l'offre.</p>
+                            <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Formation commerciale&nbsp;: maîtrisez l'offre.</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">03</div>
+                            <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Stock consigné&nbsp;: zéro trésorerie mobilisée.</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-white text-black h-8 w-8 md:h-12 md:w-12 flex items-center justify-center rounded-full font-black italic mr-4 md:mr-6 text-xs md:text-base">04</div>
+                            <p class="text-gray-300 text-xs md:text-sm font-bold uppercase tracking-wider">Vitrine dédiée&nbsp;: visibilité showroom renforcée.</p>
                         </div>
                     </div>
                 </div>
@@ -1125,15 +2724,224 @@
             </div>
         </section>
 
-        <!-- Placeholder partenariats (en attente infos client) -->
-        <section class="py-16 px-6 bg-[#0a0a0a] text-center">
-            <div class="max-w-2xl mx-auto card-glass rounded-[2rem] p-8 md:p-10">
-                <i class="fa-solid fa-handshake text-4xl text-gray-600 mb-5"></i>
-                <h3 class="text-xl md:text-2xl font-black uppercase italic mb-4">Vous êtes un réseau ou un groupe automobile&nbsp;?</h3>
-                <p class="text-gray-400 text-sm leading-relaxed mb-8">
-                    Nos équipes préparent en ce moment un espace dédié avec études de cas, conditions partenariat et contact direct. En attendant, contactez-nous pour discuter d'un partenariat.
+        <!-- COMMENT ÇA MARCHE — Processus partenariat en 4 étapes -->
+        <section class="py-16 md:py-24 px-6 bg-[#0a0a0a]">
+            <div class="max-w-6xl mx-auto">
+                <header class="text-center mb-12 md:mb-16 reveal">
+                    <span class="text-gray-500 font-black uppercase tracking-[0.4em] text-[10px] md:text-xs border-b border-white/20 pb-2">Méthode</span>
+                    <h2 class="text-3xl md:text-5xl font-black mt-6 mb-4 uppercase italic leading-tight text-white">
+                        Comment <span class="gradient-text">ça marche</span>&nbsp;?
+                    </h2>
+                    <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+                        Un process éprouvé pour déployer l'offre XPERIENCE VISION en concession, en quelques semaines seulement.
+                    </p>
+                </header>
+
+                <ol class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 list-none p-0">
+                    <li class="card-glass rounded-2xl p-6 md:p-7 relative reveal reveal-d1">
+                        <span class="absolute top-4 right-5 text-4xl md:text-5xl font-black italic text-white/5">01</span>
+                        <i class="fa-solid fa-phone text-xl text-gray-500 mb-4"></i>
+                        <h4 class="font-black uppercase text-sm tracking-widest mb-3 text-white">Prise de contact</h4>
+                        <p class="text-xs md:text-sm text-gray-400 leading-relaxed">Échange initial pour cerner votre volumétrie, votre réseau et vos marques distribuées. Signature d'un accord de partenariat sur mesure.</p>
+                    </li>
+                    <li class="card-glass rounded-2xl p-6 md:p-7 relative reveal reveal-d2">
+                        <span class="absolute top-4 right-5 text-4xl md:text-5xl font-black italic text-white/5">02</span>
+                        <i class="fa-solid fa-box-open text-xl text-gray-500 mb-4"></i>
+                        <h4 class="font-black uppercase text-sm tracking-widest mb-3 text-white">Mise en place</h4>
+                        <p class="text-xs md:text-sm text-gray-400 leading-relaxed">Dotation d'un stock démo, vitrine showroom dédiée, supports commerciaux co-brandés et kit de présentation signature.</p>
+                    </li>
+                    <li class="card-glass rounded-2xl p-6 md:p-7 relative reveal reveal-d3">
+                        <span class="absolute top-4 right-5 text-4xl md:text-5xl font-black italic text-white/5">03</span>
+                        <i class="fa-solid fa-chalkboard-user text-xl text-gray-500 mb-4"></i>
+                        <h4 class="font-black uppercase text-sm tracking-widest mb-3 text-white">Formation équipe</h4>
+                        <p class="text-xs md:text-sm text-gray-400 leading-relaxed">Session d'intégration des équipes commerciales&nbsp;: argumentaire, compatibilités véhicules, grille tarifaire et marges partenaires.</p>
+                    </li>
+                    <li class="card-glass rounded-2xl p-6 md:p-7 relative reveal reveal-d4">
+                        <span class="absolute top-4 right-5 text-4xl md:text-5xl font-black italic text-white/5">04</span>
+                        <i class="fa-solid fa-rotate text-xl text-gray-500 mb-4"></i>
+                        <h4 class="font-black uppercase text-sm tracking-widest mb-3 text-white">Suivi continu</h4>
+                        <p class="text-xs md:text-sm text-gray-400 leading-relaxed">Interlocuteur dédié, reporting mensuel, SAV prioritaire et mises à jour produits régulières pour faire vivre l'offre dans la durée.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- NOS PARTENAIRES — 3 enseignes (BYD, BYmyCAR, AutoDetail) -->
+        <section class="partenaires-section" aria-labelledby="partenaires-heading">
+            <div class="partenaires-inner">
+                <header class="partenaires-head reveal">
+                    <span class="partenaires-eyebrow">Écosystème</span>
+                    <h2 id="partenaires-heading" class="partenaires-title">Nos <span class="gradient-text">Partenaires</span></h2>
+                    <p class="partenaires-sub">Un réseau premium adossé à des marques de référence pour une expérience 360°.</p>
+                </header>
+
+                <div class="partenaires-grid">
+                    <!-- BYD -->
+                    <article class="partenaire-card reveal reveal-d1" data-partenaire-index="0"
+                             data-partenaire-long-desc="Partenariat constructeur officiel avec BYD, leader mondial du véhicule électrique premium. XPERIENCE VISION conçoit, fabrique et installe une gamme complète d'équipements sur-mesure pensés modèle par modèle — écrans intermédiaires et XL parfaitement intégrés au système infotainment, tapis 3D logotés, habillages intérieurs premium, films PPF de protection carrosserie et accessoires dédiés. Chaque produit est homologué pour respecter les standards constructeur et la garantie véhicule.">
+                        <div class="partenaire-logo partenaire-logo-dark">
+                            <picture>
+                                <source srcset="img/partenaires-byd-logo.webp" type="image/webp">
+                                <img src="img/partenaires-byd-logo.png" alt="Logo BYD — Build Your Dreams" loading="lazy" decoding="async" width="300" height="168">
+                            </picture>
+                        </div>
+                        <h3 class="partenaire-name">BYD</h3>
+                        <p class="partenaire-tagline">Build Your Dreams</p>
+                        <p class="partenaire-desc">
+                            Partenariat constructeur officiel pour l'équipement sur-mesure des véhicules BYD — écrans intermédiaires et XL, tapis 3D logotés, habillages premium et films PPF pensés gamme par gamme.
+                        </p>
+                        <ul class="partenaire-tags">
+                            <li>Constructeur officiel</li>
+                            <li>Accessoires dédiés</li>
+                            <li>Gamme complète</li>
+                        </ul>
+                        <span class="partenaire-card-hint">En savoir plus <i class="fa-solid fa-arrow-right"></i></span>
+                    </article>
+
+                    <!-- BYmyCAR -->
+                    <article class="partenaire-card reveal reveal-d2" data-partenaire-index="1"
+                             data-partenaire-long-desc="BYmyCAR est l'un des premiers réseaux de distribution automobile premium en France. Notre partenariat se matérialise par un coffret signature co-brandé XPERIENCE VISION × BYmyCAR, des installations réalisées par nos équipes XPERIENCE VISION directement en concession BYmyCAR ou à notre atelier, un pack livraison premium (emballage soigné, protections, notice dédiée) et une offre exclusive réservée aux clients du réseau. L'expérience est pensée comme une remise de clefs : le client repart avec un véhicule équipé, présenté comme un produit fini de luxe.">
+                        <div class="partenaire-logo partenaire-logo-light">
+                            <picture>
+                                <source srcset="img/partenaires-bymycar-logo.webp" type="image/webp">
+                                <img src="img/partenaires-bymycar-logo.png" alt="Logo BYmyCAR for Business" loading="lazy" decoding="async" width="276" height="182">
+                            </picture>
+                        </div>
+                        <h3 class="partenaire-name">BYmyCAR</h3>
+                        <p class="partenaire-tagline">Réseau concessions premium</p>
+                        <p class="partenaire-desc">
+                            Coffret signature co-brandé, installations réalisées par nos équipes XPERIENCE VISION en concession BYmyCAR ou à notre atelier, pack livraison premium et offre exclusive réservée aux clients du réseau BYmyCAR — une expérience d'équipement pensée comme une remise de clefs.
+                        </p>
+                        <ul class="partenaire-tags">
+                            <li>Réseau concessions</li>
+                            <li>Coffret co-brandé</li>
+                            <li>Livraison offerte</li>
+                            <li>Offre exclusive</li>
+                        </ul>
+                        <span class="partenaire-card-hint">En savoir plus <i class="fa-solid fa-arrow-right"></i></span>
+                    </article>
+
+                    <!-- AUTODETAIL -->
+                    <article class="partenaire-card reveal reveal-d3" data-partenaire-index="2"
+                             data-partenaire-long-desc="AutoDetail est notre partenaire le plus proche, installé à la même adresse que notre atelier XPERIENCE VISION. Cette proximité géographique se traduit par une offre 360° pour nos clients : en un seul passage, le véhicule peut être équipé digitalement puis préparé esthétiquement au plus haut niveau. Leur savoir-faire couvre la pose de films PPF (protection peinture invisible), les vitres teintées réglementaires, le remplacement de pare-brise, la remise en état cuir et jantes, le covering intégral ou partiel, le detailling complet ainsi que les traitements céramique longue durée.">
+                        <div class="partenaire-logo partenaire-logo-light partenaire-logo-zoom">
+                            <img src="img/partenaires-autodetail-logo.jpg"
+                                 alt="Logo AutoDetail — préparation et esthétique automobile premium"
+                                 loading="lazy" decoding="async" width="600" height="600">
+                        </div>
+                        <h3 class="partenaire-name">AutoDetail</h3>
+                        <p class="partenaire-tagline">Préparation &amp; esthétique automobile premium</p>
+                        <p class="partenaire-desc">
+                            Partenaire installé à notre adresse, AutoDetail prolonge notre intégration digitale par un savoir-faire artisanal de préparation et de protection — films PPF, traitements céramique, covering et remise en état haut de gamme.
+                        </p>
+                        <ul class="partenaire-tags">
+                            <li>Film PPF</li>
+                            <li>Vitres teintées</li>
+                            <li>Pare-brise</li>
+                            <li>Remise en état cuir</li>
+                            <li>Remise en état jantes</li>
+                            <li>Covering</li>
+                            <li>Detailling</li>
+                            <li>Traitement céramique</li>
+                        </ul>
+                        <span class="partenaire-card-hint">En savoir plus <i class="fa-solid fa-arrow-right"></i></span>
+                    </article>
+                </div>
+                <p class="partenaires-carousel-hint"><i class="fa-solid fa-arrow-right"></i> Swipez pour découvrir nos partenaires</p>
+            </div>
+        </section>
+
+        <!-- VITRINE EN CONCESSION (image gauche + texte droite) -->
+        <section class="vitrine-section" aria-labelledby="vitrine-heading">
+            <div class="vitrine-grid">
+                <figure class="vitrine-media reveal">
+                    <picture>
+                        <source srcset="img/partenaires-showroom-xperience-vision-vitrine-concession.webp" type="image/webp">
+                        <img src="img/partenaires-showroom-xperience-vision-vitrine-concession.jpeg"
+                             alt="Vitrine professionnelle XPERIENCE VISION en concession — espace d'exposition dédié avec écrans, coffrets et accessoires"
+                             loading="lazy" decoding="async" width="1200" height="900">
+                    </picture>
+                </figure>
+                <div class="reveal reveal-d1">
+                    <span class="vitrine-eyebrow">Notre vitrine concession</span>
+                    <h2 id="vitrine-heading" class="vitrine-title">Un espace <span class="gradient-text">dédié</span> chez nos partenaires.</h2>
+                    <p class="vitrine-text">
+                        Dans chaque concession partenaire, XPERIENCE VISION déploie une vitrine d'exposition complète pour mettre en avant sa gamme auprès des clients finaux. Un espace pensé comme un mini-showroom&nbsp;: écrans en démonstration, coffrets signature, brochures, accessoires tangibles et argumentaire commercial à portée de main.
+                    </p>
+                    <p class="vitrine-text">
+                        Cette vitrine n'est pas un simple présentoir&nbsp;: c'est un véritable <strong class="text-white">outil de conversion</strong> qui permet aux commerciaux de présenter concrètement l'offre, de déclencher la décision d'achat au moment de la livraison du véhicule, et d'inscrire durablement XPERIENCE VISION dans le parcours client de la concession.
+                    </p>
+                    <ul class="vitrine-features">
+                        <li><i class="fa-solid fa-check"></i><span><strong class="text-white">Mobilier premium</strong> aux couleurs de la marque, fourni et installé par nos équipes.</span></li>
+                        <li><i class="fa-solid fa-check"></i><span><strong class="text-white">Produits de démonstration</strong> en permanence&nbsp;: écrans allumés, coffrets ouverts, matériaux à toucher.</span></li>
+                        <li><i class="fa-solid fa-check"></i><span><strong class="text-white">Supports commerciaux</strong> co-brandés&nbsp;: brochures, fiches produits, tarifs à jour.</span></li>
+                        <li><i class="fa-solid fa-check"></i><span><strong class="text-white">Visibilité garantie</strong> dans la zone de livraison ou d'accueil client de la concession.</span></li>
+                        <li><i class="fa-solid fa-check"></i><span><strong class="text-white">Renouvellement régulier</strong> des supports et des nouveautés par nos équipes dédiées.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ PARTENAIRES -->
+        <section class="py-16 md:py-20 px-6 bg-[#0a0a0a]">
+            <div class="max-w-4xl mx-auto">
+                <header class="text-center mb-10 md:mb-14 reveal">
+                    <span class="text-gray-500 font-black uppercase tracking-[0.4em] text-[10px] md:text-xs border-b border-white/20 pb-2">Questions fréquentes</span>
+                    <h2 class="text-3xl md:text-4xl font-black mt-6 uppercase italic leading-tight text-white">
+                        Tout ce que vous <span class="gradient-text">devez savoir.</span>
+                    </h2>
+                </header>
+
+                <div class="space-y-3 md:space-y-4">
+                    <details class="card-glass rounded-2xl p-5 md:p-6 reveal reveal-d1 group">
+                        <summary class="flex items-center justify-between cursor-pointer list-none">
+                            <span class="font-black uppercase text-xs md:text-sm tracking-widest text-white pr-4">Quel engagement financier pour devenir partenaire&nbsp;?</span>
+                            <i class="fa-solid fa-plus text-gray-500 group-open:rotate-45 transition-transform shrink-0"></i>
+                        </summary>
+                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed mt-4 pr-8"><strong class="text-white">Aucun droit d'entrée.</strong> Stock démo <strong class="text-white">consigné</strong>, supports commerciaux <strong class="text-white">fournis</strong> et formation <strong class="text-white">offerte</strong>. Les conditions commerciales précises sont définies <strong class="text-white">sur-mesure</strong> selon votre volume et votre réseau.</p>
+                    </details>
+
+                    <details class="card-glass rounded-2xl p-5 md:p-6 reveal reveal-d2 group">
+                        <summary class="flex items-center justify-between cursor-pointer list-none">
+                            <span class="font-black uppercase text-xs md:text-sm tracking-widest text-white pr-4">Qui réalise les installations en concession&nbsp;?</span>
+                            <i class="fa-solid fa-plus text-gray-500 group-open:rotate-45 transition-transform shrink-0"></i>
+                        </summary>
+                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed mt-4 pr-8">Nos <strong class="text-white">techniciens XPERIENCE VISION</strong> se déplacent sur site ou reçoivent le véhicule à notre atelier. <strong class="text-white">Aucune mobilisation</strong> de vos équipes après-vente n'est nécessaire&nbsp;— vous encaissez la <strong class="text-white">marge sans contrainte opérationnelle</strong>.</p>
+                    </details>
+
+                    <details class="card-glass rounded-2xl p-5 md:p-6 reveal reveal-d3 group">
+                        <summary class="flex items-center justify-between cursor-pointer list-none">
+                            <span class="font-black uppercase text-xs md:text-sm tracking-widest text-white pr-4">Quelles marques et modèles sont compatibles&nbsp;?</span>
+                            <i class="fa-solid fa-plus text-gray-500 group-open:rotate-45 transition-transform shrink-0"></i>
+                        </summary>
+                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed mt-4 pr-8">Toutes les <strong class="text-white">marques chinoises premium</strong> (BYD, MG, Xpeng, Leapmotor, Hongqi, Nio, Zeekr, Voyah) sont couvertes. Notre catalogue est <strong class="text-white">mis à jour en permanence</strong> selon les sorties constructeurs.</p>
+                    </details>
+
+                    <details class="card-glass rounded-2xl p-5 md:p-6 reveal reveal-d4 group">
+                        <summary class="flex items-center justify-between cursor-pointer list-none">
+                            <span class="font-black uppercase text-xs md:text-sm tracking-widest text-white pr-4">En combien de temps le partenariat est-il opérationnel&nbsp;?</span>
+                            <i class="fa-solid fa-plus text-gray-500 group-open:rotate-45 transition-transform shrink-0"></i>
+                        </summary>
+                        <p class="text-gray-400 text-xs md:text-sm leading-relaxed mt-4 pr-8">Comptez <strong class="text-white">2 à 4 semaines</strong> entre le premier échange et le lancement commercial&nbsp;: signature, <strong class="text-white">logistique showroom</strong>, <strong class="text-white">formation des équipes</strong> et démarrage du flux de commandes.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Partenaires pro -->
+        <section class="py-16 md:py-20 px-6 bg-[#0a0a0a]">
+            <div class="max-w-3xl mx-auto card-glass rounded-[2rem] p-8 md:p-12 text-center">
+                <i class="fa-solid fa-handshake text-4xl md:text-5xl text-gray-500 mb-6"></i>
+                <h3 class="text-2xl md:text-3xl font-black uppercase italic mb-5 leading-tight">Vous êtes un réseau ou un groupe automobile&nbsp;?</h3>
+                <p class="text-gray-400 text-sm md:text-base leading-relaxed mb-8 max-w-xl mx-auto">
+                    Discutons de votre projet partenariat&nbsp;: volume annuel, marques distribuées, zone d'exclusivité et conditions commerciales. Premier retour sous 48h ouvrées avec un interlocuteur dédié.
                 </p>
-                <a href="contact.html" class="btn-premium inline-block px-10 py-5 rounded-full font-black uppercase text-xs tracking-widest">Nous contacter</a>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="contact.html?sujet=partenaire" class="btn-premium inline-block px-10 py-5 rounded-full font-black uppercase text-xs tracking-widest">Demande de partenariat</a>
+                    <a href="mailto:contact@xperience-vision.fr?subject=Demande%20de%20partenariat" class="text-gray-400 hover:text-white uppercase text-xs font-bold tracking-widest transition inline-flex items-center gap-2">
+                        <i class="fa-solid fa-envelope"></i> Email direct
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -1159,6 +2967,16 @@
             <div>
                 <div class="text-3xl font-black mb-6 italic uppercase tracking-tighter">XPERIENCE <span class="text-gray-600">VISION</span></div>
                 <p class="text-gray-500 text-xs uppercase tracking-[0.2em] max-w-sm leading-loose font-bold">L'excellence digitale embarquée. <br>Installation premium pour véhicules d'exception.</p>
+                <div class="mt-8 space-y-3 text-gray-500 text-[10px] uppercase tracking-[0.2em] font-bold">
+                    <p class="flex items-start gap-3">
+                        <i class="fa-solid fa-location-dot text-[#bf953f] mt-0.5"></i>
+                        <span>10 av. Fridingen<br>77100 Nanteuil-lès-Meaux</span>
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <i class="fa-solid fa-clock text-[#bf953f]"></i>
+                        <span>Lun - Ven · 9h - 18h</span>
+                    </p>
+                </div>
             </div>
             <div class="grid grid-cols-2 gap-16 uppercase text-[10px] font-black tracking-[0.3em] text-gray-500">
                 <div class="flex flex-col space-y-6">
@@ -1197,14 +3015,50 @@
         <span id="lightbox-counter"></span>
     </div>
 
+    <!-- PILLAR MODAL — vue détaillée piliers gamme -->
+    <div id="pillar-modal" role="dialog" aria-modal="true" aria-labelledby="pillar-modal-title">
+        <div class="pillar-modal-card">
+            <button class="pillar-modal-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+            <button class="pillar-modal-prev" aria-label="Pilier précédent"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="pillar-modal-next" aria-label="Pilier suivant"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="pillar-modal-media" data-pillar-media></div>
+            <div class="pillar-modal-body">
+                <h3 id="pillar-modal-title" class="pillar-modal-title" data-pillar-title></h3>
+                <p class="pillar-modal-desc" data-pillar-desc></p>
+                <div class="pillar-modal-tags" data-pillar-tags></div>
+                <a href="index.html#installation" class="pillar-modal-cta">
+                    <span>Voir les offres</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            <span class="pillar-modal-counter" data-pillar-counter></span>
+        </div>
+    </div>
+
+    <!-- PARTENAIRE MODAL — vue détaillée carte partenaire -->
+    <div id="partenaire-modal" role="dialog" aria-modal="true" aria-labelledby="partenaire-modal-title">
+        <div class="pillar-modal-card">
+            <button class="pillar-modal-close" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+            <button class="pillar-modal-prev" aria-label="Partenaire précédent"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="pillar-modal-next" aria-label="Partenaire suivant"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="pillar-modal-media" data-partenaire-media></div>
+            <div class="pillar-modal-body">
+                <h3 id="partenaire-modal-title" class="pillar-modal-title" data-partenaire-title></h3>
+                <p class="pillar-modal-tagline" data-partenaire-tagline style="color:#888;font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;font-weight:800;margin:-0.3rem 0 0.2rem;"></p>
+                <p class="pillar-modal-desc" data-partenaire-desc></p>
+                <div class="pillar-modal-tags" data-partenaire-tags></div>
+                <a href="contact.html?sujet=partenaire" class="pillar-modal-cta">
+                    <span>Contacter ce partenaire</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            <span class="pillar-modal-counter" data-partenaire-counter></span>
+        </div>
+    </div>
+
     <script src="script.js"></script>
     <script>
-        // Burger menu
-        document.getElementById('burger-btn')?.addEventListener('click', () => {
-            const menu = document.getElementById('mobile-dropdown');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('show');
-        });
+        // Burger menu géré par script.js (évite les doubles handlers)
 
         // Lightbox
         const lightbox = document.getElementById('lightbox');
@@ -1236,8 +3090,75 @@
 
         document.querySelectorAll('[data-gallery]').forEach(el => {
             el.addEventListener('click', () => {
-                openLightbox(el.dataset.gallery, parseInt(el.dataset.index));
+                if (el.dataset.gallery === 'pillars') {
+                    openPillarModal(parseInt(el.dataset.index));
+                } else {
+                    openLightbox(el.dataset.gallery, parseInt(el.dataset.index));
+                }
             });
+        });
+
+        // ========== PILLAR MODAL (piliers gamme — enrichi avec texte + tags + CTA) ==========
+        const pillarModal = document.getElementById('pillar-modal');
+        const pillarArticles = Array.from(document.querySelectorAll('[data-gallery="pillars"]'));
+        const pillarMediaEl = pillarModal.querySelector('[data-pillar-media]');
+        const pillarTitleEl = pillarModal.querySelector('[data-pillar-title]');
+        const pillarDescEl = pillarModal.querySelector('[data-pillar-desc]');
+        const pillarTagsEl = pillarModal.querySelector('[data-pillar-tags]');
+        const pillarCounterEl = pillarModal.querySelector('[data-pillar-counter]');
+        let pillarIndex = 0;
+        let pillarLastFocus = null;
+
+        function updatePillarModal() {
+            const article = pillarArticles[pillarIndex];
+            if (!article) return;
+            const picture = article.querySelector('.gamme-pillar-media picture');
+            const title = article.querySelector('.gamme-pillar-title')?.textContent || '';
+            // Desc longue (data-description) en priorité, fallback au <p> court
+            const descLong = (article.dataset.description || '').trim();
+            const descShort = article.querySelector('.gamme-pillar-desc')?.textContent || '';
+            const desc = descLong || descShort;
+            const tags = Array.from(article.querySelectorAll('.gamme-pillar-tag')).map(t => t.textContent.trim());
+
+            pillarMediaEl.innerHTML = picture ? picture.outerHTML : '';
+            const img = pillarMediaEl.querySelector('img');
+            if (img) { img.loading = 'eager'; img.removeAttribute('width'); img.removeAttribute('height'); }
+            pillarTitleEl.textContent = title;
+            pillarDescEl.textContent = desc;
+            pillarTagsEl.innerHTML = tags.map(t => `<span class="pillar-modal-tag">${t}</span>`).join('');
+            pillarCounterEl.textContent = `${pillarIndex + 1} / ${pillarArticles.length}`;
+        }
+
+        function openPillarModal(index) {
+            pillarIndex = index;
+            pillarLastFocus = document.activeElement;
+            updatePillarModal();
+            pillarModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => pillarModal.querySelector('.pillar-modal-close')?.focus(), 50);
+        }
+
+        function closePillarModal() {
+            pillarModal.classList.remove('open');
+            document.body.style.overflow = '';
+            if (pillarLastFocus?.focus) pillarLastFocus.focus();
+        }
+
+        pillarModal.querySelector('.pillar-modal-close').addEventListener('click', closePillarModal);
+        pillarModal.querySelector('.pillar-modal-prev').addEventListener('click', () => {
+            pillarIndex = (pillarIndex - 1 + pillarArticles.length) % pillarArticles.length;
+            updatePillarModal();
+        });
+        pillarModal.querySelector('.pillar-modal-next').addEventListener('click', () => {
+            pillarIndex = (pillarIndex + 1) % pillarArticles.length;
+            updatePillarModal();
+        });
+        pillarModal.addEventListener('click', e => { if (e.target === pillarModal) closePillarModal(); });
+        document.addEventListener('keydown', e => {
+            if (!pillarModal.classList.contains('open')) return;
+            if (e.key === 'Escape') closePillarModal();
+            else if (e.key === 'ArrowLeft') pillarModal.querySelector('.pillar-modal-prev').click();
+            else if (e.key === 'ArrowRight') pillarModal.querySelector('.pillar-modal-next').click();
         });
 
         document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
@@ -1257,13 +3178,102 @@
             if (e.key === 'ArrowRight') document.getElementById('lightbox-next').click();
         });
 
+        // ========== PARTENAIRE MODAL (fiche enrichie au clic sur carte partenaire) ==========
+        (function () {
+            const modal = document.getElementById('partenaire-modal');
+            const cards = Array.from(document.querySelectorAll('.partenaire-card[data-partenaire-index]'));
+            if (!modal || !cards.length) return;
+
+            const mediaEl = modal.querySelector('[data-partenaire-media]');
+            const titleEl = modal.querySelector('[data-partenaire-title]');
+            const taglineEl = modal.querySelector('[data-partenaire-tagline]');
+            const descEl = modal.querySelector('[data-partenaire-desc]');
+            const tagsEl = modal.querySelector('[data-partenaire-tags]');
+            const counterEl = modal.querySelector('[data-partenaire-counter]');
+            let index = 0;
+            let lastFocus = null;
+
+            function update() {
+                const card = cards[index];
+                if (!card) return;
+                const logoContainer = card.querySelector('.partenaire-logo');
+                const isLightLogo = logoContainer?.classList.contains('partenaire-logo-light');
+                const picture = logoContainer?.querySelector('picture');
+                const img = logoContainer?.querySelector('img');
+
+                mediaEl.classList.toggle('media-light', !!isLightLogo);
+                if (picture) {
+                    mediaEl.innerHTML = picture.outerHTML;
+                } else if (img) {
+                    mediaEl.innerHTML = img.outerHTML;
+                } else {
+                    mediaEl.innerHTML = '';
+                }
+                const mediaImg = mediaEl.querySelector('img');
+                if (mediaImg) { mediaImg.loading = 'eager'; mediaImg.removeAttribute('width'); mediaImg.removeAttribute('height'); }
+
+                titleEl.textContent = card.querySelector('.partenaire-name')?.textContent || '';
+                taglineEl.textContent = card.querySelector('.partenaire-tagline')?.textContent || '';
+                descEl.textContent = (card.dataset.partenaireLongDesc || card.querySelector('.partenaire-desc')?.textContent || '').trim();
+
+                const tags = Array.from(card.querySelectorAll('.partenaire-tags li')).map(t => t.textContent.trim());
+                tagsEl.innerHTML = tags.map(t => `<span class="pillar-modal-tag">${t}</span>`).join('');
+                counterEl.textContent = `${index + 1} / ${cards.length}`;
+            }
+
+            function open(i) {
+                index = i;
+                lastFocus = document.activeElement;
+                update();
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => modal.querySelector('.pillar-modal-close')?.focus(), 50);
+            }
+
+            function close() {
+                modal.classList.remove('open');
+                document.body.style.overflow = '';
+                if (lastFocus?.focus) lastFocus.focus();
+            }
+
+            cards.forEach(card => {
+                card.addEventListener('click', () => open(parseInt(card.dataset.partenaireIndex)));
+                card.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        open(parseInt(card.dataset.partenaireIndex));
+                    }
+                });
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `Voir la fiche ${card.querySelector('.partenaire-name')?.textContent || 'partenaire'}`);
+            });
+
+            modal.querySelector('.pillar-modal-close').addEventListener('click', close);
+            modal.querySelector('.pillar-modal-prev').addEventListener('click', () => {
+                index = (index - 1 + cards.length) % cards.length;
+                update();
+            });
+            modal.querySelector('.pillar-modal-next').addEventListener('click', () => {
+                index = (index + 1) % cards.length;
+                update();
+            });
+            modal.addEventListener('click', e => { if (e.target === modal) close(); });
+            document.addEventListener('keydown', e => {
+                if (!modal.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                else if (e.key === 'ArrowLeft') modal.querySelector('.pillar-modal-prev').click();
+                else if (e.key === 'ArrowRight') modal.querySelector('.pillar-modal-next').click();
+            });
+        })();
+
         // ========== ONGLETS (histoire / gamme / partenariats) ==========
         (function () {
             const tabs = document.querySelectorAll('.histoire-tab[data-tab]');
             const panels = document.querySelectorAll('.histoire-panel[data-panel]');
             if (!tabs.length || !panels.length) return;
 
-            function activate(name) {
+            function activate(name, { scroll = true } = {}) {
                 tabs.forEach(t => {
                     const on = t.dataset.tab === name;
                     t.classList.toggle('active', on);
@@ -1273,17 +3283,21 @@
                     p.hidden = p.dataset.panel !== name;
                 });
                 try { history.replaceState(null, '', '#' + name); } catch (e) {}
-                // Scroll vers les tabs pour voir immédiatement le contenu
+                if (!scroll) return;
+                // Scroll vers le début du panel cible, juste sous les tabs sticky.
+                // On s'appuie sur le panel (non-sticky) car tabs.offsetTop est faussé quand le sticky est engagé.
+                const panel = document.querySelector(`.histoire-panel[data-panel="${name}"]`);
                 const tabNav = document.querySelector('.histoire-tabs');
-                if (tabNav) {
-                    const rect = tabNav.getBoundingClientRect();
-                    if (rect.top < 0 || rect.top > 200) {
-                        window.scrollTo({
-                            top: window.scrollY + rect.top - 70,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
+                if (!panel || !tabNav) return;
+                const stickyTop = parseInt(getComputedStyle(tabNav).top, 10) || 64;
+                // Position du panel = tabsNaturalTop + tabsHeight, donc :
+                // tabsNaturalTop = panel.offsetTop - tabs.offsetHeight
+                // Scroll target = tabsNaturalTop - stickyTop → tabs pile contre la navbar, panel pile sous les tabs
+                const target = panel.offsetTop - tabNav.offsetHeight - stickyTop;
+                window.scrollTo({
+                    top: Math.max(0, target),
+                    behavior: 'smooth'
+                });
             }
 
             tabs.forEach(t => {
@@ -1294,15 +3308,72 @@
             const validHashes = ['histoire', 'gamme', 'partenariats'];
             const hash = (location.hash || '').replace('#', '');
             if (validHashes.includes(hash)) {
-                // activation sans scroll
-                tabs.forEach(t => {
-                    const on = t.dataset.tab === hash;
-                    t.classList.toggle('active', on);
-                });
-                panels.forEach(p => {
-                    p.hidden = p.dataset.panel !== hash;
-                });
+                activate(hash, { scroll: false });
             }
+        })();
+
+        // ========== REVEAL AU SCROLL (reveal-up, reveal-stagger) ==========
+        (function () {
+            const els = document.querySelectorAll('.reveal-up, .reveal-stagger');
+            if (!els.length) return;
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+            els.forEach(el => obs.observe(el));
+        })();
+
+        // ========== COMPTEURS ANIMÉS (data-counter dans les stat-table) ==========
+        (function () {
+            const counters = document.querySelectorAll('.stat-row [data-counter], .stat-row[data-counter]');
+            if (!counters.length) return;
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const el = entry.target;
+                    const target = parseFloat(el.dataset.target);
+                    const prefix = el.dataset.prefix || '';
+                    const suffix = el.dataset.suffix || '';
+                    const dur = 1600;
+                    const t0 = performance.now();
+                    function update(now) {
+                        const p = Math.min((now - t0) / dur, 1);
+                        const eased = 1 - Math.pow(1 - p, 3);
+                        el.textContent = prefix + Math.round(eased * target) + suffix;
+                        if (p < 1) requestAnimationFrame(update);
+                    }
+                    requestAnimationFrame(update);
+                    obs.unobserve(el);
+                });
+            }, { threshold: 0.5 });
+            counters.forEach(el => obs.observe(el));
+        })();
+
+        // ========== COMPTEUR DE PAGE MAGAZINE BYD ==========
+        (function () {
+            const track = document.getElementById('gamme-mag-track');
+            const counter = document.getElementById('gamme-mag-counter');
+            if (!track || !counter) return;
+            const cards = track.querySelectorAll('.gamme-mag-card');
+            const total = cards.length;
+            function update() {
+                const center = track.scrollLeft + track.clientWidth / 2;
+                let best = 0, bestDist = Infinity;
+                cards.forEach((c, i) => {
+                    const cCenter = c.offsetLeft + c.offsetWidth / 2;
+                    const d = Math.abs(cCenter - center);
+                    if (d < bestDist) { bestDist = d; best = i; }
+                });
+                const n = String(best + 1).padStart(2, '0');
+                const t = String(total).padStart(2, '0');
+                counter.textContent = `${n} / ${t}`;
+            }
+            track.addEventListener('scroll', update, { passive: true });
+            update();
         })();
     </script>
 
@@ -1475,6 +3546,5 @@
 
     <script src="https://js.stripe.com/v3/"></script>
     <script src="catalogue.js"></script>
-    <script src="js/concessions.js"></script>
 </body>
 </html>

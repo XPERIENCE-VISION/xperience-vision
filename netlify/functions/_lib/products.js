@@ -10,7 +10,18 @@
  * Types :
  *  - 'produit' : livré à domicile (accessoires, packs)
  *  - 'service' : installation par XPERIENCE VISION (écrans) — nécessite RDV
+ *
+ * Les champs `image` et `imageAlt` sont enrichis automatiquement à partir de
+ * `data/product-images.json` (source de vérité unique pour les slugs SEO).
  */
+
+let IMAGE_MAP = {};
+try {
+    // Chemin relatif pour que esbuild (Netlify node_bundler) puisse le résoudre statiquement
+    IMAGE_MAP = require('../../../data/product-images.json');
+} catch (e) {
+    // Fallback silencieux si le mapping n'est pas disponible
+}
 
 // Prix en CENTIMES d'euros (Stripe attend des cents)
 const PRODUCTS = {
@@ -19,6 +30,10 @@ const PRODUCTS = {
     'ECR-FAM': { name: 'Tablette 10.1" Famille', price: 60000, type: 'service' },
     'ECR-POL': { name: 'Écran plafond 13.3" FHD Polyvalent', price: 69900, type: 'service' },
     'ECR-PRE': { name: 'Écran plafond 17.3" FHD Premium', price: 109900, type: 'service' },
+
+    // ========== PRODUIT DE TEST (caché — accès via ?test=rdv50c sur /index.html) ==========
+    // Prix minimum Stripe EUR = 50 centimes. Type 'service' pour déclencher le flow RDV complet.
+    'TEST-50C': { name: 'TEST — Produit de test (ne pas commander)', price: 50, type: 'service' },
 
     // ========== PACKS SIGNATURE — BESTSELLERS (produits livrés) ==========
     'PACK-CAF': { name: 'Pack Café — Café Express', price: 12900, type: 'produit' },
@@ -34,7 +49,6 @@ const PRODUCTS = {
     'EXT-006': { name: 'Film PPF anti-rayures', price: 49000, type: 'produit' },
     'EXT-007': { name: 'Baguettes de portes inox', price: 12900, type: 'produit' },
     'EXT-008': { name: 'Caméra de recul HD 1080p', price: 24900, type: 'produit' },
-    'EXT-009': { name: 'Jantes sport 18-20 pouces', price: 89900, type: 'produit' },
     'EXT-010': { name: 'Spoilers latéraux sport', price: 38900, type: 'produit' },
     'EXT-011': { name: 'Décorations chromées extérieur', price: 10900, type: 'produit' },
     'EXT-012': { name: 'Protection pare-chocs arrière', price: 8900, type: 'produit' },
@@ -90,7 +104,6 @@ const PRODUCTS = {
     'TSL-004': { name: 'Films PPF capot Tesla', price: 69000, type: 'produit' },
     'TSL-005': { name: 'Films PPF pare-chocs avant Tesla', price: 49000, type: 'produit' },
     'TSL-006': { name: 'Pack PPF intégral Tesla', price: 289000, type: 'produit' },
-    'TSL-007': { name: 'Jantes aero covers alternatifs Tesla', price: 34900, type: 'produit' },
     'TSL-008': { name: 'Tapis coffre + frunk Tesla', price: 18900, type: 'produit' },
     'TSL-009': { name: 'Caméra recul HD améliorée Tesla', price: 29900, type: 'produit' },
     'TSL-010': { name: 'Hub USB multiport boîte à gants Tesla', price: 7900, type: 'produit' },
@@ -152,6 +165,16 @@ const PRODUCTS = {
     'RR-009':  { name: 'Habillage volant cuir/alcantara Range Rover', price: 54900, type: 'produit' },
     'RR-010':  { name: 'Dashcam intégrée premium Range Rover', price: 54900, type: 'produit' }
 };
+
+// Enrichit chaque produit avec son image SEO (lookup depuis data/product-images.json)
+for (const sku of Object.keys(PRODUCTS)) {
+    const imgMeta = IMAGE_MAP[sku];
+    if (imgMeta && imgMeta.slug) {
+        PRODUCTS[sku].image = `img/produits/${imgMeta.slug}.jpeg`;
+        PRODUCTS[sku].imageWebp = `img/produits/${imgMeta.slug}.webp`;
+        PRODUCTS[sku].imageAlt = imgMeta.alt;
+    }
+}
 
 function getProduct(id) {
     return PRODUCTS[id] || null;

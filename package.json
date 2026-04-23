@@ -7,9 +7,14 @@
     "build:css": "tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css --minify",
     "watch:css": "tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css --watch",
     "build:webp": "node scripts/webp.js",
+    "fetch:images": "node scripts/fetch-product-images.js",
+    "fetch:images:dry": "node scripts/fetch-product-images.js --dry-run",
+    "rename:images": "node scripts/rename-static-images.js",
+    "apply:images": "node scripts/apply-product-images.js",
     "build": "npm run build:css"
   },
   "devDependencies": {
+    "dotenv": "^16.6.1",
     "sharp": "^0.33.5",
     "tailwindcss": "^3.4.17"
   },

@@ -43,7 +43,7 @@ async function cancelBooking(bookingUid, reason = 'Paiement non finalisé dans l
 
 /**
  * Récupère les détails d'un booking par son UID.
- * Utilisé pour récupérer la date/heure/concession au moment d'envoyer les emails de confirmation.
+ * Utilisé pour récupérer la date/heure/lieu au moment d'envoyer les emails de confirmation.
  */
 async function getBooking(bookingUid) {
     const apiKey = getApiKey();

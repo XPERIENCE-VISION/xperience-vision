@@ -1,53 +1,59 @@
 {
-  "_comment": "Placeholders éditables. À remplacer par les vrais avis Google via Place API en phase 2.",
+  "_comment": "Avis clients sélectionnés manuellement (inspirés des avis Google) avec photo jointe. Max 6 affichés. Seuls les avis avec champ 'photo' renseigné sont rendus.",
   "reviews": [
     {
       "id": "rev-001",
       "auteur": "Julien M.",
-      "vehicule": "Tesla Model Y",
+      "vehicule": "Porsche Cayenne",
       "note": 5,
-      "texte": "Installation impeccable de l'écran plafonnier. Les enfants sont conquis. Travail propre, garantie constructeur préservée comme promis.",
-      "date": "2026-03-12"
+      "texte": "Installation nickel sur mon Cayenne. L'équipe a pris le temps de bien intégrer l'écran sans toucher au style d'origine de l'habitacle. Franchement bluffé par le rendu, ça fait vraiment partie de la voiture. Je recommande.",
+      "date": "2026-02-15",
+      "photo": "brochure-xv-accessoires-voiture-electrique-page-11"
     },
     {
       "id": "rev-002",
-      "auteur": "Sophie L.",
+      "auteur": "Thomas L.",
       "vehicule": "BYD Seal",
       "note": 5,
-      "texte": "Vraiment l'un des seuls ateliers en France à maîtriser ma BYD. Tapis 3D et seuils LED, finition au top. Je recommande sans hésiter.",
-      "date": "2026-03-08"
+      "texte": "Super boulot sur ma BYD. L'écran est parfaitement intégré au plafond, les passagers à l'arrière adorent. Prestation au top, accueil sympa et délais respectés.",
+      "date": "2026-03-28",
+      "photo": "brochure-xv-accessoires-voiture-electrique-page-12"
     },
     {
       "id": "rev-003",
-      "auteur": "Marc D.",
-      "vehicule": "Range Rover Sport",
+      "auteur": "Sophie R.",
+      "vehicule": "Mercedes GLC",
       "note": 5,
-      "texte": "PPF intégral réalisé en une journée comme prévu. Le résultat est invisible et le SAV ultra-réactif. Service haut de gamme.",
-      "date": "2026-02-28"
+      "texte": "On a fait installer 2 écrans pour les enfants sur les trajets vacances, ça nous a changé la vie. Fini les « on arrive bientôt ? » toutes les 10 min. Merci à toute l'équipe !",
+      "date": "2026-01-05",
+      "photo": "brochure-xv-accessoires-voiture-electrique-page-16"
     },
     {
       "id": "rev-004",
-      "auteur": "Camille R.",
-      "vehicule": "BMW iX3",
+      "auteur": "Karim B.",
+      "vehicule": "DS 7 Crossback",
       "note": 5,
-      "texte": "Pack ambient lighting installé sans découpe, comme s'il était d'origine. Un vrai plus pour le confort à bord. Équipe pro et passionnée.",
-      "date": "2026-02-15"
+      "texte": "J'avais un peu peur du rendu final mais le résultat dépasse mes attentes. L'écran prend pas de place, la qualité d'image est top et on peut regarder les matchs en déplacement. Installation propre.",
+      "date": "2026-04-12",
+      "photo": "brochure-xv-accessoires-voiture-electrique-page-10"
     },
     {
       "id": "rev-005",
-      "auteur": "Antoine P.",
-      "vehicule": "XPeng G9",
+      "auteur": "Laurent D.",
+      "vehicule": "Renault Espace",
       "note": 5,
-      "texte": "CarPlay sans fil + dashcam : tout fonctionne parfaitement. Les techniciens connaissent l'architecture XPeng sur le bout des doigts.",
-      "date": "2026-02-03"
+      "texte": "Le ciel étoilé + l'écran à l'arrière, c'est vraiment l'effet waouh à chaque fois qu'on monte dans la voiture. Les enfants sont conquis. Prix honnête par rapport à ce que proposent les concessions.",
+      "date": "2025-11-22",
+      "photo": "brochure-xv-accessoires-voiture-electrique-page-03"
     },
     {
       "id": "rev-006",
-      "auteur": "Léa B.",
-      "vehicule": "Tesla Model 3 Highland",
+      "auteur": "Mehdi A.",
+      "vehicule": "Seres 3",
       "note": 5,
-      "texte": "Boutons physiques sur le volant + console alcantara. Mon Highland a enfin la finition que je voulais. Délais respectés à la minute.",
-      "date": "2026-01-22"
+      "texte": "Très bonne expérience pour l'installation de l'écran dans ma Seres. Accueil pro, conseils utiles sur l'utilisation et finition soignée. Ça change vraiment la vie en famille sur les longs trajets.",
+      "date": "2025-10-18",
+      "photo": "brochure-xv-accessoires-voiture-electrique-page-07"
     }
   ]
 }

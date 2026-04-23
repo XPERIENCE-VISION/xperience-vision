@@ -189,52 +189,30 @@ function updateScrollIndicators(container, dotsContainerId) {
     }
 }
 
-// Logic to hide header on scroll down, show on scroll up (mobile premium feature)
-let lastScrollTop = 0;
+// Header always visible (no hide-on-scroll)
 let isMenuNavigation = false;
 let menuNavTimeout;
-const navbar = document.getElementById('navbar');
-
-window.addEventListener('scroll', () => {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    // Only apply on mobile devices
-    if (window.innerWidth < 768) {
-        if (!isMenuNavigation && scrollTop > lastScrollTop && scrollTop > 50) {
-            // Scroll down & past threshold -> hide header (manual scroll only)
-            navbar.style.transform = 'translateY(-100%)';
-            // Also hide the mobile dropdown if it was open
-            const dropdown = document.getElementById('mobile-dropdown');
-            const overlay = document.getElementById('menu-overlay');
-            if (dropdown && dropdown.classList.contains('show')) {
-                dropdown.classList.remove('show');
-                dropdown.classList.add('hide');
-                overlay.classList.add('hidden');
-                document.body.style.overflow = '';
-            }
-        } else {
-            // Scroll up ou navigation menu -> header visible
-            navbar.style.transform = 'translateY(0)';
-        }
-    } else {
-        // Always show on desktop
-        navbar.style.transform = 'translateY(0)';
-    }
-
-    lastScrollTop = scrollTop;
-}, { passive: true });
 
 // --- GESTION DU FORMULAIRE DE CONTACT ---
 document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Empêche le rechargement de la page
+    e.preventDefault();
 
     const btn = document.getElementById('form-submit-btn');
+    const banner = document.getElementById('form-banner');
     const originalText = btn.innerText;
-    
-    // État de chargement
+
     btn.innerText = 'ENVOI EN COURS...';
     btn.style.opacity = '0.7';
     btn.disabled = true;
+    if (banner) banner.hidden = true;
+
+    function showBanner(type, icon, message) {
+        if (!banner) return;
+        banner.className = `form-banner ${type}`;
+        banner.innerHTML = `<i class="fa-solid ${icon}"></i><span>${message}</span>`;
+        banner.hidden = false;
+        banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
 
     try {
         const formData = new FormData(e.target);
@@ -245,27 +223,18 @@ document.getElementById('contact-form')?.addEventListener('submit', async (e) =>
         });
 
         if (response.ok) {
-            btn.innerText = 'MESSAGE ENVOYÉ AVEC SUCCÈS !';
-            btn.style.backgroundColor = '#10B981'; // Vert succès
-            btn.style.color = '#fff';
-            e.target.reset(); // Vide le formulaire
+            e.target.reset();
+            showBanner('success', 'fa-circle-check', 'Message envoyé avec succès — on vous répond sous 48h jours ouvrés.');
         } else {
             throw new Error('Erreur réseau');
         }
     } catch (error) {
-        btn.innerText = 'ERREUR LORS DE L\'ENVOI';
-        btn.style.backgroundColor = '#EF4444'; // Rouge erreur
-        btn.style.color = '#fff';
+        showBanner('error', 'fa-circle-exclamation', 'Une erreur est survenue. Réessayez ou contactez-nous via WhatsApp.');
     }
 
-    // Remettre le bouton à la normale après 4 secondes
-    setTimeout(() => {
-        btn.innerText = originalText;
-        btn.style.backgroundColor = '';
-        btn.style.color = '';
-        btn.style.opacity = '1';
-        btn.disabled = false;
-    }, 4000);
+    btn.innerText = originalText;
+    btn.style.opacity = '1';
+    btn.disabled = false;
 });
 
 // Auto-resize textarea
@@ -294,18 +263,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Guard : ces éléments n'existent que sur contact.html (form Netlify)
     if (!subjectSelect || !vehicleInput || !vehicleAsterisk) return;
 
-    // Fonction qui met à jour l'obligation du champ Véhicule
+    // Sujets pour lesquels marque/modèle n'a pas de sens (pas encore de véhicule, B2B, etc.)
+    const SUBJECTS_WITHOUT_VEHICLE = ['Conseil avant achat', 'Concession / Partenariat pro', 'Autre'];
+
     function updateVehicleRequirement() {
         const subject = subjectSelect.value;
 
-        // Si c'est un partenariat ou "Autre", le véhicule n'est pas obligatoire
-        if (subject === 'Partenariat professionnel' || subject === 'Autre') {
+        if (SUBJECTS_WITHOUT_VEHICLE.includes(subject)) {
             vehicleInput.removeAttribute('required');
-            vehicleAsterisk.classList.add('hidden'); // Cache l'astérisque (classe Tailwind)
+            vehicleAsterisk.classList.add('hidden');
         } else {
-            // Pour Devis et SAV, c'est obligatoire
             vehicleInput.setAttribute('required', 'required');
-            vehicleAsterisk.classList.remove('hidden'); // Affiche l'astérisque
+            vehicleAsterisk.classList.remove('hidden');
         }
     }
 
@@ -345,93 +314,255 @@ const MODELES = {
 // modeles = liste des modèles compatibles ou ['all'] = tous modèles de la marque.
 const PRODUCTS_BY_BRAND = {
     byd: [
-        { id: 'BYD-001', name: 'Film protection écran rotatif 15.6"',   price: 89,   modeles: ['Seal', 'Han', 'Tang', 'Atto 3'], icon: 'fa-shield-halved' },
-        { id: 'BYD-002', name: 'Tapis TPE 3D logotés BYD',               price: 149,  modeles: ['all'], icon: 'fa-road' },
-        { id: 'BYD-003', name: 'Coque clé cuir nappa',                   price: 59,   modeles: ['all'], icon: 'fa-key' },
-        { id: 'BYD-004', name: 'Seuils de porte LED « BYD »',            price: 189,  modeles: ['all'], icon: 'fa-door-open' },
-        { id: 'BYD-005', name: 'Protection coffre sur-mesure',           price: 119,  modeles: ['Seal U', 'Atto 3', 'Tang'], icon: 'fa-box' },
-        { id: 'BYD-006', name: 'Habillage console centrale carbone',     price: 249,  modeles: ['Seal', 'Han'], icon: 'fa-layer-group' },
-        { id: 'BYD-007', name: 'Habillage console alcantara',            price: 299,  modeles: ['Seal', 'Han', 'Tang'], icon: 'fa-layer-group' },
-        { id: 'BYD-008', name: 'Films teintés homologués',               price: 349,  modeles: ['all'], icon: 'fa-window-maximize' },
-        { id: 'BYD-009', name: 'Protection toit panoramique UV',         price: 199,  modeles: ['Seal', 'Tang', 'Han'], icon: 'fa-sun' },
-        { id: 'BYD-010', name: 'Adaptateur charge Type 2 / CCS premium', price: 179,  modeles: ['all'], icon: 'fa-plug' },
-        { id: 'BYD-011', name: 'Support smartphone magnétique',          price: 49,   modeles: ['all'], icon: 'fa-mobile-screen' },
-        { id: 'BYD-012', name: 'Caches valves logotés BYD',              price: 29,   modeles: ['all'], icon: 'fa-circle-dot' },
-        { id: 'BYD-013', name: 'Pédales aluminium sport',                price: 89,   modeles: ['all'], icon: 'fa-shoe-prints' },
-        { id: 'BYD-014', name: 'Dashcam intégrée discrète',              price: 449,  modeles: ['all'], icon: 'fa-video' }
+        { id: 'BYD-001', name: 'Film protection écran rotatif 15.6"', price: 89, modeles: ['Seal', 'Han', 'Tang', 'Atto 3'], icon: 'fa-shield-halved',
+          desc: 'Film hydrogel auto-cicatrisant découpé sur-mesure · Dureté 9H, pose sans bulles.',
+          descLong: 'Film de protection hydrogel ultra-fin découpé au gabarit exact de l\'écran central rotatif 15,6" des BYD Seal, Han, Tang et Atto 3. Matériau TPU auto-cicatrisant — les micro-rayures s\'effacent avec la chaleur. Dureté 9H, traitement anti-traces de doigts, transparence optique 99 %. Adhésif sans colle, kit de pose complet inclus (lingette, raclette). Préserve la sensibilité tactile d\'origine.' },
+        { id: 'BYD-002', name: 'Tapis TPE 3D logotés BYD', price: 149, modeles: ['all'], icon: 'fa-road',
+          desc: 'Tapis 3D TPE sur-mesure avec logo BYD · Rebords anti-projection · Toutes saisons.',
+          descLong: 'Jeu complet de tapis thermoformés en TPE haute densité, moulés au gabarit exact de votre BYD (avant + arrière + coffre). Logo BYD gaufré, rebords surélevés qui contiennent boue, sel et liquides. Revers antidérapant clipsé sur les points d\'ancrage d\'origine. Utilisables toutes saisons, lavables au jet d\'eau. Garantie 2 ans.' },
+        { id: 'BYD-003', name: 'Coque clé cuir nappa', price: 59, modeles: ['all'], icon: 'fa-key',
+          desc: 'Étui cuir nappa cousu main pour télécommande BYD · 3 coloris.',
+          descLong: 'Coque de protection en cuir nappa véritable, cousue main point sellier, pour la télécommande BYD (Seal, Han, Tang, Atto 3, Seal U). Épaissit le grip et protège des chocs. Finition naturelle qui se patine avec le temps. Dragonne amovible et porte-clés métallique inclus, 3 coloris (noir, cognac, bleu marine). Garantie 2 ans.' },
+        { id: 'BYD-004', name: 'Seuils de porte LED « BYD »', price: 189, modeles: ['all'], icon: 'fa-door-open',
+          desc: 'Seuils inox brossé avec logo BYD rétroéclairé · Alimentation d\'origine.',
+          descLong: 'Set de 4 seuils de porte en inox 304 brossé, logo BYD rétroéclairé LED blanc froid. Allumage automatique à l\'ouverture via le faisceau de courtoisie d\'origine — aucun câblage. Protège les seuils des rayures d\'entrée/sortie tout en apportant une signature premium. Pose adhésive 3M VHB, 10 min. Garantie 3 ans.' },
+        { id: 'BYD-005', name: 'Protection coffre sur-mesure', price: 119, modeles: ['Seal U', 'Atto 3', 'Tang'], icon: 'fa-box',
+          desc: 'Bac thermoformé TPE moulé BYD Seal U, Atto 3, Tang · Rebords 40 mm.',
+          descLong: 'Bac de coffre thermoformé TPE haute densité, moulé au gabarit exact du coffre des BYD Seal U, Atto 3 et Tang. Rebords surélevés de 40 mm qui contiennent liquides et boue, surface gaufrée antidérapante pour maintenir les charges en virage. Imperméable, résistant aux UV et aux graisses. Nettoyage au jet d\'eau. Idéal animaux, sportifs, bricoleurs. Garantie 3 ans.' },
+        { id: 'BYD-006', name: 'Habillage console centrale carbone', price: 249, modeles: ['Seal', 'Han'], icon: 'fa-layer-group',
+          desc: 'Vinyle carbone 3M Di-Noc posé par nos installateurs · Rendu constructeur.',
+          descLong: 'Habillage complet de la console centrale (pourtour écran, tunnel, inserts portes) en vinyle 3M Di-Noc finition carbone réaliste. Pose réalisée par nos installateurs XPERIENCE VISION en atelier, thermoformage à chaud pour épouser parfaitement les formes — résultat indistinguable d\'une pièce d\'usine. Compatible BYD Seal et Han. Livraison du véhicule 24-48 h après dépose. Garantie 3 ans anti-décollage.' },
+        { id: 'BYD-007', name: 'Habillage console alcantara', price: 299, modeles: ['Seal', 'Han', 'Tang'], icon: 'fa-layer-group',
+          desc: 'Alcantara véritable Italie sur console centrale · Touché suédine premium.',
+          descLong: 'Habillage console centrale en Alcantara® véritable (fabrication italienne), matière issue du secteur automobile haut de gamme au toucher suédine et à la résistance exemplaire. Pose réalisée par nos techniciens XPERIENCE VISION avec découpe laser et collage sous presse pour une finition sans coutures visibles. Compatible BYD Seal, Han et Tang. Traitement anti-taches inclus. Garantie 3 ans.' },
+        { id: 'BYD-008', name: 'Films teintés homologués', price: 349, modeles: ['all'], icon: 'fa-window-maximize',
+          desc: 'Films teintés homologués route · 3 niveaux de teinte · Pose XPERIENCE VISION.',
+          descLong: 'Films teintés céramique nanométrique pour vitres arrière + lunette, certifiés CE et homologués route (respectent la transmission lumineuse minimale du côté conducteur pour AV). 3 niveaux disponibles : 35 %, 20 % ou 5 %. Rejet de la chaleur jusqu\'à 70 %, protection UV 99 %, anti-éblouissement. Pose par nos installateurs XPERIENCE VISION en atelier climatisé. Garantie à vie contre décollement et jaunissement.' },
+        { id: 'BYD-009', name: 'Protection toit panoramique UV', price: 199, modeles: ['Seal', 'Tang', 'Han'], icon: 'fa-sun',
+          desc: 'Film solaire pour toit pano BYD · UV 99 %, -70 % chaleur.',
+          descLong: 'Film solaire céramique spécifique pour le toit panoramique des BYD Seal, Tang et Han. Bloque 99 % des UV et réduit jusqu\'à 70 % de la chaleur transmise — protège les passagers, réduit la climatisation nécessaire et prolonge la durée de vie des cuirs et plastiques. Teinte légère (70 % transmission) pour préserver la luminosité. Pose en atelier XPERIENCE VISION, 2 h. Garantie 5 ans.' },
+        { id: 'BYD-010', name: 'Adaptateur charge Type 2 / CCS premium', price: 179, modeles: ['all'], icon: 'fa-plug',
+          desc: 'Adaptateur premium pour la recharge sur toutes bornes standard Europe.',
+          descLong: 'Adaptateur de recharge premium qui permet à votre BYD de se brancher sur les bornes d\'ancienne génération encore présentes sur le réseau français. Boîtier IP65 étanche, poignée ergonomique avec loquet de verrouillage, certification IEC 62196. Communication ISO 15118 complète. Compatible BYD Seal, Han, Tang, Atto 3, Seal U. Sac de transport renforcé. Garantie 3 ans.' },
+        { id: 'BYD-011', name: 'Support smartphone magnétique', price: 49, modeles: ['all'], icon: 'fa-mobile-screen',
+          desc: 'Support magnétique N52 compatible MagSafe · Fixation grille d\'aération.',
+          descLong: 'Support smartphone à aimants néodyme N52 compatibles MagSafe (iPhone 12+) ou plaque magnétique adhésive (tous téléphones, fournie). Fixation sur grille d\'aération avec clip renforcé, rotation 360°. Maintient fermement le téléphone même sur route dégradée sans gêner l\'aération. Finition aluminium brossé. Compatible toutes coques jusqu\'à 5 mm. Garantie 2 ans.' },
+        { id: 'BYD-012', name: 'Caches valves logotés BYD', price: 29, modeles: ['all'], icon: 'fa-circle-dot',
+          desc: 'Set 4 bouchons de valve aluminium logotés BYD · Anti-poussière.',
+          descLong: 'Jeu de 4 bouchons de valves en aluminium anodisé logotés BYD, avec joint torique étanche qui protège la valve de la poussière et de l\'humidité. Empêche la corrosion et la fuite lente d\'air. Finition noire mate ou chromée au choix. Clé de serrage incluse. Garantie à vie anti-corrosion.' },
+        { id: 'BYD-013', name: 'Pédales aluminium sport', price: 89, modeles: ['all'], icon: 'fa-shoe-prints',
+          desc: 'Pédalier sport en aluminium brossé avec picots caoutchouc antidérapants.',
+          descLong: 'Jeu de pédales sport (accélérateur, frein, repose-pied) en aluminium brossé avec picots caoutchouc antidérapants vissés. Pose par clips sur les pédales d\'origine — aucune dépose, aucun perçage. Rigidifie le feeling à la pédale, ajoute une touche sport à l\'habitacle. Compatible toute la gamme BYD. Installation 15 min, visserie incluse. Garantie 3 ans.' },
+        { id: 'BYD-014', name: 'Dashcam intégrée discrète', price: 449, modeles: ['all'], icon: 'fa-video',
+          desc: 'Dashcam 4K avant + Full HD arrière · Intégration faisceau d\'origine.',
+          descLong: 'Dashcam double canal : caméra avant 4K UHD à capteur Sony Starvis et caméra arrière Full HD 1080p, toutes deux équipées d\'un mode nuit avancé. Intégration discrète derrière le rétroviseur avec alimentation sur le faisceau d\'origine (mode stationnement 24/7). Écran 2,5" masqué, enregistrement sur carte microSD 128 GB fournie. Accéléromètre qui verrouille la vidéo en cas de choc. Pose atelier XPERIENCE VISION incluse. Garantie 2 ans.' }
     ],
     tesla: [
-        { id: 'TSL-001', name: 'Console centrale wrap alcantara',        price: 229,  modeles: ['Model 3', 'Model Y'], icon: 'fa-layer-group' },
-        { id: 'TSL-002', name: 'Console centrale wrap carbone',          price: 199,  modeles: ['Model 3', 'Model Y'], icon: 'fa-layer-group' },
-        { id: 'TSL-003', name: 'Boutons physiques volant Highland',      price: 159,  modeles: ['Model 3 Highland'], icon: 'fa-circle-dot' },
-        { id: 'TSL-004', name: 'Films PPF capot',                        price: 690,  modeles: ['all'], icon: 'fa-shield-halved' },
-        { id: 'TSL-005', name: 'Films PPF pare-chocs avant',             price: 490,  modeles: ['all'], icon: 'fa-shield-halved' },
-        { id: 'TSL-006', name: 'Pack PPF intégral',                      price: 2890, modeles: ['all'], icon: 'fa-shield' },
-        { id: 'TSL-007', name: 'Jantes aero covers alternatifs',         price: 349,  modeles: ['Model 3', 'Model Y'], icon: 'fa-compact-disc' },
-        { id: 'TSL-008', name: 'Tapis coffre + frunk',                   price: 189,  modeles: ['all'], icon: 'fa-box' },
-        { id: 'TSL-009', name: 'Caméra recul HD améliorée',              price: 299,  modeles: ['all'], icon: 'fa-camera' },
-        { id: 'TSL-010', name: 'Hub USB multiport boîte à gants',        price: 79,   modeles: ['Model 3', 'Model Y'], icon: 'fa-plug' },
-        { id: 'TSL-011', name: 'Pédales aluminium Tesla',                price: 99,   modeles: ['Model 3', 'Model Y'], icon: 'fa-shoe-prints' },
-        { id: 'TSL-012', name: 'Tapis 3D TPE logotés',                   price: 169,  modeles: ['all'], icon: 'fa-road' },
-        { id: 'TSL-013', name: 'Seuils de porte LED',                    price: 199,  modeles: ['all'], icon: 'fa-door-open' },
-        { id: 'TSL-014', name: 'Film protection écran central',          price: 79,   modeles: ['all'], icon: 'fa-shield-halved' },
-        { id: 'TSL-015', name: 'Dashcam Sentry Mode pro',                price: 399,  modeles: ['all'], icon: 'fa-video' }
+        { id: 'TSL-001', name: 'Console centrale wrap alcantara', price: 229, modeles: ['Model 3', 'Model Y'], icon: 'fa-layer-group',
+          desc: 'Alcantara véritable Italie sur console Tesla · Touché suédine premium.',
+          descLong: 'Habillage complet de la console centrale (accoudoir, tunnel, pourtour chargeur inductif) en Alcantara® véritable italien. Découpe laser et pose sous presse en atelier XPERIENCE VISION pour un rendu sans coutures visibles. Traitement hydrofuge anti-taches (eau, café) inclus. Compatible Tesla Model 3 (2017+) et Model Y. Garantie 3 ans anti-décollage.' },
+        { id: 'TSL-002', name: 'Console centrale wrap carbone', price: 199, modeles: ['Model 3', 'Model Y'], icon: 'fa-layer-group',
+          desc: 'Vinyle carbone 3M Di-Noc haute qualité · Aspect carbone tissé.',
+          descLong: 'Habillage console centrale en vinyle 3M Di-Noc finition carbone tissé 3D réaliste. Thermoformage à chaud en atelier XPERIENCE VISION pour épouser toutes les formes (tunnel, accoudoir, pourtour chargeur), rendu indistinguable d\'une pièce d\'usine. Résistant aux rayures, stable aux UV. Compatible Tesla Model 3 et Model Y. Garantie 3 ans.' },
+        { id: 'TSL-003', name: 'Boutons physiques volant Highland', price: 159, modeles: ['Model 3 Highland'], icon: 'fa-circle-dot',
+          desc: 'Molettes physiques pour le volant Tesla Model 3 Highland · Plug & play.',
+          descLong: 'Kit de boutons physiques pour restaurer les commandes tactiles du volant Tesla Model 3 Highland (2024+). Deux molettes ABS ingéniérie à clipser sur les pavés tactiles — la commande reste fonctionnelle (scroll, clic), mais avec un feedback mécanique. Clipse sans colle, démontage réversible. Finition satin noir, identique au reste du volant. Pose en 5 min, guide fourni. Garantie 2 ans.' },
+        { id: 'TSL-004', name: 'Films PPF capot', price: 690, modeles: ['all'], icon: 'fa-shield-halved',
+          desc: 'Film PPF 8 mil transparent sur capot Tesla · Auto-cicatrisant.',
+          descLong: 'Film de protection polyuréthane (PPF) 8 mil, totalement transparent et auto-cicatrisant (micro-rayures s\'effacent avec la chaleur). Protège le capot contre les impacts de graviers, fientes, sève et UV — zone la plus exposée sur Tesla. Finition brillante qui ravive même la peinture. Pose par nos installateurs XPERIENCE VISION en atelier, 3 h. Garantie 5 ans anti-jaunissement. Compatible Model S/3/X/Y.' },
+        { id: 'TSL-005', name: 'Films PPF pare-chocs avant', price: 490, modeles: ['all'], icon: 'fa-shield-halved',
+          desc: 'Film PPF 8 mil sur pare-chocs + bas de caisse · Zones à risques.',
+          descLong: 'Film PPF polyuréthane 8 mil auto-cicatrisant sur le pare-chocs avant et les premières dizaines de cm de capot + bas de caisse — la zone la plus exposée aux éclats. Transparent, finition brillante, ne modifie pas la teinte de la peinture. Pose atelier XPERIENCE VISION (2-3 h). Garantie 5 ans. Compatible toutes Tesla.' },
+        { id: 'TSL-006', name: 'Pack PPF intégral', price: 2890, modeles: ['all'], icon: 'fa-shield',
+          desc: 'Protection PPF intégrale full-body · Toute la carrosserie protégée.',
+          descLong: 'Protection PPF polyuréthane 8 mil intégrale : capot, ailes, portes, pavillon, boucliers, bas de caisse, miroirs et optiques. Protection totale contre rayures, éclats et UV — votre Tesla reste en état concours pendant des années. Finition brillante ou satinée (mate) au choix. Pose par nos installateurs XPERIENCE VISION, 2 jours d\'atelier. Garantie 7 ans. Compatible Tesla Model S/3/X/Y.' },
+        { id: 'TSL-008', name: 'Tapis coffre + frunk', price: 189, modeles: ['all'], icon: 'fa-box',
+          desc: 'Set tapis TPE coffre arrière + coffre avant (frunk) Tesla · Sur-mesure.',
+          descLong: 'Ensemble de tapis thermoformés TPE pour le coffre arrière ET le frunk (coffre avant) Tesla. Moulés au gabarit exact, rebords surélevés 30 mm qui contiennent liquides et boue. Antidérapants, résistants aux UV et aux graisses. Lavables au jet d\'eau. Compatible Tesla Model 3 (toutes années), Model Y, Model S et Model X (indiquer le modèle à la commande). Garantie 3 ans.' },
+        { id: 'TSL-009', name: 'Caméra recul HD améliorée', price: 299, modeles: ['all'], icon: 'fa-camera',
+          desc: 'Capteur Sony IMX 1080p · Remplacement de la caméra d\'origine.',
+          descLong: 'Kit de remplacement de la caméra de recul d\'origine Tesla par un module Full HD 1080p à capteur Sony IMX 415, angle 170° avec vision nocturne infrarouge. Image visiblement plus nette, surtout de nuit et par conditions dégradées. Boîtier aluminium étanche IP68. Pose en atelier XPERIENCE VISION (1,5 h) via le faisceau d\'origine — aucune modification logicielle. Compatible toutes Tesla. Garantie 3 ans.' },
+        { id: 'TSL-010', name: 'Hub USB multiport boîte à gants', price: 79, modeles: ['Model 3', 'Model Y'], icon: 'fa-plug',
+          desc: 'Hub USB-A + USB-C dans la boîte à gants · Transfert données Sentry.',
+          descLong: 'Hub USB qui se connecte au port USB-C intérieur de la boîte à gants : 2 ports USB-A + 1 port USB-C supplémentaires, avec SSD interne 256 GB pré-formaté pour la Sentry Mode et les Dashcam Tesla. Vitesse 10 Gb/s, remplace avantageusement la clé USB fragile et facilement bloquée. Boîtier ABS anti-chaleur. Compatible Model 3 (2021+) et Model Y. Garantie 2 ans.' },
+        { id: 'TSL-011', name: 'Pédales aluminium Tesla', price: 99, modeles: ['Model 3', 'Model Y'], icon: 'fa-shoe-prints',
+          desc: 'Pédalier aluminium brossé antidérapant · Pose par clips, sans perçage.',
+          descLong: 'Jeu de pédales sport (accélérateur + frein + repose-pied) en aluminium brossé avec picots caoutchouc antidérapants. Pose par clips sur les pédales d\'origine Model 3 et Model Y — aucune dépose, aucun perçage. Ajoute une touche sport et améliore le grip en chaussures humides. Installation 15 min, visserie incluse. Garantie 3 ans.' },
+        { id: 'TSL-012', name: 'Tapis 3D TPE logotés', price: 169, modeles: ['all'], icon: 'fa-road',
+          desc: 'Tapis 3D TPE logotés T Tesla · Couverture intégrale avant/arrière.',
+          descLong: 'Set complet de tapis thermoformés TPE avec logo T gaufré, moulés au gabarit exact de votre Tesla (Model S/3/X/Y). Rebords surélevés 30 mm, revers antidérapant sur les points d\'ancrage d\'origine. Résistants aux liquides, UV et écarts de température. Lavables au jet d\'eau. Toutes saisons. Garantie 3 ans.' },
+        { id: 'TSL-013', name: 'Seuils de porte LED', price: 199, modeles: ['all'], icon: 'fa-door-open',
+          desc: 'Seuils inox brossé logo T rétroéclairé · Allumage automatique.',
+          descLong: 'Set de 4 seuils de porte en inox 304 brossé avec logo T Tesla rétroéclairé LED blanc froid. Allumage automatique à l\'ouverture via le faisceau courtoisie d\'origine — aucun câblage. Protège les seuils des rayures d\'entrée/sortie et apporte une signature premium. Pose adhésive 3M VHB en 10 min. Compatible toutes Tesla. Garantie 3 ans.' },
+        { id: 'TSL-014', name: 'Film protection écran central', price: 79, modeles: ['all'], icon: 'fa-shield-halved',
+          desc: 'Film hydrogel 9H auto-cicatrisant pour écran Tesla · Anti-traces.',
+          descLong: 'Film hydrogel ultra-fin découpé sur-mesure pour l\'écran central Tesla (15" Model 3/Y, 17" Model S/X). Auto-cicatrisant (les rayures s\'effacent avec la chaleur), dureté 9H, traitement anti-traces de doigts et transparence 99 %. Pose sans bulles en 10 min avec kit complet fourni. Compatible avec la sensibilité tactile d\'origine. Garantie 2 ans.' },
+        { id: 'TSL-015', name: 'Dashcam Sentry Mode pro', price: 399, modeles: ['all'], icon: 'fa-video',
+          desc: 'SSD 1 TB haute endurance + hub USB dédié · Optimise Sentry + Dashcam.',
+          descLong: 'Kit pro pour exploiter pleinement la Sentry Mode et la Dashcam Tesla : SSD externe 1 TB haute endurance (spécial enregistrement continu) dans un boîtier thermique ventilé, hub USB-C dédié qui laisse le second port libre. Autonomie de plusieurs semaines d\'enregistrement avant bouclage. Formatage Tesla pré-configuré, fixation sous la moquette de coffre. Compatible Model S/3/X/Y. Garantie 3 ans.' }
     ],
     xpeng: [
-        { id: 'XPG-001', name: 'Films écran double dashboard',           price: 129,  modeles: ['G6', 'G9', 'P7'], icon: 'fa-shield-halved' },
-        { id: 'XPG-002', name: 'Pédales aluminium sport',                price: 89,   modeles: ['all'], icon: 'fa-shoe-prints' },
-        { id: 'XPG-003', name: 'Habillage volant cuir nappa',             price: 349,  modeles: ['G6', 'G9'], icon: 'fa-circle-half-stroke' },
-        { id: 'XPG-004', name: 'Capot chargeur sans fil renforcé',        price: 79,   modeles: ['G6', 'G9'], icon: 'fa-bolt' },
-        { id: 'XPG-005', name: 'Module CarPlay sans fil XPeng',           price: 249,  modeles: ['all'], icon: 'fa-wifi' },
-        { id: 'XPG-006', name: 'Tapis 3D TPE logotés',                    price: 159,  modeles: ['all'], icon: 'fa-road' },
-        { id: 'XPG-007', name: 'Films teintés homologués',                price: 349,  modeles: ['all'], icon: 'fa-window-maximize' },
-        { id: 'XPG-008', name: 'Protection coffre sur-mesure',            price: 119,  modeles: ['G6', 'G9'], icon: 'fa-box' },
-        { id: 'XPG-009', name: 'Coque clé premium',                       price: 49,   modeles: ['all'], icon: 'fa-key' },
-        { id: 'XPG-010', name: 'Seuils de porte LED « XPeng »',           price: 179,  modeles: ['all'], icon: 'fa-door-open' }
+        { id: 'XPG-001', name: 'Films écran double dashboard', price: 129, modeles: ['G6', 'G9', 'P7'], icon: 'fa-shield-halved',
+          desc: 'Films hydrogel 9H pour les 2 écrans XPeng (central + cockpit).',
+          descLong: 'Set de 2 films hydrogel auto-cicatrisants découpés au gabarit exact des deux écrans du dashboard XPeng G6, G9 et P7 : l\'écran central multimédia et l\'écran cluster conducteur. Dureté 9H, transparence 99 %, traitement anti-traces. Pose sans bulles. Préserve la sensibilité tactile. Garantie 2 ans.' },
+        { id: 'XPG-002', name: 'Pédales aluminium sport', price: 89, modeles: ['all'], icon: 'fa-shoe-prints',
+          desc: 'Pédalier aluminium brossé antidérapant · Clips sans perçage.',
+          descLong: 'Jeu de 3 pédales sport (accélérateur, frein, repose-pied) en aluminium brossé, picots caoutchouc antidérapants vissés. Pose par clips sur les pédales d\'origine XPeng, démontage réversible. Ajoute une touche sport et améliore le grip. Installation 15 min. Garantie 3 ans.' },
+        { id: 'XPG-003', name: 'Habillage volant cuir nappa', price: 349, modeles: ['G6', 'G9'], icon: 'fa-circle-half-stroke',
+          desc: 'Volant gainé cuir nappa cousu main · Pose par nos techniciens.',
+          descLong: 'Habillage complet du volant XPeng G6 et G9 en cuir nappa véritable, cousu main point sellier par nos techniciens XPERIENCE VISION. Finition identique aux volants de véhicules premium, avec surpiqûres contrastées (blanc ou rouge au choix). Améliore le grip et protège le volant d\'origine. Travail réalisé dépose / repose incluse, 4-5 h. Garantie 3 ans.' },
+        { id: 'XPG-004', name: 'Capot chargeur sans fil renforcé', price: 79, modeles: ['G6', 'G9'], icon: 'fa-bolt',
+          desc: 'Cache renforcé pour le chargeur induction XPeng · Anti-rayures.',
+          descLong: 'Remplacement du capot d\'origine du chargeur à induction XPeng G6 et G9 par une version renforcée en ABS chromé brossé. Plus résistant aux rayures et aux chocs, finition premium. Clips d\'origine conservés, pose en 2 min. Préserve la fonction d\'induction. Garantie 3 ans.' },
+        { id: 'XPG-005', name: 'Module CarPlay sans fil XPeng', price: 249, modeles: ['all'], icon: 'fa-wifi',
+          desc: 'Adaptateur plug & play ajoutant CarPlay sans fil sur XPeng.',
+          descLong: 'Adaptateur qui ajoute Apple CarPlay sans fil à votre XPeng — ni câble, ni modification logicielle. Branchement sur le port USB-C de la console centrale, détection automatique du téléphone dès que vous montez à bord. Transfert audio haute qualité, reconnaissance vocale Siri, mises à jour OTA. Compatible XPeng G6, G9 et P7. Garantie 2 ans.' },
+        { id: 'XPG-006', name: 'Tapis 3D TPE logotés', price: 159, modeles: ['all'], icon: 'fa-road',
+          desc: 'Tapis 3D TPE sur-mesure avec logo XPeng · Toutes saisons.',
+          descLong: 'Set complet de tapis thermoformés TPE moulés au gabarit exact des XPeng G6, G9 et P7. Logo XPeng gaufré, rebords surélevés qui contiennent liquides et boue, revers antidérapant. Résistants aux UV, graisses et écarts de température. Lavables au jet d\'eau. Utilisables toutes saisons. Garantie 3 ans.' },
+        { id: 'XPG-007', name: 'Films teintés homologués', price: 349, modeles: ['all'], icon: 'fa-window-maximize',
+          desc: 'Films céramiques homologués · 3 teintes · Pose atelier XPERIENCE VISION.',
+          descLong: 'Films teintés céramique nanométrique pour vitres arrière + lunette, homologués route. 3 niveaux : 35 %, 20 % ou 5 %. Rejet chaleur -70 %, UV 99 %, anti-éblouissement. Pose atelier XPERIENCE VISION en salle climatisée pour un rendu sans bulles. Garantie à vie contre décollement et jaunissement.' },
+        { id: 'XPG-008', name: 'Protection coffre sur-mesure', price: 119, modeles: ['G6', 'G9'], icon: 'fa-box',
+          desc: 'Bac coffre TPE rebords 40 mm · Sur-mesure XPeng G6/G9.',
+          descLong: 'Bac de coffre thermoformé TPE haute densité, moulé au gabarit exact du coffre des XPeng G6 et G9. Rebords surélevés 40 mm qui contiennent liquides et boue. Surface gaufrée antidérapante. Imperméable, résistant aux UV et aux graisses. Lavable au jet d\'eau. Idéal animaux, sportifs, matériel de bricolage. Garantie 3 ans.' },
+        { id: 'XPG-009', name: 'Coque clé premium', price: 49, modeles: ['all'], icon: 'fa-key',
+          desc: 'Étui cuir véritable cousu main pour télécommande XPeng.',
+          descLong: 'Étui cuir véritable cousu main pour la télécommande XPeng G6, G9 et P7. Protège des chocs et patine avec le temps. Dragonne amovible et anneau métallique inclus, 3 coloris (noir, cognac, bleu marine). Garantie 2 ans.' },
+        { id: 'XPG-010', name: 'Seuils de porte LED « XPeng »', price: 179, modeles: ['all'], icon: 'fa-door-open',
+          desc: 'Seuils inox brossé logo XPeng rétroéclairé · Sans câblage.',
+          descLong: 'Set de 4 seuils de porte en inox 304 brossé avec logo XPeng rétroéclairé LED blanc froid. Allumage automatique à l\'ouverture via le faisceau d\'éclairage courtoisie d\'origine — aucun câblage. Protège les seuils et signe l\'habitacle. Pose adhésive 3M VHB, 10 min. Garantie 3 ans.' }
     ],
     bmw: [
-        { id: 'BMW-001', name: 'Tapis 3D TPE logotés BMW M',             price: 179,  modeles: ['all'], icon: 'fa-road' },
-        { id: 'BMW-002', name: 'Films PPF capot',                         price: 690,  modeles: ['all'], icon: 'fa-shield-halved' },
-        { id: 'BMW-003', name: 'Habillage console carbone M',             price: 349,  modeles: ['Série 3', 'Série 5', 'X3', 'X5'], icon: 'fa-layer-group' },
-        { id: 'BMW-004', name: 'Pédales aluminium M',                     price: 119,  modeles: ['all'], icon: 'fa-shoe-prints' },
-        { id: 'BMW-005', name: 'Seuils LED illuminés BMW',                price: 219,  modeles: ['all'], icon: 'fa-door-open' },
-        { id: 'BMW-006', name: 'Films teintés homologués',                price: 349,  modeles: ['all'], icon: 'fa-window-maximize' },
-        { id: 'BMW-007', name: 'Coque clé cuir cousu main',               price: 79,   modeles: ['all'], icon: 'fa-key' },
-        { id: 'BMW-008', name: 'Protection coffre cuir',                  price: 149,  modeles: ['X3', 'X5', 'X7'], icon: 'fa-box' },
-        { id: 'BMW-009', name: 'Caches valves BMW M',                     price: 39,   modeles: ['all'], icon: 'fa-circle-dot' },
-        { id: 'BMW-010', name: 'Habillage volant alcantara',              price: 449,  modeles: ['Série 3', 'Série 5', 'X3', 'X5', 'X7'], icon: 'fa-circle-half-stroke' },
-        { id: 'BMW-011', name: 'Cache moteur alu brossé',                 price: 199,  modeles: ['Série M'], icon: 'fa-gear' },
-        { id: 'BMW-012', name: 'Dashcam intégrée BMW',                    price: 499,  modeles: ['all'], icon: 'fa-video' }
+        { id: 'BMW-001', name: 'Tapis 3D TPE logotés BMW M', price: 179, modeles: ['all'], icon: 'fa-road',
+          desc: 'Tapis 3D TPE logotés M · Rebords anti-projection · Toutes saisons.',
+          descLong: 'Set complet de tapis thermoformés TPE haute densité avec logo M gaufré, moulés au gabarit exact de votre BMW (Série 3, 5, X3, X5, X7, Série M). Rebords surélevés 30 mm qui contiennent liquides et boue, revers antidérapant sur les ancrages d\'origine. Résistants aux UV et aux graisses. Lavables au jet d\'eau. Garantie 3 ans.' },
+        { id: 'BMW-002', name: 'Films PPF capot', price: 690, modeles: ['all'], icon: 'fa-shield-halved',
+          desc: 'PPF polyuréthane 8 mil transparent · Capot protégé à vie.',
+          descLong: 'Film PPF 8 mil polyuréthane auto-cicatrisant qui protège le capot contre impacts graviers, fientes, sève et UV. Totalement transparent, finition brillante qui ravive même la peinture. Pose atelier XPERIENCE VISION en 3 h, démontage sans trace possible. Garantie 5 ans anti-jaunissement. Compatible toute la gamme BMW.' },
+        { id: 'BMW-003', name: 'Habillage console carbone M', price: 349, modeles: ['Série 3', 'Série 5', 'X3', 'X5'], icon: 'fa-layer-group',
+          desc: 'Vinyle carbone 3M Di-Noc sur console BMW · Style M.',
+          descLong: 'Habillage console centrale en vinyle 3M Di-Noc finition carbone tissé 3D. Thermoformage à chaud en atelier XPERIENCE VISION pour un rendu parfait sur Série 3, 5, X3 et X5. Résistant aux rayures et stable aux UV, indistinguable d\'une finition M d\'usine. Garantie 3 ans anti-décollage.' },
+        { id: 'BMW-004', name: 'Pédales aluminium M', price: 119, modeles: ['all'], icon: 'fa-shoe-prints',
+          desc: 'Pédalier aluminium brossé avec picots caoutchouc M · Clips sans perçage.',
+          descLong: 'Jeu de pédales sport (accélérateur, frein, repose-pied) en aluminium brossé signature M, picots caoutchouc antidérapants. Pose par clips sur les pédales d\'origine — aucun perçage, aucune dépose. Ajoute une touche sport au poste de conduite. Installation 15 min. Compatible toute la gamme BMW. Garantie 3 ans.' },
+        { id: 'BMW-005', name: 'Seuils LED illuminés BMW', price: 219, modeles: ['all'], icon: 'fa-door-open',
+          desc: 'Seuils inox brossé logo BMW rétroéclairé · Sans câblage.',
+          descLong: 'Set de 4 seuils en inox 304 brossé avec logo BMW rétroéclairé LED blanc froid. Allumage auto à l\'ouverture via faisceau courtoisie d\'origine — aucun câblage. Protège les seuils et signe l\'habitacle premium. Pose adhésive 3M VHB, 10 min. Compatible toute la gamme BMW. Garantie 3 ans.' },
+        { id: 'BMW-006', name: 'Films teintés homologués', price: 349, modeles: ['all'], icon: 'fa-window-maximize',
+          desc: 'Films céramiques homologués · 3 teintes · Pose atelier XPERIENCE VISION.',
+          descLong: 'Films teintés céramique nanométrique pour vitres arrière + lunette, certifiés CE et homologués route. 3 niveaux : 35 %, 20 % ou 5 %. Rejet chaleur jusqu\'à 70 %, UV 99 %, anti-éblouissement. Pose atelier XPERIENCE VISION en salle climatisée. Garantie à vie contre décollement et jaunissement.' },
+        { id: 'BMW-007', name: 'Coque clé cuir cousu main', price: 79, modeles: ['all'], icon: 'fa-key',
+          desc: 'Étui cuir nappa cousu main pour télécommande BMW · 3 coloris.',
+          descLong: 'Étui cuir nappa véritable cousu main point sellier pour la télécommande BMW (Display Key et standard). Épaissit le grip et protège des chocs. Finition naturelle qui se patine. 3 coloris disponibles : noir, cognac, bleu marine. Dragonne amovible et anneau métallique. Garantie 2 ans.' },
+        { id: 'BMW-008', name: 'Protection coffre cuir', price: 149, modeles: ['X3', 'X5', 'X7'], icon: 'fa-box',
+          desc: 'Protège-coffre cuir synthétique sur-mesure X3/X5/X7 · Grip et luxe.',
+          descLong: 'Tapis de coffre en cuir synthétique haute qualité, découpé au gabarit exact des BMW X3, X5 et X7. Surface gaufrée antidérapante qui maintient les charges, protège la moquette d\'origine et apporte un rendu SUV premium. Résistant à l\'eau et aux rayures, lavable au chiffon humide. Revers antidérapant avec points d\'ancrage d\'origine. Garantie 3 ans.' },
+        { id: 'BMW-009', name: 'Caches valves BMW M', price: 39, modeles: ['all'], icon: 'fa-circle-dot',
+          desc: 'Jeu 4 bouchons aluminium logo M · Joint étanche anti-corrosion.',
+          descLong: 'Jeu de 4 bouchons de valves en aluminium anodisé noir avec logo M tricolore, joint torique étanche qui protège les valves de la poussière et de l\'humidité. Empêche corrosion et fuites lentes d\'air. Clé de serrage incluse. Garantie à vie anti-corrosion.' },
+        { id: 'BMW-010', name: 'Habillage volant alcantara', price: 449, modeles: ['Série 3', 'Série 5', 'X3', 'X5', 'X7'], icon: 'fa-circle-half-stroke',
+          desc: 'Volant gainé Alcantara Italie · Cousu main · Surpiqûres M.',
+          descLong: 'Regainage complet du volant en Alcantara® véritable italien, cousu main point sellier par nos selliers. Surpiqûres tricolores M en option (bleu/rouge), ou classiques (blanc, rouge). Améliore le grip et donne un toucher premium immédiat. Travail réalisé dépose / repose incluse, 5-6 h d\'atelier. Compatible Série 3, Série 5, X3, X5, X7. Garantie 3 ans.' },
+        { id: 'BMW-011', name: 'Cache moteur alu brossé', price: 199, modeles: ['Série M'], icon: 'fa-gear',
+          desc: 'Cache moteur alu brossé signature M · Remplacement du cache d\'origine.',
+          descLong: 'Cache moteur en aluminium brossé mis en forme par emboutissage, avec logo M gravé laser. Remplace le cache plastique d\'origine des BMW Série M pour un rendu motorsport et une meilleure dissipation thermique. Clips d\'origine conservés, pose en 5 min. Compatible Série M (M2, M3, M4, M5). Garantie 5 ans.' },
+        { id: 'BMW-012', name: 'Dashcam intégrée BMW', price: 499, modeles: ['all'], icon: 'fa-video',
+          desc: 'Dashcam 4K + Full HD arrière · Intégration discrète atelier XPERIENCE VISION.',
+          descLong: 'Dashcam double canal : caméra avant 4K UHD à capteur Sony Starvis, caméra arrière Full HD 1080p, mode nuit avancé. Intégration discrète derrière le rétroviseur avec alimentation sur faisceau d\'origine (mode stationnement 24/7). Carte microSD 128 GB fournie, accéléromètre de verrouillage vidéo en cas de choc. Pose atelier XPERIENCE VISION incluse. Compatible toute la gamme BMW. Garantie 2 ans.' }
     ],
     mercedes: [
-        { id: 'MRC-001', name: 'Tapis 3D TPE logotés Mercedes',          price: 189,  modeles: ['all'], icon: 'fa-road' },
-        { id: 'MRC-002', name: 'Films PPF capot',                         price: 690,  modeles: ['all'], icon: 'fa-shield-halved' },
-        { id: 'MRC-003', name: 'Habillage console bois précieux',         price: 449,  modeles: ['Classe E', 'Classe S', 'GLE'], icon: 'fa-layer-group' },
-        { id: 'MRC-004', name: 'Pédales aluminium AMG',                   price: 129,  modeles: ['all'], icon: 'fa-shoe-prints' },
-        { id: 'MRC-005', name: 'Seuils LED illuminés Mercedes',           price: 229,  modeles: ['all'], icon: 'fa-door-open' },
-        { id: 'MRC-006', name: 'Films teintés homologués',                price: 349,  modeles: ['all'], icon: 'fa-window-maximize' },
-        { id: 'MRC-007', name: 'Coque clé cuir nappa',                    price: 89,   modeles: ['all'], icon: 'fa-key' },
-        { id: 'MRC-008', name: 'Protection coffre sur-mesure SUV',        price: 169,  modeles: ['GLC', 'GLE', 'GLS'], icon: 'fa-box' },
-        { id: 'MRC-009', name: 'Étoile éclairée calandre',                price: 299,  modeles: ['Classe E', 'Classe S', 'GLE', 'GLS'], icon: 'fa-star' },
-        { id: 'MRC-010', name: 'Habillage volant cuir/alcantara',         price: 499,  modeles: ['all'], icon: 'fa-circle-half-stroke' },
-        { id: 'MRC-011', name: 'Pack ambient lighting upgrade',           price: 590,  modeles: ['Classe C', 'Classe E', 'Classe S'], icon: 'fa-lightbulb' },
-        { id: 'MRC-012', name: 'Dashcam intégrée discrète',               price: 499,  modeles: ['all'], icon: 'fa-video' }
+        { id: 'MRC-001', name: 'Tapis 3D TPE logotés Mercedes', price: 189, modeles: ['all'], icon: 'fa-road',
+          desc: 'Tapis 3D TPE avec étoile Mercedes · Rebords anti-projection.',
+          descLong: 'Set complet de tapis thermoformés TPE haute densité avec étoile Mercedes gaufrée, moulés au gabarit exact de votre véhicule (Classe C, E, S, GLC, GLE, GLS). Rebords surélevés 30 mm, revers antidérapant sur ancrages d\'origine. Résistants aux UV et aux graisses. Lavables au jet. Garantie 3 ans.' },
+        { id: 'MRC-002', name: 'Films PPF capot', price: 690, modeles: ['all'], icon: 'fa-shield-halved',
+          desc: 'Film PPF 8 mil sur capot Mercedes · Protection totale transparente.',
+          descLong: 'Film PPF 8 mil polyuréthane auto-cicatrisant sur le capot. Protection invisible contre éclats, UV et sève. Finition brillante qui ravive la peinture Mercedes. Pose atelier XPERIENCE VISION en 3 h. Garantie 5 ans anti-jaunissement. Compatible toute la gamme Mercedes.' },
+        { id: 'MRC-003', name: 'Habillage console bois précieux', price: 449, modeles: ['Classe E', 'Classe S', 'GLE'], icon: 'fa-layer-group',
+          desc: 'Bois précieux véritable vernis 8 couches · Classe E/S/GLE.',
+          descLong: 'Habillage console en bois précieux véritable (noyer ou frêne au choix), poli puis vernis 8 couches main. Pose atelier XPERIENCE VISION par nos ébénistes partenaires, 8 h d\'atelier. Finition qui rivalise avec les plus belles options d\'usine Mercedes. Compatible Classe E, Classe S et GLE. Garantie 5 ans anti-fissuration.' },
+        { id: 'MRC-004', name: 'Pédales aluminium AMG', price: 129, modeles: ['all'], icon: 'fa-shoe-prints',
+          desc: 'Pédalier aluminium brossé signature AMG · Pose par clips.',
+          descLong: 'Jeu de pédales sport signature AMG en aluminium brossé, picots caoutchouc antidérapants. Pose par clips sur les pédales d\'origine — aucun perçage. Ajoute une touche AMG immédiate au poste de conduite. Installation 15 min. Compatible toute la gamme Mercedes. Garantie 3 ans.' },
+        { id: 'MRC-005', name: 'Seuils LED illuminés Mercedes', price: 229, modeles: ['all'], icon: 'fa-door-open',
+          desc: 'Seuils inox étoile Mercedes rétroéclairée · Allumage automatique.',
+          descLong: 'Set de 4 seuils en inox 304 brossé avec étoile Mercedes rétroéclairée LED blanc froid ou bleue (au choix). Allumage auto à l\'ouverture via faisceau courtoisie d\'origine. Protège les seuils et apporte une signature visuelle premium. Pose adhésive 3M VHB, 10 min. Garantie 3 ans.' },
+        { id: 'MRC-006', name: 'Films teintés homologués', price: 349, modeles: ['all'], icon: 'fa-window-maximize',
+          desc: 'Films céramiques homologués · 3 teintes · Pose atelier XPERIENCE VISION.',
+          descLong: 'Films teintés céramique nanométrique pour vitres arrière + lunette, homologués route. 3 niveaux : 35 %, 20 % ou 5 %. Rejet chaleur jusqu\'à 70 %, UV 99 %. Pose atelier XPERIENCE VISION en salle climatisée. Garantie à vie contre décollement et jaunissement.' },
+        { id: 'MRC-007', name: 'Coque clé cuir nappa', price: 89, modeles: ['all'], icon: 'fa-key',
+          desc: 'Étui cuir nappa cousu main pour télécommande Mercedes · 3 coloris.',
+          descLong: 'Étui en cuir nappa véritable cousu main point sellier, épousant parfaitement la télécommande Mercedes. Protège des chocs, se patine avec le temps. 3 coloris au choix (noir, cognac, bleu marine). Dragonne et anneau métallique. Garantie 2 ans.' },
+        { id: 'MRC-008', name: 'Protection coffre sur-mesure SUV', price: 169, modeles: ['GLC', 'GLE', 'GLS'], icon: 'fa-box',
+          desc: 'Bac coffre TPE sur-mesure pour SUV Mercedes · Rebords 40 mm.',
+          descLong: 'Bac de coffre thermoformé TPE haute densité, moulé au gabarit exact des Mercedes GLC, GLE et GLS. Rebords surélevés 40 mm qui contiennent liquides et boue. Antidérapant, imperméable, résistant aux UV et aux graisses. Nettoyage jet d\'eau. Idéal pour familles actives, chasseurs, propriétaires d\'animaux. Garantie 3 ans.' },
+        { id: 'MRC-009', name: 'Étoile éclairée calandre', price: 299, modeles: ['Classe E', 'Classe S', 'GLE', 'GLS'], icon: 'fa-star',
+          desc: 'Étoile Mercedes calandre éclairée LED · Allumage avec le véhicule.',
+          descLong: 'Étoile de calandre éclairée LED blanc froid qui s\'allume en même temps que les feux de position. Installation par nos techniciens XPERIENCE VISION avec pose d\'un faisceau dédié sécurisé (fusible intégré). Effet signature premium visible de loin de jour comme de nuit. Compatible Classe E, Classe S, GLE et GLS. Garantie 3 ans.' },
+        { id: 'MRC-010', name: 'Habillage volant cuir/alcantara', price: 499, modeles: ['all'], icon: 'fa-circle-half-stroke',
+          desc: 'Volant bi-matière cuir nappa + Alcantara · Cousu main.',
+          descLong: 'Regainage complet du volant Mercedes en bi-matière cuir nappa (9h-3h) et Alcantara® (12h-6h), cousu main point sellier avec surpiqûres à votre convenance. Ergonomie améliorée, grip optimal, rendu AMG. Travail dépose / repose 6 h. Compatible toute la gamme Mercedes. Garantie 3 ans.' },
+        { id: 'MRC-011', name: 'Pack ambient lighting upgrade', price: 590, modeles: ['Classe C', 'Classe E', 'Classe S'], icon: 'fa-lightbulb',
+          desc: 'Éclairage d\'ambiance étendu Classe C/E/S · 64 couleurs + zones sup.',
+          descLong: 'Kit d\'extension de l\'éclairage d\'ambiance Mercedes sur Classe C, E et S : ajoute des zones (bas de portes, tunnel console, seuils, passages de roue intérieurs) pilotables depuis le menu d\'origine. 64 couleurs, synchronisation avec la musique et les modes de conduite. Installation par nos techniciens XPERIENCE VISION (4 h). Intégration totale au système d\'origine. Garantie 3 ans.' },
+        { id: 'MRC-012', name: 'Dashcam intégrée discrète', price: 499, modeles: ['all'], icon: 'fa-video',
+          desc: 'Dashcam 4K + arrière Full HD · Intégration XPERIENCE VISION sur faisceau d\'origine.',
+          descLong: 'Dashcam double canal intégrée discrètement derrière le rétroviseur : caméra avant 4K UHD Sony Starvis + caméra arrière Full HD, mode nuit avancé. Alimentation sur faisceau d\'origine avec fusible dédié pour le mode stationnement 24/7. MicroSD 128 GB fournie, enregistrement en boucle avec verrouillage en cas de choc. Pose atelier XPERIENCE VISION incluse. Compatible toute la gamme Mercedes. Garantie 2 ans.' }
     ],
     'range-rover': [
-        { id: 'RR-001', name: 'Tapis cuir/TPE logotés',                   price: 229,  modeles: ['all'], icon: 'fa-road' },
-        { id: 'RR-002', name: 'Films PPF intégral',                       price: 2990, modeles: ['all'], icon: 'fa-shield' },
-        { id: 'RR-003', name: 'Habillage console bois noyer',             price: 549,  modeles: ['Velar', 'Sport', 'Range Rover'], icon: 'fa-layer-group' },
-        { id: 'RR-004', name: 'Marche-pieds rétractables LED',            price: 1290, modeles: ['Sport', 'Range Rover'], icon: 'fa-stairs' },
-        { id: 'RR-005', name: 'Seuils LED illuminés',                     price: 249,  modeles: ['all'], icon: 'fa-door-open' },
-        { id: 'RR-006', name: 'Films teintés homologués',                 price: 449,  modeles: ['all'], icon: 'fa-window-maximize' },
-        { id: 'RR-007', name: 'Coque clé cuir cousu main',                price: 99,   modeles: ['all'], icon: 'fa-key' },
-        { id: 'RR-008', name: 'Protection coffre cuir',                   price: 199,  modeles: ['all'], icon: 'fa-box' },
-        { id: 'RR-009', name: 'Habillage volant cuir/alcantara',          price: 549,  modeles: ['all'], icon: 'fa-circle-half-stroke' },
-        { id: 'RR-010', name: 'Dashcam intégrée premium',                 price: 549,  modeles: ['all'], icon: 'fa-video' }
+        { id: 'RR-001', name: 'Tapis cuir/TPE logotés', price: 229, modeles: ['all'], icon: 'fa-road',
+          desc: 'Tapis bi-matière cuir + TPE sur-mesure Range Rover · Luxe et praticité.',
+          descLong: 'Tapis de sol haut de gamme bi-matière : cuir véritable sur la partie visible (aspect luxe), TPE haute densité sur le pourtour et les rebords (praticité et résistance). Moulés au gabarit exact de votre Range Rover (Velar, Sport, Range Rover). Revers antidérapant et rebords anti-projection. Entretien simple au chiffon humide. Garantie 3 ans.' },
+        { id: 'RR-002', name: 'Films PPF intégral', price: 2990, modeles: ['all'], icon: 'fa-shield',
+          desc: 'PPF intégral 8 mil sur toute la carrosserie Range · Protection totale.',
+          descLong: 'Protection PPF polyuréthane 8 mil intégrale full-body : capot, ailes, portes, pavillon, boucliers, bas de caisse, miroirs. Totalement transparent, auto-cicatrisant, protège contre éclats, rayures, sève et UV — votre Range reste en état concours. Finition brillante ou satinée (mate) au choix. Pose par nos installateurs XPERIENCE VISION, 2-3 jours d\'atelier. Garantie 7 ans. Compatible Velar, Sport et Range Rover.' },
+        { id: 'RR-003', name: 'Habillage console bois noyer', price: 549, modeles: ['Velar', 'Sport', 'Range Rover'], icon: 'fa-layer-group',
+          desc: 'Noyer véritable vernis 10 couches · Pose par nos ébénistes partenaires.',
+          descLong: 'Habillage console et plaquages portes en noyer véritable, poli main puis vernis 10 couches pour une profondeur optique exceptionnelle. Pose atelier XPERIENCE VISION par ébénistes partenaires spécialisés luxe britannique (8 h). Finition digne des options bois d\'usine Range Rover. Compatible Velar, Sport et Range Rover. Garantie 5 ans anti-fissuration.' },
+        { id: 'RR-004', name: 'Marche-pieds rétractables LED', price: 1290, modeles: ['Sport', 'Range Rover'], icon: 'fa-stairs',
+          desc: 'Marche-pieds électriques LED Sport/Range · Se déploient à l\'ouverture.',
+          descLong: 'Marche-pieds électriques rétractables qui se déploient automatiquement à l\'ouverture des portes et se rétractent à la fermeture. Aluminium extrudé antidérapant, LED intégrées blanc froid pour l\'éclairage au sol. Capacité 200 kg par pied. Installation par nos techniciens (1 jour atelier) avec programmation via le CAN bus du véhicule. Compatible Sport et Range Rover. Garantie 3 ans.' },
+        { id: 'RR-005', name: 'Seuils LED illuminés', price: 249, modeles: ['all'], icon: 'fa-door-open',
+          desc: 'Seuils inox brossé logo Range rétroéclairé · Sans câblage.',
+          descLong: 'Set de 4 seuils en inox 304 brossé avec logo Range Rover rétroéclairé LED blanc froid. Allumage auto à l\'ouverture via le faisceau courtoisie d\'origine. Protège les seuils (très exposés sur SUV) et signe l\'habitacle premium britannique. Pose adhésive 3M VHB, 10 min. Garantie 3 ans.' },
+        { id: 'RR-006', name: 'Films teintés homologués', price: 449, modeles: ['all'], icon: 'fa-window-maximize',
+          desc: 'Films céramiques homologués · Grandes vitres · Pose atelier XPERIENCE VISION.',
+          descLong: 'Films teintés céramique nanométrique pour vitres arrière + lunette (grandes surfaces Range), homologués route. 3 niveaux : 35 %, 20 % ou 5 %. Rejet chaleur jusqu\'à 70 %, UV 99 %, anti-éblouissement. Pose atelier XPERIENCE VISION en salle climatisée pour un rendu sans bulles. Garantie à vie contre décollement et jaunissement.' },
+        { id: 'RR-007', name: 'Coque clé cuir cousu main', price: 99, modeles: ['all'], icon: 'fa-key',
+          desc: 'Étui cuir cousu main pour télécommande Range · 3 coloris.',
+          descLong: 'Étui en cuir véritable pleine fleur cousu main point sellier, épousant la télécommande Range Rover. Cuir sélectionné pour se patiner en beauté avec le temps. 3 coloris au choix (noir, cognac, bleu nuit). Dragonne amovible et anneau métallique en laiton. Garantie 2 ans.' },
+        { id: 'RR-008', name: 'Protection coffre cuir', price: 199, modeles: ['all'], icon: 'fa-box',
+          desc: 'Tapis coffre cuir synthétique premium Range · Grip et élégance.',
+          descLong: 'Tapis de coffre en cuir synthétique haute qualité, découpé au gabarit exact du coffre Range Rover (Velar, Sport, Range Rover). Surface gaufrée antidérapante qui maintient les charges, protège la moquette d\'origine. Résistant à l\'eau, lavable au chiffon humide. Rendu SUV luxe cohérent avec l\'intérieur. Garantie 3 ans.' },
+        { id: 'RR-009', name: 'Habillage volant cuir/alcantara', price: 549, modeles: ['all'], icon: 'fa-circle-half-stroke',
+          desc: 'Volant bi-matière cuir + Alcantara · Cousu main par selliers.',
+          descLong: 'Regainage complet du volant Range Rover en bi-matière cuir nappa (9h-3h) et Alcantara® italien (12h-6h), cousu main point sellier. Surpiqûres contrastées au choix. Ergonomie améliorée, grip optimal, rendu digne des finitions Autobiography. Travail dépose / repose incluse, 6 h d\'atelier. Garantie 3 ans.' },
+        { id: 'RR-010', name: 'Dashcam intégrée premium', price: 549, modeles: ['all'], icon: 'fa-video',
+          desc: 'Dashcam 4K + arrière Full HD · Mode stationnement 24/7 · Pose XPERIENCE VISION.',
+          descLong: 'Dashcam double canal premium : caméra avant 4K UHD Sony Starvis + arrière Full HD, mode nuit avancé et grand-angle 170°. Intégration discrète derrière le rétroviseur avec alimentation sur faisceau d\'origine (mode stationnement 24/7 avec fusible dédié). Carte microSD 128 GB fournie, verrouillage vidéo automatique en cas de choc. Pose atelier XPERIENCE VISION incluse. Compatible toute la gamme Range. Garantie 2 ans.' }
     ]
 };
 
 const configState = { brand: null, model: '' };
+
+// Mapping SEO des images produits (chargé une fois depuis data/product-images.json)
+let PRODUCT_IMAGES = {};
+(function loadProductImages() {
+    fetch('data/product-images.json', { cache: 'force-cache' })
+        .then(r => r.ok ? r.json() : {})
+        .then(map => { PRODUCT_IMAGES = map || {}; })
+        .catch(() => { /* fallback icône si indisponible */ });
+})();
+
+function configProductMedia(product) {
+    const meta = PRODUCT_IMAGES[product.id];
+    if (meta && meta.slug) {
+        const alt = configEscapeHtml(meta.alt || product.name);
+        return `<picture><source srcset="img/produits/${meta.slug}.webp" type="image/webp"><img src="img/produits/${meta.slug}.jpeg" alt="${alt}" loading="lazy" decoding="async" width="1200" height="900"></picture>`;
+    }
+    // Fallback icône Font Awesome si mapping indisponible
+    return `<i class="fa-solid ${product.icon} cat-card-icon"></i>`;
+}
 
 function configGoToStep(n) {
     document.querySelectorAll('#configurateur .config-step').forEach(s => s.classList.add('hidden'));
@@ -493,14 +624,21 @@ function configRenderResults() {
             ? 'Compatible tous modèles'
             : 'Compatible : ' + p.modeles.join(', ');
         const encodedName = configEscapeHtml(p.name);
+        // Desc courte dans la card (fallback sur compatibilité si absente)
+        const shortDesc = p.desc ? configEscapeHtml(p.desc) : configEscapeHtml(modelsLabel);
+        // Desc longue pour la modale : descLong + compatibilité en complément
+        const longParts = [];
+        if (p.descLong) longParts.push(p.descLong);
+        longParts.push(modelsLabel);
+        const longDesc = configEscapeHtml(longParts.join(' · '));
         return `
-            <article class="cat-card">
+            <article class="cat-card" data-description="${longDesc}">
                 <div class="cat-card-media">
-                    <i class="fa-solid ${p.icon} cat-card-icon"></i>
+                    ${configProductMedia(p)}
                 </div>
                 <div class="cat-card-body">
                     <h4>${encodedName}</h4>
-                    <p>${configEscapeHtml(modelsLabel)}</p>
+                    <p>${shortDesc}</p>
                     <div class="cat-card-bottom">
                         <span class="cat-price">${p.price}<span class="cat-price-cents">,00 €</span></span>
                         <button class="cat-buy-btn cat-acc-add"
@@ -575,7 +713,8 @@ function initConfigurator() {
         btn.addEventListener('click', () => configGoToStep(parseInt(btn.dataset.target)));
     });
 
-    // Logos marques du hero marquee → pré-sélection
+    // Logos marques (hero USP + marquee) → pré-sélection si dans le configurateur,
+    // sinon (Nio, Zeekr, Leapmotor...) → scroll vers #installation
     document.querySelectorAll('.brand-logo-link[data-brand]').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -583,7 +722,7 @@ function initConfigurator() {
             if (NOMS_MARQUES[b]) {
                 preselectBrand(b);
             } else {
-                document.getElementById('configurateur')?.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('installation')?.scrollIntoView({ behavior: 'smooth' });
             }
         });
     });

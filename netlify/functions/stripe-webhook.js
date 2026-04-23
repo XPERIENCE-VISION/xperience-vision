@@ -130,7 +130,7 @@ async function handlePaid(stripe, session) {
     try {
         const info = await sendMail({
             to: adminEmail,
-            subject: `[XV] Nouvelle commande ${hasServices ? (hasProducts ? 'mixte' : 'service') : 'produit'} — ${customerFullName}`,
+            subject: `[XPERIENCE VISION] Nouvelle commande ${hasServices ? (hasProducts ? 'mixte' : 'service') : 'produit'} — ${customerFullName}`,
             html: adminOrder({ session: fullSession, items, customer, lieuRdv, booking, hasServices, hasProducts })
         });
         console.log(`[webhook] ✔ Email admin envoyé à ${adminEmail} — ${info.messageId || ''}`);

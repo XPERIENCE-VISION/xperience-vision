@@ -43,7 +43,18 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
-# Headers sécurité de base
+# Cache court pour les pages HTML : revalidation quotidienne, jamais vraiment périmées
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+# Headers sécurité
 [[headers]]
   for = "/*"
   [headers.values]
@@ -51,3 +62,7 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), camera=(), microphone=()"
+    # CSP permissive : autorise les ressources tierces actuellement utilisées
+    # (Tailwind CDN désactivé en prod, mais on whitelist Stripe, Cal, Resend, Google Fonts, CDNJS)
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdnjs.cloudflare.com https://cal.com https://app.cal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https: blob:; frame-src https://js.stripe.com https://cal.com https://app.cal.com https://*.cal.com; connect-src 'self' https://api.stripe.com https://*.stripe.com https://cal.com https://*.cal.com https://api.resend.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"

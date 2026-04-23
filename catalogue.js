@@ -490,6 +490,99 @@
     });
 
     // ============================================================
+    // MODAL DÉTAIL PRODUIT — clic sur cat-card / cat-bs-card
+    // ============================================================
+
+    const productModal = document.getElementById('product-modal');
+
+    function openProductModalFromCard(card) {
+        if (!productModal) return;
+
+        const picture = card.querySelector('.cat-card-media picture, .cat-bs-media picture');
+        const img = card.querySelector('.cat-card-media img, .cat-bs-media img');
+        const mediaEl = productModal.querySelector('[data-product-media]');
+        if (picture) {
+            mediaEl.innerHTML = picture.outerHTML;
+            const clonedImg = mediaEl.querySelector('img');
+            if (clonedImg) clonedImg.loading = 'eager';
+        } else if (img) {
+            mediaEl.innerHTML = img.outerHTML;
+        } else {
+            mediaEl.innerHTML = '';
+        }
+
+        const title = (card.querySelector('h3, h4')?.textContent || '').trim();
+        const tag = (card.querySelector('.cat-bs-card-tag')?.textContent || '').trim();
+        const cible = (card.querySelector('.cat-bs-cible')?.textContent || '').trim();
+        // Description longue (data-description) si présente, sinon on prend celle affichée dans la card
+        const descLong = (card.dataset.description || '').trim();
+        const descShort = (card.querySelector('.cat-card-body p')?.textContent || '').trim();
+        const desc = descLong || descShort;
+        const listEl = card.querySelector('.cat-bs-list');
+        const bottomBtn = card.querySelector('.cat-buy-btn, .cat-rdv-btn');
+
+        // Prix — reconstruit depuis data-price du bouton pour cohérence (inclut les centimes)
+        let priceText = (card.querySelector('.cat-price, .cat-bs-price')?.textContent || '').trim();
+        if (bottomBtn && bottomBtn.dataset.price) {
+            priceText = bottomBtn.dataset.price + ' €';
+        }
+
+        productModal.querySelector('[data-product-title]').textContent = title;
+        productModal.querySelector('[data-product-desc]').textContent = desc || cible;
+        productModal.querySelector('[data-product-price]').textContent = priceText;
+
+        const tagTarget = productModal.querySelector('[data-product-tag]');
+        if (tag) { tagTarget.textContent = tag; tagTarget.hidden = false; }
+        else { tagTarget.hidden = true; }
+
+        const cibleTarget = productModal.querySelector('[data-product-cible]');
+        if (cible && cible !== desc) { cibleTarget.textContent = cible; cibleTarget.hidden = false; }
+        else { cibleTarget.hidden = true; }
+
+        const listTarget = productModal.querySelector('[data-product-list]');
+        if (listEl) { listTarget.innerHTML = listEl.innerHTML; listTarget.hidden = false; }
+        else { listTarget.hidden = true; }
+
+        const actionsEl = productModal.querySelector('[data-product-actions]');
+        actionsEl.innerHTML = '';
+
+        if (bottomBtn) {
+            const cloned = bottomBtn.cloneNode(true);
+            // Ferme la modal 400ms après l'ajout au panier (le toast de catalogue.js reste visible)
+            cloned.addEventListener('click', () => {
+                setTimeout(() => closeXvModal(productModal), 400);
+            });
+            actionsEl.appendChild(cloned);
+        }
+
+        // Bouton "Un doute ? Contactez-nous" — UNIQUEMENT pour les services RDV (écrans)
+        const contactEl = productModal.querySelector('[data-product-contact]');
+        if (contactEl) {
+            const isRdvService = !!(bottomBtn && bottomBtn.classList.contains('cat-rdv-btn'));
+            if (isRdvService) {
+                contactEl.hidden = false;
+                contactEl.href = 'contact.html?sujet=question&produit=' + encodeURIComponent(title);
+            } else {
+                contactEl.hidden = true;
+            }
+        }
+
+        openXvModal(productModal);
+    }
+
+    if (productModal) {
+        document.body.addEventListener('click', (e) => {
+            // Ignorer les clics sur tout élément interactif DANS la card (boutons, liens)
+            if (e.target.closest('button, a, input, select, textarea')) return;
+            const card = e.target.closest('.cat-card, .cat-bs-card');
+            if (!card) return;
+            // Ignorer si on est déjà dans le modal (évite réouverture quand on clique dans la modal)
+            if (e.target.closest('.xv-modal')) return;
+            openProductModalFromCard(card);
+        });
+    }
+
+    // ============================================================
     // ============================================================
     // CHECKOUT FLOW — orchestrateur 3 popups
     // ============================================================
@@ -505,7 +598,7 @@
     const formSubmitLabel = form.querySelector('[data-form-submit-label]');
     const servicesGroup = form.querySelector('[data-services-group]');
 
-    let checkoutData = null; // { customer, concession }
+    let checkoutData = null; // { customer, lieuRdv }
     let calBookingUid = null;
     let stripeInstance = null;
     let embeddedCheckout = null;
@@ -679,7 +772,7 @@
         });
     }
 
-    // Récupère les liens Cal.com (2 event types : domicile / garage XV)
+    // Récupère les liens Cal.com (2 event types : domicile / garage XPERIENCE VISION)
     let calConfigCache = null;
     async function fetchCalConfig() {
         if (calConfigCache) return calConfigCache;
@@ -800,14 +893,6 @@
     window.addEventListener('message', (e) => {
         if (typeof e.data !== 'object' || !e.data) return;
 
-        // DEBUG : log les messages Cal.com importants (ignore dimensionChanged qui spam)
-        if (e.origin && (e.origin.includes('cal.com') || e.origin.includes('cal.eu'))) {
-            const t = e.data.type || e.data.action;
-            if (t && t !== '__dimensionChanged' && t !== '__routeChanged') {
-                console.log('[Cal.com]', t, '·', JSON.stringify(e.data).slice(0, 300));
-            }
-        }
-
         const isBookingSuccess =
             e.data.type === 'bookingSuccessful' ||
             e.data.type === 'bookingSuccessfulV2' ||
@@ -840,7 +925,6 @@
         }
 
         calBookingUid = uid || '';
-        console.log('[Cal] Booking réussi, UID:', calBookingUid, '· Ouverture Stripe…');
 
         showToast('Créneau réservé · Paiement sous 1h', { variant: 'gold', duration: 3000 });
         closeXvModal(bookingModal);

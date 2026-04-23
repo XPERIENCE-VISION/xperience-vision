@@ -2,7 +2,7 @@
  * NETLIFY FUNCTION : cal-config
  *
  * Expose la config Cal.com publique : 2 event types différents selon le lieu
- * du RDV choisi par le client (domicile ou garage XV).
+ * du RDV choisi par le client (domicile ou garage XPERIENCE VISION).
  *
  * Variables attendues :
  *   CAL_EVENT_DOMICILE : slug de l'event "installation à domicile"

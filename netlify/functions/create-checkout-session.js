@@ -13,14 +13,14 @@
  *       "telephone": "...", "adresse": "...",
  *       "marque": "...", "modele": "...", "immatriculation": "..."  // si service
  *   },
- *   "concession": { "id": "...", "nom": "...", "ville": "..." } | null,
+ *   "lieuRdv": { "type": "domicile"|"garage", "label": "...", "adresse": "..." } | null,
  *   "calBookingUid": "abc-123" | null    // requis si au moins 1 service
  * }
  *
  * Réponse : { "clientSecret": "cs_...", "publishableKey": "pk_..." }
  *
  * Le panier peut mixer produits + services. La présence d'au moins un service
- * déclenche : expires_at=+1h, collecte plaque/marque/modèle/concession, email
+ * déclenche : expires_at=+1h, collecte plaque/marque/modèle/lieu RDV, email
  * de confirmation RDV supplémentaire (côté webhook).
  */
 

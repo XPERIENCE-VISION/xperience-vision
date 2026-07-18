@@ -376,7 +376,11 @@
     }
 
     function fmtPrice(n) {
-        return n.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+        const num = Number(n) || 0;
+        const hasCents = Math.round(num * 100) % 100 !== 0;
+        return num.toLocaleString('fr-FR', hasCents
+            ? { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+            : { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
     }
 
     function renderDrawer() {

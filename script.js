@@ -577,6 +577,19 @@ function configFmtPrice(n) {
     return n.toLocaleString('fr-FR') + ' €';
 }
 
+// Formate un prix en séparant partie entière / centimes, en n'affichant
+// les centimes que s'ils ne sont pas nuls (129 € vs 19,90 €)
+function configFmtPriceParts(n) {
+    const num = Number(n) || 0;
+    const hasCents = Math.round(num * 100) % 100 !== 0;
+    const integerPart = Math.floor(num).toLocaleString('fr-FR');
+    if (!hasCents) {
+        return `${integerPart}<span class="cat-price-cents"> €</span>`;
+    }
+    const cents = Math.round(num * 100) % 100;
+    return `${integerPart}<span class="cat-price-cents">,${String(cents).padStart(2, '0')} €</span>`;
+}
+
 function configEscapeHtml(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -640,7 +653,7 @@ function configRenderResults() {
                     <h4>${encodedName}</h4>
                     <p>${shortDesc}</p>
                     <div class="cat-card-bottom">
-                        <span class="cat-price">${p.price}<span class="cat-price-cents">,00 €</span></span>
+                        <span class="cat-price">${configFmtPriceParts(p.price)}</span>
                         <button class="cat-buy-btn cat-acc-add"
                                 data-add-acc="${p.id}"
                                 data-name="${encodedName}"

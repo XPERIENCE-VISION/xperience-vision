@@ -12,7 +12,11 @@
 const SITE_URL = process.env.SITE_URL || 'https://xperiencevision.com';
 
 function fmtPrice(cents) {
-    return (cents / 100).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+    const num = cents / 100;
+    const hasCents = cents % 100 !== 0;
+    return num.toLocaleString('fr-FR', hasCents
+        ? { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+        : { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
 }
 
 function fmtDate(isoDate) {

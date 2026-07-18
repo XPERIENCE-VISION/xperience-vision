@@ -11,6 +11,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:dotenv@^16.6.1",
         "npm:nodemailer@^8.0.5",
         "npm:sharp@~0.33.5",
         "npm:stripe@^22.0.2",

@@ -207,13 +207,14 @@ body.page-ecommerce #configurateur {
 }
 
 body.page-ecommerce #best-sellers {
-    background: #050505 !important;
+    background: #0a0a0a !important;
     background-image:
         radial-gradient(ellipse 60% 50% at 50% 50%, rgba(191, 149, 63, 0.07), transparent 70%) !important;
     border-top: 1px solid rgba(191, 149, 63, 0.1);
 }
 
 body.page-ecommerce #installation {
+    background: #050505 !important;
     border-top: none !important;
 }
 

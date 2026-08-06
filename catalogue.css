@@ -184,6 +184,20 @@ body.page-ecommerce #configurateur {
     scroll-margin-top: var(--xv-nav-offset);
 }
 
+/* Mobile : hauteur naturelle. La contrainte 100vh + contenu centré faisait
+   déborder l'en-tête (badge doré + titre) au-dessus du haut de la section,
+   derrière le bandeau de marques défilant du hero — d'où le chevauchement.
+   Le contenu part du haut et suit le flux : plus aucun recouvrement. */
+@media (max-width: 767px) {
+    body.page-ecommerce #configurateur {
+        height: auto !important;
+        max-height: none !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+        justify-content: flex-start;
+    }
+}
+
 /* FAQ : min-height 100vh quand fermée, peut dépasser si questions ouvertes */
 body.page-ecommerce #faq {
     height: auto !important;

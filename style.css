@@ -787,6 +787,56 @@ footer {
     background: rgba(255, 255, 255, 0.03);
 }
 
+/* Marque disponible mise en avant (BYD) — bordure + libellé dorés,
+   fond identique aux autres tuiles. Retirer la classe pour revenir à l'état neutre. */
+.config-brand-featured {
+    border-color: rgba(191, 149, 63, 0.55);
+}
+
+.config-brand-featured:hover,
+.config-brand-featured:focus {
+    border-color: rgba(252, 246, 186, 0.85);
+    background: rgba(191, 149, 63, 0.08);
+}
+
+.config-brand-featured-label {
+    display: inline-block;
+    color: #fcf6ba;
+    background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Marques pas encore ouvertes — état désactivé purement visuel.
+   Retirer la classe .config-brand-soon, l'attribut disabled et le
+   <span class="config-brand-soon-tag"> pour les réactiver. */
+.config-brand-soon {
+    opacity: 0.35;
+    filter: grayscale(1);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.config-brand-soon:hover,
+.config-brand-soon:focus {
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #bbb;
+    background: rgba(255, 255, 255, 0.02);
+    transform: none;
+}
+
+.config-brand-soon-tag {
+    display: block;
+    margin-top: 8px;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    opacity: 0.8;
+}
+
 .config-univers-grid {
     display: grid;
     grid-template-columns: 1fr;

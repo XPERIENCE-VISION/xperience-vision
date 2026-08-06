@@ -718,6 +718,9 @@ function preselectBrand(brand) {
 function initConfigurator() {
     // Boutons marques (étape 1)
     document.querySelectorAll('#configurateur .config-step[data-step="1"] .config-brand-btn[data-brand]').forEach(btn => {
+        // Marques marquées "Bientôt disponible" : aucune action au clic (état réversible,
+        // il suffit de retirer .config-brand-soon / disabled dans le HTML).
+        if (btn.disabled || btn.classList.contains('config-brand-soon')) return;
         btn.addEventListener('click', () => configSelectBrand(btn.dataset.brand));
     });
 

@@ -93,11 +93,48 @@ body.page-ecommerce #accueil {
     scroll-margin-top: var(--xv-nav-offset);
 }
 
-/* Mobile : contenu du hero plus proche du haut, moins d'espace vide */
+/* Mobile : le bloc de texte occupe la moitié basse du hero.
+   Le hero garde la hauteur de l'écran visible (100dvh, pas 100vh : sur iOS
+   la barre d'URL fait déborder 100vh sous la ligne de flottaison, ce qui
+   repoussait le bandeau hors de l'écran). Le texte et les boutons sont
+   collés en bas, le bandeau de marques suit dans le flux (il est en
+   position: absolute bottom-0 sur desktop). */
 @media (max-width: 767px) {
     body.page-ecommerce #accueil {
-        justify-content: flex-start !important;
+        justify-content: flex-end !important;
+        height: auto !important;
+        min-height: calc(100dvh - var(--xv-nav-offset)) !important;
+        max-height: none !important;
         padding-top: 2.5rem !important;
+        /* Neutralise le "section { padding-bottom: 20px !important }" global
+           de style.css, qui ajoutait du vide sous le bandeau. */
+        padding-bottom: 0 !important;
+    }
+
+    body.page-ecommerce #accueil .hero-content {
+        /* Absorbe toute la place libre au-dessus du titre. Indépendant de
+           justify-content, que trois règles se disputent (section {},
+           .justify-center, la règle ci-dessus). */
+        margin-top: auto;
+        /* Espace entre le bouton "Explorer le catalogue" et le bandeau de
+           marques : même valeur (2.5rem) que le retrait qui séparait le
+           titre du haut du hero avant que le bloc ne soit descendu. */
+        margin-bottom: 2.5rem;
+    }
+
+    /* Respiration un peu plus ample entre le titre et les lignes à coche
+       (1.5rem -> 2rem). L'écart lignes à coche / boutons est inchangé. */
+    body.page-ecommerce #accueil .hero-content h1 {
+        margin-bottom: 2rem;
+    }
+
+    /* Repasse dans le flux, en conservant le plein écran horizontal
+       (la section a un padding latéral de 1rem qu'on neutralise). */
+    body.page-ecommerce #accueil .hero-marquee {
+        position: static;
+        width: calc(100% + 2rem);
+        margin-left: -1rem;
+        margin-right: -1rem;
     }
 }
 

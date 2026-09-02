@@ -301,7 +301,7 @@ const NOMS_MARQUES = {
 
 // Liste exhaustive des modèles par marque (pour l'étape 2 du configurateur)
 const MODELES = {
-    byd:            ['Seal', 'Seal U', 'Han', 'Tang', 'Atto 3'],
+    byd:            ['Dolphin', 'Atto 2', 'Atto 3', 'Seal', 'Seal U', 'Sealion 7'],
     tesla:          ['Model 3', 'Model 3 Highland', 'Model Y'],
     xpeng:          ['G6', 'G9', 'P7'],
     bmw:            ['Série 3', 'Série 5', 'X3', 'X5', 'X7', 'Série M'],

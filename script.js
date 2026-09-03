@@ -313,50 +313,7 @@ const MODELES = {
 // netlify/functions/_lib/products.js (validation server-side zero-trust).
 // modeles = liste des modèles compatibles ou ['all'] = tous modèles de la marque.
 const PRODUCTS_BY_BRAND = {
-    byd: [
-        { id: 'BYD-001', name: 'Film protection écran rotatif 15.6"', price: 89, modeles: ['Seal', 'Han', 'Tang', 'Atto 3'], icon: 'fa-shield-halved',
-          desc: 'Film hydrogel auto-cicatrisant découpé sur-mesure · Dureté 9H, pose sans bulles.',
-          descLong: 'Film de protection hydrogel ultra-fin découpé au gabarit exact de l\'écran central rotatif 15,6" des BYD Seal, Han, Tang et Atto 3. Matériau TPU auto-cicatrisant — les micro-rayures s\'effacent avec la chaleur. Dureté 9H, traitement anti-traces de doigts, transparence optique 99 %. Adhésif sans colle, kit de pose complet inclus (lingette, raclette). Préserve la sensibilité tactile d\'origine.' },
-        { id: 'BYD-002', name: 'Tapis TPE 3D logotés BYD', price: 149, modeles: ['all'], icon: 'fa-road',
-          desc: 'Tapis 3D TPE sur-mesure avec logo BYD · Rebords anti-projection · Toutes saisons.',
-          descLong: 'Jeu complet de tapis thermoformés en TPE haute densité, moulés au gabarit exact de votre BYD (avant + arrière + coffre). Logo BYD gaufré, rebords surélevés qui contiennent boue, sel et liquides. Revers antidérapant clipsé sur les points d\'ancrage d\'origine. Utilisables toutes saisons, lavables au jet d\'eau. Garantie 2 ans.' },
-        { id: 'BYD-003', name: 'Coque clé cuir nappa', price: 59, modeles: ['all'], icon: 'fa-key',
-          desc: 'Étui cuir nappa cousu main pour télécommande BYD · 3 coloris.',
-          descLong: 'Coque de protection en cuir nappa véritable, cousue main point sellier, pour la télécommande BYD (Seal, Han, Tang, Atto 3, Seal U). Épaissit le grip et protège des chocs. Finition naturelle qui se patine avec le temps. Dragonne amovible et porte-clés métallique inclus, 3 coloris (noir, cognac, bleu marine). Garantie 2 ans.' },
-        { id: 'BYD-004', name: 'Seuils de porte LED « BYD »', price: 189, modeles: ['all'], icon: 'fa-door-open',
-          desc: 'Seuils inox brossé avec logo BYD rétroéclairé · Alimentation d\'origine.',
-          descLong: 'Set de 4 seuils de porte en inox 304 brossé, logo BYD rétroéclairé LED blanc froid. Allumage automatique à l\'ouverture via le faisceau de courtoisie d\'origine — aucun câblage. Protège les seuils des rayures d\'entrée/sortie tout en apportant une signature premium. Pose adhésive 3M VHB, 10 min. Garantie 3 ans.' },
-        { id: 'BYD-005', name: 'Protection coffre sur-mesure', price: 119, modeles: ['Seal U', 'Atto 3', 'Tang'], icon: 'fa-box',
-          desc: 'Bac thermoformé TPE moulé BYD Seal U, Atto 3, Tang · Rebords 40 mm.',
-          descLong: 'Bac de coffre thermoformé TPE haute densité, moulé au gabarit exact du coffre des BYD Seal U, Atto 3 et Tang. Rebords surélevés de 40 mm qui contiennent liquides et boue, surface gaufrée antidérapante pour maintenir les charges en virage. Imperméable, résistant aux UV et aux graisses. Nettoyage au jet d\'eau. Idéal animaux, sportifs, bricoleurs. Garantie 3 ans.' },
-        { id: 'BYD-006', name: 'Habillage console centrale carbone', price: 249, modeles: ['Seal', 'Han'], icon: 'fa-layer-group',
-          desc: 'Vinyle carbone 3M Di-Noc posé par nos installateurs · Rendu constructeur.',
-          descLong: 'Habillage complet de la console centrale (pourtour écran, tunnel, inserts portes) en vinyle 3M Di-Noc finition carbone réaliste. Pose réalisée par nos installateurs XPERIENCE VISION en atelier, thermoformage à chaud pour épouser parfaitement les formes — résultat indistinguable d\'une pièce d\'usine. Compatible BYD Seal et Han. Livraison du véhicule 24-48 h après dépose. Garantie 3 ans anti-décollage.' },
-        { id: 'BYD-007', name: 'Habillage console alcantara', price: 299, modeles: ['Seal', 'Han', 'Tang'], icon: 'fa-layer-group',
-          desc: 'Alcantara véritable Italie sur console centrale · Touché suédine premium.',
-          descLong: 'Habillage console centrale en Alcantara® véritable (fabrication italienne), matière issue du secteur automobile haut de gamme au toucher suédine et à la résistance exemplaire. Pose réalisée par nos techniciens XPERIENCE VISION avec découpe laser et collage sous presse pour une finition sans coutures visibles. Compatible BYD Seal, Han et Tang. Traitement anti-taches inclus. Garantie 3 ans.' },
-        { id: 'BYD-008', name: 'Films teintés homologués', price: 349, modeles: ['all'], icon: 'fa-window-maximize',
-          desc: 'Films teintés homologués route · 3 niveaux de teinte · Pose XPERIENCE VISION.',
-          descLong: 'Films teintés céramique nanométrique pour vitres arrière + lunette, certifiés CE et homologués route (respectent la transmission lumineuse minimale du côté conducteur pour AV). 3 niveaux disponibles : 35 %, 20 % ou 5 %. Rejet de la chaleur jusqu\'à 70 %, protection UV 99 %, anti-éblouissement. Pose par nos installateurs XPERIENCE VISION en atelier climatisé. Garantie à vie contre décollement et jaunissement.' },
-        { id: 'BYD-009', name: 'Protection toit panoramique UV', price: 199, modeles: ['Seal', 'Tang', 'Han'], icon: 'fa-sun',
-          desc: 'Film solaire pour toit pano BYD · UV 99 %, -70 % chaleur.',
-          descLong: 'Film solaire céramique spécifique pour le toit panoramique des BYD Seal, Tang et Han. Bloque 99 % des UV et réduit jusqu\'à 70 % de la chaleur transmise — protège les passagers, réduit la climatisation nécessaire et prolonge la durée de vie des cuirs et plastiques. Teinte légère (70 % transmission) pour préserver la luminosité. Pose en atelier XPERIENCE VISION, 2 h. Garantie 5 ans.' },
-        { id: 'BYD-010', name: 'Adaptateur charge Type 2 / CCS premium', price: 179, modeles: ['all'], icon: 'fa-plug',
-          desc: 'Adaptateur premium pour la recharge sur toutes bornes standard Europe.',
-          descLong: 'Adaptateur de recharge premium qui permet à votre BYD de se brancher sur les bornes d\'ancienne génération encore présentes sur le réseau français. Boîtier IP65 étanche, poignée ergonomique avec loquet de verrouillage, certification IEC 62196. Communication ISO 15118 complète. Compatible BYD Seal, Han, Tang, Atto 3, Seal U. Sac de transport renforcé. Garantie 3 ans.' },
-        { id: 'BYD-011', name: 'Support smartphone magnétique', price: 49, modeles: ['all'], icon: 'fa-mobile-screen',
-          desc: 'Support magnétique N52 compatible MagSafe · Fixation grille d\'aération.',
-          descLong: 'Support smartphone à aimants néodyme N52 compatibles MagSafe (iPhone 12+) ou plaque magnétique adhésive (tous téléphones, fournie). Fixation sur grille d\'aération avec clip renforcé, rotation 360°. Maintient fermement le téléphone même sur route dégradée sans gêner l\'aération. Finition aluminium brossé. Compatible toutes coques jusqu\'à 5 mm. Garantie 2 ans.' },
-        { id: 'BYD-012', name: 'Caches valves logotés BYD', price: 29, modeles: ['all'], icon: 'fa-circle-dot',
-          desc: 'Set 4 bouchons de valve aluminium logotés BYD · Anti-poussière.',
-          descLong: 'Jeu de 4 bouchons de valves en aluminium anodisé logotés BYD, avec joint torique étanche qui protège la valve de la poussière et de l\'humidité. Empêche la corrosion et la fuite lente d\'air. Finition noire mate ou chromée au choix. Clé de serrage incluse. Garantie à vie anti-corrosion.' },
-        { id: 'BYD-013', name: 'Pédales aluminium sport', price: 89, modeles: ['all'], icon: 'fa-shoe-prints',
-          desc: 'Pédalier sport en aluminium brossé avec picots caoutchouc antidérapants.',
-          descLong: 'Jeu de pédales sport (accélérateur, frein, repose-pied) en aluminium brossé avec picots caoutchouc antidérapants vissés. Pose par clips sur les pédales d\'origine — aucune dépose, aucun perçage. Rigidifie le feeling à la pédale, ajoute une touche sport à l\'habitacle. Compatible toute la gamme BYD. Installation 15 min, visserie incluse. Garantie 3 ans.' },
-        { id: 'BYD-014', name: 'Dashcam intégrée discrète', price: 449, modeles: ['all'], icon: 'fa-video',
-          desc: 'Dashcam 4K avant + Full HD arrière · Intégration faisceau d\'origine.',
-          descLong: 'Dashcam double canal : caméra avant 4K UHD à capteur Sony Starvis et caméra arrière Full HD 1080p, toutes deux équipées d\'un mode nuit avancé. Intégration discrète derrière le rétroviseur avec alimentation sur le faisceau d\'origine (mode stationnement 24/7). Écran 2,5" masqué, enregistrement sur carte microSD 128 GB fournie. Accéléromètre qui verrouille la vidéo en cas de choc. Pose atelier XPERIENCE VISION incluse. Garantie 2 ans.' }
-    ],
+    byd: (typeof PRODUITS_BYD !== 'undefined' ? PRODUITS_BYD : []),
     tesla: [
         { id: 'TSL-001', name: 'Console centrale wrap alcantara', price: 229, modeles: ['Model 3', 'Model Y'], icon: 'fa-layer-group',
           desc: 'Alcantara véritable Italie sur console Tesla · Touché suédine premium.',
@@ -555,7 +512,7 @@ let PRODUCT_IMAGES = {};
 })();
 
 function configProductMedia(product) {
-    const meta = PRODUCT_IMAGES[product.id];
+    const meta = PRODUCT_IMAGES[product.id] || (product.slug ? { slug: product.slug, alt: product.alt } : null);
     if (meta && meta.slug) {
         const alt = configEscapeHtml(meta.alt || product.name);
         return `<picture><source srcset="img/produits/${meta.slug}.webp" type="image/webp"><img src="img/produits/${meta.slug}.jpeg" alt="${alt}" loading="lazy" decoding="async" width="1200" height="900"></picture>`;

@@ -26,6 +26,21 @@ try {
 // Prix en CENTIMES d'euros (Stripe attend des cents)
 const PRODUCTS = {
 
+    // ===== ACCESSOIRES BYD — source unique : data/produits-byd.js =====
+    ...(function () {
+        try {
+            const list = require('../../../data/produits-byd.js');
+            return Object.fromEntries(list.map(p => [p.id, {
+                name: p.name,
+                price: p.priceCents,
+                type: 'produit',
+                image: `img/produits/${p.slug}.jpeg`,
+                imageWebp: `img/produits/${p.slug}.webp`,
+                imageAlt: p.alt
+            }]));
+        } catch (e) { return {}; }
+    })(),
+
     // ========== ÉCRANS — INSTALLATION XPERIENCE VISION (services) ==========
     'ECR-FAM': { name: 'Tablette 10.1" Famille', price: 60000, type: 'service' },
     'ECR-POL': { name: 'Écran plafond 13.3" FHD Polyvalent', price: 69900, type: 'service' },

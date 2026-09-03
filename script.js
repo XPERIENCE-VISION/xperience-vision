@@ -500,7 +500,7 @@ const PRODUCTS_BY_BRAND = {
     ]
 };
 
-const configState = { brand: null, model: '' };
+const configState = { brand: null, model: '', categorie: '' };
 
 // Mapping SEO des images produits (chargé une fois depuis data/product-images.json)
 let PRODUCT_IMAGES = {};
@@ -527,7 +527,7 @@ function configGoToStep(n) {
     if (target) target.classList.remove('hidden');
     // Libère le 100vh strict quand on affiche les résultats (étape 3)
     const section = document.getElementById('configurateur');
-    if (section) section.classList.toggle('config-showing-results', n === 3);
+    if (section) section.classList.toggle('config-showing-results', n === 4);
 }
 
 function configFmtPrice(n) {
@@ -577,9 +577,11 @@ function configRenderResults() {
     const products = PRODUCTS_BY_BRAND[brand] || [];
 
     // Filtre par modèle si choisi
-    const filtered = model
+    const categorie = configState.categorie;
+    let filtered = model
         ? products.filter(p => p.modeles.includes('all') || p.modeles.includes(model))
         : products;
+    if (categorie) filtered = filtered.filter(p => p.categorie === categorie);
 
     if (!filtered.length) {
         grid.innerHTML = '';
@@ -651,19 +653,30 @@ function configSelectBrand(brand) {
     } catch (e) {}
 }
 
-function configSelectModel(model) {
-    configState.model = (model === 'all') ? '' : model;
-
-    // En-tête résultats : "Votre BYD Seal" ou "Votre BYD (tous modèles)"
+function configSelectCategorie(categorie) {
+    configState.categorie = (categorie === 'all') ? '' : categorie;
     const brandName = NOMS_MARQUES[configState.brand] || configState.brand;
     const nameEl = document.getElementById('config-results-name');
     if (nameEl) {
-        nameEl.textContent = configState.model
+        const base = configState.model ? `${brandName} ${configState.model}` : `${brandName} (tous modèles)`;
+        nameEl.textContent = configState.categorie ? `${base} · ${configState.categorie}` : base;
+    }
+    configRenderResults();
+    configGoToStep(4);
+}
+
+function configSelectModel(model) {
+    configState.model = (model === 'all') ? '' : model;
+    configState.categorie = '';
+
+    const brandName = NOMS_MARQUES[configState.brand] || configState.brand;
+    const stepModelEl = document.getElementById('config-step-model');
+    if (stepModelEl) {
+        stepModelEl.textContent = configState.model
             ? `${brandName} ${configState.model}`
             : `${brandName} (tous modèles)`;
     }
 
-    configRenderResults();
     configGoToStep(3);
 }
 
@@ -679,6 +692,12 @@ function initConfigurator() {
         // il suffit de retirer .config-brand-soon / disabled dans le HTML).
         if (btn.disabled || btn.classList.contains('config-brand-soon')) return;
         btn.addEventListener('click', () => configSelectBrand(btn.dataset.brand));
+    });
+
+    // Boutons catégorie (étape 3)
+    document.querySelectorAll('#config-categories-grid [data-categorie]').forEach(btn => {
+        if (btn.classList.contains('config-brand-soon')) return;
+        btn.addEventListener('click', () => configSelectCategorie(btn.dataset.categorie));
     });
 
     // Boutons retour (étapes 2 et 3) — config-back-btn OU config-back-cta

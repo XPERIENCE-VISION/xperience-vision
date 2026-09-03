@@ -259,8 +259,25 @@
                     </div>
                 </div>
 
-                <!-- Étape 3 : Résultats -->
+                <!-- Étape 3 : Catégorie -->
                 <div class="config-step hidden" data-step="3">
+                    <p class="config-step-title">Étape 3 · Choisissez une catégorie <span id="config-step-model">—</span></p>
+                    <div id="config-categories-grid" class="config-brands-grid">
+                        <button class="config-brand-btn" data-categorie="Intérieur">Intérieur</button>
+                        <button class="config-brand-btn" data-categorie="Extérieur">Extérieur</button>
+                        <button class="config-brand-btn config-brand-soon" data-categorie="Goodies" disabled aria-disabled="true">Goodies<span class="config-brand-soon-tag">Bientôt disponible</span></button>
+                        <button class="config-brand-btn config-brand-soon" data-categorie="Remorquage" disabled aria-disabled="true">Remorquage &amp; tractage<span class="config-brand-soon-tag">Bientôt disponible</span></button>
+                    </div>
+                    <div class="config-step-footer">
+                        <button class="config-back-cta" data-target="2">
+                            <i class="fa-solid fa-arrow-left mr-2"></i>
+                            Changer de modèle
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Étape 4 : Résultats -->
+                <div class="config-step hidden" data-step="4">
                     <div class="config-results-brand">
                         <span class="config-results-eyebrow">Accessoires pour</span>
                         <strong id="config-results-name">—</strong>
@@ -274,13 +291,13 @@
                     </p>
 
                     <div class="config-step-footer">
-                        <button class="config-back-cta" data-target="2">
+                        <button class="config-back-cta" data-target="3">
                             <i class="fa-solid fa-arrow-left mr-2"></i>
-                            Changer de modèle
+                            Changer de catégorie
                         </button>
-                        <button class="config-back-cta config-back-cta-alt" data-target="1">
+                        <button class="config-back-cta config-back-cta-alt" data-target="2">
                             <i class="fa-solid fa-sync-alt mr-2"></i>
-                            Changer de marque
+                            Changer de modèle
                         </button>
                     </div>
                 </div>

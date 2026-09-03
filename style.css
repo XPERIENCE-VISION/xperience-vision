@@ -1345,3 +1345,36 @@ select option {
     }
 }
 
+
+/* ============================================================================
+   [MASQUAGE-ACCESSOIRES] — BLOC RÉVERSIBLE
+   ----------------------------------------------------------------------------
+   Masque la section "Accessoires" (#accessoires) ainsi que ses deux points
+   d'entrée de navigation. Aucun code HTML / JS n'a été supprimé : tout le
+   balisage, les 35 fiches produits et la logique panier restent en place.
+
+   POUR TOUT RÉAFFICHER : supprimer ce bloc CSS entier (de la ligne
+   "[MASQUAGE-ACCESSOIRES]" jusqu'au marqueur de fin ci-dessous). Rien d'autre
+   à faire, aucun autre fichier à modifier.
+   ============================================================================ */
+
+/* 1. La section Accessoires elle-même (titre "Accessoires",
+      onglets Intérieur / Extérieur / Recharge, grilles produits). */
+#accessoires {
+    display: none !important;
+}
+
+/* 2. Le lien "Accessoires" de la barre de navigation rapide (subnav). */
+.cat-subnav-btn[data-target="accessoires"] {
+    display: none !important;
+}
+
+/* 3. Le lien "Produits" du pied de page (pointe vers #accessoires).
+      Cible les footers de page uniquement (index, contact, histoire) —
+      volontairement pas les liens internes aux autres sections. */
+footer a[href="#accessoires"],
+footer a[href="index.html#accessoires"] {
+    display: none !important;
+}
+
+/* ==================== [FIN MASQUAGE-ACCESSOIRES] ==================== */

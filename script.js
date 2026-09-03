@@ -683,7 +683,10 @@ function initConfigurator() {
 
     // Boutons retour (étapes 2 et 3) — config-back-btn OU config-back-cta
     document.querySelectorAll('#configurateur [data-target]').forEach(btn => {
-        btn.addEventListener('click', () => configGoToStep(parseInt(btn.dataset.target)));
+        btn.addEventListener('click', () => {
+            configGoToStep(parseInt(btn.dataset.target));
+            document.getElementById('configurateur')?.scrollIntoView({ behavior: 'instant', block: 'start' });
+        });
     });
 
     // Logos marques (hero USP + marquee) → pré-sélection si dans le configurateur,

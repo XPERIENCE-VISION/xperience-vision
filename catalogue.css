@@ -487,6 +487,7 @@ body.page-ecommerce #configurateur .config-results-brand {
     flex: 1;
     text-align: center;
     min-width: 0;
+    margin-bottom: 2.5rem;
 }
 
 body.page-ecommerce #configurateur .config-results-eyebrow {

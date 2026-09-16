@@ -44,19 +44,56 @@
 }
 </script>
 <style>
-/* en-tête et pied de page propres à cette page — remplaçables par ceux du site */
-.xva-nav{position:relative;z-index:30;border-bottom:1px solid var(--xva-trait)}
-.xva-nav-in{max-width:1200px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;gap:20px}
-.xva-logo{font-weight:800;letter-spacing:.14em;font-size:14px;text-decoration:none;color:#fff;white-space:nowrap}
-.xva-logo b{color:var(--xva-or);font-weight:800}
+/* En-tête et pied de page repris du site, reproduits sans dépendance :
+   pas de Tailwind ni de Font Awesome à charger, donc aucun risque de conflit
+   avec le module. Les valeurs viennent des classes réellement utilisées
+   dans index.html (text-gray-500, tracking-tighter, italic, uppercase…). */
+.xva-nav{position:relative;z-index:30;border-bottom:1px solid rgba(255,255,255,.06);
+  background:rgba(10,10,10,.72);backdrop-filter:blur(18px) saturate(1.3)}
+.xva-nav-in{max-width:1280px;margin:0 auto;padding:17px 24px;display:flex;align-items:center;gap:20px}
+/* le logo du site : XPERIENCE en blanc, VISION en gris, italique, très resserré */
+.xva-logo{font-size:20px;font-weight:800;letter-spacing:-.05em;font-style:italic;
+  text-transform:uppercase;text-decoration:none;color:#fff;white-space:nowrap;transition:color .2s}
+.xva-logo span{color:#6b7280;font-weight:300}
+.xva-logo:hover{color:#9ca3af}
 .xva-nav-sp{flex:1}
-.xva-nav a.xva-lien{color:var(--xva-txt-2);text-decoration:none;font-size:14px;transition:color .2s}
-.xva-nav a.xva-lien:hover{color:#fff}
-.xva-pied{border-top:1px solid var(--xva-trait);padding:32px 0;margin-top:clamp(48px,7vw,88px);
-  color:var(--xva-txt-3);font-size:13px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-.xva-pied a{color:var(--xva-txt-2);text-decoration:none}
-.xva-pied a:hover{color:#fff}
-@media(max-width:600px){.xva-nav-in{padding:14px 16px;gap:12px}}
+.xva-nav a.xva-lien{color:#fff;text-decoration:none;font-size:12px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.2em;transition:color .2s}
+.xva-nav a.xva-lien:hover{color:#9ca3af}
+@media(max-width:760px){
+  .xva-nav-in{padding:14px 16px;gap:14px;flex-wrap:wrap}
+  .xva-logo{font-size:17px}
+  .xva-nav a.xva-lien{font-size:10.5px;letter-spacing:.16em}
+}
+
+/* pied de page : même structure que celui du site */
+.xva-pied{border-top:1px solid rgba(255,255,255,.05);background:#050505;
+  padding:clamp(48px,7vw,80px) 24px 40px;margin-top:clamp(48px,7vw,88px)}
+.xva-pied-in{max-width:1280px;margin:0 auto;display:flex;flex-wrap:wrap;
+  justify-content:space-between;align-items:flex-start;gap:48px}
+.xva-pied-marque{font-size:30px;font-weight:900;font-style:italic;text-transform:uppercase;
+  letter-spacing:-.05em;margin-bottom:24px;color:#fff}
+.xva-pied-marque span{color:#4b5563}
+.xva-pied-bl{color:#6b7280;font-size:12px;text-transform:uppercase;letter-spacing:.2em;
+  max-width:24rem;line-height:2;font-weight:700;margin:0}
+.xva-pied-coord{margin-top:32px;display:flex;flex-direction:column;gap:12px;
+  color:#6b7280;font-size:10px;text-transform:uppercase;letter-spacing:.2em;font-weight:700}
+.xva-pied-coord p{margin:0;display:flex;align-items:flex-start;gap:12px}
+.xva-pied-coord svg{width:12px;height:12px;flex:0 0 auto;fill:var(--xva-or);margin-top:3px}
+.xva-pied-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:64px;
+  text-transform:uppercase;font-size:10px;font-weight:900;letter-spacing:.3em;color:#6b7280}
+.xva-pied-col{display:flex;flex-direction:column;gap:24px}
+.xva-pied-col>span{color:#fff;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:12px}
+.xva-pied-col a{color:#6b7280;text-decoration:none;transition:color .2s}
+.xva-pied-col a:hover{color:#fff}
+.xva-pied-bas{max-width:1280px;margin:64px auto 0;padding-top:32px;border-top:1px solid rgba(255,255,255,.05)}
+.xva-pied-bas p{margin:0;font-size:9px;color:#4b5563;font-weight:700;letter-spacing:.5em;
+  text-transform:uppercase;text-align:center}
+@media(max-width:820px){
+  .xva-pied-in{flex-direction:column;gap:40px}
+  .xva-pied-cols{gap:40px}
+  .xva-pied-bas p{letter-spacing:.3em}
+}
 </style>
 </head>
 
@@ -80,10 +117,11 @@
 
 <header class="xva-nav">
   <div class="xva-nav-in">
-    <a class="xva-logo" href="/"><b>X</b>PERIENCE VISION</a>
+    <a class="xva-logo" href="/#accueil">XPERIENCE<span>VISION</span></a>
     <span class="xva-nav-sp"></span>
-    <a class="xva-lien" href="/#configurateur">Accessoires</a>
-    <a class="xva-lien" href="/#installation">Installation</a>
+    <a class="xva-lien" href="/#accueil">Catalogue</a>
+    <a class="xva-lien" href="/histoire.html">Notre Histoire</a>
+    <a class="xva-lien" href="/contact.html">Contact</a>
   </div>
 </header>
 
@@ -260,16 +298,42 @@
     </div>
   </section>
 
-  <div class="xva-w">
-    <footer class="xva-pied">
-      <a href="/">← Retour à l'accueil</a>
-      <span>·</span>
-      <a href="mailto:contact@xperience-vision.fr">contact@xperience-vision.fr</a>
-      <span class="xva-nav-sp"></span>
-      <span>XPERIENCE VISION</span>
-    </footer>
-  </div>
 </main>
+
+<footer class="xva-pied">
+  <div class="xva-pied-in">
+    <div>
+      <div class="xva-pied-marque">XPERIENCE <span>VISION</span></div>
+      <p class="xva-pied-bl">L'excellence digitale embarquée. <br>Installation premium pour véhicules d'exception.</p>
+      <div class="xva-pied-coord">
+        <p><svg viewBox="0 0 384 512" aria-hidden="true"><path d="M215.7 499.2C267 435 384 279.4 384 192 384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2 12.3 15.3 35.1 15.3 47.4 0M192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128"/></svg>
+          <span>10 av. Fridingen<br>77100 Nanteuil-lès-Meaux</span></p>
+        <p><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0a256 256 0 1 1 0 512 256 256 0 1 1 0-512m-24 120v136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24"/></svg>
+          <span>Lun - Ven · 9h - 18h</span></p>
+      </div>
+    </div>
+    <div class="xva-pied-cols">
+      <div class="xva-pied-col">
+        <span>Navigation</span>
+        <a href="/#installation">Services</a>
+        <a href="/#accessoires">Produits</a>
+        <a href="/#configurateur">Configurateur</a>
+        <a href="/#avis">Avis clients</a>
+        <a href="/histoire.html">Notre Histoire</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+      <div class="xva-pied-col">
+        <span>Légal</span>
+        <a href="/mentions-legales.html">Mentions Légales</a>
+        <a href="/cgv.html">CGV</a>
+        <a href="/politique-confidentialite.html">Confidentialité</a>
+      </div>
+    </div>
+  </div>
+  <div class="xva-pied-bas">
+    <p>© 2026 XPERIENCE VISION — TOUS DROITS RÉSERVÉS</p>
+  </div>
+</footer>
 
 <!-- ============ MODALE : DÉPOSER UN AVIS ============ -->
 <div class="xva-ov" id="xva-ov" role="dialog" aria-modal="true" aria-labelledby="xva-modal-titre">

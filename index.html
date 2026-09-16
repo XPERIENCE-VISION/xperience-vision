@@ -42,6 +42,10 @@
     <link rel="stylesheet" href="catalogue.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
+    <!-- Module Avis clients -->
+    <link rel="stylesheet" href="/avis.css?v=2">
+    <script>window.__xvaPrecharge=fetch('/.netlify/functions/avis-liste',{headers:{accept:'application/json'}}).catch(function(){return new Response('{"avis":[]}',{status:200,headers:{'content-type':'application/json'}})});</script>
+
     <!-- JSON-LD : Organization + LocalBusiness + FAQPage -->
     <script type="application/ld+json">
     {
@@ -589,11 +593,33 @@
                 <header class="cat-section-header">
                     <span class="cat-section-tag cat-section-tag-gold"><i class="fa-solid fa-star mr-2"></i>Avis clients</span>
                     <h2>Ils nous font <span class="gradient-text">confiance.</span></h2>
-                    <p>Les retours de nos installations · Note moyenne 5★</p>
+                    <p>Les retours de nos installations et de nos accessoires, toutes marques</p>
                 </header>
 
-                <div class="reviews-grid">
-                    <p class="reviews-loading">Chargement des avis…</p>
+                <!-- Module Avis clients — se remplit tout seul, chaque bloc
+                     disparaît s'il n'a rien à montrer. -->
+                <div id="xva-section" class="xva">
+
+                    <div class="xva-stats" data-xva="stats" style="margin-bottom:26px"></div>
+
+                    <div class="xva-duo" style="margin-bottom:26px">
+                        <div class="xva-crit">
+                            <h3>Note par critère</h3>
+                            <div class="xva-crit-liste" data-xva="criteres"></div>
+                            <p class="xva-crit-pied" data-xva="criteres-pied"></p>
+                        </div>
+                        <div class="xva-une" data-xva="une"></div>
+                    </div>
+
+                    <div class="xva-grille" data-xva="apercu"></div>
+
+                    <div style="text-align:center;margin-top:30px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                        <a class="xva-btn xva-btn-or" href="/avis" data-xva-tous data-xva="lien-tous">Voir tous les avis</a>
+                        <button class="xva-btn xva-btn-fant" data-xva-ouvrir>
+                            <span class="xva-nowrap">Partagez votre <b class="xva-mx">X</b>périence</span>
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -622,6 +648,7 @@
                     <a href="#installation" class="hover:text-white transition">Services</a>
                     <a href="#accessoires" class="hover:text-white transition">Produits</a>
                     <a href="#configurateur" class="hover:text-white transition">Configurateur</a>
+                    <a href="#avis" class="hover:text-white transition">Avis clients</a>
                     <a href="histoire.html" class="hover:text-white transition">Notre Histoire</a>
                     <a href="contact.html" class="hover:text-white transition">Contact</a>
                 </div>
@@ -843,11 +870,166 @@
 
     <div class="grain-overlay" aria-hidden="true"></div>
 
+    <!-- ===== Module Avis : modale de dépôt, visionneuse photo, notification ===== -->
+<!-- ============ MODALE : DÉPOSER UN AVIS ============ -->
+<div class="xva-ov" id="xva-ov" role="dialog" aria-modal="true" aria-labelledby="xva-modal-titre">
+  <div class="xva-modal">
+    <button class="xva-x" data-xva-fermer aria-label="Fermer">×</button>
+
+    <div id="xva-formulaire">
+      <h2 class="xva-h3" id="xva-modal-titre">Votre avis</h2>
+      <p class="xva-lede" style="font-size:13.5px;margin:6px 0 22px">Ne parlez que de ce que vous avez réellement acheté ou fait installer.</p>
+
+      <div class="xva-prog" aria-hidden="true">
+        <div class="xva-encours"><i></i></div><div><i></i></div><div><i></i></div>
+      </div>
+
+      <p class="xva-err" id="xva-err" role="alert"></p>
+
+      <!-- ---------- étape 1 : la note ---------- -->
+      <section class="xva-pas xva-on" data-pas="1">
+        <div class="xva-pas-titre"><em>Étape 1 sur 3</em></div>
+        <h3 class="xva-h3" style="margin-bottom:20px">Votre note</h3>
+
+        <div class="xva-champ">
+          <label for="xva-f-type">Votre avis concerne <span class="xva-req">*</span></label>
+          <select id="xva-f-type"></select>
+        </div>
+
+        <div class="xva-champ">
+          <label>Note globale <span class="xva-req">*</span></label>
+          <div class="xva-picker" id="xva-picker"><span class="xva-mot">Cliquez sur les étoiles</span></div>
+        </div>
+
+        <div class="xva-champ">
+          <label>Le détail <span style="color:var(--xva-txt-3);font-weight:400">(facultatif, mais très utile)</span></label>
+          <div class="xva-crit-form" id="xva-criteres"></div>
+          <div class="xva-aide">Ces notes alimentent le tableau « Note par critère » en haut de la page.</div>
+        </div>
+
+        <div class="xva-pieds">
+          <span class="xva-sp"></span>
+          <button class="xva-btn xva-btn-or" data-suivant>Continuer</button>
+        </div>
+      </section>
+
+      <!-- ---------- étape 2 : l'expérience ---------- -->
+      <section class="xva-pas" data-pas="2">
+        <div class="xva-pas-titre"><em>Étape 2 sur 3</em></div>
+        <h3 class="xva-h3" style="margin-bottom:20px">Votre expérience</h3>
+
+        <div class="xva-champ">
+          <label for="xva-f-modele">Votre véhicule</label>
+          <input type="text" id="xva-f-modele" maxlength="40" list="xva-f-modele-liste"
+                 autocomplete="off" placeholder="Marque et modèle — par exemple : Mercedes GLC">
+          <datalist id="xva-f-modele-liste"></datalist>
+          <p class="xva-aide">Toutes marques. Si votre véhicule n'est pas suggéré, écrivez-le.</p>
+        </div>
+
+        <div class="xva-champ">
+          <label for="xva-f-titre">Titre de votre avis <span class="xva-req">*</span></label>
+          <input type="text" id="xva-f-titre" maxlength="70" placeholder="Pose impeccable, résultat au top">
+        </div>
+
+        <div class="xva-champ">
+          <label for="xva-f-texte">Racontez <span class="xva-req">*</span>
+            <span class="xva-compteur"><span id="xva-cc">0</span>/1000</span></label>
+          <textarea id="xva-f-texte" maxlength="1000" placeholder="Qu'avez-vous acheté ? Comment s'est passée la commande, la livraison, la pose ? Qu'est-ce que ça donne à l'usage ?"></textarea>
+          <div class="xva-aide">Minimum 40 caractères.</div>
+        </div>
+
+        <div class="xva-champ">
+          <label>Vos photos <span style="color:var(--xva-txt-3);font-weight:400">(3 maximum, facultatif)</span></label>
+          <div class="xva-drop" id="xva-drop" role="button" tabindex="0">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 7h-3V5.5A2.5 2.5 0 0 0 13.5 3h-3A2.5 2.5 0 0 0 8 5.5V7H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2m-7 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8"/></svg>
+            <p>Ajouter une photo du résultat</p>
+            <span>JPG, PNG ou WebP · redimensionnée automatiquement</span>
+            <input type="file" id="xva-f-file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+          </div>
+          <div class="xva-vign" id="xva-vign"></div>
+          <div class="xva-aide">Vos photos sont redimensionnées dans votre navigateur avant l'envoi, ce qui efface au passage les données de localisation qu'elles contiennent.</div>
+        </div>
+
+        <div class="xva-pieds">
+          <button class="xva-retour" data-precedent>← Retour</button>
+          <span class="xva-sp"></span>
+          <button class="xva-btn xva-btn-or" data-suivant>Continuer</button>
+        </div>
+      </section>
+
+      <!-- ---------- étape 3 : qui vous êtes ---------- -->
+      <section class="xva-pas" data-pas="3">
+        <div class="xva-pas-titre"><em>Étape 3 sur 3</em></div>
+        <h3 class="xva-h3" style="margin-bottom:20px">Qui êtes-vous ?</h3>
+
+        <div class="xva-2">
+          <div class="xva-champ">
+            <label for="xva-f-prenom">Prénom <span class="xva-req">*</span></label>
+            <input type="text" id="xva-f-prenom" maxlength="40" autocomplete="given-name" placeholder="Thomas">
+            <div class="xva-aide">Affiché avec l'initiale de votre nom : « Thomas L. »</div>
+          </div>
+          <div class="xva-champ">
+            <label for="xva-f-nom">Initiale du nom</label>
+            <input type="text" id="xva-f-nom" maxlength="1" placeholder="L">
+          </div>
+        </div>
+
+        <div class="xva-champ">
+          <label for="xva-f-mail">Votre e-mail <span class="xva-req">*</span></label>
+          <input type="email" id="xva-f-mail" autocomplete="email" placeholder="vous@exemple.fr">
+          <div class="xva-aide">Jamais publié. Sert à vérifier que vous êtes bien client et à vous prévenir de la publication.</div>
+        </div>
+
+        <input type="text" class="xva-piege" id="xva-f-piege" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <label class="xva-coche"><input type="checkbox" id="xva-c1"><span>J'ai bien acheté ce produit ou fait réaliser cette prestation chez XPERIENCE VISION.</span></label>
+        <label class="xva-coche"><input type="checkbox" id="xva-c2"><span>J'accepte que mon avis, mon prénom, l'initiale de mon nom et mes photos soient publiés sur le site. Je peux demander leur suppression à tout moment.</span></label>
+
+        <div class="xva-pieds">
+          <button class="xva-retour" data-precedent>← Retour</button>
+          <span class="xva-sp"></span>
+          <button class="xva-btn xva-btn-or" id="xva-envoyer">Envoyer mon avis</button>
+        </div>
+        <p style="text-align:center;font-size:11.5px;color:var(--xva-txt-3);margin:16px 0 0">
+          Votre avis est relu avant publication. Aucun avis n'est supprimé parce qu'il est négatif.</p>
+      </section>
+    </div>
+
+    <div id="xva-etape-fin" style="display:none">
+      <div class="xva-fini">
+        <div class="xva-fini-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg></div>
+        <h2 class="xva-h3">Merci, c'est envoyé.</h2>
+        <p>Votre avis a bien été reçu. Il n'est pas encore visible sur le site.</p>
+        <div class="xva-etapes">
+          <div><i>1.</i><span>Nous vérifions que l'avis correspond à une commande réelle.</span></div>
+          <div><i>2.</i><span>Nous relisons le texte et les photos — 72 h ouvrées au maximum.</span></div>
+          <div><i>3.</i><span>Vous recevez un e-mail dès qu'il est en ligne, ou le motif précis s'il ne peut pas être publié.</span></div>
+        </div>
+        <button class="xva-btn xva-btn-fant" data-xva-fermer>Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ VISIONNEUSE ============ -->
+<div class="xva-lb" id="xva-lb" role="dialog" aria-modal="true" aria-label="Photo client">
+  <button class="xva-lb-x" aria-label="Fermer">×</button>
+  <button class="xva-lb-nav xva-lb-prev" aria-label="Photo précédente">‹</button>
+  <img src="" alt="Photo envoyée par un client">
+  <button class="xva-lb-nav xva-lb-next" aria-label="Photo suivante">›</button>
+  <div class="xva-lb-info"></div>
+</div>
+
+<div class="xva-toast" id="xva-toast" role="status" aria-live="polite"></div>
+
+
     <script src="https://js.stripe.com/v3/"></script>
     <script src="data/produits-byd.js"></script>
     <script src="script.js"></script>
     <script src="catalogue.js"></script>
-    <script src="js/reviews.js"></script>
+    <script src="/avis.js?v=2" defer></script>
+    <!-- Remplacé par le module Avis. Fichier conservé, simplement plus appelé. -->
+    <!-- <script src="js/reviews.js"></script> -->
 
     <!-- Révélation des produits de test (?test=rdv50c) -->
     <script>

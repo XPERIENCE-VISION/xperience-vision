@@ -415,7 +415,11 @@
    10. MODALE FORMULAIRE
    ====================================================================== */
 .xva-ov{
-  position:fixed;inset:0;z-index:60;display:none;
+  /* Le site a sa propre échelle : sous-barre 99, navbar 100, tiroir 120,
+     modale 130, bannière 200. En dessous, la barre de navigation recouvrait
+     le haut de la modale. On passe au-dessus de toute l'échelle du site —
+     en restant sous .skip-link (9999), qui doit rester le tout premier. */
+  position:fixed;inset:0;z-index:9100;display:none;
   background:rgba(0,0,0,.82);backdrop-filter:blur(8px);
   align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;
 }
@@ -502,7 +506,7 @@
 /* ======================================================================
    11. VISIONNEUSE PHOTO
    ====================================================================== */
-.xva-lb{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;
+.xva-lb{position:fixed;inset:0;z-index:9200;display:none;align-items:center;justify-content:center;
   background:rgba(0,0,0,.94);padding:24px}
 .xva-lb.xva-on{display:flex;animation:xva-fade .2s var(--xva-ease)}
 .xva-lb img{max-width:min(920px,92vw);max-height:84vh;border-radius:14px;object-fit:contain}
@@ -703,7 +707,7 @@
 
 /* ---------- bulle de confirmation de copie ---------- */
 .xva-toast{
-  position:fixed;left:50%;bottom:28px;transform:translate(-50%,16px);z-index:90;
+  position:fixed;left:50%;bottom:28px;transform:translate(-50%,16px);z-index:9300;
   background:#151515;border:1px solid var(--xva-trait-2);border-radius:999px;
   padding:12px 22px;font-size:13.5px;color:#fff;
   opacity:0;pointer-events:none;transition:all .3s var(--xva-ease);
@@ -716,7 +720,8 @@
 
 /* ---------- panneau plein écran (construit par avis.js) ---------- */
 .xva-panneau{
-  position:fixed;inset:0;z-index:70;display:none;
+  /* Même raison : le panneau plein écran doit couvrir la navbar du site. */
+  position:fixed;inset:0;z-index:9000;display:none;
   background:rgba(8,8,8,.92);backdrop-filter:blur(14px) saturate(1.3);
 }
 .xva-panneau.xva-on{display:flex;flex-direction:column;animation:xva-fade .25s var(--xva-ease)}
@@ -800,3 +805,35 @@
   padding:4px 0;border-radius:6px;cursor:pointer;font-family:inherit;
 }
 .xva-roles button.xva-on{background:var(--xva-or);border-color:var(--xva-or);color:#0a0a0a}
+
+/* ==========================================================================
+   14. SECTION DE LA PAGE D'ACCUEIL — réglages qui ne valent que là
+   ========================================================================== */
+
+/* Quatre avis en vitrine plutôt que trois : la rangée occupe toute la
+   largeur, et il reste de quoi donner envie de cliquer sur « Voir les N avis ».
+   La grille générale (auto-fill, 340 px mini) n'en tenait que trois. */
+/* Hauteur égale : sur quatre colonnes, des cartes de tailles différentes
+   se voient tout de suite. Le pied de carte est déjà poussé en bas. */
+#xva-section .xva-grille{grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch}
+@media(max-width:1240px){#xva-section .xva-grille{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:980px){#xva-section .xva-grille{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){#xva-section .xva-grille{grid-template-columns:1fr}}
+
+/* Sur quatre colonnes les cartes sont plus étroites : on resserre le
+   rembourrage pour que le texte garde de la place. */
+@media(min-width:1241px){
+  #xva-section .xva-avis{padding:22px}
+  #xva-section .xva-avis-titre{font-size:15.5px}
+  #xva-section .xva-avis-txt{font-size:14px}
+}
+
+/* Les boutons touchaient le bas de la section : on leur donne de l'air
+   avant la section suivante. */
+#xva-section{display:block;padding-bottom:clamp(28px,4.5vw,60px)}
+
+/* La citation mise en une occupait trop de hauteur pour ce qu'elle dit.
+   Bloc plus ramassé, texte un cran plus petit, lignes plus longues. */
+.xva-duo.xva-solo .xva-une{padding:clamp(26px,3.2vw,42px)}
+.xva-duo.xva-solo .xva-une q{max-width:36ch;font-size:clamp(18px,1.9vw,24px);margin:16px auto 18px}
+#xva-section .xva-une q{margin-top:14px}

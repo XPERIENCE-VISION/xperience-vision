@@ -709,7 +709,7 @@
         return poids(y) - poids(x)
           || (y.utile || 0) - (x.utile || 0)
           || new Date(y.datePublication || 0) - new Date(x.datePublication || 0);
-      }).slice(0, 3);
+      }).slice(0, 4);   /* quatre en vitrine : la rangée fait toute la largeur */
       g.innerHTML = l.length ? l.map(carte).join('') : vide();
       observer();
     }

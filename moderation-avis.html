@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Modération des avis — XPERIENCE VISION</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/avis.css?v=2">
+<style>
+  .md-head{border-bottom:1px solid var(--xva-trait);padding:20px 0;margin-bottom:34px}
+  .md-head-in{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .md-head h1{font-size:19px;font-weight:800;margin:0;letter-spacing:-.02em}
+  .md-sp{flex:1}
+  .md-onglets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+  .md-carte{background:var(--xva-s1);border:1px solid var(--xva-trait);border-radius:var(--xva-r);
+    padding:24px;margin-bottom:16px}
+  .md-top{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:flex-start;margin-bottom:14px}
+  .md-qui{font-weight:600;font-size:15px}
+  .md-qui span{display:block;color:var(--xva-txt-3);font-weight:400;font-size:12.5px;margin-top:3px;word-break:break-word}
+  .md-badge{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:6px;white-space:nowrap}
+  .md-b-att{background:rgba(240,180,41,.13);border:1px solid rgba(240,180,41,.36);color:var(--xva-warn)}
+  .md-b-ok{background:rgba(61,220,151,.12);border:1px solid rgba(61,220,151,.32);color:var(--xva-ok)}
+  .md-b-ko{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.32);color:var(--xva-ko)}
+  .md-actions{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:16px;
+    border-top:1px solid var(--xva-trait);padding-top:16px}
+  .md-actions button{border-radius:10px;padding:10px 18px;font-size:13.5px;font-weight:600;cursor:pointer;
+    border:1px solid var(--xva-trait-2);background:transparent;color:#fff;transition:all .2s}
+  .md-actions button:hover{background:var(--xva-s3)}
+  .md-pub{background:var(--xva-ok)!important;border-color:var(--xva-ok)!important;color:#052e22!important}
+  .md-ref{border-color:rgba(248,113,113,.45)!important;color:var(--xva-ko)!important}
+  .md-sup{border-color:rgba(248,113,113,.25)!important;color:rgba(248,113,113,.75)!important;font-size:12.5px!important}
+  .md-actions select,.md-actions input{background:rgba(255,255,255,.04);border:1px solid var(--xva-trait);
+    color:var(--xva-txt-2);border-radius:10px;padding:10px 13px;font-size:13px;font-family:inherit}
+  .md-actions input{flex:1;min-width:200px}
+  .md-porte{max-width:420px;margin:12vh auto;text-align:center}
+  .md-porte input{width:100%;margin:18px 0 14px}
+  .md-note{background:rgba(191,149,63,.06);border:1px solid rgba(191,149,63,.24);border-left:3px solid var(--xva-or);
+    border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:26px;font-size:13.5px;color:var(--xva-txt-2)}
+  .md-etat{padding:40px;text-align:center;color:var(--xva-txt-3)}
+  .md-edit{margin-top:16px;border-top:1px solid var(--xva-trait);padding-top:16px}
+  .md-edit>summary{cursor:pointer;font-size:13.5px;font-weight:600;color:var(--xva-or-clair);list-style:none}
+  .md-edit>summary::-webkit-details-marker{display:none}
+  .md-edit>summary::before{content:"✎ ";opacity:.8}
+  .md-form{display:grid;gap:14px;margin-top:18px}
+  .md-form label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:var(--xva-txt-2)}
+  .md-form input,.md-form select,.md-form textarea{
+    width:100%;background:rgba(255,255,255,.04);border:1px solid var(--xva-trait);
+    border-radius:10px;padding:11px 13px;color:#fff;font-family:inherit;font-size:14px}
+  .md-form textarea{min-height:110px;resize:vertical;line-height:1.55}
+  .md-form input:focus,.md-form select:focus,.md-form textarea:focus{outline:none;border-color:var(--xva-or)}
+  .md-form option{background:#151515}
+  .md-g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .md-g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  @media(max-width:620px){.md-g2{grid-template-columns:1fr}}
+  .md-photos{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+  .md-ph{width:130px}
+  .md-ph .md-vue{width:130px;height:110px;border-radius:10px;overflow:hidden;border:1px solid var(--xva-trait);position:relative}
+  .md-ph .md-vue img{width:100%;height:100%;object-fit:cover}
+  .md-ph-roles{display:flex;gap:3px;margin-top:6px}
+  .md-ph-roles button{flex:1;padding:5px 0;font-size:9.5px;font-weight:700;letter-spacing:.05em;
+    text-transform:uppercase;border-radius:6px;border:1px solid var(--xva-trait);
+    background:var(--xva-s2);color:var(--xva-txt-3);cursor:pointer;font-family:inherit}
+  .md-ph-roles button.on{background:var(--xva-or);border-color:var(--xva-or);color:#0a0a0a}
+  .md-ph-sup{width:100%;margin-top:5px;padding:5px 0;font-size:10.5px;border-radius:6px;
+    border:1px solid rgba(248,113,113,.3);background:none;color:rgba(248,113,113,.85);cursor:pointer;font-family:inherit}
+  .md-ajout{width:130px;height:110px;border:1.5px dashed var(--xva-trait-2);border-radius:10px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    color:var(--xva-txt-3);font-size:12px;cursor:pointer;text-align:center;padding:8px}
+  .md-ajout:hover{border-color:var(--xva-or);color:#fff}
+  .md-enr{background:var(--xva-or);border:1px solid var(--xva-or);color:#0a0a0a;
+    border-radius:10px;padding:12px 22px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit}
+  .md-enr:hover{background:var(--xva-or-clair)}
+  .md-enr:disabled{opacity:.5;cursor:not-allowed}
+</style>
+</head>
+<body class="xva">
+<datalist id="md-vehicules"></datalist>
+<div class="xva-grain" aria-hidden="true"></div>
+
+<!-- ============ PORTE ============ -->
+<div id="porte" class="xva-w md-porte">
+  <h1 class="xva-h3">Modération des avis</h1>
+  <p class="xva-lede" style="font-size:13.5px;margin-top:8px">Page privée. Entrez la clé d'administration.</p>
+  <div class="xva-champ">
+    <input type="password" id="cle" class="" placeholder="Clé d'administration" autocomplete="current-password"
+      style="width:100%;background:rgba(255,255,255,.04);border:1px solid var(--xva-trait);border-radius:12px;padding:13px 15px;color:#fff;font-family:inherit;font-size:14.5px">
+  </div>
+  <button class="xva-btn xva-btn-or" id="entrer" style="width:100%">Entrer</button>
+  <p id="porte-err" style="color:var(--xva-ko);font-size:13px;margin-top:14px;display:none"></p>
+</div>
+
+<!-- ============ CONSOLE ============ -->
+<div id="console" style="display:none">
+  <header class="md-head">
+    <div class="xva-w md-head-in">
+      <h1>Modération des avis</h1>
+      <span class="md-sp"></span>
+      <span id="compteur" class="xva-compte"></span>
+      <button class="xva-btn xva-btn-fant xva-btn-sm" id="sortir">Quitter</button>
+    </div>
+  </header>
+
+  <div class="xva-w">
+    <div class="md-note">
+      <b>Rien n'est visible sur le site tant que vous n'avez pas cliqué « Publier ».</b><br>
+      Rappel légal : un avis ne peut pas être refusé parce qu'il est négatif. Sur un avis négatif fondé,
+      utilisez « Répondre publiquement » — c'est plus efficace qu'un refus, et c'est légal.
+    </div>
+
+
+    <details style="margin-bottom:14px;background:var(--xva-s1);border:1px solid var(--xva-trait);border-radius:var(--xva-r);padding:18px 22px" id="socle-bloc">
+      <summary style="cursor:pointer;font-weight:600;font-size:14.5px">Les avis historiques du fichier <code>data/reviews.json</code> <span id="socle-n" style="color:var(--xva-txt-3);font-weight:400"></span></summary>
+      <p style="color:var(--xva-txt-2);font-size:13.5px;margin:14px 0 4px">
+        Ces avis <b>ne sont pas dans cette console</b> : ils vivent dans le fichier
+        <code>data/reviews.json</code> de votre dépôt, et leurs photos dans <code>img/</code>.
+        Ils s'affichent sur le site exactement comme avant. Pour en modifier un, ouvrez le fichier
+        sur GitHub — c'est plus simple que n'importe quelle interface.
+      </p>
+      <p style="color:var(--xva-txt-3);font-size:12.5px;margin:0 0 14px">
+        Ils restent affichés tant que vous ne les reprenez pas ici. Si vous les reprenez,
+        ils cessent automatiquement d'apparaître en double.
+      </p>
+      <div id="socle-liste" style="display:flex;flex-direction:column;gap:10px"></div>
+    </details>
+
+    <details style="margin-bottom:22px;background:var(--xva-s1);border:1px solid var(--xva-trait);border-radius:var(--xva-r);padding:18px 22px">
+      <summary style="cursor:pointer;font-weight:600;font-size:14.5px">Reprendre des avis dans cette console</summary>
+      <p style="color:var(--xva-txt-2);font-size:13.5px;margin:14px 0 10px">
+        À faire <b>une seule fois</b>. Collez vos avis actuels au format ci-dessous : ils seront publiés tels quels,
+        <b>sans</b> la mention « Achat vérifié » — cette mention suppose un rattachement automatique à une commande,
+        qui n'existe pas pour ces avis-là. Ne l'ajoutez pas à la main : ce serait faux.
+      </p>
+      <textarea id="import-txt" spellcheck="false" style="width:100%;min-height:190px;background:rgba(255,255,255,.04);border:1px solid var(--xva-trait);border-radius:12px;padding:14px;color:#fff;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.5"
+placeholder='[
+  {"prenom":"Thomas","initiale":"L","note":5,"titre":"Pose impeccable","texte":"…","modele":"Mercedes GLC","type":"Installation d&#39;écran","date":"2026-06-14"},
+  {"prenom":"Sarah","initiale":"M","note":5,"titre":"Très satisfaite","texte":"…","date":"2026-07-02"}
+]'></textarea>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap">
+        <button class="xva-btn xva-btn-or xva-btn-sm" id="import-go">Reprendre ces avis</button>
+        <span id="import-res" style="font-size:13px;color:var(--xva-txt-2)"></span>
+      </div>
+    </details>
+
+    <div class="md-onglets">
+      <button class="xva-chip xva-on" data-etat="en_attente">En attente</button>
+      <button class="xva-chip" data-etat="publie">Publiés</button>
+      <button class="xva-chip" data-etat="refuse">Refusés</button>
+      <span class="xva-sp"></span>
+      <button class="xva-chip" id="rafraichir">Rafraîchir</button>
+    </div>
+
+    <div id="liste"><div class="md-etat">Chargement…</div></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var API = '/.netlify/functions/avis-moderer';
+  var PHOTO = '/.netlify/functions/avis-photo?c=';
+  var cle = '';
+  var etat = 'en_attente';
+  var motifs = [];
+
+  function $(s) { return document.querySelector(s); }
+  function esc(t) {
+    return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function jour(iso) {
+    if (!iso) return '—';
+    var d = new Date(iso);
+    return isNaN(d) ? '—' : d.toLocaleDateString('fr-FR') + ' ' + d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  }
+  function masquer(m) {
+    if (!m) return '';
+    var p = m.split('@');
+    return p[0].slice(0, 2) + '•••@' + (p[1] || '');
+  }
+  function etoiles(n) {
+    var h = '<span class="xva-stars">';
+    for (var i = 1; i <= 5; i++) h += '<svg viewBox="0 0 24 24" class="' + (i <= n ? 'xva-sf' : 'xva-se') + '"><path d="m12 17.27 6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>';
+    return h + '</span>';
+  }
+
+  function appel(opts) {
+    return fetch(API + (opts.qs || ''), {
+      method: opts.methode || 'GET',
+      headers: Object.assign({ 'x-avis-cle': cle }, opts.corps ? { 'content-type': 'application/json' } : {}),
+      body: opts.corps ? JSON.stringify(opts.corps) : undefined
+    }).then(function (r) {
+      /* Si la fonction n'est pas déployée, Netlify renvoie une page HTML
+         d'erreur : r.json() jetterait et on n'afficherait plus rien du tout.
+         On traduit ce cas en message lisible au lieu de rester muet. */
+      return r.text().then(function (t) {
+        var d;
+        try { d = JSON.parse(t); }
+        catch (e) {
+          d = { ok: false, message: r.status === 404
+            ? "La fonction avis-moderer n'est pas déployée. Vérifiez que les 4 fichiers .mjs sont bien dans netlify/functions/ et que @netlify/blobs figure dans package.json."
+            : 'Réponse inattendue du serveur (HTTP ' + r.status + ').' };
+        }
+        return { ok: r.ok && d && d.ok !== false, d: d };
+      });
+    }).catch(function () {
+      return { ok: false, d: { message: 'Connexion impossible. Vérifiez votre réseau.' } };
+    });
+  }
+
+  /* ---------- porte ---------- */
+  function entrer() {
+    cle = $('#cle').value.trim();
+    if (!cle) return;
+    $('#porte-err').style.display = 'none';
+    appel({ qs: '?etat=en_attente' }).then(function (r) {
+      if (!r.ok) {
+        $('#porte-err').textContent = r.d && r.d.message ? r.d.message : 'Accès refusé.';
+        $('#porte-err').style.display = 'block';
+        return;
+      }
+      try { sessionStorage.setItem('xva_cle', cle); } catch (e) { }
+      $('#porte').style.display = 'none';
+      $('#console').style.display = '';
+      peindre(r.d);
+      chargerSocle();
+    });
+  }
+  $('#entrer').addEventListener('click', entrer);
+  $('#cle').addEventListener('keydown', function (e) { if (e.key === 'Enter') entrer(); });
+  $('#sortir').addEventListener('click', function () {
+    try { sessionStorage.removeItem('xva_cle'); } catch (e) { }
+    location.reload();
+  });
+
+  /* ---------- liste ---------- */
+  function charger() {
+    $('#liste').innerHTML = '<div class="md-etat">Chargement…</div>';
+    appel({ qs: '?etat=' + etat }).then(function (r) {
+      if (!r.ok) { $('#liste').innerHTML = '<div class="md-etat">' + esc(r.d.message || 'Erreur') + '</div>'; return; }
+      peindre(r.d);
+    });
+  }
+
+  function peindre(d) {
+    motifs = d.motifs || motifs;
+    majVehicules(d.avis);
+    $('#compteur').textContent = d.avis.length + ' avis · ' + d.total + ' au total';
+    if (!d.avis.length) {
+      $('#liste').innerHTML = '<div class="md-etat">Aucun avis dans cette file.</div>';
+      return;
+    }
+    $('#liste').innerHTML = d.avis.map(carte).join('');
+  }
+
+  function carte(a) {
+    var badge = a.statut === 'publie' ? ['md-b-ok', 'Publié'] :
+      a.statut === 'refuse' ? ['md-b-ko', 'Refusé — ' + esc(a.motifRefus || '')] :
+        ['md-b-att', 'En attente'];
+
+    var photos = normPhotos(a).map(function (ph) {
+      var u = PHOTO + encodeURIComponent(ph.c);
+      var etiq = ph.r === 'avant' ? 'Avant' : ph.r === 'apres' ? 'Après' : '';
+      return '<a href="' + u + '" target="_blank" rel="noopener" class="xva-tile" '
+        + 'style="width:88px;height:88px;aspect-ratio:auto;display:block">'
+        + '<img src="' + u + '" alt="">'
+        + (etiq ? '<span class="xva-tile-cap" style="opacity:1;transform:none">' + etiq + '</span>' : '')
+        + '</a>';
+    }).join('');
+
+    var opts = motifs.map(function (m) { return '<option>' + esc(m) + '</option>'; }).join('');
+
+    return '<div class="md-carte" data-id="' + esc(a.id) + '">'
+      + '<div class="md-top"><div class="md-qui">' + esc(a.prenom) + ' ' + esc(a.initiale || '') + '.'
+      + '<span>' + esc(masquer(a.email)) + ' · ' + esc(a.modele || 'véhicule non précisé') + ' · ' + esc(a.type || '')
+      + ' · déposé le ' + jour(a.cree) + (a.jeton ? ' · <b style="color:var(--xva-ok)">lien e-mail vérifié</b>' : ' · dépôt libre')
+      + '</span></div>'
+      + '<span class="md-badge ' + badge[0] + '">' + badge[1] + '</span></div>'
+      + etoiles(a.note)
+      + '<div style="font-weight:700;margin:10px 0 6px;font-size:16px">' + esc(a.titre) + '</div>'
+      + '<p style="color:var(--xva-txt-2);font-size:14px;margin:0 0 14px;white-space:pre-wrap">' + esc(a.texte) + '</p>'
+      + (photos ? '<div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:6px">' + photos + '</div>' : '')
+      + (a.reponse && a.reponse.texte ? '<div class="xva-rep"><b>Votre réponse publique</b>' + esc(a.reponse.texte) + '</div>' : '')
+      + '<div class="md-actions">'
+      + (a.statut !== 'publie' ? '<button class="md-pub" data-act="publier">✓ Publier</button>' : '')
+      + (a.statut !== 'refuse' ? '<button class="md-ref" data-act="refuser">✕ Refuser</button>' : '')
+      + '<select data-motif>' + opts + '</select>'
+      + '<input data-reponse placeholder="Répondre publiquement sous cet avis…" value="' + esc(a.reponse ? a.reponse.texte : '') + '">'
+      + '<button data-act="repondre">Enregistrer la réponse</button>'
+      + (a.jeton ? '' : '<button data-act="verifier">Marquer « achat vérifié »</button>')
+      + '<button class="md-sup" data-act="supprimer">Supprimer définitivement</button>'
+      + '</div>'
+      + editeur(a)
+      + '</div>';
+  }
+
+  /* Suggestions de saisie, toutes marques. Le champ reste libre : un véhicule
+     absent de cette liste s'enregistre sans problème. Pour en ajouter, il suffit
+     d'écrire ici — rien d'autre à toucher. */
+  var VEHICULES = ['BYD Dolphin','BYD Atto 2','BYD Atto 3','BYD Seal','BYD Seal U','BYD Sealion 7',
+    'Tesla Model 3','Tesla Model Y','Mercedes GLC','Mercedes Classe C','Mercedes EQB',
+    'Porsche Cayenne','Porsche Macan','Renault Espace','Renault Austral','Renault Scenic',
+    'Peugeot 3008','Peugeot 5008','Peugeot 208','DS 7 Crossback','DS 4',
+    'Audi Q5','Audi Q7','BMW X3','BMW X5','Volkswagen Tiguan','Volkswagen ID.4',
+    'Seres 3','MG ZS','Kia EV6','Hyundai Tucson'];
+  var TYPES = ["Installation d'écran",'Accessoire véhicule','Pack exclusif','Conseil / SAV'];
+  var CRITERES = [['produit','Qualité du produit'],['delai','Respect des délais'],['pose','Qualité de la pose'],
+                  ['prix','Rapport qualité-prix'],['relation','Relation client']];
+
+  function normPhotos(a) {
+    return (a.photos || []).map(function (p) {
+      return (typeof p === 'string') ? { c: p, r: null } : { c: p.c, r: p.r || null };
+    }).filter(function (p) { return p.c; });
+  }
+
+  /* Les suggestions de véhicule : notre liste d'aide + tous les véhicules déjà
+     présents dans les avis. La liste s'enrichit donc toute seule à mesure que
+     de nouvelles marques arrivent. */
+  function majVehicules(avis) {
+    var dl = document.getElementById('md-vehicules');
+    if (!dl) return;
+    var vus = {};
+    VEHICULES.forEach(function (v) { vus[v] = 1; });
+    (avis || []).forEach(function (a) { if (a && a.modele) vus[a.modele] = 1; });
+    dl.innerHTML = Object.keys(vus).sort(function (x, y) { return x.localeCompare(y, 'fr'); })
+      .map(function (v) { return '<option value="' + esc(v) + '"></option>'; }).join('');
+  }
+
+  function opts(liste, choisi) {
+    return liste.map(function (v) {
+      return '<option' + (v === choisi ? ' selected' : '') + '>' + esc(v) + '</option>';
+    }).join('');
+  }
+
+  function editeur(a) {
+    var c = a.criteres || {};
+    var ph = normPhotos(a);
+
+    var photos = ph.map(function (p) {
+      return '<div class="md-ph" data-cle="' + esc(p.c) + '">'
+        + '<div class="md-vue"><img src="' + PHOTO + encodeURIComponent(p.c) + '" alt=""></div>'
+        + '<div class="md-ph-roles">'
+        + '<button data-role="avant" class="' + (p.r === 'avant' ? 'on' : '') + '">Avant</button>'
+        + '<button data-role="apres" class="' + (p.r === 'apres' ? 'on' : '') + '">Après</button>'
+        + '</div>'
+        + '<button class="md-ph-sup" data-photo-sup>Retirer cette photo</button>'
+        + '</div>';
+    }).join('');
+
+    var paire = ph.some(function (p) { return p.r === 'avant'; }) && ph.some(function (p) { return p.r === 'apres'; });
+
+    return '<details class="md-edit"><summary>Modifier cet avis, ses photos et son Avant/Après</summary>'
+      + '<div class="md-form">'
+      + '<div class="md-g2">'
+      + '<div><label>Note globale</label><select data-f="note">'
+      + [5,4,3,2,1].map(function (n) { return '<option value="' + n + '"' + (a.note === n ? ' selected' : '') + '>' + n + ' étoile' + (n>1?'s':'') + '</option>'; }).join('')
+      + '</select></div>'
+      + '<div><label>Prénom et initiale</label><div class="md-g2">'
+      + '<input data-f="prenom" value="' + esc(a.prenom || '') + '" placeholder="Prénom">'
+      + '<input data-f="initiale" maxlength="1" value="' + esc(a.initiale || '') + '" placeholder="L"></div></div>'
+      + '</div>'
+      + '<div class="md-g2">'
+      /* Champ LIBRE, pas une liste fermée : avec une liste, un « Porsche Cayenne »
+         absent des options serait remis à zéro au premier enregistrement. */
+      + '<div><label>Véhicule</label><input data-f="modele" maxlength="40" list="md-vehicules" autocomplete="off" placeholder="Marque et modèle" value="' + esc(a.modele || '') + '"></div>'
+      + '<div><label>Concerne</label><select data-f="type">' + opts(TYPES, a.type) + '</select></div>'
+      + '</div>'
+      + '<div><label>Titre</label><input data-f="titre" maxlength="70" value="' + esc(a.titre || '') + '"></div>'
+      + '<div><label>Texte de l\'avis</label><textarea data-f="texte" maxlength="1000">' + esc(a.texte || '') + '</textarea></div>'
+      + '<div><label>Notes par critère</label><div class="md-g3">'
+      + CRITERES.map(function (k) {
+          return '<div><label style="font-weight:400;color:var(--xva-txt-3)">' + k[1] + '</label>'
+            + '<select data-crit="' + k[0] + '"><option value="">—</option>'
+            + [5,4,3,2,1].map(function (n) { return '<option value="' + n + '"' + (c[k[0]] === n ? ' selected' : '') + '>' + n + '/5</option>'; }).join('')
+            + '</select></div>';
+        }).join('')
+      + '</div></div>'
+      + '<div><label>Photos ' + (paire ? '— <span style="color:var(--xva-ok)">paire Avant/Après active</span>' : '— marquez une photo « Avant » et une « Après » pour activer le comparateur') + '</label>'
+      + '<div class="md-photos">' + photos
+      + '<div class="md-ajout" data-photo-ajout>+<br>Ajouter une photo</div>'
+      + '<input type="file" accept="image/jpeg,image/png,image/webp" hidden data-photo-file>'
+      + '</div></div>'
+      + '<div><button class="md-enr" data-act="enregistrer">Enregistrer les modifications</button></div>'
+      + '</div></details>';
+  }
+
+  /* Redimensionne dans le navigateur avant l'envoi : allège le fichier et
+     efface au passage les données EXIF, donc la localisation. */
+  function preparerPhoto(f) {
+    return new Promise(function (ok, ko) {
+      var url = URL.createObjectURL(f);
+      var img = new Image();
+      img.onload = function () {
+        URL.revokeObjectURL(url);
+        var MAX = 1600, r = Math.min(MAX / img.width, MAX / img.height, 1);
+        var w = Math.round(img.width * r), h = Math.round(img.height * r);
+        var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+        var x = cv.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, w, h);
+        x.drawImage(img, 0, 0, w, h);
+        ok(cv.toDataURL('image/jpeg', 0.82));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); ko(new Error('lecture')); };
+      img.src = url;
+    });
+  }
+
+  /* ---------- actions ---------- */
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-act]');
+    if (!b) return;
+    var carte = b.closest('.md-carte');
+    var id = carte.getAttribute('data-id');
+    var act = b.getAttribute('data-act');
+    var corps = { id: id, action: act };
+
+    if (act === 'refuser') corps.motif = carte.querySelector('[data-motif]').value;
+    if (act === 'repondre') corps.reponse = carte.querySelector('[data-reponse]').value;
+    if (act === 'verifier') { corps.action = 'publier'; corps.verifie = true; }
+    if (act === 'supprimer') {
+      if (!window.confirm('Supprimer définitivement cet avis et ses photos ? Cette action est irréversible.')) return;
+    }
+
+    b.disabled = true;
+    b.textContent = '…';
+    appel({ methode: 'POST', corps: corps }).then(function (r) {
+      if (!r.ok) { window.alert(r.d.message || 'Action impossible.'); b.disabled = false; charger(); return; }
+      charger();
+    });
+  });
+
+  document.querySelectorAll('[data-etat]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('[data-etat]').forEach(function (x) { x.classList.remove('xva-on'); });
+      b.classList.add('xva-on');
+      etat = b.getAttribute('data-etat');
+      charger();
+    });
+  });
+  $('#rafraichir').addEventListener('click', charger);
+
+
+  /* ---------- éditeur : enregistrer, rôles, ajout et retrait de photo ---------- */
+  document.addEventListener('click', function (ev) {
+    var carte = ev.target.closest && ev.target.closest('.md-carte');
+    if (!carte) return;
+    var id = carte.getAttribute('data-id');
+
+    // rôle Avant / Après
+    var rl = ev.target.closest('[data-role]');
+    if (rl && rl.closest('.md-ph')) {
+      var bloc = rl.closest('.md-ph');
+      var role = rl.classList.contains('on') ? '' : rl.getAttribute('data-role');
+      appel({ methode: 'POST', corps: { id: id, action: 'photo-role', cle: bloc.getAttribute('data-cle'), role: role } })
+        .then(function (r) { if (!r.ok) window.alert(r.d.message || 'Action impossible.'); charger(); });
+      return;
+    }
+
+    // retrait d'une photo
+    if (ev.target.closest('[data-photo-sup]')) {
+      var b2 = ev.target.closest('.md-ph');
+      if (!window.confirm('Retirer cette photo de l\'avis ? Le fichier sera supprimé.')) return;
+      appel({ methode: 'POST', corps: { id: id, action: 'photo-retirer', cle: b2.getAttribute('data-cle') } })
+        .then(function (r) { if (!r.ok) window.alert(r.d.message || 'Action impossible.'); charger(); });
+      return;
+    }
+
+    // ouvrir le sélecteur de fichier
+    if (ev.target.closest('[data-photo-ajout]')) {
+      carte.querySelector('[data-photo-file]').click();
+      return;
+    }
+
+    // enregistrement des champs
+    if (ev.target.closest('[data-act=enregistrer]')) {
+      var bouton = ev.target.closest('[data-act=enregistrer]');
+      var g = function (n) { var e = carte.querySelector('[data-f=' + n + ']'); return e ? e.value : undefined; };
+      var crit = {};
+      carte.querySelectorAll('[data-crit]').forEach(function (e) {
+        if (e.value) crit[e.getAttribute('data-crit')] = parseInt(e.value, 10);
+      });
+      bouton.disabled = true; bouton.textContent = 'Enregistrement…';
+      appel({ methode: 'POST', corps: {
+        id: id, action: 'modifier',
+        note: g('note'), prenom: g('prenom'), initiale: g('initiale'),
+        modele: g('modele'), type: g('type'), titre: g('titre'), texte: g('texte'),
+        criteres: crit
+      }}).then(function (r) {
+        bouton.disabled = false; bouton.textContent = 'Enregistrer les modifications';
+        if (!r.ok) { window.alert(r.d.message || 'Enregistrement impossible.'); return; }
+        charger();
+      });
+      return;
+    }
+  });
+
+  document.addEventListener('change', function (ev) {
+    var f = ev.target.closest && ev.target.closest('[data-photo-file]');
+    if (!f || !f.files || !f.files[0]) return;
+    var carte = f.closest('.md-carte');
+    var id = carte.getAttribute('data-id');
+    var zone = f.closest('.md-photos');
+    var ajout = zone.querySelector('[data-photo-ajout]');
+    ajout.textContent = 'Envoi…';
+    preparerPhoto(f.files[0]).then(function (data) {
+      return appel({ methode: 'POST', corps: { id: id, action: 'photo-ajouter', photo: data } });
+    }).then(function (r) {
+      if (!r.ok) window.alert(r.d.message || 'Ajout impossible.');
+      charger();
+    }).catch(function () { window.alert('Cette image n\'a pas pu être lue.'); charger(); });
+    f.value = '';
+  });
+
+  /* ---------- le socle : lecture seule, jamais modifié d'ici ---------- */
+  function chargerSocle() {
+    var bloc = $('#socle-bloc'); if (!bloc) return;
+    fetch('/data/reviews.json', { headers: { accept: 'application/json' } })
+      .then(function (r) { return r.ok ? r.json() : { reviews: [] }; })
+      .then(function (d) {
+        var l = Array.isArray(d.reviews) ? d.reviews : [];
+        if (!l.length) { bloc.style.display = 'none'; return; }
+        $('#socle-n').textContent = '· ' + l.length + ' avis';
+        $('#socle-liste').innerHTML = l.map(function (v) {
+          var img = v.photo
+            ? '<img src="/img/' + encodeURIComponent(v.photo) + '.jpeg" alt="" style="width:70px;height:60px;object-fit:cover;border-radius:8px;border:1px solid var(--xva-trait);flex:0 0 auto">'
+            : '';
+          return '<div style="display:flex;gap:12px;align-items:flex-start;background:var(--xva-s2);'
+            + 'border:1px solid var(--xva-trait);border-radius:10px;padding:12px">'
+            + img
+            + '<div style="min-width:0">'
+            + '<div style="font-weight:600;font-size:13.5px">' + esc(v.auteur || '') + ' · '
+            + esc(v.vehicule || '') + ' · ' + esc(String(v.note || '')) + '/5</div>'
+            + '<div style="font-size:12.5px;color:var(--xva-txt-2);margin-top:4px">' + esc(v.texte || '') + '</div>'
+            + '<div style="font-size:11.5px;color:var(--xva-txt-3);margin-top:6px">'
+            + 'id <code>' + esc(v.id || '') + '</code>'
+            + (v.photo ? ' · photo <code>img/' + esc(v.photo) + '.{webp,jpeg}</code>' : ' · sans photo')
+            + '</div></div></div>';
+        }).join('');
+      })
+      .catch(function () { bloc.style.display = 'none'; });
+  }
+
+  /* ---------- reprise des anciens avis ---------- */
+  var bi = $('#import-go');
+  if (bi) bi.addEventListener('click', function () {
+    var res = $('#import-res');
+    var brut = $('#import-txt').value.trim();
+    if (!brut) { res.textContent = 'Collez d\'abord vos avis.'; return; }
+    var liste;
+    try { liste = JSON.parse(brut); }
+    catch (e) { res.style.color = 'var(--xva-ko)'; res.textContent = 'Le format n\'est pas du JSON valide : ' + e.message; return; }
+    if (!Array.isArray(liste)) { res.style.color = 'var(--xva-ko)'; res.textContent = 'Il faut une liste entre crochets [ ].'; return; }
+    if (!window.confirm('Reprendre ' + liste.length + ' avis ? Ils seront publiés immédiatement.')) return;
+    bi.disabled = true; res.style.color = ''; res.textContent = 'Reprise en cours…';
+    appel({ methode: 'POST', corps: { action: 'importer', avis: liste } }).then(function (r) {
+      bi.disabled = false;
+      if (!r.ok) { res.style.color = 'var(--xva-ko)'; res.textContent = r.d.message || 'Échec.'; return; }
+      res.style.color = 'var(--xva-ok)';
+      res.textContent = r.d.repris + ' avis repris' + (r.d.ignores ? ', ' + r.d.ignores + ' ignorés (champs manquants)' : '') + '.';
+      charger();
+    });
+  });
+
+  /* reprise de session */
+  try {
+    var c = sessionStorage.getItem('xva_cle');
+    if (c) { $('#cle').value = c; entrer(); }
+  } catch (e) { }
+})();
+</script>
+</body>
+</html>

@@ -319,10 +319,10 @@
 .xva-avis-top{display:flex;gap:13px;align-items:center}
 .xva-av{
   width:44px;height:44px;border-radius:50%;flex:0 0 auto;
-  /* Un aplat doré par carte, ça fait autant de pastilles dorées qu'il y a
-     d'avis. Le disque passe en neutre : sur une carte, le seul doré est
-     désormais les étoiles, c'est-à-dire la note. */
-  background:var(--xva-s3);color:#fff;border:1px solid var(--xva-trait);
+  /* Pastille dorée à l'initiale du client, même doré que le bouton « Voir les
+     avis ». Elle avait été passée en neutre lors du rééquilibrage du doré ;
+     la section paraissait alors trop fade, on la remet en doré (17/09/2026). */
+  background:var(--xva-or);color:#0a0a0a;border:1px solid var(--xva-or-fonce);
   display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;
 }
 .xva-qui{min-width:0;flex:1}
@@ -855,22 +855,11 @@
      carte touchée, et se recalculait pendant le défilement. */
   #xva-section .xva-grille>.xva-avis:hover{transform:none}
 
-  /* Le filet doré passe du bord gauche au bas de la carte : liste verticale,
-     trait vertical ; liste horizontale, trait horizontal. Il grandit depuis le
-     centre et désigne l'avis qu'on est en train de lire — c'est avis.js qui
-     pose la classe .xva-centre sur la carte au milieu du cadre. */
-  #xva-section .xva-grille>.xva-avis::before{
-    left:50%;
-    top:auto;
-    bottom:0;
-    width:38%;
-    height:2px;
-    border-radius:2px 2px 0 0;
-    transform:translateX(-50%) scaleX(0);
-    transform-origin:center;
-  }
-  #xva-section .xva-grille>.xva-avis:hover::before{transform:translateX(-50%) scaleX(0)}
-  #xva-section .xva-grille>.xva-avis.xva-centre::before{transform:translateX(-50%) scaleX(1)}
+  /* Pas de filet doré dans le carrousel. Sur une liste verticale il soulignait
+     la carte survolée ; au doigt il restait allumé au hasard et ne voulait plus
+     rien dire. La carte reste désignée par son recentrage, ça suffit.
+     Le filet demeure intact partout ailleurs. */
+  #xva-section .xva-grille>.xva-avis::before{display:none}
 }
 
 /* Sur quatre colonnes les cartes sont plus étroites : on resserre le

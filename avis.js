@@ -712,6 +712,7 @@
       }).slice(0, 4);   /* quatre en vitrine : la rangée fait toute la largeur */
       g.innerHTML = l.length ? l.map(carte).join('') : vide();
       observer();
+      centreur(g);
     }
     var lien = $('[data-xva=lien-tous]', racine);
     /* Libellé fixe : « Voir les 6 avis » devenait « 7 » puis « 8 » à chaque
@@ -910,6 +911,41 @@
 
   /* ------------------------------------------------------- révélation défil */
   var obs = null;
+  /* ------------------------------------------- carte centrée du carrousel */
+  /* Sur téléphone, la rangée d'avis se feuillette horizontalement. On éclaire
+     d'un filet doré celle qui occupe le centre, pour qu'on sache laquelle on
+     lit. La racine de l'observateur est la rangée elle-même : la carte centrée
+     y est visible en entier, ses voisines dépassent à peine — un seuil aux
+     trois quarts suffit donc à la désigner sans ambiguïté. */
+  var obsCentre = null;
+  var mqCarrousel = null;
+
+  function centreur(grille) {
+    if (!grille || !('IntersectionObserver' in window) || !window.matchMedia) return;
+
+    if (!mqCarrousel) {
+      mqCarrousel = window.matchMedia('(max-width: 640px)');
+      var relancer = function () { centreur($('[data-xva=apercu]')); };
+      if (mqCarrousel.addEventListener) mqCarrousel.addEventListener('change', relancer);
+      else if (mqCarrousel.addListener) mqCarrousel.addListener(relancer);
+    }
+
+    if (obsCentre) { obsCentre.disconnect(); obsCentre = null; }
+
+    if (!mqCarrousel.matches) {
+      $$('.xva-centre', grille).forEach(function (c) { c.classList.remove('xva-centre'); });
+      return;
+    }
+
+    obsCentre = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        e.target.classList.toggle('xva-centre', e.intersectionRatio > .75);
+      });
+    }, { root: grille, threshold: [0, .75, 1] });
+
+    $$('.xva-avis', grille).forEach(function (c) { obsCentre.observe(c); });
+  }
+
   function observer() {
     if (!('IntersectionObserver' in window) || calme()) {
       $$('.xva-rev').forEach(function (e) { e.classList.add('xva-vu'); });

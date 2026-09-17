@@ -829,13 +829,10 @@
     grid-template-columns:none;
     overflow-x:auto;
     overscroll-behavior-x:contain;
-    /* « proximity » et non « mandatory » : le recalage se fait à la fin du geste
-       et non en continu. Avec « mandatory », le navigateur recentrait la carte
-       pendant qu'on faisait défiler la page verticalement — d'où la tremblote.
-       On garde bien le recentrage, il cesse simplement de lutter contre le doigt.
-       Pas de -webkit-overflow-scrolling ici : inutile depuis iOS 13, et cette
-       vieille propriété provoque elle-même des sautillements sur iPhone récent. */
-    scroll-snap-type:x proximity;
+    /* Recentrage franc : la carte se cale au milieu dès qu'on lâche.
+       (Pas de -webkit-overflow-scrolling : inutile depuis iOS 13 et source de
+       sautillements sur iPhone récent.) */
+    scroll-snap-type:x mandatory;
     gap:12px;
     padding-bottom:10px;
     scrollbar-width:none;
@@ -846,19 +843,34 @@
     max-width:84%;
     scroll-snap-align:center;
   }
-}
 
-/* Appareils sans survol : le filet doré et le soulèvement de la carte sont des
-   effets de souris. Au doigt, le navigateur simule un survol qui reste COLLÉ
-   après le toucher — la barre dorée restait allumée sur la carte touchée, comme
-   un marqueur de sélection qui ne veut rien dire, et la transformation se
-   recalculait pendant le défilement. On les neutralise ici seulement.
-   Le filet garde son sens sur :target — quand on ouvre le lien direct vers un
-   avis précis, il le désigne. Cette règle-là n'est pas touchée. */
-@media(hover:none){
-  #xva-section .xva-avis:hover{transform:none}
-  #xva-section .xva-avis:hover::before{transform:scaleY(0)}
-  #xva-section .xva-avis:target::before{transform:scaleY(1)}
+  /* Pas d'apparition animée dans le carrousel. Les cartes arrivent déjà en
+     place au lieu de monter de 20 px en fondu : une carte qui bouge à
+     l'intérieur d'un conteneur qui défile, c'est du mouvement parasite.
+     L'animation reste partout ailleurs — page /avis, ordinateur, tablette. */
+  #xva-section .xva-grille>.xva-rev{opacity:1;transform:none;transition:none}
+
+  /* Au doigt, il n'y a pas de survol : le navigateur en simule un qui reste
+     COLLÉ après le toucher. Le soulèvement de 2 px se figeait donc sur la
+     carte touchée, et se recalculait pendant le défilement. */
+  #xva-section .xva-grille>.xva-avis:hover{transform:none}
+
+  /* Le filet doré passe du bord gauche au bas de la carte : liste verticale,
+     trait vertical ; liste horizontale, trait horizontal. Il grandit depuis le
+     centre et désigne l'avis qu'on est en train de lire — c'est avis.js qui
+     pose la classe .xva-centre sur la carte au milieu du cadre. */
+  #xva-section .xva-grille>.xva-avis::before{
+    left:50%;
+    top:auto;
+    bottom:0;
+    width:38%;
+    height:2px;
+    border-radius:2px 2px 0 0;
+    transform:translateX(-50%) scaleX(0);
+    transform-origin:center;
+  }
+  #xva-section .xva-grille>.xva-avis:hover::before{transform:translateX(-50%) scaleX(0)}
+  #xva-section .xva-grille>.xva-avis.xva-centre::before{transform:translateX(-50%) scaleX(1)}
 }
 
 /* Sur quatre colonnes les cartes sont plus étroites : on resserre le

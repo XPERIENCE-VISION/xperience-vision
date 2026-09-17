@@ -714,7 +714,9 @@
       observer();
     }
     var lien = $('[data-xva=lien-tous]', racine);
-    if (lien && r.total) lien.textContent = 'Voir les ' + r.total + ' avis';
+    /* Libellé fixe : « Voir les 6 avis » devenait « 7 » puis « 8 » à chaque
+       nouvel avis, ce qui attire l'œil sur le compte plutôt que sur l'action. */
+    if (lien && r.total) lien.textContent = 'Voir les avis';
   }
 
   /* -------------------------------------------------------- encarts courts */

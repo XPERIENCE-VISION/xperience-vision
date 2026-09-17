@@ -818,7 +818,30 @@
 #xva-section .xva-grille{grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch}
 @media(max-width:1240px){#xva-section .xva-grille{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:980px){#xva-section .xva-grille{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){#xva-section .xva-grille{grid-template-columns:1fr}}
+/* Sur téléphone, quatre avis empilés font quatre écrans de haut : on n'en voit
+   qu'un et on ne devine pas qu'il y en a d'autres. On les met donc à feuilleter
+   du doigt, de droite à gauche. La carte fait 84 % de la largeur pour que la
+   suivante dépasse toujours un peu — c'est ce débord qui donne envie de glisser.
+   Ne vaut que pour la vitrine de la page d'accueil : la page /avis garde sa grille. */
+@media(max-width:640px){
+  #xva-section .xva-grille{
+    display:flex;
+    grid-template-columns:none;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    gap:12px;
+    padding-bottom:10px;
+    scrollbar-width:none;
+  }
+  #xva-section .xva-grille::-webkit-scrollbar{display:none}
+  #xva-section .xva-grille>.xva-avis{
+    flex:0 0 84%;
+    max-width:84%;
+    scroll-snap-align:center;
+  }
+}
 
 /* Sur quatre colonnes les cartes sont plus étroites : on resserre le
    rembourrage pour que le texte garde de la place. */

@@ -1,65 +1,11 @@
 // script.js
 
-// 1. On crée la variable de contrôle en dehors de la fonction
-let currentActiveSolution = '';
-
-function showSolution(type) {
-    // 2. CONDITION ANTI-RÉPÉTITION : Si on survole le même bouton, on stoppe tout de suite
-    if (type === currentActiveSolution) return;
-
-    const display = document.getElementById('solution-content');
-    let content = "";
-
-    const solutions = {
-        'family': {
-            tag: "Pack Expérience Arrière",
-            title: "Le Cinéma Privé",
-            items: ["Écran 17.3\" ultra-fin ou Appuie-tête 10.1\"", "Casques sans fil & Manettes Gaming"],
-            link: "Vérifier mon véhicule",
-            warning: "⚠️ Analyse de compatibilité : Toit Panoramique ou Ouvrant compatible"
-        },
-        'pro': {
-            tag: "Expertise Business",
-            title: "Bureau Connecté",
-            items: ["CarPlay & Android Auto sans fil", "Dashcam 4K avant/arrière intégrée", "Modem 4G/5G haute vitesse"],
-            link: "Solutions flottes & VO"
-        },
-        'protection': {
-            tag: "Esthétique & Valeur",
-            title: "Finition Concours",
-            items: ["Protection écran oléophobique", "Pack Clean : Tapis & Cuirs", "Parfum d'ambiance Signature"],
-            link: "Découvrir les accessoires"
-        }
-    };
-
-    const data = solutions[type];
-
-    // Construction du contenu HTML
-    content = `
-        <span class="text-xs font-bold text-gray-500 uppercase tracking-[0.3em]">${data.tag}</span>
-        <h3 class="text-4xl font-black mb-6 uppercase italic">${data.title}</h3>
-        ${data.warning ? `<p class="text-[10px] text-amber-500 font-bold mb-4 uppercase">${data.warning}</p>` : ''}
-        <ul class="space-y-4 mb-8">
-            ${data.items.map(item => `<li class="flex items-center text-sm"><i class="fa-solid fa-circle-check mr-3 text-white"></i> ${item}</li>`).join('')}
-        </ul>
-        <a href="#installation" class="text-white border-b border-white pb-1 font-bold uppercase text-[10px] tracking-widest hover:text-gray-400 transition">${data.link}</a>
-    `;
-
-    // 3. ANIMATION DE SORTIE
-    display.style.opacity = 0;
-    display.style.transform = "translateY(10px)"; // Légère descente
-
-    setTimeout(() => {
-        // 4. MISE À JOUR DU CONTENU ET DE LA VARIABLE
-        display.innerHTML = content;
-        currentActiveSolution = type; // On mémorise que c'est cette solution qui est affichée
-
-        // 5. ANIMATION D'ENTRÉE
-        display.style.opacity = 1;
-        display.style.transform = "translateY(0)"; // Retour à la position initiale
-    }, 200);
-}
-
+/* [CODE RETIRÉ LE 17/09/2026] showSolution() et sa variable currentActiveSolution.
+   La fonction écrivait dans #solution-content, un identifiant qui n'existe dans
+   aucune des pages du site, et elle n'était appelée de nulle part — ni depuis le
+   HTML, ni depuis un autre script. Vestige d'une maquette abandonnée.
+   Elle décrivait des prestations absentes du catalogue (CarPlay, Android Auto,
+   dashcam 4K, modem 4G/5G) : à trancher séparément, hors de cette mission. */
 
 // Smooth scroll sur clic menu uniquement (pas au scroll naturel)
 // Les .brand-logo-link sont gérés par preselectBrand() dans initConfigurator

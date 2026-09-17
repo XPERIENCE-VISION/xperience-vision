@@ -1,5 +1,17 @@
 User-agent: *
 Allow: /
-Disallow: /netlify/
+
+# Les avis de la page d'accueil et de /avis sont chargés depuis cette fonction :
+# Google doit pouvoir la lire, sinon la section Avis lui apparaît vide.
+# La règle la plus précise l'emporte, donc cette autorisation passe avant le blocage.
+Allow: /.netlify/functions/avis-liste
+
+# Le reste des fonctions n'a rien à faire dans un index de moteur de recherche.
+# (L'ancienne règle disait /netlify/ sans point : elle ne correspondait à rien.)
+Disallow: /.netlify/
+
+# Ancien fichier d'avis, remplacé par le module mais encore servi à la racine.
+# Il sera déplacé en mission 2.
+Disallow: /data/reviews.json
 
 Sitemap: https://xperiencevision.com/sitemap.xml

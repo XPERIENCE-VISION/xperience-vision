@@ -1430,7 +1430,7 @@
             font-weight: 800;
             letter-spacing: 0.25em;
             text-transform: uppercase;
-            color: #666;
+            color: #8a8a8a;
         }
 
         /* Desktop : on cache le hint "Défilez" (propre au mobile) */
@@ -1573,7 +1573,7 @@
             font-size: 11px;
             letter-spacing: 0.25em;
             text-transform: uppercase;
-            color: #666;
+            color: #8a8a8a;
             font-weight: 700;
         }
 
@@ -1965,7 +1965,7 @@
             font-weight: 800;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            color: #777;
+            color: #8a8a8a;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -2002,7 +2002,7 @@
                 justify-content: center;
                 gap: 0.5rem;
                 margin-top: 0.4rem;
-                color: #666;
+                color: #8a8a8a;
                 font-size: 9px;
                 font-weight: 800;
                 letter-spacing: 0.2em;
@@ -2703,22 +2703,22 @@
                     <div class="text-center group">
                         <i class="fa-solid fa-shield text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
                         <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Garantie 1 an</h5>
-                        <p class="text-[10px] text-gray-600 uppercase font-bold">Sérénité totale</p>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold">Sérénité totale</p>
                     </div>
                     <div class="text-center group">
                         <i class="fa-solid fa-bolt text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
                         <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Plug &amp; Play</h5>
-                        <p class="text-[10px] text-gray-600 uppercase font-bold">Zéro découpe faisceau</p>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold">Zéro découpe faisceau</p>
                     </div>
                     <div class="text-center group">
                         <i class="fa-solid fa-headset text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
                         <h5 class="font-bold uppercase text-xs tracking-widest mb-2">SAV Premium</h5>
-                        <p class="text-[10px] text-gray-600 uppercase font-bold">Réponse sous 24h</p>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold">Réponse sous 24h</p>
                     </div>
                     <div class="text-center group">
                         <i class="fa-solid fa-gem text-3xl mb-4 text-gray-500 group-hover:text-white transition"></i>
                         <h5 class="font-bold uppercase text-xs tracking-widest mb-2">Finition Luxe</h5>
-                        <p class="text-[10px] text-gray-600 uppercase font-bold">Standard constructeur</p>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold">Standard constructeur</p>
                     </div>
                 </div>
             </div>
@@ -2995,7 +2995,7 @@
             </div>
         </div>
         <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5">
-            <p class="text-[9px] text-gray-600 font-bold tracking-[0.5em] uppercase text-center">© 2026 XPERIENCE VISION — TOUS DROITS RÉSERVÉS</p>
+            <p class="text-[9px] text-gray-400 font-bold tracking-[0.5em] uppercase text-center">© 2026 XPERIENCE VISION — TOUS DROITS RÉSERVÉS</p>
         </div>
     </footer>
 
@@ -3089,13 +3089,40 @@
         }
 
         document.querySelectorAll('[data-gallery]').forEach(el => {
-            el.addEventListener('click', () => {
+            const ouvrir = () => {
                 if (el.dataset.gallery === 'pillars') {
                     openPillarModal(parseInt(el.dataset.index));
                 } else {
                     openLightbox(el.dataset.gallery, parseInt(el.dataset.index));
                 }
+            };
+
+            el.addEventListener('click', ouvrir);
+
+            /* Ces éléments sont des balises article et div : le navigateur ne les
+               place pas dans l'ordre de tabulation, donc au clavier ils étaient
+               tout simplement inatteignables — 31 vignettes et cartes ouvrant
+               une modale, accessibles à la souris seulement.
+
+               On reprend le motif déjà utilisé plus bas pour les cartes
+               partenaires : tabindex, Entrée/Espace, role bouton et un nom
+               explicite. Le nom vient du titre pour les piliers, du texte
+               alternatif de l'image pour les vignettes. */
+            el.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    ouvrir();
+                }
             });
+            el.setAttribute('tabindex', '0');
+            if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+            if (!el.hasAttribute('aria-label')) {
+                const titre = el.querySelector('.gamme-pillar-title')?.textContent?.trim();
+                const alt = el.querySelector('img')?.getAttribute('alt')?.trim();
+                el.setAttribute('aria-label', titre ? `Voir le détail : ${titre}`
+                    : alt ? `Agrandir : ${alt}` : 'Agrandir');
+            }
+            el.setAttribute('aria-haspopup', 'dialog');
         });
 
         // ========== PILLAR MODAL (piliers gamme — enrichi avec texte + tags + CTA) ==========
@@ -3380,7 +3407,7 @@
     <!-- DRAWER PANIER -->
     <aside id="cart-drawer" class="cart-drawer" aria-hidden="true">
         <div class="cart-drawer-overlay"></div>
-        <div class="cart-drawer-panel" role="dialog" aria-labelledby="cart-drawer-title">
+        <div class="cart-drawer-panel" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title">
             <header class="cart-drawer-header">
                 <h2 id="cart-drawer-title">
                     <i class="cart-drawer-icon fa-solid fa-bag-shopping"></i>

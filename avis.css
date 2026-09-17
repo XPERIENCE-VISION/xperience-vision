@@ -829,8 +829,13 @@
     grid-template-columns:none;
     overflow-x:auto;
     overscroll-behavior-x:contain;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
+    /* « proximity » et non « mandatory » : le recalage se fait à la fin du geste
+       et non en continu. Avec « mandatory », le navigateur recentrait la carte
+       pendant qu'on faisait défiler la page verticalement — d'où la tremblote.
+       On garde bien le recentrage, il cesse simplement de lutter contre le doigt.
+       Pas de -webkit-overflow-scrolling ici : inutile depuis iOS 13, et cette
+       vieille propriété provoque elle-même des sautillements sur iPhone récent. */
+    scroll-snap-type:x proximity;
     gap:12px;
     padding-bottom:10px;
     scrollbar-width:none;
@@ -841,6 +846,19 @@
     max-width:84%;
     scroll-snap-align:center;
   }
+}
+
+/* Appareils sans survol : le filet doré et le soulèvement de la carte sont des
+   effets de souris. Au doigt, le navigateur simule un survol qui reste COLLÉ
+   après le toucher — la barre dorée restait allumée sur la carte touchée, comme
+   un marqueur de sélection qui ne veut rien dire, et la transformation se
+   recalculait pendant le défilement. On les neutralise ici seulement.
+   Le filet garde son sens sur :target — quand on ouvre le lien direct vers un
+   avis précis, il le désigne. Cette règle-là n'est pas touchée. */
+@media(hover:none){
+  #xva-section .xva-avis:hover{transform:none}
+  #xva-section .xva-avis:hover::before{transform:scaleY(0)}
+  #xva-section .xva-avis:target::before{transform:scaleY(1)}
 }
 
 /* Sur quatre colonnes les cartes sont plus étroites : on resserre le

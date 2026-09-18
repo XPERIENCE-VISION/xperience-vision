@@ -528,7 +528,8 @@
         // Prix — reconstruit depuis data-price du bouton pour cohérence (inclut les centimes)
         let priceText = (card.querySelector('.cat-price, .cat-bs-price')?.textContent || '').trim();
         if (bottomBtn && bottomBtn.dataset.price) {
-            priceText = bottomBtn.dataset.price + ' €';
+            const prefixe = bottomBtn.dataset.pricePrefix ? bottomBtn.dataset.pricePrefix + ' ' : '';
+            priceText = prefixe + bottomBtn.dataset.price + ' €';
         }
 
         productModal.querySelector('[data-product-title]').textContent = title;

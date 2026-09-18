@@ -1853,6 +1853,17 @@ body.page-ecommerce .cat-filter {
     margin-left: 0.1rem;
 }
 
+.cat-price-prefix {
+    display: block;
+    font-size: 0.56rem;
+    font-weight: 700;
+    color: var(--xv-text-muted);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 0.1rem;
+}
+
 .cat-buy-btn {
     background: white;
     color: black;

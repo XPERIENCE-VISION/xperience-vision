@@ -66,10 +66,10 @@ const PRODUCTS = {
     'EXT-008': { name: 'Caméra de recul HD 1080p', price: 24900, type: 'produit' },
     'EXT-010': { name: 'Spoilers latéraux sport', price: 38900, type: 'produit' },
     'EXT-011': { name: 'Décorations chromées extérieur', price: 10900, type: 'produit' },
-    'EXT-012': { name: 'Protection pare-chocs arrière', price: 8900, type: 'produit' },
+    'EXT-012': { name: 'Plaque de seuil de coffre inox', price: 8900, type: 'produit' },
 
     // ========== ACCESSOIRES RECHARGE (produits livrés) ==========
-    'REC-001': { name: 'Câble Type 2 7,4 kW — 6m', price: 8900, type: 'produit' },
+    'REC-001': { name: 'Câble Type 2 7,4 kW — 6 m', price: 8900, type: 'produit' },
     'REC-002': { name: 'Câble CCS DC Rapide', price: 14900, type: 'produit' },
     'REC-003': { name: 'Câble T2 vers prise domestique', price: 6900, type: 'produit' },
     'REC-004': { name: 'Wallbox 11 kW connectée', price: 79900, type: 'produit' },
@@ -93,7 +93,7 @@ const PRODUCTS = {
     'INT-008': { name: 'Housses de siège premium', price: 28900, type: 'produit' },
     'INT-009': { name: 'Filet séparation coffre', price: 4900, type: 'produit' },
     'INT-010': { name: 'Éclairage LED ambiance RGB', price: 18900, type: 'produit' },
-    'INT-011': { name: 'Chargeur à induction 15W', price: 8900, type: 'produit' },
+    'INT-011': { name: 'Chargeur à induction 15 W', price: 8900, type: 'produit' },
     'INT-012': { name: 'Cache-bagages enrouleur', price: 13900, type: 'produit' },
 
     // ========== ACCESSOIRES SUR-MESURE BYD (configurateur) ==========

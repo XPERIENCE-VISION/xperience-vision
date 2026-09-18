@@ -18,7 +18,9 @@
 
 [[redirects]]
   from = "/catalogue.html"
-  to = "/#services"
+  # L'ancre #services n'a jamais existé dans index.html : le visiteur atterrissait
+  # en haut de page. On l'envoie au configurateur, qui est le vrai catalogue.
+  to = "/#configurateur"
   status = 301
   force = true
 

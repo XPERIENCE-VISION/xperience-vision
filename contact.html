@@ -573,6 +573,11 @@
             const mapping = {
                 'partenaire': 'Concession / Partenariat pro',
                 'conseil': 'Conseil avant achat',
+                /* « question » est envoyé par les fiches produits du catalogue
+                   (catalogue.js). Il ne figurait pas ici : le menu restait donc
+                   sur sa valeur par défaut et vous receviez la demande sans
+                   savoir de quoi elle parlait. */
+                'question': 'Conseil avant achat',
                 'devis': 'Devis sur-mesure / installation',
                 'sav': 'Service après-vente',
                 'autre': 'Autre',
@@ -586,6 +591,20 @@
                 select.value = target;
                 select.dispatchEvent(new Event('change', { bubbles: true }));
             }
+        })();
+
+        /* Le nom du produit voyageait dans l'adresse (&produit=…) mais n'était
+           lu nulle part : on perdait l'objet exact de la question. On le place
+           en tête du message, sans écraser ce que le visiteur aurait déjà saisi. */
+        (function () {
+            const produit = new URLSearchParams(window.location.search).get('produit');
+            if (!produit) return;
+            const champ = document.getElementById('form-message');
+            if (!champ || champ.value.trim()) return;
+            const propre = produit.replace(/\s+/g, ' ').trim().slice(0, 120);
+            if (!propre) return;
+            champ.value = `Bonjour,\n\nMa question porte sur : ${propre}\n\n`;
+            champ.dispatchEvent(new Event('input', { bubbles: true }));
         })();
     </script>
 </body>

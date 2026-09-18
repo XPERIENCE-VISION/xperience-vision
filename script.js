@@ -575,9 +575,12 @@ function configSelectBrand(brand) {
     configState.brand = brand;
     configState.model = '';
 
-    // "Autre véhicule" → redirige directement vers les accessoires universels
+    /* « Autre véhicule » menait vers la section Accessoires, masquée depuis
+       (display:none). Le clic ne produisait donc plus rien du tout : le
+       visiteur dont la marque n'est pas listée se retrouvait bloqué.
+       Il part maintenant vers le formulaire de contact, en conseil. */
     if (brand === 'autre') {
-        document.getElementById('accessoires')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.location.href = 'contact.html?sujet=conseil';
         return;
     }
 
@@ -660,6 +663,20 @@ function initConfigurator() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const b = link.dataset.brand;
+
+            /* Les marques encore fermées portent l'attribut « disabled » sur leur
+               bouton du configurateur (étiquette « Bientôt disponible »). Le
+               carrousel de logos, lui, ne vérifiait rien : un clic sur le logo
+               Tesla entrait dans le tunnel malgré le verrou, affichait les
+               modèles, puis se terminait sur « aucun accessoire ».
+               On descend désormais jusqu'au configurateur sans rien
+               pré-sélectionner : le visiteur voit la marque et son étiquette. */
+            const bouton = document.querySelector(`[data-brand="${b}"]:not(.brand-logo-link)`);
+            if (bouton && bouton.disabled) {
+                document.getElementById('configurateur')?.scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
             if (NOMS_MARQUES[b]) {
                 preselectBrand(b);
             } else {

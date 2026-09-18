@@ -260,6 +260,25 @@
     </footer>
 
     <script>
+        /* Lecture du panier AVANT de le vider. C'est la seule trace, côté
+           navigateur, de ce qui vient d'être commandé : elle dit si la commande
+           contient une installation, des produits livrés, ou les deux.
+           Le panier est un objet indexé par identifiant : { id: {name, price, qty, type} }. */
+        let aDesServices = false, aDesProduits = false, panierLu = false;
+        try {
+            const brut = localStorage.getItem('xv-cart');
+            if (brut) {
+                const panier = JSON.parse(brut);
+                if (panier && typeof panier === 'object') {
+                    for (const ligne of Object.values(panier)) {
+                        if (ligne && ligne.type === 'service') aDesServices = true;
+                        if (ligne && ligne.type === 'produit') aDesProduits = true;
+                    }
+                    panierLu = aDesServices || aDesProduits;
+                }
+            }
+        } catch (e) {}
+
         // Vide le panier (la commande est validée)
         try {
             localStorage.removeItem('xv-cart');
@@ -315,10 +334,17 @@
             });
         }
 
-        // Par défaut on affiche les deux messages (livraison + RDV) :
-        // le client sait ce qui le concerne et reçoit un email détaillé par type.
-        document.getElementById('service-extra').hidden = false;
-        document.getElementById('produit-extra').hidden = false;
+        /* On n'affiche que le message qui concerne réellement la commande.
+           Avant, les deux s'affichaient pour tout le monde : un client venu
+           acheter un tapis de sol lisait qu'un rendez-vous d'installation était
+           validé pour lui.
+
+           Si le panier n'a pas pu être lu — page rouverte depuis un autre
+           navigateur, stockage bloqué, lien de confirmation partagé — on
+           retombe sur l'ancien comportement et on affiche les deux. Mieux vaut
+           une information de trop qu'un client qui ne sait pas quoi attendre. */
+        document.getElementById('service-extra').hidden = panierLu ? !aDesServices : false;
+        document.getElementById('produit-extra').hidden = panierLu ? !aDesProduits : false;
     </script>
 </body>
 

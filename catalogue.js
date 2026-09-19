@@ -639,7 +639,15 @@
                 el.setAttribute('required', 'required');
             } else {
                 el.removeAttribute('required');
-                el.value = '';
+                // Une case à cocher garde sa valeur : l'effacer la vidait définitivement.
+                // Un client qui ouvrait le tunnel avec un produit seul, puis ajoutait un
+                // service, ne pouvait plus jamais valider — le lieu de rendez-vous partait
+                // vide quel que soit son choix, et la commande était refusée.
+                if (el.type === 'radio' || el.type === 'checkbox') {
+                    el.checked = false;
+                } else {
+                    el.value = '';
+                }
             }
         });
         formSubmitLabel.textContent = hasServices ? 'Continuer vers le RDV' : 'Continuer vers le paiement';

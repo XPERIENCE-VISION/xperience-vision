@@ -723,7 +723,7 @@
             } else {
                 lieuRdv = {
                     type: 'garage',
-                    label: 'Garage XPERIENCE VISION',
+                    label: 'Atelier XPERIENCE VISION',
                     adresse: '10 av. Fridingen · 77100 Nanteuil-lès-Meaux'
                 };
             }

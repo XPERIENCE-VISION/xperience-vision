@@ -267,7 +267,7 @@ function adminOrder({ session, items, customer, lieuRdv, booking, hasServices, h
         const lieuIsGarage = lieuRdv?.type === 'garage';
         servicesBlock = `
             <div class="info-box">
-                <p><strong>🛠️ ${lieuIsGarage ? 'PRESTATION EN GARAGE XPERIENCE VISION' : 'PRESTATION À DOMICILE'}</strong></p>
+                <p><strong>🛠️ ${lieuIsGarage ? 'PRESTATION À L\'ATELIER XPERIENCE VISION' : 'PRESTATION À DOMICILE'}</strong></p>
             </div>
             ${renderMetaGrid([
                 { label: 'Véhicule',     value: formatVehicle(customer) },
@@ -346,7 +346,7 @@ function clientOrder({ session, items, customer, lieuRdv, booking, hasServices, 
                 <p><strong>📍 Le jour J</strong></p>
                 <p style="margin-top:8px;color:#ccc;">${
                     lieuIsGarage
-                        ? 'Présentez-vous au garage XPERIENCE VISION à l\'heure du rendez-vous avec votre véhicule.'
+                        ? 'Présentez-vous à l\'atelier XPERIENCE VISION à l\'heure du rendez-vous avec votre véhicule.'
                         : 'Notre technicien se présentera à l\'adresse indiquée à l\'heure du rendez-vous. Merci de préparer l\'accès à votre véhicule.'
                 }</p>
             </div>
@@ -410,7 +410,7 @@ function bookingConfirm({ customer, lieuRdv, booking, items }) {
 
     const lieuIsGarage = lieuRdv?.type === 'garage';
     const jourJText = lieuIsGarage
-        ? "Présentez-vous au garage XPERIENCE VISION à l'heure du rendez-vous avec votre véhicule. Notre équipe s'occupe du reste."
+        ? "Présentez-vous à l'atelier XPERIENCE VISION à l'heure du rendez-vous avec votre véhicule. Notre équipe s'occupe du reste."
         : "Notre technicien se présentera à l'adresse indiquée à l'heure du rendez-vous. Assurez-vous que votre véhicule soit accessible.";
 
     const content = `

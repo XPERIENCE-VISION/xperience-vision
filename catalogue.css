@@ -579,6 +579,7 @@ body.page-ecommerce #configurateur .cat-card-body {
     padding: 0.8rem 0.9rem 0.9rem;
 }
 
+body.page-ecommerce #configurateur .cat-card-body h3,
 body.page-ecommerce #configurateur .cat-card-body h4 {
     font-size: 0.78rem;
     letter-spacing: 0.01em;
@@ -818,6 +819,7 @@ body.page-ecommerce .cat-section-produits .cat-card-body {
     gap: 0.35rem;
 }
 
+body.page-ecommerce .cat-section-produits .cat-card-body h3,
 body.page-ecommerce .cat-section-produits .cat-card-body h4 {
     font-size: 0.78rem;
     letter-spacing: 0.01em;
@@ -1806,6 +1808,7 @@ body.page-ecommerce .cat-filter {
     flex: 1;
 }
 
+.cat-card-body h3,
 .cat-card-body h4 {
     font-size: clamp(0.8rem, 1.6vw, 0.95rem);
     font-weight: 900;
@@ -1969,7 +1972,7 @@ body.page-ecommerce .cat-filter {
     top: 0.9rem;
     right: 1rem;
     font-size: 8px;
-    color: #666;
+    color: var(--xv-text-muted);
     font-weight: 800;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -2558,7 +2561,7 @@ body.page-ecommerce .cat-filter {
 
 .cart-drawer-empty {
     text-align: center;
-    color: #666;
+    color: var(--xv-text-muted);
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.2em;
@@ -2777,7 +2780,7 @@ body.page-ecommerce .cat-filter {
 .cart-drawer-note {
     text-align: center;
     margin-top: 0.8rem;
-    color: #666;
+    color: var(--xv-text-muted);
     font-size: 9px;
     letter-spacing: 0.2em;
     text-transform: uppercase;

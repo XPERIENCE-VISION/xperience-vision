@@ -257,7 +257,7 @@ function adminOrder({ session, items, customer, lieuRdv, booking, hasServices, h
     const clientMeta = renderMetaGrid([
         { label: 'Nº commande',  value: session.id,            html: `<span class="copy-id">${escapeHtml(session.id || '?')}</span>` },
         { label: 'Client',       value: customerFullName },
-        { label: 'Email',        value: customer.email,        html: `<a href="mailto:${escapeHtml(customer.email)}" style="color:#fcf6ba;">${escapeHtml(customer.email)}</a>` },
+        { label: 'E-mail',       value: customer.email,        html: `<a href="mailto:${escapeHtml(customer.email)}" style="color:#fcf6ba;">${escapeHtml(customer.email)}</a>` },
         { label: 'Téléphone',    value: customer.telephone,    html: customer.telephone ? `<a href="tel:${escapeHtml(customer.telephone)}" style="color:#fff;">${escapeHtml(customer.telephone)}</a>` : '' },
         { label: 'Adresse',      value: addressHtml,           html: addressHtml }
     ]);
@@ -360,7 +360,7 @@ function clientOrder({ session, items, customer, lieuRdv, booking, hasServices, 
     if (hasProducts) {
         shippingBlock = `
             <p class="section-title">Livraison</p>
-            <p>Vos produits seront expédiés sous <strong style="color:#fff;">3 à 5 jours ouvrés</strong>. Vous recevrez un email avec le numéro de suivi dès l'envoi.</p>
+            <p>Vos produits seront livrés sous <strong style="color:#fff;">10 à 15 jours</strong>. Vous recevrez un e-mail avec le numéro de suivi dès l'expédition.</p>
             ${renderMetaGrid([
                 { label: 'Adresse livraison', value: formatAddress(customer), html: formatAddress(customer) }
             ])}
@@ -442,10 +442,10 @@ function bookingConfirm({ customer, lieuRdv, booking, items }) {
         </div>
 
         <div class="info-box-green">
-            <p><strong>✅ Un rappel sera envoyé 24h avant.</strong></p>
+            <p><strong>✅ Un rappel sera envoyé 24 h avant.</strong></p>
         </div>
 
-        <p style="margin-top:32px;color:#aaa;font-size:13px;">Besoin de reprogrammer ? Répondez à cet email ou contactez-nous à <a href="mailto:contact@xperience-vision.fr" style="color:#fcf6ba;">contact@xperience-vision.fr</a>.</p>
+        <p style="margin-top:32px;color:#aaa;font-size:13px;">Besoin de reprogrammer ? Répondez à cet e-mail ou contactez-nous à <a href="mailto:contact@xperience-vision.fr" style="color:#fcf6ba;">contact@xperience-vision.fr</a>.</p>
 
         <p style="margin-top:24px;"><a href="${SITE_URL}" class="cta">Retour au site</a></p>
     `;

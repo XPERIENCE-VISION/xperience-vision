@@ -46,10 +46,20 @@ const PRODUCTS = {
     'ECR-POL': { name: 'Écran plafond 13.3" FHD Polyvalent', price: 69900, type: 'service' },
     'ECR-PRE': { name: 'Écran plafond 17.3" FHD Premium', price: 109900, type: 'service' },
 
-    // Le produit de test TEST-50C a été retiré le 18/09/2026 (mission 1).
-    // Il était accessible en production via ?test=rdv50c et permettait de
-    // déclencher un vrai flux de commande à 0,50 €. Pour tester à nouveau,
-    // le rétablir temporairement ici et dans index.html, puis le retirer.
+    // ========== ARTICLE DE TEST — TEMPORAIRE ==========
+    // Rétabli le 19/09/2026 pour le test de paiement réel. Caché : accessible
+    // uniquement via ?test=rdv50c sur /index.html.
+    //
+    // Pourquoi 34,90 € et non 0,50 € : sous 30 €, la banque a le droit
+    // d'appliquer l'exemption « petit montant » de la DSP2 et de ne PAS
+    // afficher sa fenêtre d'authentification. Le test ne prouverait alors rien
+    // sur le correctif 3-D Secure (CSP / hooks.stripe.com, commit 98982fe).
+    // Au-dessus de 30 €, l'authentification forte est requise.
+    //
+    // À RETIRER après le test, ici et dans index.html (carte + script de
+    // révélation), puis rembourser la commande dans Stripe et annuler le
+    // créneau Cal.com.
+    'TEST-SCA': { name: 'TEST — Ne pas commander', price: 3490, type: 'service' },
 
     // ========== PACKS SIGNATURE — BESTSELLERS (produits livrés) ==========
     'PACK-CAF': { name: 'Pack Café — Café Express', price: 12900, type: 'produit' },

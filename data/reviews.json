@@ -13,7 +13,7 @@
     {
       "id": "rev-002",
       "auteur": "Thomas L.",
-      "vehicule": "BYD Seal",
+      "vehicule": "BYD Seal 6",
       "note": 5,
       "texte": "Super boulot sur ma BYD. L'écran est parfaitement intégré au plafond, les passagers à l'arrière adorent. Prestation au top, accueil sympa et délais respectés.",
       "date": "2026-03-28",
@@ -22,7 +22,7 @@
     {
       "id": "rev-003",
       "auteur": "Sophie R.",
-      "vehicule": "Mercedes GLC",
+      "vehicule": "Mercedes-Benz GLE",
       "note": 5,
       "texte": "On a fait installer 2 écrans pour les enfants sur les trajets vacances, ça nous a changé la vie. Fini les « on arrive bientôt ? » toutes les 10 min. Merci à toute l'équipe !",
       "date": "2026-01-05",
@@ -31,7 +31,7 @@
     {
       "id": "rev-004",
       "auteur": "Karim B.",
-      "vehicule": "DS 7 Crossback",
+      "vehicule": "BYD Seal",
       "note": 5,
       "texte": "J'avais un peu peur du rendu final mais le résultat dépasse mes attentes. L'écran prend pas de place, la qualité d'image est top et on peut regarder les matchs en déplacement. Installation propre.",
       "date": "2026-04-12",
@@ -40,7 +40,7 @@
     {
       "id": "rev-005",
       "auteur": "Laurent D.",
-      "vehicule": "Renault Espace",
+      "vehicule": "Mercedes-Benz Classe V",
       "note": 5,
       "texte": "Le ciel étoilé + l'écran à l'arrière, c'est vraiment l'effet waouh à chaque fois qu'on monte dans la voiture. Les enfants sont conquis. Prix honnête par rapport à ce que proposent les concessions.",
       "date": "2025-11-22",
@@ -49,9 +49,9 @@
     {
       "id": "rev-006",
       "auteur": "Mehdi A.",
-      "vehicule": "Seres 3",
+      "vehicule": "BYD Seal U",
       "note": 5,
-      "texte": "Très bonne expérience pour l'installation de l'écran dans ma Seres. Accueil pro, conseils utiles sur l'utilisation et finition soignée. Ça change vraiment la vie en famille sur les longs trajets.",
+      "texte": "Très bonne expérience pour l'installation de l'écran dans ma Seal U. Accueil pro, conseils utiles sur l'utilisation et finition soignée. Ça change vraiment la vie en famille sur les longs trajets.",
       "date": "2025-10-18",
       "photo": "brochure-xv-accessoires-voiture-electrique-page-07"
     }

@@ -26,6 +26,8 @@
 
 const Stripe = require('stripe');
 const { getProduct } = require('./_lib/products');
+const { enTetesCors } = require('./_lib/cors');
+const { getBooking, controlerAppartenance } = require('./_lib/cal');
 
 function getStripe() {
     const key = process.env.STRIPE_SECRET_KEY;
@@ -36,12 +38,10 @@ function getStripe() {
 const HOLD_DURATION_SECONDS = 60 * 60; // 1 heure
 
 exports.handler = async (event) => {
-    const headers = {
-        'Access-Control-Allow-Origin': '*',
+    const headers = enTetesCors(event, {
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Content-Type': 'application/json'
-    };
+        'Access-Control-Allow-Headers': 'Content-Type'
+    });
 
     if (event.httpMethod === 'OPTIONS') {
         return { statusCode: 204, headers, body: '' };
@@ -111,6 +111,34 @@ exports.handler = async (event) => {
         if (!calBookingUid) {
             return { statusCode: 400, headers, body: JSON.stringify({ error: 'calBookingUid required for services' }) };
         }
+
+        // Le rendez-vous doit exister, être actif, et appartenir à l'acheteur.
+        // Sans ce contrôle, n'importe qui pouvait s'approprier le créneau d'un tiers.
+        try {
+            const reponse = await getBooking(calBookingUid);
+            const { trouve, appartient, statut } = controlerAppartenance(reponse, customer.email);
+
+            if (!trouve) {
+                return { statusCode: 403, headers, body: JSON.stringify({
+                    error: 'Rendez-vous introuvable. Merci de choisir à nouveau un créneau.'
+                }) };
+            }
+            if (statut === 'cancelled' || statut === 'rejected') {
+                return { statusCode: 403, headers, body: JSON.stringify({
+                    error: 'Ce rendez-vous n’est plus actif. Merci de choisir à nouveau un créneau.'
+                }) };
+            }
+            if (!appartient) {
+                console.warn(`[checkout] Rendez-vous ${calBookingUid} demandé par ${customer.email}, qui n'y figure pas`);
+                return { statusCode: 403, headers, body: JSON.stringify({
+                    error: 'Ce rendez-vous ne correspond pas à votre adresse e-mail. Merci de réserver un créneau avec la même adresse.'
+                }) };
+            }
+        } catch (err) {
+            // API Cal.com injoignable : on laisse passer la vente plutôt que de
+            // bloquer un client légitime. Le webhook revalide avant toute annulation.
+            console.error(`[checkout] Contrôle du rendez-vous ${calBookingUid} impossible : ${err.message} — on laisse passer`);
+        }
     }
 
     // ---------- Construction de la session Stripe ----------
@@ -133,6 +161,7 @@ exports.handler = async (event) => {
             items: itemsForMetadata.join(',').slice(0, 480),
             has_services: hasServices ? 'true' : 'false',
             has_products: hasProducts ? 'true' : 'false',
+            customer_email: customer.email.slice(0, 100),
             customer_prenom: (customer.prenom || '').slice(0, 50),
             customer_nom: (customer.nom || '').slice(0, 50),
             customer_tel: (customer.telephone || '').slice(0, 30),
@@ -209,11 +238,14 @@ exports.handler = async (event) => {
             })
         };
     } catch (err) {
+        // Le détail reste dans les journaux Netlify ; le navigateur ne reçoit
+        // qu'un message générique (un message Stripe peut exposer des identifiants
+        // de compte, des noms de paramètres ou l'état du compte).
         console.error('[Stripe] create session error:', err);
         return {
             statusCode: 500,
             headers,
-            body: JSON.stringify({ error: 'Stripe error', detail: err.message || String(err) })
+            body: JSON.stringify({ error: 'Le paiement n’a pas pu être initialisé. Merci de réessayer dans un instant.' })
         };
     }
 };

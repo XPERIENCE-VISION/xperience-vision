@@ -13,12 +13,10 @@
  * Fallback : si CAL_EVENT_TYPE_ID est défini, il sert pour les deux.
  */
 
-exports.handler = async () => {
-    const headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-        'Cache-Control': 'public, max-age=300'
-    };
+const { enTetesCors } = require('./_lib/cors');
+
+exports.handler = async (event) => {
+    const headers = enTetesCors(event, { 'Cache-Control': 'public, max-age=300' });
     const fallback = process.env.CAL_EVENT_TYPE_ID || null;
     return {
         statusCode: 200,

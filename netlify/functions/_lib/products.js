@@ -46,9 +46,10 @@ const PRODUCTS = {
     'ECR-POL': { name: 'Écran plafond 13.3" FHD Polyvalent', price: 69900, type: 'service' },
     'ECR-PRE': { name: 'Écran plafond 17.3" FHD Premium', price: 109900, type: 'service' },
 
-    // ========== PRODUIT DE TEST (caché — accès via ?test=rdv50c sur /index.html) ==========
-    // Prix minimum Stripe EUR = 50 centimes. Type 'service' pour déclencher le flow RDV complet.
-    'TEST-50C': { name: 'TEST — Produit de test (ne pas commander)', price: 50, type: 'service' },
+    // Le produit de test TEST-50C a été retiré le 18/09/2026 (mission 1).
+    // Il était accessible en production via ?test=rdv50c et permettait de
+    // déclencher un vrai flux de commande à 0,50 €. Pour tester à nouveau,
+    // le rétablir temporairement ici et dans index.html, puis le retirer.
 
     // ========== PACKS SIGNATURE — BESTSELLERS (produits livrés) ==========
     'PACK-CAF': { name: 'Pack Café — Café Express', price: 12900, type: 'produit' },

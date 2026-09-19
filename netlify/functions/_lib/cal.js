@@ -56,4 +56,47 @@ async function getBooking(bookingUid) {
     return res.json();
 }
 
-module.exports = { cancelBooking, getBooking };
+/**
+ * Extrait l'objet booking d'une réponse Cal.com v1, qui l'enveloppe parfois
+ * dans { booking: {...} } et parfois non.
+ */
+function extraireBooking(reponse) {
+    if (!reponse || typeof reponse !== 'object') return null;
+    if (reponse.booking && typeof reponse.booking === 'object') return reponse.booking;
+    return reponse;
+}
+
+/**
+ * Le rendez-vous appartient-il bien à cet acheteur ?
+ *
+ * Sans ce contrôle, n'importe qui pouvait passer l'UID du rendez-vous d'un
+ * autre client : à la création pour s'approprier son créneau, et surtout au
+ * moment de l'annulation, où une session Stripe abandonnée aurait annulé le
+ * rendez-vous d'un tiers.
+ *
+ * @param {Object} reponse - réponse brute de getBooking()
+ * @param {string} email - e-mail de l'acheteur
+ * @returns {{ trouve: boolean, appartient: boolean, statut: string|null }}
+ */
+function controlerAppartenance(reponse, email) {
+    const booking = extraireBooking(reponse);
+    if (!booking || (!booking.uid && !booking.id)) {
+        return { trouve: false, appartient: false, statut: null };
+    }
+
+    const statut = String(booking.status || '').toLowerCase() || null;
+    const attendu = String(email || '').trim().toLowerCase();
+    if (!attendu) return { trouve: true, appartient: false, statut };
+
+    const candidats = [];
+    if (Array.isArray(booking.attendees)) {
+        booking.attendees.forEach(a => { if (a && a.email) candidats.push(a.email); });
+    }
+    if (booking.attendeeEmail) candidats.push(booking.attendeeEmail);
+    if (booking.responses && booking.responses.email) candidats.push(booking.responses.email);
+
+    const appartient = candidats.some(e => String(e).trim().toLowerCase() === attendu);
+    return { trouve: true, appartient, statut };
+}
+
+module.exports = { cancelBooking, getBooking, controlerAppartenance, extraireBooking };

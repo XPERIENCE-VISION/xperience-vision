@@ -5,12 +5,10 @@
  * Utilisée comme fallback si create-checkout-session ne renvoie pas la clé.
  */
 
-exports.handler = async () => {
-    const headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-        'Cache-Control': 'public, max-age=300'
-    };
+const { enTetesCors } = require('./_lib/cors');
+
+exports.handler = async (event) => {
+    const headers = enTetesCors(event, { 'Cache-Control': 'public, max-age=300' });
     return {
         statusCode: 200,
         headers,

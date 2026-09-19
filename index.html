@@ -374,23 +374,6 @@
                                     <button class="cat-rdv-btn cat-rdv-btn-gold cat-srv-add" data-add-service="ECR-PRE" data-name="Écran plafond 17.3&quot; FHD Premium" data-price="1099">+ Panier RDV</button>
                                 </div>
                             </article>
-
-                            <!-- PRODUIT DE TEST — caché, affiché uniquement avec ?test=rdv50c -->
-                            <article class="cat-bs-card cat-test-card" hidden>
-                                <div class="cat-bs-card-tag" style="background:#c1410b;color:#fff;">TEST · Dev only</div>
-                                <div class="cat-bs-media"><picture><source srcset="img/tablette-10-pouces-appuie-tete-famille-voiture.webp" type="image/webp"><img src="img/tablette-10-pouces-appuie-tete-famille-voiture.jpeg" alt="Produit de test XPERIENCE VISION — flow RDV + Stripe 0,50 €" loading="lazy" decoding="async" width="385" height="785"></picture></div>
-                                <h3>Produit de test</h3>
-                                <p class="cat-bs-cible">Article factice pour tester le flow RDV + Stripe de bout en bout</p>
-                                <ul class="cat-bs-list">
-                                    <li><i class="fa-solid fa-check"></i>Type <strong>service</strong> (déclenche Cal.com)</li>
-                                    <li><i class="fa-solid fa-check"></i>Prix minimum Stripe EUR (0,50 €)</li>
-                                    <li><i class="fa-solid fa-check"></i>Simule une installation d'écran</li>
-                                </ul>
-                                <div class="cat-bs-bottom">
-                                    <span class="cat-bs-price">0,50 €</span>
-                                    <button class="cat-rdv-btn cat-srv-add" data-add-service="TEST-50C" data-name="TEST — Produit de test" data-price="0.50">+ Panier RDV</button>
-                                </div>
-                            </article>
                         </div>
                     </div>
                 </div>
@@ -1033,18 +1016,5 @@
     <!-- Remplacé par le module Avis. Fichier conservé, simplement plus appelé. -->
     <!-- <script src="js/reviews.js"></script> -->
 
-    <!-- Révélation des produits de test (?test=rdv50c) -->
-    <script>
-        (function () {
-            var params = new URLSearchParams(location.search);
-            if (params.get('test') !== 'rdv50c') return;
-            document.querySelectorAll('.cat-test-card').forEach(function (el) {
-                el.hidden = false;
-                el.style.outline = '2px dashed #c1410b';
-                el.style.outlineOffset = '4px';
-            });
-            console.info('[XPERIENCE VISION] Mode test activé — produit TEST-50C visible.');
-        })();
-    </script>
 </body>
 </html>

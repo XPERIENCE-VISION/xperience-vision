@@ -215,17 +215,23 @@ function wrap(content, title) {
 </html>`;
 }
 
+// Ces deux fonctions alimentent du HTML inséré tel quel dans les gabarits
+// d'e-mail. Tout ce qui vient du client doit donc passer par escapeHtml —
+// sinon un lien ou une image de hameçonnage pouvait être glissé dans le
+// champ adresse et se retrouver dans l'e-mail envoyé par nos soins.
 function formatLieuRdv(lieu) {
     if (!lieu) return '';
-    const label = lieu.label || (lieu.type === 'garage' ? 'Garage XPERIENCE VISION' : 'À domicile');
+    const label = lieu.label || (lieu.type === 'garage' ? 'Atelier XPERIENCE VISION' : 'À domicile');
     const adresse = lieu.adresse || '';
-    return adresse ? `${label}<br><span style="color:#888;font-size:12px;">${escapeHtml(adresse)}</span>` : label;
+    return adresse
+        ? `${escapeHtml(label)}<br><span style="color:#888;font-size:12px;">${escapeHtml(adresse)}</span>`
+        : escapeHtml(label);
 }
 
 function formatAddress(customer) {
-    const line1 = customer.adresse || '';
-    const cp = customer.code_postal || '';
-    const ville = customer.ville || '';
+    const line1 = escapeHtml(customer.adresse || '');
+    const cp = escapeHtml(customer.code_postal || '');
+    const ville = escapeHtml(customer.ville || '');
     const line2 = [cp, ville].filter(Boolean).join(' ');
     return [line1, line2].filter(Boolean).join('<br>');
 }

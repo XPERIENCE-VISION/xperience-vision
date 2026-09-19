@@ -14,7 +14,8 @@ const Stripe = require('stripe');
 const { getProduct } = require('./_lib/products');
 const { sendMail } = require('./_lib/mailer');
 const { adminOrder, clientOrder } = require('./_lib/templates');
-const { cancelBooking, getBooking } = require('./_lib/cal');
+const { cancelBooking, getBooking, controlerAppartenance } = require('./_lib/cal');
+const { enregistrerCommande, marquerEvenement, terminerEvenement, demarquerEvenement } = require('./_lib/stockage');
 
 function getStripe() {
     const key = process.env.STRIPE_SECRET_KEY;
@@ -50,6 +51,18 @@ exports.handler = async (event) => {
 
     console.log(`[webhook] Received event: ${stripeEvent.type} (id=${stripeEvent.id})`);
 
+    // Idempotence en deux temps. Stripe réémet un event tant qu'il n'a pas reçu
+    // de 200, et peut l'émettre plusieurs fois même après : sans garde-fou, le
+    // client recevait deux fois le même e-mail et l'atelier deux fois le même bon.
+    // L'event est d'abord ouvert, puis clôturé seulement si le traitement a
+    // réussi. Un event ouvert mais jamais clôturé (fonction tuée en plein vol)
+    // redevient traitable au bout de deux minutes — sinon la commande serait
+    // perdue en silence, ce qui est bien pire qu'un e-mail en double.
+    const aTraiter = await marquerEvenement(stripeEvent.id, stripeEvent.type);
+    if (!aTraiter) {
+        return { statusCode: 200, body: JSON.stringify({ received: true, duplicate: true }) };
+    }
+
     try {
         switch (stripeEvent.type) {
             case 'checkout.session.completed':
@@ -65,9 +78,13 @@ exports.handler = async (event) => {
             default:
                 console.log(`[webhook] Event ${stripeEvent.type} ignored`);
         }
+        await terminerEvenement(stripeEvent.id, stripeEvent.type);
         return { statusCode: 200, body: JSON.stringify({ received: true }) };
     } catch (err) {
         console.error(`[webhook] Handler error for ${stripeEvent.type}:`, err);
+        // Le traitement a échoué : on retire la marque d'idempotence pour que
+        // la réémission de Stripe soit bien reprise, sinon la commande est perdue.
+        await demarquerEvenement(stripeEvent.id);
         return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
     }
 };
@@ -81,7 +98,10 @@ async function handlePaid(stripe, session) {
     });
 
     const meta = fullSession.metadata || {};
-    const items = parseItems(meta.items || '');
+    // Source de vérité : les line_items Stripe. Le champ metadata.items est
+    // tronqué à 480 caractères par l'API Stripe, donc faux au-delà d'une
+    // quarantaine d'articles — le bon de commande était alors incomplet.
+    const items = itemsDepuisStripe(fullSession) || parseItems(meta.items || '');
     const hasServices = meta.has_services === 'true';
     const hasProducts = meta.has_products === 'true';
     const calBookingUid = meta.cal_booking_uid || null;
@@ -116,13 +136,34 @@ async function handlePaid(stripe, session) {
         }
     }
 
-    if (!customer.email) {
-        console.error('[webhook] No customer email in session, cannot send confirmation');
-        return;
-    }
-
     const adminEmail = process.env.CONTACT_EMAIL || 'contact@xperience-vision.fr';
     const customerFullName = `${customer.prenom} ${customer.nom}`.trim() || 'Client';
+
+    // La commande est enregistrée AVANT tout le reste — y compris avant le
+    // garde-fou sur l'e-mail manquant. C'est précisément le cas où la commande
+    // est payée mais non confirmable qu'il ne faut surtout pas perdre.
+    await enregistrerCommande(fullSession.id, {
+        session_id: fullSession.id,
+        payment_intent: typeof fullSession.payment_intent === 'object'
+            ? fullSession.payment_intent?.id
+            : fullSession.payment_intent || null,
+        amount_total: fullSession.amount_total,
+        currency: fullSession.currency,
+        payment_status: fullSession.payment_status,
+        client: customer,
+        articles: items,
+        lieu_rdv: lieuRdv,
+        cal_booking_uid: calBookingUid,
+        adresse_livraison: fullSession.shipping_details || fullSession.collected_information?.shipping_details || null,
+        a_des_services: hasServices,
+        a_des_produits: hasProducts
+    });
+
+    if (!customer.email) {
+        console.error(`[webhook] ⚠ Commande ${fullSession.id} PAYÉE mais sans e-mail client : ` +
+                      `enregistrée, aucune confirmation envoyable. À traiter à la main.`);
+        return;
+    }
 
     console.log(`[webhook] Envoi emails — admin=${adminEmail} · client=${customer.email}`);
 
@@ -166,6 +207,46 @@ async function handleNotPaid(session) {
         console.log(`[webhook] Session ${session.id} expired without booking, nothing to cancel`);
         return;
     }
+
+    // Barrière décisive : on ne détruit le rendez-vous de personne sans avoir
+    // vérifié qu'il appartient bien à l'acheteur de cette session. Une session
+    // abandonnée portant l'UID d'un tiers aurait sinon annulé son créneau.
+    // On lit l'e-mail à trois endroits : sur une session expirée, customer_details
+    // peut être vide. Sans e-mail, le contrôle d'appartenance refuse d'annuler et
+    // le créneau resterait bloqué pour rien.
+    const emailAcheteur = session.customer_details?.email
+        || session.customer_email
+        || session.metadata?.customer_email
+        || '';
+    try {
+        const reponse = await getBooking(calBookingUid);
+        const { trouve, appartient, statut } = controlerAppartenance(reponse, emailAcheteur);
+
+        if (!trouve) {
+            console.log(`[webhook] Rendez-vous ${calBookingUid} introuvable — rien à annuler`);
+            return;
+        }
+        if (statut === 'cancelled' || statut === 'rejected') {
+            console.log(`[webhook] Rendez-vous ${calBookingUid} déjà inactif (${statut}) — rien à faire`);
+            return;
+        }
+        if (!appartient) {
+            console.warn(
+                `[webhook] ⚠ ANNULATION REFUSÉE — le rendez-vous ${calBookingUid} n'appartient pas ` +
+                `à ${emailAcheteur || '(e-mail inconnu)'} (session ${session.id}). Aucun créneau touché.`
+            );
+            return;
+        }
+    } catch (err) {
+        // API Cal.com injoignable : on s'abstient. Un rendez-vous gardé en trop se
+        // règle par un appel ; un rendez-vous annulé à tort fait perdre un client.
+        console.error(
+            `[webhook] Contrôle d'appartenance impossible pour ${calBookingUid} (${err.message}) ` +
+            `— annulation NON effectuée par précaution`
+        );
+        return;
+    }
+
     try {
         await cancelBooking(calBookingUid, 'Paiement non finalisé dans le délai imparti (1h)');
         console.log(`[webhook] Cancelled Cal booking ${calBookingUid} after Stripe session expired`);
@@ -175,6 +256,40 @@ async function handleNotPaid(session) {
 }
 
 // ----------------- Utils -----------------
+
+/**
+ * Reconstruit la liste des articles depuis les line_items Stripe.
+ * Les métadonnées ne servent plus qu'à retrouver le type (produit / service).
+ * Renvoie null si les line_items ne sont pas exploitables — l'appelant retombe
+ * alors sur parseItems().
+ */
+function itemsDepuisStripe(fullSession) {
+    const lignes = fullSession?.line_items?.data;
+    if (!Array.isArray(lignes) || lignes.length === 0) return null;
+
+    // metadata.items donne le type de chaque référence, dans le même ordre.
+    const typesParNom = new Map();
+    for (const entree of String(fullSession.metadata?.items || '').split(',')) {
+        const id = entree.split(':')[0];
+        const produit = id && getProduct(id);
+        if (produit) typesParNom.set(produit.name, { id, type: produit.type });
+    }
+
+    return lignes.map(ligne => {
+        const nom = ligne.description || ligne.price?.product?.name || 'Article';
+        const connu = typesParNom.get(nom);
+        const qty = ligne.quantity || 1;
+        return {
+            id: connu?.id || nom,
+            qty,
+            name: nom,
+            unitPrice: typeof ligne.price?.unit_amount === 'number'
+                ? ligne.price.unit_amount
+                : Math.round((ligne.amount_total || 0) / Math.max(1, qty)),
+            type: connu?.type || 'unknown'
+        };
+    });
+}
 
 function parseItems(metadataString) {
     // Format : "PROD-001:2,PROD-002:1,..."

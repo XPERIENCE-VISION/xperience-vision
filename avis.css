@@ -482,6 +482,14 @@
 }
 .xva-coche{display:flex;gap:11px;align-items:flex-start;font-size:12.5px;color:var(--xva-txt-2);margin-bottom:13px;cursor:pointer}
 .xva-coche input{margin-top:2px;accent-color:var(--xva-or);width:17px;height:17px;flex:0 0 auto}
+/* Sur la page d'accueil, style.css applique « appearance:none !important » à tous
+   les input — règle écrite pour les champs texte du formulaire de contact. Sur une
+   case à cocher, cela supprime le rendu natif : le carré et la coche ne sont plus
+   dessinés, la case devient invisible, cochée comme décochée. On rétablit le rendu
+   natif pour ces deux cases uniquement ; avis.css est chargé après style.css.
+   Ne pas élargir ce sélecteur : les boutons radio du tunnel de commande sont
+   volontairement masqués et remplacés par une carte cliquable (catalogue.css). */
+.xva-coche input[type="checkbox"]{appearance:auto !important;-webkit-appearance:auto !important}
 .xva-err{color:var(--xva-ko);font-size:13px;margin:0 0 14px;display:none;
   background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.26);border-radius:10px;padding:11px 14px}
 .xva-err.xva-on{display:block}

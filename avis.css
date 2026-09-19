@@ -408,6 +408,10 @@
    ====================================================================== */
 .xva-legal{border-top:1px solid var(--xva-trait);padding-top:clamp(36px,5vw,56px)}
 .xva-legal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:26px;margin-top:26px}
+/* Ces titres etaient des h4 places directement sous un h2 : un saut de niveau.
+   Passes en h3, ils gardent leur taille grace a ce selecteur. Le h4 est conserve
+   dans la regle pour ne rien casser si un cache sert encore l'ancien HTML. */
+.xva-legal-grid h3,
 .xva-legal-grid h4{margin:0 0 7px;font-size:13.5px;font-weight:700;color:#fff;letter-spacing:.01em}
 .xva-legal-grid p{margin:0;font-size:13.5px;color:var(--xva-txt-2)}
 

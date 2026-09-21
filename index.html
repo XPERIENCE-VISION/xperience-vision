@@ -374,24 +374,6 @@
                                     <button class="cat-rdv-btn cat-rdv-btn-gold cat-srv-add" data-add-service="ECR-PRE" data-name="Écran plafond 17.3&quot; FHD Premium" data-price="1099">+ Panier RDV</button>
                                 </div>
                             </article>
-
-                            <!-- ARTICLE DE TEST — TEMPORAIRE, à retirer après le test de paiement.
-                                 Caché par `hidden`, révélé uniquement par ?test=rdv50c (script en bas de page). -->
-                            <article class="cat-bs-card cat-test-card" hidden>
-                                <div class="cat-bs-card-tag" style="background:#c1410b;color:#fff;">TEST · Ne pas commander</div>
-                                <div class="cat-bs-media"><picture><source srcset="img/tablette-10-pouces-appuie-tete-famille-voiture.webp" type="image/webp"><img src="img/tablette-10-pouces-appuie-tete-famille-voiture.jpeg" alt="Article de test XPERIENCE VISION — vérification du tunnel de paiement" loading="lazy" decoding="async" width="385" height="785"></picture></div>
-                                <h3>Article de test</h3>
-                                <p class="cat-bs-cible">Article factice&nbsp;: sert à vérifier le tunnel de commande de bout en bout</p>
-                                <ul class="cat-bs-list">
-                                    <li><i class="fa-solid fa-check"></i>Type <strong>service</strong> — déclenche le rendez-vous</li>
-                                    <li><i class="fa-solid fa-check"></i>Au-dessus de 30&nbsp;€ — force la validation bancaire</li>
-                                    <li><i class="fa-solid fa-check"></i>À rembourser dans Stripe après le test</li>
-                                </ul>
-                                <div class="cat-bs-bottom">
-                                    <span class="cat-bs-price">34,90 €</span>
-                                    <button class="cat-rdv-btn cat-srv-add" data-add-service="TEST-SCA" data-name="TEST — Ne pas commander" data-price="34.90">+ Panier RDV</button>
-                                </div>
-                            </article>
                         </div>
                     </div>
                 </div>
@@ -1033,21 +1015,6 @@
     <script src="/avis.js?v=3" defer></script>
     <!-- Remplacé par le module Avis. Fichier conservé, simplement plus appelé. -->
     <!-- <script src="js/reviews.js"></script> -->
-
-    <!-- RÉVÉLATION DE L'ARTICLE DE TEST — TEMPORAIRE, à retirer après le test de paiement.
-         Sans ?test=rdv50c, la carte reste `hidden` et aucun visiteur ne la voit. -->
-    <script>
-        (function () {
-            var params = new URLSearchParams(location.search);
-            if (params.get('test') !== 'rdv50c') return;
-            document.querySelectorAll('.cat-test-card').forEach(function (el) {
-                el.hidden = false;
-                el.style.outline = '2px dashed #c1410b';
-                el.style.outlineOffset = '4px';
-            });
-            console.info('[XPERIENCE VISION] Mode test activé — article TEST-SCA visible.');
-        })();
-    </script>
 
 </body>
 </html>

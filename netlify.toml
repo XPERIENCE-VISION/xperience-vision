@@ -8,6 +8,17 @@
 [functions]
   node_bundler = "esbuild"
 
+# Vérification du domaine pour Apple Pay.
+# Apple exige que ce fichier soit servi par xperiencevision.com lui-même.
+# Le statut 200 est un proxy : Netlify va chercher le fichier chez Stripe et
+# le renvoie sous notre domaine, sans qu’on ait à le versionner ni à le mettre
+# à jour quand Stripe le fait tourner.
+[[redirects]]
+  from = "/.well-known/apple-developer-merchantid-domain-association"
+  to = "https://stripe.com/files/apple-pay/apple-developer-merchantid-domain-association"
+  status = 200
+  force = true
+
 # Redirections 301 — anciennes pages absorbées dans la refonte e-commerce
 # Préserve le jus SEO des liens externes (Google, partages, bookmarks).
 [[redirects]]

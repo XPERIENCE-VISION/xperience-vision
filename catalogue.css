@@ -1546,12 +1546,6 @@ body.page-ecommerce .cat-filter {
         flex: none;
         scroll-snap-align: none;
     }
-    /* Mode test : si la carte TEST-50C est révélée, bascule en 4 colonnes
-       pour garder les 4 cartes (3 écrans + test) sur la même ligne */
-    .cat-bs-grid:has(.cat-test-card:not([hidden])) {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.3rem;
-    }
 }
 
 .cat-bs-card {

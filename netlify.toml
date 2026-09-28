@@ -46,15 +46,20 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
+# CSS et JS : revalidation horaire, comme le HTML.
+# Avec max-age=86400 sans numero de version dans l URL, un visiteur deja venu
+# gardait l ancienne feuille pendant 24 h tout en recevant le nouveau HTML —
+# donc une page a moitie a jour. La revalidation coute une requete conditionnelle
+# de quelques centaines d octets quand rien n a change.
 [[headers]]
   for = "/*.css"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    Cache-Control = "public, max-age=3600, must-revalidate"
 
 [[headers]]
   for = "/*.js"
   [headers.values]
-    Cache-Control = "public, max-age=86400"
+    Cache-Control = "public, max-age=3600, must-revalidate"
 
 # Cache court pour les pages HTML : revalidation quotidienne, jamais vraiment périmées
 [[headers]]

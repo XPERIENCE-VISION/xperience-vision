@@ -1548,6 +1548,17 @@ body.page-ecommerce .cat-filter {
     }
 }
 
+/* Grille a 2 produits : sans ca, les 2 cartes restent collees a gauche dans une
+   grille prevue pour 3 et laissent une colonne vide. On garde la largeur de carte
+   d origine (405 px = (1280 - 2 gouttieres) / 3) et on recentre l ensemble.
+   Classe dediee : .cat-bs-grid sert aussi aux Packs Signature, qui restent a 3. */
+@media (min-width: 768px) {
+    .cat-bs-grid.cat-bs-grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 405px));
+        justify-content: center;
+    }
+}
+
 .cat-bs-card {
     background: linear-gradient(180deg, #131313 0%, #0a0a0a 100%);
     border: 1px solid rgba(255, 255, 255, 0.08);

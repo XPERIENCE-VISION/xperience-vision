@@ -328,7 +328,7 @@
 
                 <div class="cat-content">
                     <div class="cat-content-block" data-cat="ecrans" data-sub="tous">
-                        <div class="cat-bs-grid">
+                        <div class="cat-bs-grid cat-bs-grid-2">
                             <article class="cat-bs-card">
                                 <div class="cat-bs-card-tag">Famille</div>
                                 <div class="cat-bs-media"><picture><source srcset="img/tablette-10-pouces-appuie-tete-famille-voiture.webp" type="image/webp"><img src="img/tablette-10-pouces-appuie-tete-famille-voiture.jpeg" alt="Tablette 10.1&quot; pour voiture — Installation famille" loading="lazy" decoding="async" width="385" height="785"></picture></div>
@@ -344,7 +344,10 @@
                                     <button class="cat-rdv-btn cat-srv-add" data-add-service="ECR-FAM" data-name="Tablette 10.1&quot; Famille" data-price="600">+ Panier RDV</button>
                                 </div>
                             </article>
-                            <article class="cat-bs-card cat-bs-card-feature">
+                            <!-- MASQUE le 28/09/2026 : produit retire de la vitrine, pas du catalogue serveur.
+                                 Pour le remettre : supprimer l attribut hidden ci-dessous ET la classe
+                                 cat-bs-grid-2 sur le .cat-bs-grid parent (sinon la grille reste a 2 colonnes). -->
+                            <article class="cat-bs-card cat-bs-card-feature" hidden>
                                 <div class="cat-bs-card-tag">Polyvalent</div>
                                 <div class="cat-bs-media"><picture><source srcset="img/ecran-plafond-13-pouces-fhd-polyvalent-voiture.webp" type="image/webp"><img src="img/ecran-plafond-13-pouces-fhd-polyvalent-voiture.jpeg" alt="Écran plafond 13.3&quot; FHD voiture — Installation polyvalente" loading="lazy" decoding="async" width="392" height="775"></picture></div>
                                 <h3>Plafond 13.3" FHD</h3>
